@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jbus_app/generated/l10n.dart';
 
 class LanguageSettingsScreen extends StatelessWidget {
   const LanguageSettingsScreen({Key? key}) : super(key: key);
@@ -6,10 +7,10 @@ class LanguageSettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('LanguageSettingsScreen'),
+        title:  Text(S.of(context).language),
       ),
-      body: const Center(
-        child: Text('LanguageSettingsScreen'),
+      body:  Center(
+        child: Text(S.of(context).language),
       ),
     );
   }

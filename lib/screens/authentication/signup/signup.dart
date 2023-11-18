@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jbus_app/generated/l10n.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -6,10 +7,10 @@ class SignupScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('SignupScreen'),
+        title: Text(S.of(context).signUp),
       ),
-      body: const Center(
-        child: Text('SignupScreen'),
+      body:  Center(
+        child: Text(S.of(context).signUp),
       ),
     );
   }

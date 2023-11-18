@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jbus_app/generated/l10n.dart';
 
 class SigninScreen extends StatelessWidget {
   const SigninScreen({Key? key}) : super(key: key);
@@ -6,10 +7,10 @@ class SigninScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('SigninScreen'),
+        title: Text(S.of(context).signIn),
       ),
-      body: const Center(
-        child: Text('SigninScreen'),
+      body: Center(
+        child: Text(S.of(context).signIn),
       ),
     );
   }
