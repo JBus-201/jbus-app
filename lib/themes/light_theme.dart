@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:jbus_app/main.dart';
 
 class AppLightTheme {
-  // make them static, or use singletone... 
+  // make them static, or use singletone...
   Color ourMainColor = const Color.fromARGB(255, 68, 142, 226);
   Color ourSecondaryColor = const Color.fromARGB(255, 242, 176, 62);
   Color ourThirdColor = const Color.fromARGB(255, 246, 246, 246);
@@ -10,7 +9,7 @@ class AppLightTheme {
   Color pointsSColor = const Color.fromARGB(255, 176, 155, 57);
   Color ourWhite = Colors.white;
   Color ourdarkGray = const Color.fromARGB(255, 65, 65, 65);
-  LinearGradient gradient = LinearGradient(
+  LinearGradient gradient = const LinearGradient(
     colors: [
       Color.fromARGB(255, 225, 209, 159),
       Color.fromARGB(255, 176, 155, 57)
@@ -19,7 +18,7 @@ class AppLightTheme {
     end: Alignment.bottomCenter,
   );
 
-   Color getMainColor() {
+  Color getMainColor() {
     return ourMainColor;
   }
 

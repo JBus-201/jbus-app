@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-///  use the following line in the onPress or tap 
+///  use the following line in the onPress or tap
 ///   Provider.of<ThemeModel>(context, listen: false).toggleThemeMode();
 
 class ThemeModel extends ChangeNotifier {

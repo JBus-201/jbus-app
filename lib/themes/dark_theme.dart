@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:jbus_app/main.dart';
 
 class AppDarkTheme {
-  // make them static, or use singletone... 
-  Color ourMainColor = const Color.fromARGB(255, 68, 142, 226);
+  // make them static, or use singletone...
+  Color ourMainColor = Color.fromARGB(255, 36, 51, 67);
   Color ourSecondaryColor = const Color.fromARGB(255, 242, 176, 62);
   Color ourThirdColor = const Color.fromARGB(255, 246, 246, 246);
   Color pointsFColor = const Color.fromARGB(255, 225, 209, 159);
   Color pointsSColor = const Color.fromARGB(255, 176, 155, 57);
   Color ourWhite = Colors.white;
   Color ourdarkGray = const Color.fromARGB(255, 65, 65, 65);
-  LinearGradient gradient = LinearGradient(
+  LinearGradient gradient = const LinearGradient(
     colors: [
       Color.fromARGB(255, 225, 209, 159),
       Color.fromARGB(255, 176, 155, 57)
@@ -19,7 +18,7 @@ class AppDarkTheme {
     end: Alignment.bottomCenter,
   );
 
-   Color getMainColor() {
+  Color getMainColor() {
     return ourMainColor;
   }
 
@@ -40,8 +39,7 @@ class AppDarkTheme {
         //AppBar theme
 
         appBarTheme: AppBarTheme(
-            backgroundColor:
-                Color.fromARGB(255, 0, 0, 0).withOpacity(0),
+            backgroundColor: const Color.fromARGB(255, 0, 0, 0).withOpacity(0),
             //centerTitle: true,
             elevation: 0,
             titleTextStyle: TextStyle(
@@ -54,7 +52,7 @@ class AppDarkTheme {
         primaryColor: ourMainColor,
         //Fonts
         fontFamily: 'Roboto',
-        textTheme: TextTheme(
+        textTheme: const TextTheme(
             bodyMedium: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
         //ElevatedButton
         elevatedButtonTheme: ElevatedButtonThemeData(
@@ -89,4 +87,3 @@ class AppDarkTheme {
         );
   }
 }
-
