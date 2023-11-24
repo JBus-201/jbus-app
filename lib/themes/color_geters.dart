@@ -4,60 +4,61 @@ import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 import 'package:jbus_app/themes/dark_theme.dart';
 import 'package:jbus_app/themes/light_theme.dart';
 
-class GetThemeColors {
-  Color getMainColor(context) {
-    ThemeMode currentTheme = BlocProvider.of<ThemeBloc>(context).currentTheme;
+class ThemeColors {
+  final ThemeMode currentTheme;
+  final AppLightTheme _lightTheme;
+  final AppDarkTheme _darkTheme;
+
+  ThemeColors(BuildContext context)
+      : currentTheme = BlocProvider.of<ThemeBloc>(context).currentTheme,
+        _lightTheme = AppLightTheme(),
+        _darkTheme = AppDarkTheme();
+
+  Color getMainColor() {
     return currentTheme == ThemeMode.light
-        ? AppLightTheme().ourMainColor
-        : AppDarkTheme().ourMainColor;
+        ? _lightTheme.getMainColor()
+        : _darkTheme.getMainColor();
   }
 
-  Color getSecondaryColor(context) {
-    ThemeMode currentTheme = BlocProvider.of<ThemeBloc>(context).currentTheme;
+  Color getSecondaryColor() {
     return currentTheme == ThemeMode.light
-        ? AppLightTheme().ourSecondaryColor
-        : AppDarkTheme().ourSecondaryColor;
+        ? _lightTheme.getSecondaryColor()
+        : _darkTheme.getSecondaryColor();
   }
 
-  Color getThirdColor(context) {
-    ThemeMode currentTheme = BlocProvider.of<ThemeBloc>(context).currentTheme;
+  Color getThirdColor() {
     return currentTheme == ThemeMode.light
-        ? AppLightTheme().ourThirdColor
-        : AppDarkTheme().ourThirdColor;
+        ? _lightTheme.getThirdColor()
+        : _darkTheme.getThirdColor();
   }
 
-  Color getPointFColor(context) {
-    ThemeMode currentTheme = BlocProvider.of<ThemeBloc>(context).currentTheme;
+  Color getPointFColor() {
     return currentTheme == ThemeMode.light
-        ? AppLightTheme().pointsFColor
-        : AppDarkTheme().pointsFColor;
+        ? _lightTheme.getPointFColor()
+        : _darkTheme.getPointFColor();
   }
 
-  Color getpointSColor(context) {
-    ThemeMode currentTheme = BlocProvider.of<ThemeBloc>(context).currentTheme;
+  Color getPointSColor() {
     return currentTheme == ThemeMode.light
-        ? AppLightTheme().pointsSColor
-        : AppDarkTheme().pointsSColor;
+        ? _lightTheme.getPointSColor()
+        : _darkTheme.getPointSColor();
   }
 
-  Color getWhiteColor(context) {
-    ThemeMode currentTheme = BlocProvider.of<ThemeBloc>(context).currentTheme;
+  Color getWhiteColor() {
     return currentTheme == ThemeMode.light
-        ? AppLightTheme().ourWhite
-        : AppDarkTheme().ourWhite;
+        ? _lightTheme.getWhiteColor()
+        : _darkTheme.getWhiteColor();
   }
 
-  Color getDarkGrayColor(context) {
-    ThemeMode currentTheme = BlocProvider.of<ThemeBloc>(context).currentTheme;
+  Color getDarkGrayColor() {
     return currentTheme == ThemeMode.light
-        ? AppLightTheme().ourdarkGray
-        : AppDarkTheme().ourdarkGray;
+        ? _lightTheme.getDarkGrayColor()
+        : _darkTheme.getDarkGrayColor();
   }
 
-  LinearGradient getGradient(context) {
-    ThemeMode currentTheme = BlocProvider.of<ThemeBloc>(context).currentTheme;
+  LinearGradient getGradient() {
     return currentTheme == ThemeMode.light
-        ? AppLightTheme().gradient
-        : AppDarkTheme().gradient;
+        ? _lightTheme.getGoldGradient()
+        : _darkTheme.getGoldGradient();
   }
 }
