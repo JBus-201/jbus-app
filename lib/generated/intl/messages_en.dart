@@ -131,6 +131,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sorry, Please enter your last name."),
         "sorryPleaseReEnterYourPassword": MessageLookupByLibrary.simpleMessage(
             "Sorry, Please re enter your password."),
+        "systemTheme": MessageLookupByLibrary.simpleMessage("System theme"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "timeToGetOff": MessageLookupByLibrary.simpleMessage("Time to get off"),
         "tryAgain": MessageLookupByLibrary.simpleMessage("Try again"),

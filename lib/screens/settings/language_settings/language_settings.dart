@@ -5,11 +5,12 @@ class LanguageSettingsScreen extends StatelessWidget {
   const LanguageSettingsScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    //ThemeBloc themeBloc = ThemeBloc();
     return Scaffold(
       appBar: AppBar(
-        title:  Text(S.of(context).language),
+        title: Text(S.of(context).language),
       ),
-      body:  Center(
+      body: Center(
         child: Text(S.of(context).language),
       ),
     );

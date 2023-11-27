@@ -79,5 +79,6 @@
     "back" : "عودة",
     "dropOffRequest" : "طلب إنزال",
     "userAuthenticationDemo" : "عرض مصادقة المستخدم",
-    "drawer" : "قائمة منبثقة"
+    "drawer" : "قائمة منبثقة",
+    "systemTheme" : "نمط النظام"
 }

@@ -130,6 +130,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "عذرًا، الرجاء إدخال اسمك الأخير."),
         "sorryPleaseReEnterYourPassword": MessageLookupByLibrary.simpleMessage(
             "عذرًا، الرجاء إعادة إدخال الكلمة السرية الخاصة بك."),
+        "systemTheme": MessageLookupByLibrary.simpleMessage("نمط النظام"),
         "theme": MessageLookupByLibrary.simpleMessage("سمة الألوان"),
         "timeToGetOff": MessageLookupByLibrary.simpleMessage("وقت النزول"),
         "tryAgain": MessageLookupByLibrary.simpleMessage("حاول ثانية"),

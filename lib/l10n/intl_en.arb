@@ -79,5 +79,6 @@
     "back": "Back",
     "dropOffRequest": "Drop off request",
     "userAuthenticationDemo": "User Authentication Demo",
-    "drawer" : "Drawer"
+    "drawer": "Drawer",
+    "systemTheme": "System theme"
 }

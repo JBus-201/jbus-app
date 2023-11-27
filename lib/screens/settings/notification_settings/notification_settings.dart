@@ -10,7 +10,10 @@ class NotificationSettingsScreen extends StatelessWidget {
         title:  Text(S.of(context).notifications),
       ),
       body:  Center(
-        child: Text(S.of(context).notifications),
+
+        child: 
+        Text(S.of(context).notifications),
+        
       ),
     );
   }
