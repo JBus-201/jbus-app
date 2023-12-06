@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:jbus_app/generated/l10n.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:jbus_app/services/service_locator.dart';
 
 class MainDrawerScreen extends StatelessWidget {
   const MainDrawerScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations locale = localeInstance();
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.of(context).drawer),
+        title: Text(locale.drawer),
       ),
       body: Center(
-        child: Text(S.of(context).drawer),
+        child: Text(locale.drawer),
       ),
     );
   }
