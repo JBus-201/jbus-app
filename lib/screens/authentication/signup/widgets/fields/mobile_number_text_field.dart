@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jbus_app/generated/l10n.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/fields/text_form_field.dart';
 
 class MobileNumberTextField extends StatelessWidget {
@@ -9,8 +10,10 @@ class MobileNumberTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations locale = localeInstance();
+
     return OurTextFormField(
-        label: '${S.of(context).mobileNumber} ${S.of(context).optional}',
+        label: '${locale.mobileNumber} ${locale.optional}',
         icon: Icons.phone_iphone,
         textInputAction: TextInputAction.next,
         controller: phoneNumberController,
@@ -28,7 +31,7 @@ class MobileNumberTextField extends StatelessWidget {
           if (numberValid) {
             return null;
           } else {
-            return S.of(context).sorryPleaseEnterAValidNumberStartsWith07;
+            return locale.sorryPleaseEnterAValidNumberStartsWith07;
           }
         });
   }

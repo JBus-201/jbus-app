@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jbus_app/generated/l10n.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/fields/text_form_field.dart';
 
 class LastNameTextField extends StatelessWidget {
@@ -10,8 +11,10 @@ class LastNameTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations locale = localeInstance();
+
     return OurTextFormField(
-      label: S.of(context).lastName,
+      label: locale.lastName,
       icon: Icons.person_outline_outlined,
       textInputAction: TextInputAction.next,
       controller: lastNameController,
@@ -22,14 +25,14 @@ class LastNameTextField extends StatelessWidget {
       counterText: '',
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return S.of(context).sorryPleaseEnterYourLastName;
+          return locale.sorryPleaseEnterYourLastName;
         }
         final bool firstNameValid =
             RegExp('^[A-Za-z]{1,15}\$').hasMatch(value.trim());
         if (firstNameValid) {
           return null;
         } else {
-          return S.of(context).sorryPleaseEnterAValidName;
+          return locale.sorryPleaseEnterAValidName;
         }
       },
     );

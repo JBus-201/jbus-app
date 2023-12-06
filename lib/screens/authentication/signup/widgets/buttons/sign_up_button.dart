@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:jbus_app/generated/l10n.dart';
 import 'package:jbus_app/screens/authentication/email_verification/email_verification.dart';
+import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignUpButton extends StatelessWidget {
   const SignUpButton({
@@ -25,8 +26,9 @@ class SignUpButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations locale = localeInstance();
     return RectangularElevatedButton(
-      text: S.of(context).signUp,
+      text: locale.signUp,
       onPressed: () {
         if (formKey.currentState!.validate()) {
           Navigator.push(

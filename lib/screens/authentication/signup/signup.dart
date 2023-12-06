@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:jbus_app/generated/l10n.dart';
 import 'package:jbus_app/screens/authentication/signup/widgets/buttons/sign_up_button.dart';
 import 'package:jbus_app/screens/authentication/signup/widgets/fields/email_text_field.dart';
 import 'package:jbus_app/screens/authentication/signup/widgets/fields/first_name_text_field.dart';
 import 'package:jbus_app/screens/authentication/signup/widgets/fields/last_name_text_field.dart';
 import 'package:jbus_app/screens/authentication/signup/widgets/fields/mobile_number_text_field.dart';
 import 'package:jbus_app/screens/authentication/signup/widgets/fields/password_text_fields.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:jbus_app/services/service_locator.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -13,11 +14,12 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
+    final AppLocalizations locale = localeInstance();
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          S.of(context).signUp,
+          locale.signUp,
         ),
       ),
       body: Padding(
@@ -41,7 +43,6 @@ class SignupScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    
                     EmailTextField(),
                     MobileNumberTextField(),
                     PasswordTextFields(),

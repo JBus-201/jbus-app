@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jbus_app/generated/l10n.dart';
 import 'package:jbus_app/localization/bloc/localization_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:jbus_app/services/service_locator.dart';
 
 class LanguageSettingsScreen extends StatelessWidget {
   const LanguageSettingsScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations locale = localeInstance();
     //ThemeBloc themeBloc = ThemeBloc();
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.of(context).language),
+        title: Text(locale.language),
       ),
       body: Center(
         child: Column(
@@ -18,7 +21,7 @@ class LanguageSettingsScreen extends StatelessWidget {
           children: [
             ElevatedButton(
               child: Text(
-                S.of(context).arabic,
+                locale.arabic,
               ),
               onPressed: () {
                 final themeBloc = BlocProvider.of<LocalizationBloc>(context);
@@ -27,7 +30,7 @@ class LanguageSettingsScreen extends StatelessWidget {
             ),
             ElevatedButton(
               child: Text(
-                S.of(context).english,
+                locale.english,
               ),
               onPressed: () {
                 final themeBloc = BlocProvider.of<LocalizationBloc>(context);

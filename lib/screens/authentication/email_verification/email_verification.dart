@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:jbus_app/generated/l10n.dart';
 import 'package:jbus_app/screens/settings/settings/settings.dart';
+import 'package:jbus_app/services/service_locator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EmailVerificationScreen extends StatelessWidget {
   const EmailVerificationScreen({
@@ -20,14 +21,15 @@ class EmailVerificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations locale = localeInstance();
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.of(context).email),
+        title: Text(locale.email),
       ),
       body: Center(
         child: ElevatedButton(
             child: Text(
-              S.of(context).signUp,
+              locale.signUp,
             ),
             onPressed: () {
               Navigator.push(

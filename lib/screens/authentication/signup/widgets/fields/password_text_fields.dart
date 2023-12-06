@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jbus_app/generated/l10n.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/fields/text_form_field.dart';
 
 class PasswordTextFields extends StatelessWidget {
@@ -12,12 +13,14 @@ class PasswordTextFields extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations locale = localeInstance();
+
     String? password;
 
     return Column(
       children: [
         OurTextFormField(
-            label: S.of(context).password,
+            label: locale.password,
             icon: Icons.lock_outline_rounded,
             textInputAction: TextInputAction.next,
             controller: passwordController,
@@ -33,14 +36,14 @@ class PasswordTextFields extends StatelessWidget {
                   r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
 
               if (value == null || value.isEmpty) {
-                return S.of(context).sorryPleaseEnterAPassword;
+                return locale.sorryPleaseEnterAPassword;
               } else if (!regex.hasMatch(value)) {
-                return S.of(context).sorryPleaseEnterAValidPassword;
+                return locale.sorryPleaseEnterAValidPassword;
               }
               return null;
             }),
         OurTextFormField(
-            label: S.of(context).confirmPassword,
+            label: locale.confirmPassword,
             icon: Icons.lock_outline_rounded,
             textInputAction: TextInputAction.done,
             controller: confirmPasswordController,
@@ -51,11 +54,11 @@ class PasswordTextFields extends StatelessWidget {
             maxLength: 40,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return S.of(context).sorryPleaseReEnterYourPassword;
+                return locale.sorryPleaseReEnterYourPassword;
               }
 
               if (password != value.trim()) {
-                return S.of(context).sorryPasswordDoesNotMatch;
+                return locale.sorryPasswordDoesNotMatch;
                 //'Sorry, Password does not match, please re enter your password correctly.';
               }
 

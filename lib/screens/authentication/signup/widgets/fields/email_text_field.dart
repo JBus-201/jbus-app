@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jbus_app/generated/l10n.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/fields/text_form_field.dart';
 
 class EmailTextField extends StatelessWidget {
@@ -11,8 +12,10 @@ class EmailTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations locale = localeInstance();
+
     return OurTextFormField(
-        label: S.of(context).email,
+        label: locale.email,
         icon: Icons.email_outlined,
         textInputAction: TextInputAction.next,
         controller: emailController,
@@ -23,7 +26,7 @@ class EmailTextField extends StatelessWidget {
         counterText: '',
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return S.of(context).sorryPleaseEnterYourEmail;
+            return locale.sorryPleaseEnterYourEmail;
           }
           final bool emailValid =
               RegExp('^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,})\$')
@@ -32,7 +35,7 @@ class EmailTextField extends StatelessWidget {
           if (emailValid) {
             return null;
           } else {
-            return S.of(context).sorryPleaseEnterAValidEmail;
+            return locale.sorryPleaseEnterAValidEmail;
           }
         });
   }
