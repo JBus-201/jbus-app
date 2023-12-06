@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 import 'package:jbus_app/themes/dark_theme.dart';
 import 'package:jbus_app/themes/light_theme.dart';
-
 import 'generated/l10n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -31,6 +30,8 @@ Future main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+  
+  
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
           builder: (context, localizationState) {
             return MaterialApp(
               home: const SignupScreen(),
-              locale: const Locale('en'),
+              locale: Locale(localizationState.languageCode),
               localizationsDelegates: const [
                 S.delegate,
                 GlobalMaterialLocalizations.delegate,

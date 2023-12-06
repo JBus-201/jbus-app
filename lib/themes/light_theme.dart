@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppLightTheme {
+  
   // make them static, or use singletone...
   Color ourMainColor = const Color.fromARGB(255, 68, 142, 226);
   Color ourSecondaryColor = const Color.fromARGB(255, 242, 176, 62);

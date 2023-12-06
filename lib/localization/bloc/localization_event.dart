@@ -1,8 +1,10 @@
 part of 'localization_bloc.dart';
 
-sealed class LocalizationEvent extends Equatable {
-  const LocalizationEvent();
+@immutable
+sealed class LocalizationEvent {}
 
-  @override
-  List<Object> get props => [];
-}
+class SwitchToArabicLanguageEvent extends LocalizationEvent {}
+
+class SwitchToEnglishLanguageEvent extends LocalizationEvent {}
+
+//class SwitchToSystemLanguageEvent extends LocalizationEvent {}

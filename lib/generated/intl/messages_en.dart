@@ -69,6 +69,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Forgot password?"),
         "go": MessageLookupByLibrary.simpleMessage("Go"),
         "help": MessageLookupByLibrary.simpleMessage("Help"),
+        "iAlreadyHaveAnAccount":
+            MessageLookupByLibrary.simpleMessage("I olready have an account"),
         "jbusDriver": MessageLookupByLibrary.simpleMessage("JBUS driver"),
         "jordanTheme": MessageLookupByLibrary.simpleMessage("Jordan theme"),
         "jordanianDinar": MessageLookupByLibrary.simpleMessage("JOD"),

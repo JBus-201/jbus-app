@@ -80,5 +80,6 @@
     "dropOffRequest": "Drop off request",
     "userAuthenticationDemo": "User Authentication Demo",
     "drawer": "Drawer",
-    "systemTheme": "System theme"
+    "systemTheme": "System theme",
+    "iAlreadyHaveAnAccount": "I olready have an account"
 }

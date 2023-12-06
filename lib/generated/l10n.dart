@@ -869,6 +869,16 @@ class S {
       args: [],
     );
   }
+
+  /// `I olready have an account`
+  String get iAlreadyHaveAnAccount {
+    return Intl.message(
+      'I olready have an account',
+      name: 'iAlreadyHaveAnAccount',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
