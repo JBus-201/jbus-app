@@ -7,4 +7,3 @@ class SwitchToArabicLanguageEvent extends LocalizationEvent {}
 
 class SwitchToEnglishLanguageEvent extends LocalizationEvent {}
 
-//class SwitchToSystemLanguageEvent extends LocalizationEvent {}

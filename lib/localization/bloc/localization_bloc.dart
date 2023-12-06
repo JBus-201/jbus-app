@@ -31,12 +31,4 @@ class LocalizationBloc extends Bloc<LocalizationEvent, LocalizationState> {
 
     emit(state.copyWith(languageCode));
   }
-
-  //   FutureOr<void> _switchToEnglishEvent(
-  //     SwitchToEnglishLanguageEvent event, Emitter<LocalizationState> emit) {
-  //   String languageCode = state.languageCode;
-  //   languageCode = 'en';
-
-  //   emit(state.copyWith(languageCode));
-  // }
 }
