@@ -83,6 +83,12 @@ class OurTextFormField extends StatelessWidget {
             autocorrect: autocorrect,
             showCursor: showCursor,
             controller: controller,
+            cursorColor:
+                themeState.thememode == ThemeMode.light ? ourBlue : ourOrange,
+            style: TextStyle(
+              color:
+                  themeState.thememode == ThemeMode.light ? ourBlack : ourWhite,
+            ),
             decoration: InputDecoration(
                 focusColor: themeState.thememode == ThemeMode.light
                     ? ourBlue
@@ -136,8 +142,8 @@ class OurTextFormField extends StatelessWidget {
                       label,
                       style: TextStyle(
                         color: themeState.thememode == ThemeMode.light
-                          ? ourNavey
-                          : ourYellow,
+                            ? ourNavey
+                            : ourYellow,
                         fontSize: 16,
                       ),
                     ),

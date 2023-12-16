@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
-import 'package:jbus_app/constants/colors/gradients.dart';
 import 'package:jbus_app/themes/theme_controller.dart';
 
 class AppDarkTheme extends AppTheme {
@@ -41,7 +40,7 @@ class AppDarkTheme extends AppTheme {
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
                 elevation: 2,
-                foregroundColor:ourWhite,
+                foregroundColor:ourDarkThemeBackgroundNavey,
                 backgroundColor: getMainOrange(),
                 textStyle: const TextStyle(
                   fontSize: 20,
@@ -58,7 +57,7 @@ class AppDarkTheme extends AppTheme {
           style: //ButtonStyle(textStyle: TextStyle(color: ourMainColor))
               TextButton.styleFrom(
                   textStyle: TextStyle(
-                      color: getMainBlue(),
+                      color: ourWhite,
                       decoration: TextDecoration.underline)),
         ),
 
@@ -72,7 +71,7 @@ class AppDarkTheme extends AppTheme {
         
         // FloatingActionButton
         floatingActionButtonTheme: FloatingActionButtonThemeData(
-            backgroundColor: getMainOrange(), foregroundColor: ourWhite)
+            backgroundColor: getMainOrange(), foregroundColor: ourWhite),    
         );
   }
   
