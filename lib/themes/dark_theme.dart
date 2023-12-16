@@ -1,39 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:jbus_app/constants/colors/colors.dart';
+import 'package:jbus_app/constants/colors/gradients.dart';
 import 'package:jbus_app/themes/theme_controller.dart';
 
 class AppDarkTheme extends AppTheme {
   /// Geters
   @override
-  Color getMainColor() => const Color.fromARGB(255, 36, 51, 67);
+  Color getMainBlue() => const Color.fromARGB(255, 36, 51, 67);
 
   @override
-  Color getSecondaryColor() => const Color.fromARGB(255, 242, 176, 62);
-
-  @override
-  Color getThirdColor() => const Color.fromARGB(255, 246, 246, 246);
-
-  @override
-  Color getPointFColor() => const Color.fromARGB(255, 225, 209, 159);
-
-  @override
-  Color getPointSColor() => const Color.fromARGB(255, 176, 155, 57);
-
-  @override
-  Color getWhiteColor() => Colors.white;
-
-  @override
-  Color getDarkGrayColor() => const Color.fromARGB(255, 65, 65, 65);
-
-  /// Gradiant Colors
-  @override
-  LinearGradient getGoldGradient() => const LinearGradient(
-        colors: [
-          Color.fromARGB(255, 225, 209, 159),
-          Color.fromARGB(255, 176, 155, 57)
-        ],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-      );
+  Color getMainOrange() => const Color.fromARGB(255, 242, 176, 62);
 
   /// Theme Data
   @override
@@ -50,11 +26,11 @@ class AppDarkTheme extends AppTheme {
                 fontSize: 23,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Roboto',
-                color: getMainColor())),
-        scaffoldBackgroundColor: getDarkGrayColor(),
+                color: getMainBlue())),
+        scaffoldBackgroundColor: ourDarkThemeBackgroundNavey,
 
         // Colors
-        primaryColor: getMainColor(),
+        primaryColor: getMainBlue(),
 
         // Fonts
         fontFamily: 'Roboto',
@@ -65,8 +41,8 @@ class AppDarkTheme extends AppTheme {
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
                 elevation: 2,
-                foregroundColor:const Color.fromARGB(255, 181, 158, 99),
-                backgroundColor: getMainColor(),
+                foregroundColor:ourWhite,
+                backgroundColor: getMainOrange(),
                 textStyle: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -82,7 +58,7 @@ class AppDarkTheme extends AppTheme {
           style: //ButtonStyle(textStyle: TextStyle(color: ourMainColor))
               TextButton.styleFrom(
                   textStyle: TextStyle(
-                      color: getMainColor(),
+                      color: getMainBlue(),
                       decoration: TextDecoration.underline)),
         ),
 
@@ -90,14 +66,15 @@ class AppDarkTheme extends AppTheme {
         tabBarTheme: TabBarTheme(
             labelStyle:
                 const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-            labelColor: getSecondaryColor(),
-            indicatorColor: getSecondaryColor(),
-            dividerColor: getSecondaryColor()),
+            labelColor: getMainOrange(),
+            indicatorColor: getMainOrange(),
+            dividerColor: getMainOrange()),
         
         // FloatingActionButton
         floatingActionButtonTheme: FloatingActionButtonThemeData(
-            backgroundColor: getSecondaryColor(), foregroundColor: getWhiteColor())
+            backgroundColor: getMainOrange(), foregroundColor: ourWhite)
         );
   }
+  
 }
 

@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jbus_app/constants/colors/colors.dart';
+import 'package:jbus_app/constants/colors/gradients.dart';
+import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 import 'package:jbus_app/themes/theme_controller.dart';
 
 class AppLightTheme extends AppTheme {
   @override
-  Color getMainColor() => const Color.fromARGB(255, 68, 142, 226);
+  Color getMainBlue() => ourBlue;
 
   @override
-  Color getSecondaryColor() => const Color.fromARGB(255, 242, 176, 62);
+  Color getMainOrange() => ourOrange;
 
   @override
   Color getThirdColor() => const Color.fromARGB(255, 246, 246, 246);
@@ -18,20 +22,19 @@ class AppLightTheme extends AppTheme {
   Color getPointSColor() => const Color.fromARGB(255, 176, 155, 57);
 
   @override
-  Color getWhiteColor() => Colors.white;
+  Color getWhiteColor() => ourWhite;
 
   @override
-  Color getDarkGrayColor() => const Color.fromARGB(255, 65, 65, 65);
+  Color getDarkGrayColor() => ourDarkGray;
 
+    @override
+  LinearGradient getGoldGradient() => goldButtonGradient;
+  
   @override
-  LinearGradient getGoldGradient() => const LinearGradient(
-        colors: [
-          Color.fromARGB(255, 225, 209, 159),
-          Color.fromARGB(255, 176, 155, 57)
-        ],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-      );
+  LinearGradient getBlueButtonGradient() => blueButtonGradient;
+  
+  @override
+  LinearGradient getOrangeButtonGradient() => orangeButtonGradient;
 
   @override
   ThemeData createTheme() {
@@ -47,13 +50,13 @@ class AppLightTheme extends AppTheme {
                 fontSize: 23,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Roboto',
-                color: getMainColor())),
+                color: getMainBlue())),
 
         // Scaffold        
         scaffoldBackgroundColor: getWhiteColor(),
 
         // Colors
-        primaryColor: getMainColor(),
+        primaryColor: getMainBlue(),
 
         // Fonts
         fontFamily: 'Roboto',
@@ -65,7 +68,7 @@ class AppLightTheme extends AppTheme {
             style: ElevatedButton.styleFrom(
                 elevation: 2,
                 foregroundColor:getWhiteColor(),
-                backgroundColor: getMainColor(),
+                backgroundColor: getMainBlue(),
                 textStyle: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -80,7 +83,7 @@ class AppLightTheme extends AppTheme {
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
                   textStyle: TextStyle(
-                      color: getMainColor(),
+                      color: getMainBlue(),
                       decoration: TextDecoration.underline)),
         ),
 
@@ -88,13 +91,13 @@ class AppLightTheme extends AppTheme {
         tabBarTheme: TabBarTheme(
             labelStyle:
                 const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-            labelColor: getSecondaryColor(),
-            indicatorColor: getSecondaryColor(),
-            dividerColor: getSecondaryColor()),
+            labelColor: getMainOrange(),
+            indicatorColor: getMainOrange(),
+            dividerColor: getMainOrange()),
         
         // FloatingActionButton
         floatingActionButtonTheme: FloatingActionButtonThemeData(
-            backgroundColor: getSecondaryColor(), foregroundColor: getWhiteColor())
+            backgroundColor: getMainOrange(), foregroundColor: getWhiteColor())
         );
   }
 }
@@ -106,20 +109,17 @@ class AppBarStyle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      builder: (context, themeState) {
+        return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: <Color>[
-            AppLightTheme().getWhiteColor(),
-            AppLightTheme().getWhiteColor().withOpacity(0.9),
-            AppLightTheme().getWhiteColor().withOpacity(0.8),
-            AppLightTheme().getWhiteColor().withOpacity(0.8),
-            AppLightTheme().getWhiteColor().withOpacity(0.6),
-            AppLightTheme().getWhiteColor().withOpacity(0.3),
-            AppLightTheme().getWhiteColor().withOpacity(0)
+            themeState.thememode == ThemeMode.light ? ourWhite : ourDarkThemeBackgroundNavey,
+            themeState.thememode == ThemeMode.light ? ourWhite.withOpacity(0) : ourDarkThemeBackgroundNavey.withOpacity(0)
           ])),
-    );
+    );});
   }
 }

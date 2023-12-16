@@ -1,7 +1,7 @@
 part of 'theme_bloc.dart';
 
 class ThemeState extends Equatable {
-  const ThemeState({this.thememode = ThemeMode.system});
+  const ThemeState({this.thememode = ThemeMode.light});
   final ThemeMode thememode;
 
   @override
