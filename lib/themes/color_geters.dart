@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jbus_app/constants/colors/gradients.dart';
 import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 import 'package:jbus_app/themes/dark_theme.dart';
 import 'package:jbus_app/themes/light_theme.dart';
@@ -16,49 +17,20 @@ class ThemeColors {
 
   Color getMainColor() {
     return currentTheme == ThemeMode.light
-        ? _lightTheme.getMainColor()
-        : _darkTheme.getMainColor();
+        ? _lightTheme.getMainBlue()
+        : _darkTheme.getMainOrange();
   }
 
   Color getSecondaryColor() {
     return currentTheme == ThemeMode.light
-        ? _lightTheme.getSecondaryColor()
-        : _darkTheme.getSecondaryColor();
+        ? _lightTheme.getMainOrange()
+        : _darkTheme.getMainBlue();
   }
 
-  Color getThirdColor() {
-    return currentTheme == ThemeMode.light
-        ? _lightTheme.getThirdColor()
-        : _darkTheme.getThirdColor();
-  }
 
-  Color getPointFColor() {
+  LinearGradient getMainGradient() {
     return currentTheme == ThemeMode.light
-        ? _lightTheme.getPointFColor()
-        : _darkTheme.getPointFColor();
-  }
-
-  Color getPointSColor() {
-    return currentTheme == ThemeMode.light
-        ? _lightTheme.getPointSColor()
-        : _darkTheme.getPointSColor();
-  }
-
-  Color getWhiteColor() {
-    return currentTheme == ThemeMode.light
-        ? _lightTheme.getWhiteColor()
-        : _darkTheme.getWhiteColor();
-  }
-
-  Color getDarkGrayColor() {
-    return currentTheme == ThemeMode.light
-        ? _lightTheme.getDarkGrayColor()
-        : _darkTheme.getDarkGrayColor();
-  }
-
-  LinearGradient getGradient() {
-    return currentTheme == ThemeMode.light
-        ? _lightTheme.getGoldGradient()
-        : _darkTheme.getGoldGradient();
+        ? blueButtonGradient
+        : orangeButtonGradient;
   }
 }

@@ -1,7 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
+import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 
 class OurTextFormField extends StatelessWidget {
   const OurTextFormField({
@@ -53,81 +54,104 @@ class OurTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: 4,
-        right: 4,
-        top: 12,
-        bottom: 12,
-        // left: leftPadding,
-        // top: topPadding,
-        // right: rightPadding,
-        // bottom: bottomPadding,
-      ),
-      child: SizedBox(
-        height: 75,
-        child: TextFormField(
-          validator: validator,
-          focusNode: focusNode,
-          autofocus: autofocus,
-          inputFormatters: inputFormatters,
-          onChanged: onChanged,
-          textAlign: textAlign,
-          textInputAction: textInputAction,
-          maxLength: maxLength,
-          keyboardType: keyboardType,
-          obscureText: obscureText!,
-          enableSuggestions: enableSuggestions,
-          autocorrect: autocorrect,
-          showCursor: showCursor,
-          controller: controller,
-          decoration: InputDecoration(
-              focusColor: ourBlue,
-              errorStyle: const TextStyle(height: 1),
-              counterText: counterText,
-              errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(22),
-                borderSide: const BorderSide(
-                  color: ourBlue,
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(22),
-                borderSide: const BorderSide(
-                  color: ourBlue,
-                ),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(22),
-                borderSide: const BorderSide(
-                  color: ourDarkBlue,
-                ),
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(22),
-                borderSide: const BorderSide(color: ourDarkBlue),
-              ),
-              label: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    icon,
-                    color: ourNavey,
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Text(
-                    label,
-                    style: const TextStyle(
-                      color: ourNavey,
-                      fontSize: 16,
-                    ),
-                  ),
-                ],
-              )),
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
+      return Padding(
+        padding: const EdgeInsets.only(
+          left: 4,
+          right: 4,
+          top: 12,
+          bottom: 12,
+          // left: leftPadding,
+          // top: topPadding,
+          // right: rightPadding,
+          // bottom: bottomPadding,
         ),
-      ),
-    );
+        child: SizedBox(
+          height: 75,
+          child: TextFormField(
+            validator: validator,
+            focusNode: focusNode,
+            autofocus: autofocus,
+            inputFormatters: inputFormatters,
+            onChanged: onChanged,
+            textAlign: textAlign,
+            textInputAction: textInputAction,
+            maxLength: maxLength,
+            keyboardType: keyboardType,
+            obscureText: obscureText!,
+            enableSuggestions: enableSuggestions,
+            autocorrect: autocorrect,
+            showCursor: showCursor,
+            controller: controller,
+            cursorColor:
+                themeState.thememode == ThemeMode.light ? ourBlue : ourOrange,
+            style: TextStyle(
+              color:
+                  themeState.thememode == ThemeMode.light ? ourBlack : ourWhite,
+            ),
+            decoration: InputDecoration(
+                focusColor: themeState.thememode == ThemeMode.light
+                    ? ourBlue
+                    : ourOrange,
+                errorStyle: const TextStyle(height: 1),
+                counterText: counterText,
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(22),
+                  borderSide: BorderSide(
+                    color: themeState.thememode == ThemeMode.light
+                        ? ourBlue
+                        : ourOrange,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(22),
+                  borderSide: BorderSide(
+                    color: themeState.thememode == ThemeMode.light
+                        ? ourBlue
+                        : ourOrange,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(22),
+                  borderSide: BorderSide(
+                    color: themeState.thememode == ThemeMode.light
+                        ? ourDarkBlue
+                        : ourOrange,
+                  ),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(22),
+                  borderSide: BorderSide(
+                      color: themeState.thememode == ThemeMode.light
+                          ? ourDarkBlue
+                          : ourOrange),
+                ),
+                label: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      icon,
+                      color: themeState.thememode == ThemeMode.light
+                          ? ourNavey
+                          : ourOrange,
+                    ),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    Text(
+                      label,
+                      style: TextStyle(
+                        color: themeState.thememode == ThemeMode.light
+                            ? ourNavey
+                            : ourYellow,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                )),
+          ),
+        ),
+      );
+    });
   }
 }
