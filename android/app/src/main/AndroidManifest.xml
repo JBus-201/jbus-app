@@ -3,6 +3,9 @@
         android:label="JBus"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBGSGYjRajQX1-0LksuNshClN1l8ORObJA" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -29,5 +32,6 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
     </application>
 </manifest>
