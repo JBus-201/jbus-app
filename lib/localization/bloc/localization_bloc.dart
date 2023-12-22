@@ -8,12 +8,11 @@ part 'localization_event.dart';
 part 'localization_state.dart';
 
 class LocalizationBloc extends Bloc<LocalizationEvent, LocalizationState> {
-  LocalizationBloc() : super(const LocalizationState(languageCode: 'ar')) {
+  LocalizationBloc() : super(const LocalizationState(languageCode: 'en')) {
     on<LocalizationEvent>((event, emit) {});
 
     on<SwitchToArabicLanguageEvent>(_switchToArabicLanguageEvent);
     on<SwitchToEnglishLanguageEvent>(_switchToEnglishLanguageEvent);
-    
   }
 
   FutureOr<void> _switchToArabicLanguageEvent(

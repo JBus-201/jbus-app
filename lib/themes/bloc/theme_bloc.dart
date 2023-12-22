@@ -34,9 +34,9 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   FutureOr<void> _switchToSystemThemeEvent(
       SwitchToSystemThemeEvent event, Emitter<ThemeState> emit) {
     //ThemeMode themeMode = ThemeMode.system;
-    if (kDebugMode) {
-      print('Theme Mode');
-    }
+    // if (kDebugMode) {
+    //   print('Theme Mode');
+    // }
 
     emit(state.copyWith(ThemeMode.system));
   }

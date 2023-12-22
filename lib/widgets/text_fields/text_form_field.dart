@@ -1,7 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
+import 'package:jbus_app/screens/authentication/signup/bloc/signup_bloc.dart';
 
 class OurTextFormField extends StatelessWidget {
   const OurTextFormField({
@@ -23,6 +24,7 @@ class OurTextFormField extends StatelessWidget {
     this.autofocus = false,
     this.focusNode,
     this.icon,
+    this.suffixIcon,
     // this.leftPadding = 4,
     // this.topPadding = 12,
     // this.rightPadding = 4,
@@ -46,11 +48,12 @@ class OurTextFormField extends StatelessWidget {
   final bool autofocus;
   final FocusNode? focusNode;
   final IconData? icon;
+  final IconData? suffixIcon;
+
   // final double leftPadding;
   // final double topPadding;
   // final double rightPadding;
   // final double bottomPadding;
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -67,6 +70,8 @@ class OurTextFormField extends StatelessWidget {
       child: SizedBox(
         height: 75,
         child: TextFormField(
+          //textAlignVertical: TextAlignVertical.center,
+
           validator: validator,
           focusNode: focusNode,
           autofocus: autofocus,
@@ -82,6 +87,26 @@ class OurTextFormField extends StatelessWidget {
           showCursor: showCursor,
           controller: controller,
           decoration: InputDecoration(
+              suffix: suffixIcon != null
+                  ? IconButton(
+                      icon: Icon(
+                        suffixIcon,
+                        color: ourNavey,
+                      ),
+                      color: ourNavey,
+                      onPressed: () {
+                        final signupBloc = BlocProvider.of<SignupBloc>(context);
+
+                        if (signupBloc.state.icon ==
+                            Icons.visibility_off_outlined) {
+                          signupBloc.add(SwitchToVisibilityOnEvent());
+                        } else {
+                          signupBloc.add(SwitchToVisibilityOffEvent());
+                        }
+                      })
+                  : null,
+              // suffixIcon: Icon(
+
               focusColor: ourBlue,
               errorStyle: const TextStyle(height: 1),
               counterText: counterText,

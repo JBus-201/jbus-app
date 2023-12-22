@@ -81,5 +81,6 @@
     "userAuthenticationDemo": "عرض مصادقة المستخدم",
     "drawer": "قائمة منبثقة",
     "systemTheme": "نمط النظام",
-    "iAlreadyHaveAnAccount": "لدي حساب بالفعل"
+    "alreadyHaveAnAccount": "لدي حساب بالفعل، تسجيل الدخول",
+    "verify": "تأكيد"
 }
