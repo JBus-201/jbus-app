@@ -14,66 +14,65 @@ class AppDarkTheme extends AppTheme {
   @override
   ThemeData createTheme() {
     return ThemeData(
-        useMaterial3: true,
+      useMaterial3: true,
 
-        //AppBar theme
-        appBarTheme: AppBarTheme(
-            backgroundColor: const Color.fromARGB(255, 0, 0, 0).withOpacity(0),
-            centerTitle: true,
-            elevation: 0,
-            titleTextStyle: TextStyle(
-                fontSize: 23,
+      //AppBar theme
+      appBarTheme: AppBarTheme(
+          backgroundColor: const Color.fromARGB(255, 0, 0, 0).withOpacity(0),
+          centerTitle: true,
+          elevation: 0,
+          titleTextStyle: TextStyle(
+              fontSize: 23,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Roboto',
+              color: getMainOrange())),
+      scaffoldBackgroundColor: ourDarkThemeBackgroundNavey,
+      listTileTheme: ListTileThemeData(
+          iconColor: ourWhite, selectedColor: ourWhite, textColor: ourWhite),
+      dividerColor: ourBlack.withOpacity(0),
+      // Colors
+      primaryColor: getMainBlue(),
+
+      // Fonts
+      fontFamily: 'Roboto',
+      textTheme: const TextTheme(
+          bodyMedium: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 18, color: ourWhite)),
+
+      // ElevatedButton
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+              elevation: 2,
+              foregroundColor: ourDarkThemeBackgroundNavey,
+              backgroundColor: getMainOrange(),
+              textStyle: const TextStyle(
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Roboto',
-                color: getMainBlue())),
-        scaffoldBackgroundColor: ourDarkThemeBackgroundNavey,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ))),
 
-        // Colors
-        primaryColor: getMainBlue(),
+      /// TextButtons
+      textButtonTheme: TextButtonThemeData(
+        style: //ButtonStyle(textStyle: TextStyle(color: ourMainColor))
+            TextButton.styleFrom(
+                textStyle: TextStyle(
+                    color: ourWhite, decoration: TextDecoration.underline)),
+      ),
 
-        // Fonts
-        fontFamily: 'Roboto',
-        textTheme: const TextTheme(
-            bodyMedium: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+      //TabBarTheme
+      tabBarTheme: TabBarTheme(
+          labelStyle:
+              const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          labelColor: getMainOrange(),
+          indicatorColor: getMainOrange(),
+          dividerColor: getMainOrange()),
 
-        // ElevatedButton
-        elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-                elevation: 2,
-                foregroundColor:ourDarkThemeBackgroundNavey,
-                backgroundColor: getMainOrange(),
-                textStyle: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Roboto',
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.circular(30), 
-                ))),
-
-        /// TextButtons
-        textButtonTheme: TextButtonThemeData(
-          style: //ButtonStyle(textStyle: TextStyle(color: ourMainColor))
-              TextButton.styleFrom(
-                  textStyle: TextStyle(
-                      color: ourWhite,
-                      decoration: TextDecoration.underline)),
-        ),
-
-        //TabBarTheme
-        tabBarTheme: TabBarTheme(
-            labelStyle:
-                const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-            labelColor: getMainOrange(),
-            indicatorColor: getMainOrange(),
-            dividerColor: getMainOrange()),
-        
-        // FloatingActionButton
-        floatingActionButtonTheme: FloatingActionButtonThemeData(
-            backgroundColor: getMainOrange(), foregroundColor: ourWhite),    
-        );
+      // FloatingActionButton
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: getMainOrange(), foregroundColor: ourWhite),
+    );
   }
-  
 }
-
