@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/localization/bloc/localization_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jbus_app/services/service_locator.dart';
+import 'package:jbus_app/themes/bloc/theme_bloc.dart';
+import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 
 class LanguageSettingsScreen extends StatelessWidget {
   const LanguageSettingsScreen({Key? key}) : super(key: key);
@@ -40,6 +42,14 @@ class LanguageSettingsScreen extends StatelessWidget {
                 //locale = localeInstance();
               },
             ),
+            RectangularElevatedButton(
+                text: "change Theme",
+                width: 200,
+                onPressed: () {
+                  final themeBloc = BlocProvider.of<ThemeBloc>(context);
+                  final currentTheme = BlocProvider.of<ThemeBloc>(context).state.thememode;
+                  currentTheme == ThemeMode.light ? themeBloc.add(SwitchToDarkThemeEvent()) : themeBloc.add(SwitchToLightThemeEvent());
+                }),
           ],
         ),
       ),

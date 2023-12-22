@@ -24,6 +24,7 @@ dependencies:
   flutter_native_splash: ^2.3.6
   intl: ^0.18.1
   meta: ^1.10.0
+  google_maps_flutter: ^2.5.0
 
 flutter_native_splash:
   android: true

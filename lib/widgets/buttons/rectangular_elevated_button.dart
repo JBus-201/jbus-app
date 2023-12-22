@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/constants/colors/gradients.dart';
+import 'package:jbus_app/themes/bloc/theme_bloc.dart';
+import 'package:jbus_app/themes/color_geters.dart';
 
 class RectangularElevatedButton extends StatelessWidget {
   const RectangularElevatedButton({
@@ -9,6 +12,7 @@ class RectangularElevatedButton extends StatelessWidget {
     this.height = 50,
     this.width = double.maxFinite,
     this.gradient = blueButtonGradient,
+    this.gradientForDark = orangeButtonGradient,
     this.padding = 4,
   }) : super(key: key);
 
@@ -17,16 +21,19 @@ class RectangularElevatedButton extends StatelessWidget {
   final double height;
   final double width;
   final Gradient? gradient;
+  final Gradient? gradientForDark;
   final double padding;
   
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      builder: (context, themeState) {
+        return Padding(
       padding: EdgeInsets.all(padding),
       child: Container(
         decoration: BoxDecoration(
-          gradient: gradient,
+          gradient:themeState.thememode == ThemeMode.light? gradient:gradientForDark,
           borderRadius: BorderRadius.circular(22),
         ),
         child: ElevatedButton(
@@ -41,6 +48,6 @@ class RectangularElevatedButton extends StatelessWidget {
           ),
         ),
       ),
-    );
+    );});
   }
 }
