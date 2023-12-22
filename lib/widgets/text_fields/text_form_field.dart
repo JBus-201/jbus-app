@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
-import 'package:jbus_app/screens/authentication/signup/bloc/signup_bloc.dart';
 import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 
 class OurTextFormField extends StatelessWidget {
@@ -58,20 +57,17 @@ class OurTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
-      return
-    Padding(
-      padding: const EdgeInsets.only(
-        left: 4,
-        right: 4,
-        top: 12,
-        bottom: 12,
-        // left: leftPadding,
-        // top: topPadding,
-        // right: rightPadding,
-        // bottom: bottomPadding,
-      ),
-      
-      
+      return Padding(
+        padding: const EdgeInsets.only(
+          left: 4,
+          right: 4,
+          top: 12,
+          bottom: 12,
+          // left: leftPadding,
+          // top: topPadding,
+          // right: rightPadding,
+          // bottom: bottomPadding,
+        ),
         child: SizedBox(
           height: 75,
           child: TextFormField(
@@ -157,8 +153,7 @@ class OurTextFormField extends StatelessWidget {
                 )),
           ),
         ),
-      
-    );
+      );
     });
   }
 }

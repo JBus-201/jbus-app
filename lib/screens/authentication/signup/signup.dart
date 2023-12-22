@@ -9,7 +9,6 @@ import 'package:jbus_app/screens/authentication/signup/widgets/fields/password_t
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jbus_app/screens/authentication/signup/widgets/fields/password_verification_field.dart';
 import 'package:jbus_app/services/service_locator.dart';
-import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -80,7 +79,7 @@ class SignupScreen extends StatelessWidget {
                                 PasswordTextField.passwordController.text,
                             formKey: formKey,
                           ),
-                          //const SignInButtonSUS(),
+                          const SignInButtonSUS(),
                         ],
                       ),
                     ),

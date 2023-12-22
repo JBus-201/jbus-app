@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jbus_app/constants/colors/colors.dart';
+import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 
 class OtpTextField extends StatelessWidget {
   const OtpTextField({
@@ -13,7 +16,8 @@ class OtpTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController digitController = TextEditingController();
 
-    return Expanded(
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
+      return Expanded(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SizedBox(
@@ -44,17 +48,27 @@ class OtpTextField extends StatelessWidget {
             autofocus: first == true ? true : false,
             controller: digitController,
             textAlign: TextAlign.center,
+            style: TextStyle(
+              color:
+                  themeState.thememode == ThemeMode.light ? ourBlack : ourWhite,
+            ),
             decoration: InputDecoration(
               counterText: ' ',
-              focusColor: Colors.amber,
+              focusColor: themeState.thememode == ThemeMode.light
+                        ? ourBlue
+                        : ourOrange,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(22),
-                borderSide: const BorderSide(color: Colors.amber),
+                borderSide: BorderSide(
+                    color: themeState.thememode == ThemeMode.light
+                        ? ourBlue
+                        : ourOrange,
+                  ),
               ),
             ),
           ),
         ),
       ),
-    );
+    );});
   }
 }

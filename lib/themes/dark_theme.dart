@@ -56,12 +56,11 @@ class AppDarkTheme extends AppTheme {
 
       /// TextButtons
       textButtonTheme: TextButtonThemeData(
-        style: //ButtonStyle(textStyle: TextStyle(color: ourMainColor))
-            TextButton.styleFrom(
-                textStyle: TextStyle(
-                    color: ourWhite, decoration: TextDecoration.underline)),
+        style: TextButton.styleFrom(foregroundColor: ourWhite,
+            textStyle: const TextStyle(
+                color: ourWhite, decoration: TextDecoration.underline)),
       ),
-
+      focusColor: ourOrange,
       //TabBarTheme
       tabBarTheme: TabBarTheme(
           labelStyle:

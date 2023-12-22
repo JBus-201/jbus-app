@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/constants/colors/gradients.dart';
 import 'package:jbus_app/themes/bloc/theme_bloc.dart';
-import 'package:jbus_app/themes/color_geters.dart';
 
 class RectangularElevatedButton extends StatelessWidget {
   const RectangularElevatedButton({

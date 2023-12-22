@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jbus_app/themes/light_theme.dart';
-
 class AppBarTitleLogo extends StatelessWidget {
   const AppBarTitleLogo({super.key});
 

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
-import 'package:jbus_app/constants/colors/gradients.dart';
-import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 import 'package:jbus_app/themes/theme_controller.dart';
 
 class AppLightTheme extends AppTheme {
@@ -13,29 +10,6 @@ class AppLightTheme extends AppTheme {
   Color getMainOrange() => ourOrange;
 
   @override
-  Color getThirdColor() => const Color.fromARGB(255, 246, 246, 246);
-
-  @override
-  Color getPointFColor() => const Color.fromARGB(255, 225, 209, 159);
-
-  @override
-  Color getPointSColor() => const Color.fromARGB(255, 176, 155, 57);
-
-  @override
-  Color getWhiteColor() => ourWhite;
-
-  @override
-  Color getDarkGrayColor() => ourDarkGray;
-
-    @override
-  LinearGradient getGoldGradient() => goldButtonGradient;
-  
-  @override
-  LinearGradient getBlueButtonGradient() => blueButtonGradient;
-  
-  @override
-  LinearGradient getOrangeButtonGradient() => orangeButtonGradient;
-
   @override
   ThemeData createTheme() {
     return ThemeData(
@@ -52,8 +26,8 @@ class AppLightTheme extends AppTheme {
                 fontFamily: 'Roboto',
                 color: getMainBlue())),
 
-        // Scaffold        
-        scaffoldBackgroundColor: getWhiteColor(),
+        // Scaffold
+        scaffoldBackgroundColor: ourWhite,
 
         // Colors
         primaryColor: getMainBlue(),
@@ -62,12 +36,12 @@ class AppLightTheme extends AppTheme {
         fontFamily: 'Roboto',
         textTheme: const TextTheme(
             bodyMedium: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-
+        focusColor: ourBlue,
         // ElevatedButton
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
                 elevation: 2,
-                foregroundColor:getWhiteColor(),
+                foregroundColor: ourWhite,
                 backgroundColor: getMainBlue(),
                 textStyle: const TextStyle(
                   fontSize: 20,
@@ -75,16 +49,15 @@ class AppLightTheme extends AppTheme {
                   fontFamily: 'Roboto',
                 ),
                 shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.circular(30), 
+                  borderRadius: BorderRadius.circular(30),
                 ))),
 
         /// TextButtons
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-                  textStyle: TextStyle(
-                      color: getMainBlue(),
-                      decoration: TextDecoration.underline)),
+              foregroundColor: ourNavey,
+              textStyle: TextStyle(
+                  color: getMainBlue(), decoration: TextDecoration.underline)),
         ),
 
         //TabBarTheme
@@ -94,32 +67,13 @@ class AppLightTheme extends AppTheme {
             labelColor: getMainOrange(),
             indicatorColor: getMainOrange(),
             dividerColor: getMainOrange()),
-        
+
         // FloatingActionButton
         floatingActionButtonTheme: FloatingActionButtonThemeData(
-            backgroundColor: getMainOrange(), foregroundColor: getWhiteColor())
-        );
+            backgroundColor: getMainOrange(), foregroundColor: ourWhite));
   }
 }
 
 //AppBarStyle for Gradient color
 
-class AppBarStyle extends StatelessWidget {
-  const AppBarStyle({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeState>(
-      builder: (context, themeState) {
-        return Container(
-      decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: <Color>[
-            themeState.thememode == ThemeMode.light ? ourWhite : ourDarkThemeBackgroundNavey,
-            themeState.thememode == ThemeMode.light ? ourWhite.withOpacity(0) : ourDarkThemeBackgroundNavey.withOpacity(0)
-          ])),
-    );});
-  }
-}

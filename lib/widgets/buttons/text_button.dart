@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jbus_app/constants/colors/colors.dart';
 
 class OurTextButton extends StatelessWidget {
   const OurTextButton({Key? key, this.onPressed, this.text = ""})
@@ -14,7 +13,6 @@ class OurTextButton extends StatelessWidget {
       onPressed: onPressed,
       child: Text(
         text,
-        style: const TextStyle(color: ourNavey),
       ),
     );
   }
