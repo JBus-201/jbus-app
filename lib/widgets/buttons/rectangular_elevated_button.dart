@@ -10,7 +10,7 @@ class RectangularElevatedButton extends StatelessWidget {
     required this.text,
     required this.onPressed,
     this.height = 50,
-    this.width = 100,
+    this.width = double.maxFinite,
     this.gradient = blueButtonGradient,
     this.gradientForDark = orangeButtonGradient,
     this.padding = 4,
@@ -23,6 +23,7 @@ class RectangularElevatedButton extends StatelessWidget {
   final Gradient? gradient;
   final Gradient? gradientForDark;
   final double padding;
+  
 
   @override
   Widget build(BuildContext context) {

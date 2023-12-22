@@ -11,7 +11,8 @@ class LanguageSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AppLocalizations locale = localeInstance();
+    //final languageBloc = BlocProvider.of<LocalizationBloc>(context);
+    AppLocalizations locale = localeInstance();
     //ThemeBloc themeBloc = ThemeBloc();
     return Scaffold(
       appBar: AppBar(
@@ -26,8 +27,9 @@ class LanguageSettingsScreen extends StatelessWidget {
                 locale.arabic,
               ),
               onPressed: () {
-                final themeBloc = BlocProvider.of<LocalizationBloc>(context);
-                themeBloc.add(SwitchToArabicLanguageEvent());
+                final languageBloc = BlocProvider.of<LocalizationBloc>(context);
+                languageBloc.add(SwitchToArabicLanguageEvent());
+                //locale = localeInstance();
               },
             ),
             ElevatedButton(
@@ -35,8 +37,9 @@ class LanguageSettingsScreen extends StatelessWidget {
                 locale.english,
               ),
               onPressed: () {
-                final themeBloc = BlocProvider.of<LocalizationBloc>(context);
-                themeBloc.add(SwitchToEnglishLanguageEvent());
+                final languageBloc = BlocProvider.of<LocalizationBloc>(context);
+                languageBloc.add(SwitchToEnglishLanguageEvent());
+                //locale = localeInstance();
               },
             ),
             RectangularElevatedButton(

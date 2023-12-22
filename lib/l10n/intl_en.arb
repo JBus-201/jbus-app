@@ -81,5 +81,6 @@
     "userAuthenticationDemo": "User Authentication Demo",
     "drawer": "Drawer",
     "systemTheme": "System theme",
-    "iAlreadyHaveAnAccount": "I olready have an account"
+    "alreadyHaveAnAccount": "already have an account? SignIn",
+    "verify": "Verify"
 }

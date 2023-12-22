@@ -4,8 +4,8 @@ import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class SignUpButton extends StatelessWidget {
-  const SignUpButton({
+class SignUpButtonSUS extends StatelessWidget {
+  const SignUpButtonSUS({
     super.key,
     required this.firstNameControllerText,
     required this.lastNameControllerText,

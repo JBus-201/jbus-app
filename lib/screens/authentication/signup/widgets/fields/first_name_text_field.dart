@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jbus_app/services/service_locator.dart';
-import 'package:jbus_app/widgets/fields/text_form_field.dart';
+import 'package:jbus_app/widgets/text_fields/text_form_field.dart';
 
 class FirstNameTextField extends StatelessWidget {
   const FirstNameTextField({super.key});
