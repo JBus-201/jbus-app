@@ -35,48 +35,48 @@ class MainDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.favorite_border_rounded),
-            title: Text("fav"),
+            title: Text("Favorite points"),
             onTap: () {
             },
           ),
           ListTile(
             leading: const Icon(Icons.history),
-            title: Text("hist"),
+            title: Text("Trips History"),
             onTap: () {
             },
           ),
           ListTile(
             leading: const Icon(Icons.map),
-            title: Text("routs"),
+            title: Text("Routs"),
             onTap: () {
             },
           ),
           ListTile(
             leading: const Icon(Icons.wallet),
-            title: Text("wallet"),
+            title: Text("Wallet"),
             onTap: () {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.add_card_outlined),
-            title: Text("transaction"),
+            leading: const Icon(Icons.currency_exchange_rounded),
+            title: Text("Balance transfer"),
             onTap: () {
             },
           ),
           ListTile(
             leading: const Icon(Icons.monetization_on_sharp),
-            title: Text("rewadr points"),
+            title: Text("Rewadr points"),
             onTap: () {
             },
           ),
           ListTile(
             leading: const Icon(Icons.account_circle),
-            title: Text("manage account"),
+            title: Text("Manage account"),
             onTap: () {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.account_circle),
+            leading: const Icon(Icons.report_rounded),
             title: Text("faza'a"),
             onTap: () {
             },

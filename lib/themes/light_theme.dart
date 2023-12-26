@@ -14,7 +14,6 @@ class AppLightTheme extends AppTheme {
   ThemeData createTheme() {
     return ThemeData(
         useMaterial3: true,
-
         //AppBar theme
         appBarTheme: AppBarTheme(
             backgroundColor: const Color.fromARGB(255, 0, 0, 0).withOpacity(0),
@@ -70,7 +69,7 @@ class AppLightTheme extends AppTheme {
 
         // FloatingActionButton
         floatingActionButtonTheme: FloatingActionButtonThemeData(
-            backgroundColor: getMainOrange(), foregroundColor: ourWhite));
+            backgroundColor: getMainBlue(), foregroundColor: ourWhite));
   }
 }
 

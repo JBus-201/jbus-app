@@ -14,13 +14,15 @@ class endDrawerButton extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           Container(
-            decoration: BoxDecoration(boxShadow: [
-              BoxShadow(
-                offset: const Offset(0, 2),
-                color:themeState.thememode == ThemeMode.light ? ourDarkGray50.withOpacity(0.1) : ourWhite.withOpacity(0.1),
-                blurRadius: 2,
-              )
-            ], shape: BoxShape.circle),
+            decoration: BoxDecoration(
+            //   boxShadow: [
+            //   BoxShadow(
+            //     offset: const Offset(0, 2),
+            //     color:themeState.thememode == ThemeMode.light ? ourDarkGray50.withOpacity(0.1) : ourWhite.withOpacity(0.1),
+            //     blurRadius: 2,
+            //   )
+            // ], 
+            shape: BoxShape.circle),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 shape: CircleBorder(

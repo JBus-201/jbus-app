@@ -11,15 +11,8 @@ class drawerButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
       return Container(
-        decoration: BoxDecoration(boxShadow: [
-          BoxShadow(
-            offset: const Offset(0, 2),
-            color: themeState.thememode == ThemeMode.light
-                ? ourDarkGray50.withOpacity(0.1)
-                : ourWhite.withOpacity(0.1),
-            blurRadius: 2,
-          )
-        ], shape: BoxShape.circle),
+        decoration: const BoxDecoration(
+        shape: BoxShape.circle),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             shape: CircleBorder(
@@ -28,9 +21,9 @@ class drawerButton extends StatelessWidget {
                   width: 0.5), // Add the border here
             ),
             foregroundColor:
-                themeState.thememode == ThemeMode.light ? ourBlack : ourOrange,
+                themeState.thememode == ThemeMode.light ? ourWhite : ourOrange,
             backgroundColor: themeState.thememode == ThemeMode.light
-                ? ourWhite
+                ? ourBlack
                 : ourDarkThemeBackgroundNavey,
             elevation: 0,
           ),
