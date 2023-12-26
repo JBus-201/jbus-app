@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/data/api/google/google.dart';
@@ -22,9 +21,6 @@ class _DashbourdState extends State<Dashbourd> {
   late GoogleMapController _mapController;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GoogleMapsApi googleService = GoogleMapsApi();
-  void _onMapCreated(GoogleMapController controller) {
-    _mapController = controller;
-  }
 
   @override
   void initState() {

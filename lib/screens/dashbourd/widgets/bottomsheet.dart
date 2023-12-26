@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 
 class BottomSearchSheet extends StatefulWidget {
@@ -36,7 +35,7 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
   ////////////////////////////////////////
   final DraggableScrollableController _draggableScrollableController =
       DraggableScrollableController();
-  final TextEditingController _textEditingController = TextEditingController();
+  // final TextEditingController _textEditingController = TextEditingController();
 
   @override
   void initState() {
