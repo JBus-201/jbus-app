@@ -11,8 +11,8 @@ class AppBarTitleLogo extends StatelessWidget {
           height: 20,
         ),
         Image.asset(
-          'assets/logos/splash.png',
-          scale: 13,
+          'assets/logos/jbus-logo.png',
+          scale: 17,
         ),
       ],
     ));
