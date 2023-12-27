@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
-import 'package:jbus_app/data/api/google/google.dart';
+import 'package:jbus_app/data/api/google.dart';
 import 'package:jbus_app/screens/dashbourd/buttons/drawer.dart';
 import 'package:jbus_app/screens/dashbourd/buttons/end_drawer.dart';
 import 'package:jbus_app/screens/dashbourd/widgets/bottomsheet.dart';

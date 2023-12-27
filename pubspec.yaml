@@ -27,6 +27,9 @@ dependencies:
   google_maps_flutter: ^2.5.0
   http: ^1.1.2
   geolocator: ^10.1.0
+  retrofit: any
+  dio: any
+  json_annotation: ^4.8.1
   # location: ^5.0.3
 
 flutter_native_splash:
@@ -40,6 +43,9 @@ dev_dependencies:
     sdk: flutter
 
   flutter_launcher_icons: ^0.13.1
+  build_runner: any
+  json_serializable: any
+  retrofit_generator: ">=7.0.0 <8.0.0"
 
 flutter_icons:
   image_path: "assets/logos/icon.png"
