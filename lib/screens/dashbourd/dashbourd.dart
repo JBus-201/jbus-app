@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
-import 'package:jbus_app/data/api/google/google.dart';
+import 'package:jbus_app/data/api/google/google-service.dart';
 import 'package:jbus_app/screens/dashbourd/buttons/drawer.dart';
 import 'package:jbus_app/screens/dashbourd/buttons/end_drawer.dart';
 import 'package:jbus_app/screens/dashbourd/widgets/bottomsheet.dart';
 import 'package:jbus_app/screens/drawer/main_drawer/main_drawer.dart';
 import 'package:jbus_app/screens/drawer_notification/notification_drawer.dart';
 import 'package:jbus_app/themes/appbar_style.dart';
+import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
+import 'package:jbus_app/widgets/others/googlemaps.dart';
 
 class Dashbourd extends StatefulWidget {
   const Dashbourd({super.key});
@@ -55,36 +58,20 @@ class _DashbourdState extends State<Dashbourd> {
       endDrawerEnableOpenDragGesture: true,
       drawer: const NotificationsDrawer(),
       endDrawer: const MainDrawer(),
-      body: Stack(children: [
-        GoogleMap(
-          trafficEnabled: true,
-          buildingsEnabled: true,
-          myLocationEnabled: true,
-          rotateGesturesEnabled: true,
-          zoomControlsEnabled: false,
-          myLocationButtonEnabled: false,
-          onMapCreated: (controller) {
-            _mapController = controller;
-            googleService.moveToCurrentLocation(_mapController);
-          },
-          initialCameraPosition: CameraPosition(
-            target: GoogleMapsApi
-                .curentLocation, // Initial camera position, it will be overridden later
-            zoom: 15.0,
-          ),
-        ),
-        const BottomSearchSheet()
+      body: const Stack(children: [
+        JBusGoogleMaps(),
+        BottomSearchSheet()
       ]),
       floatingActionButton: FloatingActionButton(
           shape: const CircleBorder(),
           child: const Icon(Icons.location_searching_rounded),
           onPressed: () {
-            // final themeBloc = BlocProvider.of<ThemeBloc>(context);
-            // final currentTheme =
-            //     BlocProvider.of<ThemeBloc>(context).state.thememode;
-            // currentTheme == ThemeMode.light
-            //     ? themeBloc.add(SwitchToDarkThemeEvent())
-            //     : themeBloc.add(SwitchToLightThemeEvent());
+            final themeBloc = BlocProvider.of<ThemeBloc>(context);
+            final currentTheme =
+                BlocProvider.of<ThemeBloc>(context).state.thememode;
+            currentTheme == ThemeMode.light
+                ? themeBloc.add(SwitchToDarkThemeEvent())
+                : themeBloc.add(SwitchToLightThemeEvent());
             googleService.moveToCurrentLocation(_mapController);
           }),
     );

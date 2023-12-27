@@ -8,6 +8,45 @@ class GoogleMapsApi {
   final String apiKey = "AIzaSyBGSGYjRajQX1-0LksuNshClN1l8ORObJA";
   static LatLng curentLocation = const LatLng(0, 0);
   static bool permission = false;
+  static const String darkMapString = '''[
+  {
+    "featureType": "administrative",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#3C4E3E"
+      }
+    ]
+  },
+  {
+    "featureType": "landscape",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#25253C"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#000000"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#5B5969"  
+      }
+    ]
+  }
+]
+''';
 
   GoogleMapsApi() {
     setCurrentLocation();
