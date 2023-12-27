@@ -66,12 +66,12 @@ class _DashbourdState extends State<Dashbourd> {
           shape: const CircleBorder(),
           child: const Icon(Icons.location_searching_rounded),
           onPressed: () {
-            final themeBloc = BlocProvider.of<ThemeBloc>(context);
-            final currentTheme =
-                BlocProvider.of<ThemeBloc>(context).state.thememode;
-            currentTheme == ThemeMode.light
-                ? themeBloc.add(SwitchToDarkThemeEvent())
-                : themeBloc.add(SwitchToLightThemeEvent());
+            // final themeBloc = BlocProvider.of<ThemeBloc>(context);
+            // final currentTheme =
+            //     BlocProvider.of<ThemeBloc>(context).state.thememode;
+            // currentTheme == ThemeMode.light
+            //     ? themeBloc.add(SwitchToDarkThemeEvent())
+            //     : themeBloc.add(SwitchToLightThemeEvent());
             googleService.moveToCurrentLocation(_mapController);
           }),
     );
