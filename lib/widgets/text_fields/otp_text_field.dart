@@ -49,15 +49,21 @@ class OtpTextField extends StatelessWidget {
               controller: digitController,
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: themeState.thememode == ThemeMode.light ? ourBlack : ourWhite,
+                color: themeState.thememode == ThemeMode.light
+                    ? ourBlack
+                    : ourWhite,
               ),
               decoration: InputDecoration(
                 counterText: ' ',
-                focusColor: themeState.thememode == ThemeMode.light ? ourBlue : ourOrange,
+                focusColor: themeState.thememode == ThemeMode.light
+                    ? ourBlue
+                    : ourOrange,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(22),
                   borderSide: BorderSide(
-                    color: themeState.thememode == ThemeMode.light ? ourBlue : ourOrange,
+                    color: themeState.thememode == ThemeMode.light
+                        ? ourBlue
+                        : ourOrange,
                   ),
                 ),
               ),
