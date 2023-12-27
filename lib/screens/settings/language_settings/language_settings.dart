@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/localization/bloc/localization_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 
@@ -12,11 +11,10 @@ class LanguageSettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //final languageBloc = BlocProvider.of<LocalizationBloc>(context);
-    AppLocalizations locale = localeInstance();
     //ThemeBloc themeBloc = ThemeBloc();
     return Scaffold(
       appBar: AppBar(
-        title: Text(locale.language),
+        title: Text(AppLocalizations.of(context)!.language),
       ),
       body: Center(
         child: Column(
@@ -24,7 +22,7 @@ class LanguageSettingsScreen extends StatelessWidget {
           children: [
             ElevatedButton(
               child: Text(
-                locale.arabic,
+                AppLocalizations.of(context)!.arabic,
               ),
               onPressed: () {
                 final languageBloc = BlocProvider.of<LocalizationBloc>(context);
@@ -34,7 +32,7 @@ class LanguageSettingsScreen extends StatelessWidget {
             ),
             ElevatedButton(
               child: Text(
-                locale.english,
+                AppLocalizations.of(context)!.english,
               ),
               onPressed: () {
                 final languageBloc = BlocProvider.of<LocalizationBloc>(context);
@@ -48,7 +46,9 @@ class LanguageSettingsScreen extends StatelessWidget {
                 onPressed: () {
                   final themeBloc = BlocProvider.of<ThemeBloc>(context);
                   final currentTheme = BlocProvider.of<ThemeBloc>(context).state.thememode;
-                  currentTheme == ThemeMode.light ? themeBloc.add(SwitchToDarkThemeEvent()) : themeBloc.add(SwitchToLightThemeEvent());
+                  currentTheme == ThemeMode.light
+                      ? themeBloc.add(SwitchToDarkThemeEvent())
+                      : themeBloc.add(SwitchToLightThemeEvent());
                 }),
           ],
         ),

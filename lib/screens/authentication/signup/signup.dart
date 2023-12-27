@@ -8,7 +8,6 @@ import 'package:jbus_app/screens/authentication/signup/widgets/fields/mobile_num
 import 'package:jbus_app/screens/authentication/signup/widgets/fields/password_text_fields.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jbus_app/screens/authentication/signup/widgets/fields/password_verification_field.dart';
-import 'package:jbus_app/services/service_locator.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -16,7 +15,7 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
-    final AppLocalizations locale = localeInstance();
+
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
@@ -27,7 +26,7 @@ class SignupScreen extends StatelessWidget {
                 title:
                     //const AppBarTitleLogo(),
                     Text(
-                  locale.signUp,
+                  AppLocalizations.of(context)!.signUp,
                 ),
                 floating: false,
                 pinned: false,
@@ -67,16 +66,11 @@ class SignupScreen extends StatelessWidget {
                           //   height: 8,
                           // ),
                           SignUpButtonSUS(
-                            firstNameControllerText:
-                                FirstNameTextField.firstNameController.text,
-                            lastNameControllerText:
-                                LastNameTextField.lastNameController.text,
-                            emailControllerText:
-                                EmailTextField.emailController.text,
-                            phoneNumberControllerText: MobileNumberTextField
-                                .phoneNumberController.text,
-                            passwordControllerText:
-                                PasswordTextField.passwordController.text,
+                            firstNameControllerText: FirstNameTextField.firstNameController.text,
+                            lastNameControllerText: LastNameTextField.lastNameController.text,
+                            emailControllerText: EmailTextField.emailController.text,
+                            phoneNumberControllerText: MobileNumberTextField.phoneNumberController.text,
+                            passwordControllerText: PasswordTextField.passwordController.text,
                             formKey: formKey,
                           ),
                           const SignInButtonSUS(),

@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/text_fields/text_form_field.dart';
 
 class LastNameTextField extends StatelessWidget {
   const LastNameTextField({super.key});
 
-  static final TextEditingController lastNameController =
-      TextEditingController();
+  static final TextEditingController lastNameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final AppLocalizations locale = localeInstance();
-
     return OurTextFormField(
-      label: locale.lastName,
+      label: AppLocalizations.of(context)!.lastName,
       icon: Icons.person_outline_outlined,
       textInputAction: TextInputAction.next,
       controller: lastNameController,
@@ -25,14 +21,13 @@ class LastNameTextField extends StatelessWidget {
       counterText: '',
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return locale.sorryPleaseEnterYourLastName;
+          return AppLocalizations.of(context)!.sorryPleaseEnterYourLastName;
         }
-        final bool firstNameValid =
-            RegExp('^[A-Za-z]{1,15}\$').hasMatch(value.trim());
+        final bool firstNameValid = RegExp('^[A-Za-z]{1,15}\$').hasMatch(value.trim());
         if (firstNameValid) {
           return null;
         } else {
-          return locale.sorryPleaseEnterAValidName;
+          return AppLocalizations.of(context)!.sorryPleaseEnterAValidName;
         }
       },
     );

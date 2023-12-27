@@ -4,6 +4,7 @@ part of 'theme_bloc.dart';
 sealed class ThemeEvent {}
 
 class SwitchToLightThemeEvent extends ThemeEvent {}
-class SwitchToDarkThemeEvent extends ThemeEvent {}
-class SwitchToSystemThemeEvent extends ThemeEvent {}
 
+class SwitchToDarkThemeEvent extends ThemeEvent {}
+
+class SwitchToSystemThemeEvent extends ThemeEvent {}

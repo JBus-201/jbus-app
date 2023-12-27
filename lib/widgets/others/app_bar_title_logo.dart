@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class AppBarTitleLogo extends StatelessWidget {
   const AppBarTitleLogo({super.key});
 

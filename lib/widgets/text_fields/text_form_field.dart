@@ -85,57 +85,42 @@ class OurTextFormField extends StatelessWidget {
             autocorrect: autocorrect,
             showCursor: showCursor,
             controller: controller,
-            cursorColor:
-                themeState.thememode == ThemeMode.light ? ourBlue : ourOrange,
+            cursorColor: themeState.thememode == ThemeMode.light ? ourBlue : ourOrange,
             style: TextStyle(
-              color:
-                  themeState.thememode == ThemeMode.light ? ourBlack : ourWhite,
+              color: themeState.thememode == ThemeMode.light ? ourBlack : ourWhite,
             ),
             decoration: InputDecoration(
-                focusColor: themeState.thememode == ThemeMode.light
-                    ? ourBlue
-                    : ourOrange,
+                focusColor: themeState.thememode == ThemeMode.light ? ourBlue : ourOrange,
                 errorStyle: const TextStyle(height: 1),
                 counterText: counterText,
                 errorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(22),
                   borderSide: BorderSide(
-                    color: themeState.thememode == ThemeMode.light
-                        ? ourBlue
-                        : ourOrange,
+                    color: themeState.thememode == ThemeMode.light ? ourBlue : ourOrange,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(22),
                   borderSide: BorderSide(
-                    color: themeState.thememode == ThemeMode.light
-                        ? ourBlue
-                        : ourOrange,
+                    color: themeState.thememode == ThemeMode.light ? ourBlue : ourOrange,
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(22),
                   borderSide: BorderSide(
-                    color: themeState.thememode == ThemeMode.light
-                        ? ourDarkBlue
-                        : ourOrange,
+                    color: themeState.thememode == ThemeMode.light ? ourDarkBlue : ourOrange,
                   ),
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(22),
-                  borderSide: BorderSide(
-                      color: themeState.thememode == ThemeMode.light
-                          ? ourDarkBlue
-                          : ourOrange),
+                  borderSide: BorderSide(color: themeState.thememode == ThemeMode.light ? ourDarkBlue : ourOrange),
                 ),
                 label: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
                       icon,
-                      color: themeState.thememode == ThemeMode.light
-                          ? ourNavey
-                          : ourOrange,
+                      color: themeState.thememode == ThemeMode.light ? ourNavey : ourOrange,
                     ),
                     const SizedBox(
                       width: 8,
@@ -143,9 +128,7 @@ class OurTextFormField extends StatelessWidget {
                     Text(
                       label,
                       style: TextStyle(
-                        color: themeState.thememode == ThemeMode.light
-                            ? ourNavey
-                            : ourYellow,
+                        color: themeState.thememode == ThemeMode.light ? ourNavey : ourYellow,
                         fontSize: 16,
                       ),
                     ),

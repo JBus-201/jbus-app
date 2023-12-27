@@ -42,13 +42,13 @@ class _DashbourdState extends State<Dashbourd> {
           backgroundColor: ourBlack.withOpacity(0),
           title: const AppBarTitleLogo(),
           flexibleSpace: const AppBarStyle(),
-          leading: endDrawerButton(
+          leading: CustomEndDrawerButton(
             onTap: () {
               _scaffoldKey.currentState!.openDrawer();
             },
           ),
           actions: [
-            drawerButton(onTap: () {
+            CustomDrawerButton(onTap: () {
               _scaffoldKey.currentState!.openEndDrawer();
             })
           ],

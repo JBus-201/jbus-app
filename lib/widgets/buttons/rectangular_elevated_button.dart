@@ -22,31 +22,30 @@ class RectangularElevatedButton extends StatelessWidget {
   final Gradient? gradient;
   final Gradient? gradientForDark;
   final double padding;
-  
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeState>(
-      builder: (context, themeState) {
-        return Padding(
-      padding: EdgeInsets.all(padding),
-      child: Container(
-        decoration: BoxDecoration(
-          gradient:themeState.thememode == ThemeMode.light? gradient:gradientForDark,
-          borderRadius: BorderRadius.circular(22),
-        ),
-        child: ElevatedButton(
-          onPressed: onPressed,
-          style: ElevatedButton.styleFrom(
-            fixedSize: Size(width, height),
-            backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent,
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
+      return Padding(
+        padding: EdgeInsets.all(padding),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: themeState.thememode == ThemeMode.light ? gradient : gradientForDark,
+            borderRadius: BorderRadius.circular(22),
           ),
-          child: Text(
-            text,
+          child: ElevatedButton(
+            onPressed: onPressed,
+            style: ElevatedButton.styleFrom(
+              fixedSize: Size(width, height),
+              backgroundColor: Colors.transparent,
+              shadowColor: Colors.transparent,
+            ),
+            child: Text(
+              text,
+            ),
           ),
         ),
-      ),
-    );});
+      );
+    });
   }
 }
