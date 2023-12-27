@@ -6,4 +6,3 @@ sealed class LocalizationEvent {}
 class SwitchToArabicLanguageEvent extends LocalizationEvent {}
 
 class SwitchToEnglishLanguageEvent extends LocalizationEvent {}
-

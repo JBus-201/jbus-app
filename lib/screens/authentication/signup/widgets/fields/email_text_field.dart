@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/text_fields/text_form_field.dart';
 
 class EmailTextField extends StatelessWidget {
@@ -9,13 +8,11 @@ class EmailTextField extends StatelessWidget {
   });
 
   static final TextEditingController emailController = TextEditingController();
-  
+
   @override
   Widget build(BuildContext context) {
-    final AppLocalizations locale = localeInstance();
-
     return OurTextFormField(
-        label: locale.email,
+        label: AppLocalizations.of(context)!.email,
         icon: Icons.email_outlined,
         textInputAction: TextInputAction.next,
         controller: emailController,
@@ -26,16 +23,14 @@ class EmailTextField extends StatelessWidget {
         counterText: '',
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return locale.sorryPleaseEnterYourEmail;
+            return AppLocalizations.of(context)!.sorryPleaseEnterYourEmail;
           }
-          final bool emailValid =
-              RegExp('^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,})\$')
-                  .hasMatch(value.trim());
+          final bool emailValid = RegExp('^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,})\$').hasMatch(value.trim());
 
           if (emailValid) {
             return null;
           } else {
-            return locale.sorryPleaseEnterAValidEmail;
+            return AppLocalizations.of(context)!.sorryPleaseEnterAValidEmail;
           }
         });
   }

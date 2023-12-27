@@ -4,6 +4,5 @@ part of 'signup_bloc.dart';
 sealed class SignupEvent {}
 
 class SwitchToVisibilityOnEvent extends SignupEvent {}
+
 class SwitchToVisibilityOffEvent extends SignupEvent {}
-
-

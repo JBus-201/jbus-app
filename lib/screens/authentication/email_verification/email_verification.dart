@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:jbus_app/screens/settings/settings/settings.dart';
-import 'package:jbus_app/services/service_locator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:jbus_app/widgets/text_fields/otp_text_field.dart';
@@ -23,7 +22,6 @@ class EmailVerificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AppLocalizations locale = localeInstance();
     return GestureDetector(
       onTap: () {
         if (MediaQuery.of(context).viewInsets.bottom != 0) {
@@ -35,7 +33,7 @@ class EmailVerificationScreen extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(locale.email),
+          title: Text(AppLocalizations.of(context)!.email),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8),
@@ -43,7 +41,7 @@ class EmailVerificationScreen extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  locale.pleaseEnterTheCodeSentToTheEmailBelow,
+                  AppLocalizations.of(context)!.pleaseEnterTheCodeSentToTheEmailBelow,
                 ),
                 Form(
                   child: Column(
@@ -61,12 +59,11 @@ class EmailVerificationScreen extends StatelessWidget {
                         ),
                       ),
                       RectangularElevatedButton(
-                          text: locale.verify,
+                          text: AppLocalizations.of(context)!.verify,
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => const SettingsScreen()),
+                              MaterialPageRoute(builder: (context) => const SettingsScreen()),
                             );
                           }),
                     ],

@@ -21,23 +21,17 @@ class AppDarkTheme extends AppTheme {
           backgroundColor: const Color.fromARGB(255, 0, 0, 0).withOpacity(0),
           centerTitle: true,
           elevation: 0,
-          titleTextStyle: TextStyle(
-              fontSize: 23,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Roboto',
-              color: getMainOrange())),
+          titleTextStyle:
+              TextStyle(fontSize: 23, fontWeight: FontWeight.bold, fontFamily: 'Roboto', color: getMainOrange())),
       scaffoldBackgroundColor: ourDarkThemeBackgroundNavey,
-      listTileTheme: ListTileThemeData(
-          iconColor: ourWhite, selectedColor: ourWhite, textColor: ourWhite),
+      listTileTheme: const ListTileThemeData(iconColor: ourWhite, selectedColor: ourWhite, textColor: ourWhite),
       dividerColor: ourBlack.withOpacity(0),
       // Colors
       primaryColor: getMainBlue(),
 
       // Fonts
       fontFamily: 'Roboto',
-      textTheme: const TextTheme(
-          bodyMedium: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 18, color: ourWhite)),
+      textTheme: const TextTheme(bodyMedium: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: ourWhite)),
 
       // ElevatedButton
       elevatedButtonTheme: ElevatedButtonThemeData(
@@ -56,22 +50,21 @@ class AppDarkTheme extends AppTheme {
 
       /// TextButtons
       textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(foregroundColor: ourWhite,
-            textStyle: const TextStyle(
-                color: ourWhite, decoration: TextDecoration.underline)),
+        style: TextButton.styleFrom(
+            foregroundColor: ourWhite,
+            textStyle: const TextStyle(color: ourWhite, decoration: TextDecoration.underline)),
       ),
       focusColor: ourOrange,
       //TabBarTheme
       tabBarTheme: TabBarTheme(
-          labelStyle:
-              const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          labelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
           labelColor: getMainOrange(),
           indicatorColor: getMainOrange(),
           dividerColor: getMainOrange()),
 
       // FloatingActionButton
-      floatingActionButtonTheme: FloatingActionButtonThemeData(
-          backgroundColor: getMainOrange(), foregroundColor: ourWhite),
+      floatingActionButtonTheme:
+          FloatingActionButtonThemeData(backgroundColor: getMainOrange(), foregroundColor: ourWhite),
     );
   }
 }
