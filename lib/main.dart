@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:jbus_app/data/api/google-service.dart';
+import 'package:jbus_app/data/api/google_service.dart';
 import 'package:jbus_app/localization/bloc/localization_bloc.dart';
 import 'package:jbus_app/screens/authentication/signup/signup.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
