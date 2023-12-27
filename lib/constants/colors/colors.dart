@@ -29,3 +29,6 @@ final Color ourGray50 = const Color.fromARGB(255, 146, 146, 146).withOpacity(0.5
 const Color ourDarkGray = Color.fromARGB(255, 94, 94, 94);
 final Color ourDarkGray50 = const Color.fromARGB(255, 94, 94, 94).withOpacity(0.5);
 const Color ourDarkThemeBackgroundNavey = Color.fromARGB(255, 36, 51, 67);
+const Color appBarLightGray = Color.fromARGB(232, 242, 242, 242);
+
+

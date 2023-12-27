@@ -11,12 +11,17 @@ class AppBarStyle extends StatelessWidget {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
       return Container(
         decoration: BoxDecoration(
-            gradient: LinearGradient(begin: const Alignment(0, -0.1), end: Alignment.bottomCenter, colors: <Color>[
-          themeState.thememode == ThemeMode.light
-              ? const Color.fromARGB(232, 242, 242, 242)
-              : ourDarkThemeBackgroundNavey.withOpacity(0.7),
-          themeState.thememode == ThemeMode.light ? ourWhite.withOpacity(0) : ourDarkThemeBackgroundNavey.withOpacity(0)
-        ])),
+            gradient: LinearGradient(
+                begin: const Alignment(0, -0.1),
+                end: Alignment.bottomCenter,
+                colors: <Color>[
+              themeState.thememode == ThemeMode.light
+                  ? appBarLightGray
+                  : ourDarkThemeBackgroundNavey.withOpacity(0.9),
+              themeState.thememode == ThemeMode.light
+                  ? ourWhite.withOpacity(0)
+                  : ourDarkThemeBackgroundNavey.withOpacity(0)
+            ])),
       );
     });
   }
