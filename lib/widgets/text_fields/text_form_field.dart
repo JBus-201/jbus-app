@@ -25,10 +25,10 @@ class OurTextFormField extends StatelessWidget {
     this.focusNode,
     this.icon,
     this.suffixIcon,
-    // this.leftPadding = 4,
-    // this.topPadding = 12,
-    // this.rightPadding = 4,
-    // this.bottomPadding = 12,
+    this.leftPadding = 4,
+    this.topPadding = 12,
+    this.rightPadding = 4,
+    this.bottomPadding = 12,
   });
 
   final String label;
@@ -49,24 +49,19 @@ class OurTextFormField extends StatelessWidget {
   final FocusNode? focusNode;
   final IconData? icon;
   final IconData? suffixIcon;
-
-  // final double leftPadding;
-  // final double topPadding;
-  // final double rightPadding;
-  // final double bottomPadding;
+  final double leftPadding;
+  final double topPadding;
+  final double rightPadding;
+  final double bottomPadding;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
       return Padding(
-        padding: const EdgeInsets.only(
-          left: 4,
-          right: 4,
-          top: 12,
-          bottom: 12,
-          // left: leftPadding,
-          // top: topPadding,
-          // right: rightPadding,
-          // bottom: bottomPadding,
+        padding: EdgeInsets.only(
+          left: leftPadding,
+          top: topPadding,
+          right: rightPadding,
+          bottom: bottomPadding,
         ),
         child: SizedBox(
           height: 75,
