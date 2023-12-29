@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/constants/colors/gradients.dart';
+import 'package:jbus_app/screens/faza/pages/main_faza.dart';
 import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -17,7 +18,9 @@ class MainDrawer extends StatelessWidget {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
       return Drawer(
         // width: double.infinity,
-        backgroundColor: themeState.thememode == ThemeMode.light ? ourWhite : ourDarkThemeBackgroundNavey,
+        backgroundColor: themeState.thememode == ThemeMode.light
+            ? ourWhite
+            : ourDarkThemeBackgroundNavey,
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
@@ -25,8 +28,12 @@ class MainDrawer extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 10),
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
-                color: themeState.thememode == ThemeMode.light ? ourBlue : ourOrange,
-                gradient: themeState.thememode == ThemeMode.light ? blueButtonGradient : orangeButtonGradient,
+                color: themeState.thememode == ThemeMode.light
+                    ? ourBlue
+                    : ourOrange,
+                gradient: themeState.thememode == ThemeMode.light
+                    ? blueButtonGradient
+                    : orangeButtonGradient,
                 borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(0),
                   bottomRight: Radius.circular(0),
@@ -72,7 +79,12 @@ class MainDrawer extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.report_rounded),
               title: const Text("faza'a"),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const FazaMainPage()));
+              },
             ),
             ListTile(
               leading: const Icon(Icons.settings),
@@ -81,7 +93,10 @@ class MainDrawer extends StatelessWidget {
             ),
             const Divider(),
             const Spacer(),
-            ListTile(title: const Text("logout"), leading: const Icon(Icons.exit_to_app), onTap: () => {}),
+            ListTile(
+                title: const Text("logout"),
+                leading: const Icon(Icons.exit_to_app),
+                onTap: () => {}),
           ],
         ),
       );

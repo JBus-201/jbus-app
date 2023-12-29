@@ -30,6 +30,9 @@ dependencies:
   retrofit: any
   dio: any
   json_annotation: ^4.8.1
+  firebase_database: ^10.3.8
+  firebase_auth: ^4.15.3
+  firebase_storage: ^11.5.6
   # location: ^5.0.3
 
 flutter_native_splash:
