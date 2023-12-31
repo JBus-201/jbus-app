@@ -39,5 +39,8 @@ const LinearGradient redButtonGradient = LinearGradient(
 const LinearGradient goldButtonGradient = LinearGradient(
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
-  colors: [Color.fromARGB(255, 225, 209, 159), Color.fromARGB(255, 176, 155, 57)],
+  colors: [
+    Color.fromARGB(255, 225, 209, 159),
+    Color.fromARGB(255, 176, 155, 57)
+  ],
 );

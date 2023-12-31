@@ -15,10 +15,15 @@ class CustomDrawerButton extends StatelessWidget {
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             shape: CircleBorder(
-              side: BorderSide(color: Colors.black.withOpacity(0), width: 0.5), // Add the border here
+              side: BorderSide(
+                  color: Colors.black.withOpacity(0),
+                  width: 0.5), // Add the border here
             ),
-            foregroundColor: themeState.thememode == ThemeMode.light ? ourWhite : ourOrange,
-            backgroundColor: themeState.thememode == ThemeMode.light ? ourBlack : ourDarkThemeBackgroundNavey,
+            foregroundColor:
+                themeState.thememode == ThemeMode.light ? ourWhite : ourOrange,
+            backgroundColor: themeState.thememode == ThemeMode.light
+                ? ourBlack
+                : ourDarkThemeBackgroundNavey,
             elevation: 0,
           ),
           onPressed: onTap,

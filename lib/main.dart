@@ -5,6 +5,8 @@ import 'package:jbus_app/data/api/google_service.dart';
 import 'package:jbus_app/localization/bloc/localization_bloc.dart';
 import 'package:jbus_app/screens/authentication/signup/signup.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jbus_app/screens/dashbourd/dashbourd.dart';
+import 'package:jbus_app/services/auth_service.dart';
 import 'package:jbus_app/services/navigation_service.dart';
 import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 import 'package:jbus_app/themes/dark_theme.dart';
@@ -35,13 +37,15 @@ Future main() async {
           create: (BuildContext context) => LocalizationBloc(),
         ),
       ],
-      child: const MyApp(),
+      child: MyApp(authService: sl()),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final AuthService authService;
+
+  const MyApp({super.key, required this.authService});
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +56,9 @@ class MyApp extends StatelessWidget {
             GoogleMapsApi.askForLocationPermission();
             return MaterialApp(
               navigatorKey: sl<NavigationService>().navigatorKey,
-              home: const SignupScreen(),
+              home: authService.isLoggedIn()
+                  ? const Dashbourd()
+                  : const SignupScreen(),
               locale: Locale(localizationState.languageCode),
               localizationsDelegates: const [
                 AppLocalizations.delegate,

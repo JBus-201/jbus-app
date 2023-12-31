@@ -6,7 +6,11 @@ class Warning extends StatelessWidget {
   final String title;
   final String description;
   final bool isWarning;
-  const Warning({super.key, required this.title, required this.description,this.isWarning = true});
+  const Warning(
+      {super.key,
+      required this.title,
+      required this.description,
+      this.isWarning = true});
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +26,9 @@ class Warning extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Icon(
-              isWarning?Icons.warning:Icons.task_alt_rounded,
+              isWarning ? Icons.warning : Icons.task_alt_rounded,
               size: 48,
-              color: isWarning?ourRed:ourGreen,
+              color: isWarning ? ourRed : ourGreen,
             ),
             const SizedBox(height: 16),
             Text(
@@ -48,9 +52,8 @@ class Warning extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              text:
-                "OK",
-              ),
+              text: "OK",
+            ),
           ],
         ),
       ),

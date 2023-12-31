@@ -45,7 +45,8 @@ class LanguageSettingsScreen extends StatelessWidget {
                 width: 200,
                 onPressed: () {
                   final themeBloc = BlocProvider.of<ThemeBloc>(context);
-                  final currentTheme = BlocProvider.of<ThemeBloc>(context).state.thememode;
+                  final currentTheme =
+                      BlocProvider.of<ThemeBloc>(context).state.thememode;
                   currentTheme == ThemeMode.light
                       ? themeBloc.add(SwitchToDarkThemeEvent())
                       : themeBloc.add(SwitchToLightThemeEvent());

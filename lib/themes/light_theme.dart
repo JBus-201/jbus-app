@@ -19,8 +19,11 @@ class AppLightTheme extends AppTheme {
             backgroundColor: const Color.fromARGB(255, 0, 0, 0).withOpacity(0),
             centerTitle: true,
             elevation: 0,
-            titleTextStyle:
-                TextStyle(fontSize: 23, fontWeight: FontWeight.bold, fontFamily: 'Roboto', color: getMainBlue())),
+            titleTextStyle: TextStyle(
+                fontSize: 23,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Roboto',
+                color: getMainBlue())),
 
         // Scaffold
         scaffoldBackgroundColor: ourWhite,
@@ -30,7 +33,8 @@ class AppLightTheme extends AppTheme {
 
         // Fonts
         fontFamily: 'Roboto',
-        textTheme: const TextTheme(bodyMedium: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+        textTheme: const TextTheme(
+            bodyMedium: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
         focusColor: ourBlue,
         // ElevatedButton
         elevatedButtonTheme: ElevatedButtonThemeData(
@@ -51,19 +55,21 @@ class AppLightTheme extends AppTheme {
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
               foregroundColor: ourNavey,
-              textStyle: TextStyle(color: getMainBlue(), decoration: TextDecoration.underline)),
+              textStyle: TextStyle(
+                  color: getMainBlue(), decoration: TextDecoration.underline)),
         ),
 
         //TabBarTheme
         tabBarTheme: TabBarTheme(
-            labelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            labelStyle:
+                const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             labelColor: getMainOrange(),
             indicatorColor: getMainOrange(),
             dividerColor: getMainOrange()),
 
         // FloatingActionButton
-        floatingActionButtonTheme:
-            FloatingActionButtonThemeData(backgroundColor: getMainBlue(), foregroundColor: ourWhite));
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+            backgroundColor: getMainBlue(), foregroundColor: ourWhite));
   }
 }
 

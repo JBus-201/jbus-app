@@ -10,7 +10,9 @@ class NotificationsDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
       return Drawer(
-        backgroundColor: themeState.thememode == ThemeMode.light ? ourWhite : ourDarkThemeBackgroundNavey,
+        backgroundColor: themeState.thememode == ThemeMode.light
+            ? ourWhite
+            : ourDarkThemeBackgroundNavey,
       );
     });
   }

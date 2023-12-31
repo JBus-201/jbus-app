@@ -62,28 +62,27 @@ class AddFriendForFaza extends StatelessWidget {
                 print("Friend's ID as int: $friendId");
 
                 writeFazaReqState('p', responderId, friendId).then((value) => {
-                if (value)
-                  {
-                    showDialog(
-                      context: context,
-                      builder: (context) => const Warning(
-                          isWarning: false,
-                          title: "Request Sent Succesfuly",
-                          description: ""),
-                    ),
-                    
-                  }
-                else
-                  {
-                    showDialog(
-                      context: context,
-                      builder: (context) => const Warning(
-                          isWarning: true,
-                          title: "Ops!",
-                          description: "Somthing went wrong"),
-                    )
-                  }
-              });
+                      if (value)
+                        {
+                          showDialog(
+                            context: context,
+                            builder: (context) => const Warning(
+                                isWarning: false,
+                                title: "Request Sent Succesfuly",
+                                description: ""),
+                          ),
+                        }
+                      else
+                        {
+                          showDialog(
+                            context: context,
+                            builder: (context) => const Warning(
+                                isWarning: true,
+                                title: "Ops!",
+                                description: "Somthing went wrong"),
+                          )
+                        }
+                    });
               }
             },
             width: 250,

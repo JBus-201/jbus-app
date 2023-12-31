@@ -5,7 +5,8 @@ import 'package:jbus_app/widgets/text_fields/text_form_field.dart';
 class LastNameTextField extends StatelessWidget {
   const LastNameTextField({super.key});
 
-  static final TextEditingController lastNameController = TextEditingController();
+  static final TextEditingController lastNameController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,8 @@ class LastNameTextField extends StatelessWidget {
         if (value == null || value.isEmpty) {
           return AppLocalizations.of(context)!.sorryPleaseEnterYourLastName;
         }
-        final bool firstNameValid = RegExp('^[A-Za-z]{1,15}\$').hasMatch(value.trim());
+        final bool firstNameValid =
+            RegExp('^[A-Za-z]{1,15}\$').hasMatch(value.trim());
         if (firstNameValid) {
           return null;
         } else {

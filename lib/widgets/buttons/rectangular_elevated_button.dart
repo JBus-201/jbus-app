@@ -30,7 +30,9 @@ class RectangularElevatedButton extends StatelessWidget {
         padding: EdgeInsets.all(padding),
         child: Container(
           decoration: BoxDecoration(
-            gradient: themeState.thememode == ThemeMode.light ? gradient : gradientForDark,
+            gradient: themeState.thememode == ThemeMode.light
+                ? gradient
+                : gradientForDark,
             borderRadius: BorderRadius.circular(22),
           ),
           child: ElevatedButton(
