@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
@@ -73,7 +75,7 @@ class GoogleMapsApi {
       final LocationPermission permission = await Geolocator.checkPermission();
 
       if (permission == LocationPermission.denied) {
-        final LocationPermission newPermission = await Geolocator.requestPermission();
+        final LocationPermission permission = await Geolocator.requestPermission();
       }
     } catch (e) {
       if (kDebugMode) {
