@@ -4,7 +4,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/data/api/google_service.dart';
 import 'package:jbus_app/data/api/realtime-firebase/lestiners.dart';
-import 'package:jbus_app/data/api/realtime-firebase/writers.dart';
 import 'package:jbus_app/screens/dashbourd/buttons/drawer.dart';
 import 'package:jbus_app/screens/dashbourd/buttons/end_drawer.dart';
 import 'package:jbus_app/screens/dashbourd/widgets/bottomsheet.dart';
@@ -97,7 +96,7 @@ class _DashbourdState extends State<Dashbourd> {
             // currentTheme == ThemeMode.light
             //     ? themeBloc.add(SwitchToDarkThemeEvent())
             //     : themeBloc.add(SwitchToLightThemeEvent());
-            // googleService.moveToCurrentLocation(_mapController);
+            googleService.moveToCurrentLocation(_mapController);
           }),
     );
   }
