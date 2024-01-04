@@ -8,19 +8,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 final GetIt sl = GetIt.instance;
 
-void setupLocator() {
+Future<void> setupLocator() async {
   sl.registerSingleton(NavigationService());
+  final sharedPreferences = await SharedPreferences.getInstance();
+  sl.registerSingleton(sharedPreferences);
+  sl.registerSingleton<Interceptor>(AuthenticationInterceptor(sl()));
 
-  sl.registerSingletonAsync<SharedPreferences>(
-      () async => await SharedPreferences.getInstance());
-
-  sl.registerSingleton(AuthenticationInterceptor(sl()));
-
-  sl.registerSingleton(() {
-    final dio = Dio();
-    dio.interceptors.add(sl());
-    return dio;
-  });
+  final dio = Dio();
+  dio.interceptors.add(sl());
+  sl.registerSingleton(dio);
 
   sl.registerSingleton(ApiService(sl()));
 
