@@ -34,9 +34,8 @@ class _FazaWaitingPageState extends State<FazaWaitingPage> {
   @override
   void initState() {
     super.initState();
-    _amountReference = FirebaseDatabase.instance
-        .ref()
-        .child('Faza/$myId/totalAmount');
+    _amountReference =
+        FirebaseDatabase.instance.ref().child('Faza/$myId/totalAmount');
 
     // Start listening to changes in the amount
     _amountReference.onValue.listen((event) {
@@ -94,7 +93,7 @@ class _FazaWaitingPageState extends State<FazaWaitingPage> {
         if (_secondsRemaining > 0) {
           _secondsRemaining--;
         } else {
-          timer.cancel(); 
+          timer.cancel();
           writeNeedFaza(myId, false);
           removeAllPayers(myId);
           // Navigator.of(context).pop();

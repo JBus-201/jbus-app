@@ -19,7 +19,8 @@ class SigninScreen extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const EmailVerificationScreen()),
+                MaterialPageRoute(
+                    builder: (context) => const EmailVerificationScreen()),
               );
             }),
       ),

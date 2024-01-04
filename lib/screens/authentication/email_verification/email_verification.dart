@@ -41,7 +41,8 @@ class EmailVerificationScreen extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  AppLocalizations.of(context)!.pleaseEnterTheCodeSentToTheEmailBelow,
+                  AppLocalizations.of(context)!
+                      .pleaseEnterTheCodeSentToTheEmailBelow,
                 ),
                 Form(
                   child: Column(
@@ -63,7 +64,8 @@ class EmailVerificationScreen extends StatelessWidget {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const SettingsScreen()),
+                              MaterialPageRoute(
+                                  builder: (context) => const SettingsScreen()),
                             );
                           }),
                     ],

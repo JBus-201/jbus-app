@@ -26,7 +26,9 @@ class CircularElevatedButton extends StatelessWidget {
         padding: const EdgeInsets.all(12.0),
         child: Container(
           decoration: BoxDecoration(
-            gradient: themeState.thememode == ThemeMode.light ? gradient : gradientForDark,
+            gradient: themeState.thememode == ThemeMode.light
+                ? gradient
+                : gradientForDark,
             shape: BoxShape.circle,
           ),
           child: ElevatedButton(

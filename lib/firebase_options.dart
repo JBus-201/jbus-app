@@ -54,21 +54,18 @@ class DefaultFirebaseOptions {
     appId: '1:161058040222:android:0dffe6e7b3e6a5465d4e8f',
     messagingSenderId: '161058040222',
     projectId: 'jbus-8f9bf',
-    databaseURL:
-        'https://jbus-8f9bf-default-rtdb.europe-west1.firebasedatabase.app',
+    databaseURL: 'https://jbus-8f9bf-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'jbus-8f9bf.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAY-2iHBnIctUyzmkmM8btqfZV0DKcPM_0',
-    appId: '1:161058040222:ios:4fcdb76a5afe31725d4e8f',
+    appId: '1:161058040222:ios:f757e33a152a4e6c5d4e8f',
     messagingSenderId: '161058040222',
     projectId: 'jbus-8f9bf',
-    databaseURL:
-        'https://jbus-8f9bf-default-rtdb.europe-west1.firebasedatabase.app',
+    databaseURL: 'https://jbus-8f9bf-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'jbus-8f9bf.appspot.com',
-    iosClientId:
-        '161058040222-9mt33mf2uooc9cslvmtjo5k3vvodbk83.apps.googleusercontent.com',
-    iosBundleId: 'com.example.jbusApp',
+    iosClientId: '161058040222-6mspa63qpof19rftncgeu5vj2qqf3793.apps.googleusercontent.com',
+    iosBundleId: 'com.testing.jbusApp',
   );
 }

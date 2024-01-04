@@ -7,7 +7,8 @@ class BottomSearchSheet extends StatefulWidget {
   State<BottomSearchSheet> createState() => _BottomSearchSheetState();
 }
 
-class _BottomSearchSheetState extends State<BottomSearchSheet> with TickerProviderStateMixin {
+class _BottomSearchSheetState extends State<BottomSearchSheet>
+    with TickerProviderStateMixin {
   ////////////////////////////////////////
   final double min = 0.2;
   final double max = 0.8;
@@ -16,19 +17,24 @@ class _BottomSearchSheetState extends State<BottomSearchSheet> with TickerProvid
 
   void _handleDragUpdate(DragUpdateDetails details) {
     setState(() {
-      _dragSheetPosition -= details.primaryDelta! / MediaQuery.of(context).size.height;
+      _dragSheetPosition -=
+          details.primaryDelta! / MediaQuery.of(context).size.height;
       _dragSheetPosition = _dragSheetPosition.clamp(min, max);
     });
   }
 
   void _handleDragEnd(DragEndDetails details) {
     setState(() {
-      _dragSheetPosition = (_dragSheetPosition - max).abs() <= (_dragSheetPosition - min).abs() ? max : min;
+      _dragSheetPosition =
+          (_dragSheetPosition - max).abs() <= (_dragSheetPosition - min).abs()
+              ? max
+              : min;
     });
   }
 
   ////////////////////////////////////////
-  final DraggableScrollableController _draggableScrollableController = DraggableScrollableController();
+  final DraggableScrollableController _draggableScrollableController =
+      DraggableScrollableController();
   // final TextEditingController _textEditingController = TextEditingController();
 
   @override
@@ -53,7 +59,8 @@ class _BottomSearchSheetState extends State<BottomSearchSheet> with TickerProvid
             return Container(
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: const BorderRadius.only(topLeft: Radius.circular(0), topRight: Radius.circular(0)),
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(0), topRight: Radius.circular(0)),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.3),
@@ -117,6 +124,7 @@ class _BottomSearchSheetState extends State<BottomSearchSheet> with TickerProvid
   }
 
   void expand() {
-    _draggableScrollableController.animateTo(max, duration: const Duration(milliseconds: 10), curve: Curves.linear);
+    _draggableScrollableController.animateTo(max,
+        duration: const Duration(milliseconds: 10), curve: Curves.linear);
   }
 }

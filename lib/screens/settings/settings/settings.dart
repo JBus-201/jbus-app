@@ -23,7 +23,8 @@ class SettingsScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const LanguageSettingsScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const LanguageSettingsScreen()),
                 );
               },
             ),
@@ -34,7 +35,8 @@ class SettingsScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const LanguageSettingsScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const LanguageSettingsScreen()),
                 );
               },
             ),
@@ -46,7 +48,8 @@ class SettingsScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const LanguageSettingsScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const LanguageSettingsScreen()),
                 );
               },
             ),
@@ -57,7 +60,8 @@ class SettingsScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const LanguageSettingsScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const LanguageSettingsScreen()),
                 );
               },
             ),
@@ -68,7 +72,8 @@ class SettingsScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const LanguageSettingsScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const LanguageSettingsScreen()),
                 );
               },
             ),
@@ -79,7 +84,8 @@ class SettingsScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const LanguageSettingsScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const LanguageSettingsScreen()),
                 );
               },
             ),

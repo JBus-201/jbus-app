@@ -16,14 +16,20 @@ class ThemeColors {
         _darkTheme = AppDarkTheme();
 
   Color getMainColor() {
-    return currentTheme == ThemeMode.light ? _lightTheme.getMainBlue() : _darkTheme.getMainOrange();
+    return currentTheme == ThemeMode.light
+        ? _lightTheme.getMainBlue()
+        : _darkTheme.getMainOrange();
   }
 
   Color getSecondaryColor() {
-    return currentTheme == ThemeMode.light ? _lightTheme.getMainOrange() : _darkTheme.getMainBlue();
+    return currentTheme == ThemeMode.light
+        ? _lightTheme.getMainOrange()
+        : _darkTheme.getMainBlue();
   }
 
   LinearGradient getMainGradient() {
-    return currentTheme == ThemeMode.light ? blueButtonGradient : orangeButtonGradient;
+    return currentTheme == ThemeMode.light
+        ? blueButtonGradient
+        : orangeButtonGradient;
   }
 }
