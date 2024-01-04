@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/data/api/realtime-firebase/removers.dart';
 import 'package:jbus_app/data/api/realtime-firebase/writers.dart';
 import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
@@ -26,6 +25,7 @@ class _FazaWaitingPageState extends State<FazaWaitingPage> {
   /// TO DO
   int myId = 1;
   int _secondsRemaining = 30;
+  // ignore: unused_field
   late Timer _timer;
   int amountfaz = 0;
   bool done = false;
