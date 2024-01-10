@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/data/api/google_service.dart';
+import 'package:jbus_app/data/api/realtime-firebase/lestiners.dart';
 import 'package:jbus_app/screens/dashbourd/buttons/drawer.dart';
 import 'package:jbus_app/screens/dashbourd/buttons/end_drawer.dart';
 import 'package:jbus_app/screens/dashbourd/widgets/bottomsheet.dart';
@@ -11,7 +12,6 @@ import 'package:jbus_app/screens/drawer_notification/notification_drawer.dart';
 import 'package:jbus_app/themes/appbar_style.dart';
 import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
-import 'package:jbus_app/widgets/others/googlemaps.dart';
 
 class Dashbourd extends StatefulWidget {
   const Dashbourd({super.key});
@@ -28,6 +28,8 @@ class _DashbourdState extends State<Dashbourd> {
   @override
   void initState() {
     super.initState();
+    listenFazaReqState(1, 2);
+    listenFazaNeed(1);
   }
 
   @override
@@ -58,8 +60,30 @@ class _DashbourdState extends State<Dashbourd> {
       endDrawerEnableOpenDragGesture: true,
       drawer: const NotificationsDrawer(),
       endDrawer: const MainDrawer(),
-      body: const Stack(children: [
-        JBusGoogleMaps(),
+      body: Stack(children: [
+        BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
+          return GoogleMap(
+            trafficEnabled: true,
+            buildingsEnabled: true,
+            myLocationEnabled: true,
+            rotateGesturesEnabled: true,
+            zoomControlsEnabled: false,
+            myLocationButtonEnabled: false,
+            onMapCreated: (controller) {
+              _mapController = controller;
+              // ignore: unrelated_type_equality_checks
+              if (themeState.thememode == ThemeMode.dark) {
+                _mapController.setMapStyle(GoogleMapsApi.darkMapString);
+              }
+              googleService.moveToCurrentLocation(_mapController);
+            },
+            initialCameraPosition: CameraPosition(
+              target: GoogleMapsApi
+                  .curentLocation, // Initial camera position, it will be overridden later
+              zoom: 15.0,
+            ),
+          );
+        }),
         BottomSearchSheet()
       ]),
       floatingActionButton: FloatingActionButton(

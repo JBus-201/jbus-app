@@ -8,7 +8,8 @@ import 'package:jbus_app/widgets/text_fields/text_form_field.dart';
 class PasswordVerificationTextField extends StatelessWidget {
   const PasswordVerificationTextField({super.key});
 
-  static final TextEditingController confirmPasswordController = TextEditingController();
+  static final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,8 @@ class PasswordVerificationTextField extends StatelessWidget {
             maxLength: 40,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return AppLocalizations.of(context)!.sorryPleaseReEnterYourPassword;
+                return AppLocalizations.of(context)!
+                    .sorryPleaseReEnterYourPassword;
               }
 
               if (PasswordTextField.password != value.trim()) {

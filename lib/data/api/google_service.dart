@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
@@ -52,7 +54,8 @@ class GoogleMapsApi {
   GoogleMapsApi() {
     setCurrentLocation();
   }
-  String generateMapImageUrl(double latitude, double longitude, Color markerColor) {
+  String generateMapImageUrl(
+      double latitude, double longitude, Color markerColor) {
     const int width = 247;
     const int height = 101;
     final String marker = 'markers=color:$markerColor|$latitude,$longitude';
@@ -73,7 +76,7 @@ class GoogleMapsApi {
       final LocationPermission permission = await Geolocator.checkPermission();
 
       if (permission == LocationPermission.denied) {
-        final LocationPermission newPermission = await Geolocator.requestPermission();
+        final LocationPermission permission = await Geolocator.requestPermission();
       }
     } catch (e) {
       if (kDebugMode) {
@@ -87,7 +90,8 @@ class GoogleMapsApi {
       final LocationPermission permission = await Geolocator.checkPermission();
 
       if (permission == LocationPermission.denied) {
-        final LocationPermission newPermission = await Geolocator.requestPermission();
+        final LocationPermission newPermission =
+            await Geolocator.requestPermission();
         if (newPermission == LocationPermission.denied) {
           return false;
         } else {

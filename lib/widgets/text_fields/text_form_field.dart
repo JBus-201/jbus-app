@@ -26,10 +26,10 @@ class OurTextFormField extends StatelessWidget {
     this.focusNode,
     this.icon,
     this.suffixIcon,
-    // this.leftPadding = 4,
-    // this.topPadding = 12,
-    // this.rightPadding = 4,
-    // this.bottomPadding = 12,
+    this.leftPadding = 4,
+    this.topPadding = 12,
+    this.rightPadding = 4,
+    this.bottomPadding = 12,
   });
 
   final String label;
@@ -50,24 +50,19 @@ class OurTextFormField extends StatelessWidget {
   final FocusNode? focusNode;
   final IconData? icon;
   final IconData? suffixIcon;
-
-  // final double leftPadding;
-  // final double topPadding;
-  // final double rightPadding;
-  // final double bottomPadding;
+  final double leftPadding;
+  final double topPadding;
+  final double rightPadding;
+  final double bottomPadding;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
       return Padding(
-        padding: const EdgeInsets.only(
-          left: 4,
-          right: 4,
-          top: 12,
-          bottom: 12,
-          // left: leftPadding,
-          // top: topPadding,
-          // right: rightPadding,
-          // bottom: bottomPadding,
+        padding: EdgeInsets.only(
+          left: leftPadding,
+          top: topPadding,
+          right: rightPadding,
+          bottom: bottomPadding,
         ),
         child: SizedBox(
           height: 75,
@@ -93,6 +88,7 @@ class OurTextFormField extends StatelessWidget {
                   themeState.thememode == ThemeMode.light ? ourBlack : ourWhite,
             ),
             decoration: InputDecoration(
+
                 // isDense: true,
                 // contentPadding: const EdgeInsets.fromLTRB(15, 50, 50, 0),
 
@@ -116,6 +112,7 @@ class OurTextFormField extends StatelessWidget {
                           }
                         })
                     : null,
+
                 focusColor: themeState.thememode == ThemeMode.light
                     ? ourBlue
                     : ourOrange,

@@ -25,7 +25,9 @@ class EmailTextField extends StatelessWidget {
           if (value == null || value.isEmpty) {
             return AppLocalizations.of(context)!.sorryPleaseEnterYourEmail;
           }
-          final bool emailValid = RegExp('^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,})\$').hasMatch(value.trim());
+          final bool emailValid =
+              RegExp('^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,})\$')
+                  .hasMatch(value.trim());
 
           if (emailValid) {
             return null;

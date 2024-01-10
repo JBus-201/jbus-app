@@ -53,7 +53,8 @@ class ThemeSettingsScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const LanguageSettingsScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const LanguageSettingsScreen()),
                 );
               },
             ),

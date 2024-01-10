@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'route.dart';
+part of 'bus_route.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Route _$RouteFromJson(Map<String, dynamic> json) => Route(
+BusRoute _$BusRouteFromJson(Map<String, dynamic> json) => BusRoute(
       id: json['id'] as int,
       name: json['name'] as String?,
       waypointsGoing: json['waypointsGoing'] as String?,
@@ -21,7 +21,7 @@ Route _$RouteFromJson(Map<String, dynamic> json) => Route(
           InterestPoint.fromJson(json['endingPoint'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$RouteToJson(Route instance) => <String, dynamic>{
+Map<String, dynamic> _$BusRouteToJson(BusRoute instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'waypointsGoing': instance.waypointsGoing,
