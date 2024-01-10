@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
+import 'package:jbus_app/screens/authentication/signup/bloc/signup_bloc.dart';
 import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 
 class OurTextFormField extends StatelessWidget {
@@ -87,6 +88,31 @@ class OurTextFormField extends StatelessWidget {
                   themeState.thememode == ThemeMode.light ? ourBlack : ourWhite,
             ),
             decoration: InputDecoration(
+
+                // isDense: true,
+                // contentPadding: const EdgeInsets.fromLTRB(15, 50, 50, 0),
+
+                //suffixIcon: Icon(suffixIcon),
+                suffix: suffixIcon != null
+                    ? IconButton(
+                        icon: Icon(
+                          suffixIcon,
+                          color: ourNavey,
+                        ),
+                        color: ourNavey,
+                        onPressed: () {
+                          final signupBloc =
+                              BlocProvider.of<SignupBloc>(context);
+
+                          if (signupBloc.state.icon ==
+                              Icons.visibility_off_outlined) {
+                            signupBloc.add(SwitchToVisibilityOnEvent());
+                          } else {
+                            signupBloc.add(SwitchToVisibilityOffEvent());
+                          }
+                        })
+                    : null,
+
                 focusColor: themeState.thememode == ThemeMode.light
                     ? ourBlue
                     : ourOrange,

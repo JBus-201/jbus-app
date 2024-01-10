@@ -65,6 +65,7 @@ class SignupScreen extends StatelessWidget {
                           // const SizedBox(
                           //   height: 8,
                           // ),
+
                           SignUpButtonSUS(
                             firstNameControllerText:
                                 FirstNameTextField.firstNameController.text,
@@ -78,6 +79,7 @@ class SignupScreen extends StatelessWidget {
                                 PasswordTextField.passwordController.text,
                             formKey: formKey,
                           ),
+
                           const SignInButtonSUS(),
                         ],
                       ),
