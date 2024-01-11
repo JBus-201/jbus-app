@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:jbus_app/constants/strings.dart' as constants;
 import 'package:jbus_app/data/api/api_service.dart';
 import 'package:jbus_app/services/auth_service.dart';
 import 'package:jbus_app/services/authentication_interceptor.dart';
@@ -18,7 +19,7 @@ Future<void> setupLocator() async {
   dio.interceptors.add(sl());
   sl.registerSingleton(dio);
 
-  sl.registerSingleton(ApiService(sl()));
+  sl.registerSingleton(ApiService(sl(), baseUrl: constants.baseUrl));
 
   sl.registerSingleton(AuthService(sl()));
 }
