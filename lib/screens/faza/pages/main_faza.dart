@@ -19,7 +19,7 @@ class _FazaMainPageState extends State<FazaMainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const AppBarTitleLogo(),
+        title: const JbusAppBarTitle(),
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),

@@ -66,7 +66,7 @@ class _FazaWaitingPageState extends State<FazaWaitingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const AppBarTitleLogo(),
+        title: const JbusAppBarTitle(),
       ),
       body: Center(
         child: Column(
