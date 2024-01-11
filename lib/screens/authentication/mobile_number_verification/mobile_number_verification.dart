@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:jbus_app/screens/authentication/mobile_number_verification/bloc/mobile_number_bloc.dart';
-import 'package:jbus_app/screens/authentication/mobile_number_verification/mobile_number_verification.dart';
 import 'package:jbus_app/screens/settings/settings/settings.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:jbus_app/widgets/text_fields/otp_text_field.dart';
 
-class EmailVerificationScreen extends StatelessWidget {
-  const EmailVerificationScreen({
+class MobileNumberVerificationScreen extends StatelessWidget {
+  const MobileNumberVerificationScreen({
     Key? key,
     this.firstName,
     this.lastName,
@@ -35,7 +33,7 @@ class EmailVerificationScreen extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.email),
+          title: Text(AppLocalizations.of(context)!.mobileNumber),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8),
@@ -44,7 +42,7 @@ class EmailVerificationScreen extends StatelessWidget {
               children: [
                 Text(
                   AppLocalizations.of(context)!
-                      .pleaseEnterTheCodeSentToTheEmailBelow,
+                      .pleaseEnterTheCodeSentToTheMobileNumberBelow,
                 ),
                 Form(
                   child: Column(
@@ -70,7 +68,7 @@ class EmailVerificationScreen extends StatelessWidget {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(    
+                              MaterialPageRoute(
                                   builder: (context) => const SettingsScreen()),
                             );
                           }),
