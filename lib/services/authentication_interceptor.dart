@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:jbus_app/services/auth_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthenticationInterceptor extends Interceptor {
@@ -8,8 +9,7 @@ class AuthenticationInterceptor extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    super.onRequest(options, handler);
-    final token = _sharedPreferences.getString('token');
+    final token = _sharedPreferences.getString(AuthService.tokenKey);
     if (token != null) options.headers['Authentication'] = 'Bearer $token';
     handler.next(options);
   }

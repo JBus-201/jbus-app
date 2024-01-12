@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class AuthService {
-  static const String _tokenKey = 'auth_token';
+  static const String tokenKey = 'auth_token';
   final SharedPreferences prefs;
 
   dynamic data;
@@ -13,7 +13,7 @@ class AuthService {
   AuthService(this.prefs);
 
   Future<UserStatus> getApiStatus() async {
-    final authToken = prefs.getString(_tokenKey);
+    final authToken = prefs.getString(tokenKey);
 
     if (authToken == null) {
       return UserStatus.notLoggedIn;
@@ -45,12 +45,12 @@ class AuthService {
 
   // Set the authentication state to logged in
   Future<void> setLoggedIn(String token) async {
-    await prefs.setString(_tokenKey, token);
+    await prefs.setString(tokenKey, token);
   }
 
   // Set the authentication state to unauthenticated
   Future<void> setLoggedOut() async {
-    await prefs.remove(_tokenKey);
+    await prefs.remove(tokenKey);
   }
 }
 
