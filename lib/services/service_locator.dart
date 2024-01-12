@@ -17,6 +17,7 @@ Future<void> setupLocator() async {
 
   final dio = Dio();
   dio.interceptors.add(sl());
+  dio.interceptors.add(LogInterceptor());
   sl.registerSingleton(dio);
 
   sl.registerSingleton(ApiService(sl(), baseUrl: constants.baseUrl));

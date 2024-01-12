@@ -10,7 +10,7 @@ class AuthenticationInterceptor extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     super.onRequest(options, handler);
     final token = _sharedPreferences.getString('token');
-    options.headers['Authentication'] = 'Bearer $token';
+    if (token != null) options.headers['Authentication'] = 'Bearer $token';
     handler.next(options);
   }
 }
