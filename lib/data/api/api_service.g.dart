@@ -13,7 +13,7 @@ class _ApiService implements ApiService {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://109.123.253.16/api/v1.0';
+    baseUrl ??= 'http://vmi1560602.contaboserver.net/api/v1.0';
   }
 
   final Dio _dio;
@@ -35,7 +35,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'PassengerAccount/register',
+              '/PassengerAccount/register',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -63,7 +63,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'PassengerAccount/login',
+              '/PassengerAccount/login',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -90,7 +90,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'PassengerAccount/sendOTP',
+              '/PassengerAccount/sendOTP',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -120,7 +120,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'FavoritePoint/addfavoritepoint',
+              '/FavoritePoint/addfavoritepoint',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -148,7 +148,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'FavoritePoint/${id}',
+              '/FavoritePoint/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -177,7 +177,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'FavoritePoint/${id}',
+              '/FavoritePoint/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -204,7 +204,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'FavoritePoint/favoritepoints',
+              '/FavoritePoint/favoritepoints',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -233,7 +233,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'Route/getroutes',
+              '/Route/getroutes',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -262,7 +262,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'Route/${id}',
+              '/Route/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -289,7 +289,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'Route/${id}/favoritepoints',
+              '/Route/${id}/favoritepoints',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -319,7 +319,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'Fazaa/storeFazaas',
+              '/Fazaa/storeFazaas',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -349,7 +349,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'Friends/sendFriendRequest',
+              '/Friends/sendFriendRequest',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -377,7 +377,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'Friends/confirmFriendRequest',
+              '/Friends/confirmFriendRequest',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -405,7 +405,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'Friends/getFriendById',
+              '/Friends/getFriendById',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -432,7 +432,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'Friends/getFriends',
+              '/Friends/getFriends',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -461,7 +461,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'Friends/getFriendRequests',
+              '/Friends/getFriendRequests',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -490,7 +490,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'Friends/deleteFriend',
+              '/Friends/deleteFriend',
               queryParameters: queryParameters,
               data: _data,
             )

@@ -10,7 +10,7 @@ LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) =>
     LoginResponse(
       passengerDto:
           Passenger.fromJson(json['passengerDto'] as Map<String, dynamic>),
-      token: json['token'] as String?,
+      token: json['token'] as String,
     );
 
 Map<String, dynamic> _$LoginResponseToJson(LoginResponse instance) =>

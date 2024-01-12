@@ -1,16 +1,46 @@
+import 'dart:convert';
+
+import 'package:jbus_app/constants/strings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class AuthService {
   static const String _tokenKey = 'auth_token';
   final SharedPreferences prefs;
 
+  dynamic data;
+
   AuthService(this.prefs);
 
-  // Check if the user is logged in
-  bool isLoggedIn() {
-    final String? token = prefs.getString(_tokenKey);
+  Future<UserStatus> getApiStatus() async {
+    final authToken = prefs.getString(_tokenKey);
 
-    return token != null && token.isNotEmpty;
+    if (authToken == null) {
+      return UserStatus.notLoggedIn;
+    }
+
+    var response = await http.get(Uri.https(baseUrl, '/status'), headers: {
+      "Accept": "application/json",
+      "Authentication": "Bearer $authToken",
+    });
+
+    if (response.statusCode != 200) {
+      return UserStatus.notLoggedIn;
+    }
+
+    final status = json.decode(response.body)['status'];
+
+    switch (status) {
+      case 0:
+        return UserStatus.notLoggedIn;
+      case 1:
+        return UserStatus.loggedIn;
+      case 2:
+        data = json.decode(response.body);
+        return UserStatus.inTrip;
+      default:
+        throw Exception('Unexpected status from API');
+    }
   }
 
   // Set the authentication state to logged in
@@ -20,7 +50,12 @@ class AuthService {
 
   // Set the authentication state to unauthenticated
   Future<void> setLoggedOut() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove(_tokenKey);
   }
+}
+
+enum UserStatus {
+  notLoggedIn,
+  loggedIn,
+  inTrip,
 }

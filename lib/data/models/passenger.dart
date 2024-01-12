@@ -7,7 +7,7 @@ part 'passenger.g.dart';
 class Passenger {
   final int id;
   final String? profileImage;
-  final double wallet;
+  final int wallet;
   final DateTime createdAt;
   final DateTime updatedAt;
   final User user;
