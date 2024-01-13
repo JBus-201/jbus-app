@@ -8,20 +8,20 @@ class User {
   final String? name;
   final String? phoneNumber;
   final String? email;
-  final String? userRole;
+  final String? role;
   final DateTime updatedAt;
   final DateTime lastActive;
-  final String? userSex;
+  final String? sex;
 
   User({
     required this.id,
     this.name,
     this.phoneNumber,
     this.email,
-    this.userRole,
+    this.role,
     required this.updatedAt,
     required this.lastActive,
-    this.userSex,
+    this.sex,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
