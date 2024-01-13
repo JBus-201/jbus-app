@@ -52,9 +52,9 @@ class GoogleMapsApi {
 ''';
 
   GoogleMapsApi() {
-    setCurrentLocation();
+    _setCurrentLocation();
   }
-  String generateMapImageUrl(
+  String _generateMapImageUrl(
       double latitude, double longitude, Color markerColor) {
     const int width = 247;
     const int height = 101;
@@ -66,7 +66,7 @@ class GoogleMapsApi {
 
   Widget getPointImage(double latitude, double longitude, Color markerColor) {
     return Image.network(
-      generateMapImageUrl(latitude, longitude, markerColor),
+      _generateMapImageUrl(latitude, longitude, markerColor),
       fit: BoxFit.cover,
     );
   }
@@ -76,7 +76,8 @@ class GoogleMapsApi {
       final LocationPermission permission = await Geolocator.checkPermission();
 
       if (permission == LocationPermission.denied) {
-        final LocationPermission permission = await Geolocator.requestPermission();
+        final LocationPermission permission =
+            await Geolocator.requestPermission();
       }
     } catch (e) {
       if (kDebugMode) {
@@ -106,7 +107,7 @@ class GoogleMapsApi {
     return false;
   }
 
-  Future<void> setCurrentLocation() async {
+  Future<void> _setCurrentLocation() async {
     // Check if the app has permission to access the device's location
     try {
       askForLocationPermission();
@@ -141,7 +142,18 @@ class GoogleMapsApi {
       mapController.animateCamera(CameraUpdate.newLatLng(currentLocation));
     } catch (e) {
       if (kDebugMode) {
-        print("Exception error: $e");
+        print("Moving Map Exception error: $e");
+      }
+    }
+  }
+
+  Future<void> moveToLocation(
+      GoogleMapController mapController, LatLng location) async {
+    try {
+      mapController.animateCamera(CameraUpdate.newLatLng(location));
+    } catch (e) {
+      if (kDebugMode) {
+        print("Moving Map Exception error: $e");
       }
     }
   }
@@ -149,17 +161,16 @@ class GoogleMapsApi {
   Future<String?> loadRoute(List<dynamic> waypoints) async {
     waypoints
         .map((waypointData) {
-          final geometry = waypointData['Location'];
-          //??
-          // waypointData['Position'] ??
-          // waypointData['Coordinates'] ??
-          // waypointData['GeoData'] ??
-          // waypointData['Place'] ??
-          // waypointData['Positioning'] ??
-          // waypointData['MapInfo'] ??
-          // waypointData['GPS'] ??
-          // waypointData['PlaceCoordinates'] ??
-          // waypointData['Waypoint'];
+          final geometry = waypointData['Location'] ??
+              waypointData['Position'] ??
+              waypointData['Coordinates'] ??
+              waypointData['GeoData'] ??
+              waypointData['Place'] ??
+              waypointData['Positioning'] ??
+              waypointData['MapInfo'] ??
+              waypointData['GPS'] ??
+              waypointData['PlaceCoordinates'] ??
+              waypointData['Waypoint'];
 
           if (geometry != null) {
             final latitude = geometry['Latitude'];
@@ -200,13 +211,13 @@ class GoogleMapsApi {
 
   List<LatLng> decodePolyline(String polyline) {
     List<LatLng> points = [];
-    for (var point in decodeEncodedPolyline(polyline)) {
+    for (var point in _decodeEncodedPolyline(polyline)) {
       points.add(LatLng(point[0], point[1]));
     }
     return points;
   }
 
-  List<List<double>> decodeEncodedPolyline(String encoded) {
+  List<List<double>> _decodeEncodedPolyline(String encoded) {
     List<List<double>> poly = [];
     int index = 0;
     int len = encoded.length;

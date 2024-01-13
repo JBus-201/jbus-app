@@ -106,3 +106,64 @@ void listenFazaNeed(int requesterId) {
     print('Error listening for changes: $error');
   });
 }
+
+Future<int?> getTotalAmount(int requesterId) async {
+  try {
+    // Create a reference to the "Faza" node in the Realtime Database
+    final fazaReference =
+        FirebaseDatabase.instance.ref('Faza/$requesterId');
+
+    // Retrieve the data at the specified location
+    DatabaseEvent totalEvent = await fazaReference.once();
+    DataSnapshot dataSnapshot = totalEvent.snapshot;
+
+    // Check if the data contains the 'totalAmount' field
+    if (dataSnapshot.value is Map<Object?, Object?>) {
+      Map<Object?, Object?>? totalData =
+          dataSnapshot.value as Map<Object?, Object?>?;
+
+      // Check if 'totalAmount' is not null before casting
+      if (totalData?['totalAmount'] != null) {
+        print('TotalAmount: ${totalData?['totalAmount']}');
+        return totalData?['totalAmount'] as int;
+      }
+    }
+  } catch (error) {
+    // Handle errors, e.g., print an error message
+    print("Error retrieving totalAmount: $error");
+  }
+
+  // Return null if there is an error or 'totalAmount' is null
+  return null;
+}
+
+Future<int?> getTotalPayed(int requesterId, int payerId) async {
+  try {
+    // Create a reference to the "Faza" node in the Realtime Database
+    final fazaReference =
+        FirebaseDatabase.instance.ref('Faza/$requesterId/payers/$payerId');
+
+    // Retrieve the data at the specified location
+    DatabaseEvent totalEvent = await fazaReference.once();
+    DataSnapshot dataSnapshot = totalEvent.snapshot;
+
+    // Check if the data contains the 'totalPayed' field
+    if (dataSnapshot.value is Map<Object?, Object?>) {
+      Map<Object?, Object?>? totalData =
+          dataSnapshot.value as Map<Object?, Object?>?;
+
+      // Check if 'totalPayed' is not null before casting
+      if (totalData?['totalPayed'] != null) {
+        print('totalPayed: ${totalData?['totalPayed']}');
+        return totalData?['totalPayed'] as int;
+      }
+    }
+  } catch (error) {
+    // Handle errors, e.g., print an error message
+    print("Error retrieving totalPayed: $error");
+  }
+
+  // Return null if there is an error or 'totalPayed' is null
+  return null;
+}
+

@@ -4,6 +4,7 @@ import 'package:jbus_app/data/models/login_request.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jbus_app/screens/authentication/signin/cubit/signin_cubit.dart';
 import 'package:jbus_app/screens/authentication/signin/cubit/signin_state.dart';
+import 'package:jbus_app/screens/dashbourd/dashbourd.dart';
 import 'package:jbus_app/services/service_locator.dart';
 
 class SigninScreen extends StatelessWidget {
@@ -23,6 +24,10 @@ class SigninScreen extends StatelessWidget {
           SigninCubit(apiService: sl(), authService: sl(), prefs: sl()),
       child: BlocBuilder<SigninCubit, SigninState>(
         builder: (context, state) {
+          if (state is SigninSuccess) {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => const Dashbourd()));
+          }
           return Scaffold(
             appBar: AppBar(
               title: Text(AppLocalizations.of(context)!.signIn),

@@ -53,7 +53,7 @@ class EmailVerificationScreen extends StatelessWidget {
                         child: Directionality(
                           textDirection: TextDirection.ltr,
                           child: Row(
-                            //textDirection: TextDirection.ltr,
+                            // textDirection: TextDirection.ltr,
                             children: [
                               OtpTextField(first: true),
                               OtpTextField(),

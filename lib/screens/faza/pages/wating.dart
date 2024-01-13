@@ -92,6 +92,7 @@ class _FazaWaitingPageState extends State<FazaWaitingPage> {
       setState(() {
         if (_secondsRemaining > 0) {
           _secondsRemaining--;
+          writeFazaTimer(myId, _secondsRemaining);
         } else {
           timer.cancel();
           writeNeedFaza(myId, false);

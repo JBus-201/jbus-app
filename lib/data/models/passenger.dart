@@ -10,16 +10,12 @@ class Passenger {
   final int id;
   final String? profileImage;
   final int wallet;
-  final DateTime createdAt;
-  final DateTime updatedAt;
   final User user;
 
   Passenger({
     required this.id,
     this.profileImage,
     required this.wallet,
-    required this.createdAt,
-    required this.updatedAt,
     required this.user,
   });
 
