@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
               navigatorKey: sl<NavigationService>().navigatorKey,
               home: authService.isLoggedIn()
                   ? const Dashbourd()
-                  : const SignupScreen(),
+                  : const Dashbourd(),
               locale: Locale(localizationState.languageCode),
               localizationsDelegates: const [
                 AppLocalizations.delegate,

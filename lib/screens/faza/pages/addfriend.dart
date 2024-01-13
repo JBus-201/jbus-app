@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:jbus_app/data/api/api_service.dart';
+import 'package:jbus_app/data/api/google_service.dart';
 import 'package:jbus_app/data/api/realtime-firebase/writers.dart';
+import 'package:jbus_app/data/models/friends_create_request.dart';
+import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:jbus_app/widgets/text_fields/text_form_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -57,31 +61,31 @@ class AddFriendForFaza extends StatelessWidget {
 
                 int responderId = 1;
                 int friendId = int.parse(friendIdController.text);
-
-                print("Friend's ID as int: $friendId");
-
-                writeFazaReqState('p', responderId, friendId).then((value) => {
-                      if (value)
-                        {
-                          showDialog(
-                            context: context,
-                            builder: (context) => const Warning(
-                                isWarning: false,
-                                title: "Request Sent Succesfuly",
-                                description: ""),
-                          ),
-                        }
-                      else
-                        {
-                          showDialog(
-                            context: context,
-                            builder: (context) => const Warning(
-                                isWarning: true,
-                                title: "Ops!",
-                                description: "Somthing went wrong"),
-                          )
-                        }
-                    });
+                FriendsCreateRequest fr = FriendsCreateRequest(friendId: friendId);
+                final res = sl<ApiService>().sendFriendRequest(fr);
+                print("Friend's ID as int: $res");
+                // writeFazaReqState('p', responderId, friendId).then((value) => {
+                //       if (value)
+                //         {
+                //           showDialog(
+                //             context: context,
+                //             builder: (context) => const Warning(
+                //                 isWarning: false,
+                //                 title: "Request Sent Succesfuly",
+                //                 description: ""),
+                //           ),
+                //         }
+                //       else
+                //         {
+                //           showDialog(
+                //             context: context,
+                //             builder: (context) => const Warning(
+                //                 isWarning: true,
+                //                 title: "Ops!",
+                //                 description: "Somthing went wrong"),
+                //           )
+                //         }
+                //     });
               }
             },
             width: 250,

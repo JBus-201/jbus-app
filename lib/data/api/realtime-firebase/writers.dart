@@ -1,6 +1,9 @@
 // ignore_for_file: avoid_print, prefer_typing_uninitialized_variables
 
+import 'dart:async';
+
 import 'package:firebase_database/firebase_database.dart';
+import 'package:jbus_app/data/api/realtime-firebase/lestiners.dart';
 
 final databaseReference = FirebaseDatabase.instance.ref();
 void writeLocationToDatabase(
@@ -186,15 +189,31 @@ Future<bool> writeNeedFaza(int requesterId, bool state) async {
   }
 }
 
-void writeFazaPayers(int requesterId, int payerId, int amount) {
+void writeFazaPayers(int requesterId, int payerId, int amount) async {
   String locationPath = "Faza/$requesterId/payers/$payerId";
-
+  int? totalPayed = await getTotalPayed(requesterId, payerId);
+  totalPayed = (totalPayed! + amount);
   databaseReference.child(locationPath).update({
-    "totalPayed": amount,
+    "totalPayed": totalPayed,
   }).then((_) {
     print("totalPayed written successfully!\nAmount:$amount");
+    writeUpdatedTotalAmountNeeded(requesterId, payerId, amount);
   }).catchError((error) {
     print("Error writing NeedFaza: $error");
+  });
+}
+
+void writeUpdatedTotalAmountNeeded(
+    int requesterId, int payerId, int amount) async {
+  String locationPath = "Faza/$requesterId/";
+  int? totalAmount = await getTotalAmount(requesterId);
+  totalAmount = (totalAmount! - amount);
+  databaseReference.child(locationPath).update({
+    "totalAmount": totalAmount,
+  }).then((_) {
+    print("totalAmount written successfully!\ntotalAmount:$amount");
+  }).catchError((error) {
+    print("Error writing totalAmount: $error");
   });
 }
 
@@ -207,5 +226,16 @@ void writeFazaTotalAmountNeeded(int requesterId, int amount) {
     print("totalAmount written successfully!\ntotalAmount:$amount");
   }).catchError((error) {
     print("Error writing totalAmount: $error");
+  });
+}
+void writeFazaTimer(int requesterId,int timer) {
+  String locationPath = "Faza/$requesterId/";
+
+  databaseReference.child(locationPath).update({
+    "timer": timer,
+  }).then((_) {
+    print("timer written successfully!\ntimer:$timer");
+  }).catchError((error) {
+    print("Error writing timer: $error");
   });
 }
