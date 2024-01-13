@@ -18,6 +18,7 @@ class AppDarkTheme extends AppTheme {
 
       //AppBar theme
       appBarTheme: AppBarTheme(
+        iconTheme: const IconThemeData(color: ourWhite),
           backgroundColor: const Color.fromARGB(255, 0, 0, 0).withOpacity(0),
           centerTitle: true,
           elevation: 0,
@@ -64,11 +65,25 @@ class AppDarkTheme extends AppTheme {
       focusColor: ourOrange,
       //TabBarTheme
       tabBarTheme: TabBarTheme(
-          labelStyle:
-              const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-          labelColor: getMainOrange(),
-          indicatorColor: getMainOrange(),
-          dividerColor: getMainOrange()),
+        labelStyle: const TextStyle(
+            fontWeight: FontWeight.bold, fontSize: 13, color: ourOrange),
+        labelColor: ourOrange,
+        indicatorColor: ourOrange,
+        dividerColor: ourOrange,
+        unselectedLabelColor: ourOrange50,
+      ),
+
+      //bottomNavigationTheme
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: ourDarkThemeBackgroundNavey,
+        elevation: 0,
+        unselectedIconTheme: IconThemeData(color: ourGray50),
+        unselectedLabelStyle: TextStyle(color: ourGray50),
+        unselectedItemColor: ourGray50,
+        selectedIconTheme: const IconThemeData(color: ourOrange),
+        selectedLabelStyle: const TextStyle(color: ourOrange),
+        selectedItemColor: ourOrange,
+      ),
 
       // FloatingActionButton
       floatingActionButtonTheme: FloatingActionButtonThemeData(

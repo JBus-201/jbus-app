@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jbus_app/constants/colors/colors.dart';
-import 'package:jbus_app/screens/faza/pages/addfriend.dart';
-import 'package:jbus_app/screens/faza/pages/friend_request.dart';
+import 'package:jbus_app/screens/faza/widgets/friends.dart';
 import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
 
 class FazaMainPage extends StatefulWidget {
@@ -31,28 +29,24 @@ class _FazaMainPageState extends State<FazaMainPage> {
             label: 'Friends',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_add_alt_1_rounded),
-            label: 'Friend Requests',
+            icon: Icon(Icons.history),
+            label: 'History',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.group_add_outlined),
-            label: 'Add Friends',
+            icon: Icon(Icons.monetization_on_outlined),
+            label: 'Dians',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: ourBlue,
         onTap: _onItemTapped,
       ),
     );
   }
 
   static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
-    FazaFriendRequestPage(),
-    AddFriendForFaza()
+    FazaFriendsPage(),
+    Text('history'),
+    Text('dain')
   ];
 
   void _onItemTapped(int index) {

@@ -5,7 +5,7 @@ import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  const SettingsScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

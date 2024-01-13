@@ -42,3 +42,5 @@ const Color ourDarkThemeBackgroundNavey = Color.fromARGB(255, 36, 51, 67);
 const Color appBarLightGray = Color.fromARGB(232, 242, 242, 242);
 const Color ourGreen = Color.fromARGB(232, 16, 160, 14);
 const Color ourLightGreen = Color.fromARGB(232, 49, 243, 46);
+const Color ourLightGold = Color.fromARGB(255, 211, 191, 131);
+const Color ourGold = Color.fromARGB(255, 176, 155, 57);

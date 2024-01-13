@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jbus_app/data/api/realtime-firebase/writers.dart';
-import 'package:jbus_app/screens/faza/wating.dart';
+import 'package:jbus_app/screens/faza/pages/wating.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:jbus_app/widgets/warnings/warning.dart';
 

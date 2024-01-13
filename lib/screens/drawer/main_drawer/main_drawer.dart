@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/constants/colors/gradients.dart';
-import 'package:jbus_app/screens/faza/pages/main_faza.dart';
+import 'package:jbus_app/screens/faza/widgets/main_faza.dart';
+import 'package:jbus_app/screens/settings/language_settings/language_settings.dart';
 import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -89,7 +90,10 @@ class MainDrawer extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.settings),
               title: const Text("settings"),
-              onTap: () {},
+              onTap: () {Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LanguageSettingsScreen()));},
             ),
             const Divider(),
             const Spacer(),
