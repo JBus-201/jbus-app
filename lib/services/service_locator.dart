@@ -17,7 +17,12 @@ Future<void> setupLocator() async {
 
   final dio = Dio();
   dio.interceptors.add(sl());
-  dio.interceptors.add(LogInterceptor());
+  dio.interceptors.add(LogInterceptor(
+    requestBody: true,
+    responseBody: true,
+    requestHeader: true,
+    responseHeader: true,
+  ));
   dio.options.headers['Content-Type'] = 'application/json';
   sl.registerSingleton(dio);
 

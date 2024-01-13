@@ -17,7 +17,7 @@ class AddFriendForFaza extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text("Enter your Friend's Id number"),
+          const Text("Enter your Friend's Id number"),
           Form(
             key: formKey,
             child: OurTextFormField(

@@ -10,7 +10,15 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jbus_app/screens/authentication/signup/widgets/fields/password_verification_field.dart';
 
 class SignupScreen extends StatelessWidget {
-  const SignupScreen({super.key});
+  SignupScreen({super.key});
+
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController passwordVerificationController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {

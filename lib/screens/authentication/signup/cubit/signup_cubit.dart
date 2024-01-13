@@ -1,58 +1,35 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:jbus_app/data/api/api_service.dart';
+import 'package:jbus_app/data/models/register_request.dart';
+import 'package:jbus_app/services/auth_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'signup_state.dart';
 
 class SignupCubit extends Cubit<SignupState> {
-  SignupCubit()
-      : super(const SignupState(
-          firstName: '',
-          lastName: '',
-          email: '',
-          mobileNumber: '',
-          password: '',
-          passwordConfirmation: '',
-        ));
+  final ApiService _apiService;
+  final AuthService _authService;
+  final SharedPreferences _prefs;
 
-  void firstNameChanged(String value) {
-    emit(state.copyWith(firstName: value));
-  }
+  SignupCubit({
+    required ApiService apiService,
+    required AuthService authService,
+    required SharedPreferences prefs,
+  })  : _apiService = apiService,
+        _authService = authService,
+        _prefs = prefs,
+        super(SignupInitial());
 
-  void lastNameChanged(String value) {
-    emit(state.copyWith(lastName: value));
-  }
+  void signUp(RegisterRequest request) async {
+    emit(SignupLoading());
+    try {
+      final res = await _apiService.register(request);
+      await _authService.setLoggedIn(res.token);
+      await _prefs.setString('user', res.passengerDto.toString());
 
-  void emailChanged(String value) {
-    emit(state.copyWith(email: value));
-  }
-
-  void mobileNumberChanged(String value) {
-    emit(state.copyWith(mobileNumber: value));
-  }
-
-  void passwordChanged(String value) {
-    emit(state.copyWith(password: value));
-  }
-
-  void passwordConfirmationChanged(String value) {
-    emit(state.copyWith(passwordConfirmation: value));
-  }
-
-  void submit() {
-    final firstName = state.firstName;
-    final lastName = state.lastName;
-    final email = state.email;
-    final mobileNumber = state.mobileNumber;
-    final password = state.password;
-    final passwordConfirmation = state.passwordConfirmation;
-
-    if (firstName.isEmpty ||
-        lastName.isEmpty ||
-        email.isEmpty ||
-        mobileNumber.isEmpty ||
-        password.isEmpty ||
-        passwordConfirmation.isEmpty) {
-      return;
+      emit(SignupSuccess());
+    } catch (error) {
+      emit(SignupFailure(error.toString()));
     }
   }
 }

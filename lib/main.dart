@@ -47,13 +47,13 @@ Future main() async {
 Widget _getHomeScreen(UserStatus status) {
   switch (status) {
     case UserStatus.notLoggedIn:
-      return const SignupScreen();
+      return SignupScreen();
     case UserStatus.loggedIn:
       return const Dashbourd();
     case UserStatus.inTrip:
       return const Dashbourd();
     default:
-      return const SignupScreen();
+      return SignupScreen();
   }
 }
 

@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jbus_app/screens/authentication/email_verification/email_verification.dart';
+import 'package:jbus_app/data/models/login_request.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jbus_app/screens/authentication/signin/cubit/signin_cubit.dart';
 import 'package:jbus_app/screens/authentication/signin/cubit/signin_state.dart';
 import 'package:jbus_app/services/service_locator.dart';
 
 class SigninScreen extends StatelessWidget {
-  const SigninScreen({super.key});
+  const SigninScreen({
+    super.key,
+    required this.emailController,
+    required this.passwordController,
+  });
+
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SigninCubit(apiService: sl(), authService: sl()),
+      create: (context) =>
+          SigninCubit(apiService: sl(), authService: sl(), prefs: sl()),
       child: BlocBuilder<SigninCubit, SigninState>(
         builder: (context, state) {
           return Scaffold(
@@ -25,22 +33,22 @@ class SigninScreen extends StatelessWidget {
                   decoration: InputDecoration(
                     hintText: AppLocalizations.of(context)!.email,
                   ),
-                  onChanged: (value) {
-                    context.read<SigninCubit>().emailChanged(value);
-                  },
+                  controller: emailController,
                 ),
                 TextField(
                   decoration: InputDecoration(
                     hintText: AppLocalizations.of(context)!.password,
                   ),
-                  onChanged: (value) {
-                    context.read<SigninCubit>().passwordChanged(value);
-                  },
+                  controller: passwordController,
                 ),
                 ElevatedButton(
                   onPressed: state is! SigninLoading
                       ? () {
-                          context.read<SigninCubit>().submit();
+                          final credentials = LoginRequest(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          );
+                          context.read<SigninCubit>().login(credentials);
                         }
                       : null,
                   child: Text(AppLocalizations.of(context)!.signIn),

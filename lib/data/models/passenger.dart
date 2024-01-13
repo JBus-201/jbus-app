@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:json_annotation/json_annotation.dart';
 import 'package:jbus_app/data/models/user.dart';
 
@@ -21,7 +23,15 @@ class Passenger {
     required this.user,
   });
 
-  factory Passenger.fromJson(Map<String, dynamic> json) =>
-      _$PassengerFromJson(json);
+  factory Passenger.fromJson(Map<String, dynamic> json) {
+    log('Passenger.fromJson: $json');
+    try {
+      final res = _$PassengerFromJson(json);
+      return res;
+    } catch (e) {
+      log('Passenger.fromJson: $e');
+    }
+    return _$PassengerFromJson(json);
+  }
   Map<String, dynamic> toJson() => _$PassengerToJson(this);
 }

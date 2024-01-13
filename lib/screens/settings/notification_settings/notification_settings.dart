@@ -4,8 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class NotificationSettingsScreen extends StatelessWidget {
   final AppLocalizations locale;
 
-  const NotificationSettingsScreen({Key? key, required this.locale})
-      : super(key: key);
+  const NotificationSettingsScreen({super.key, required this.locale});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

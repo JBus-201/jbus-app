@@ -5,7 +5,7 @@ import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 
 class RectangularElevatedButton extends StatelessWidget {
   const RectangularElevatedButton({
-    Key? key,
+    super.key,
     required this.text,
     required this.onPressed,
     this.height = 50,
@@ -13,7 +13,7 @@ class RectangularElevatedButton extends StatelessWidget {
     this.gradient = blueButtonGradient,
     this.gradientForDark = orangeButtonGradient,
     this.padding = 4,
-  }) : super(key: key);
+  });
 
   final String text;
   final Function()? onPressed;

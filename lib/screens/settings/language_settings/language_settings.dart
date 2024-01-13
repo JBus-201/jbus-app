@@ -6,7 +6,7 @@ import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 
 class LanguageSettingsScreen extends StatelessWidget {
-  const LanguageSettingsScreen({Key? key}) : super(key: key);
+  const LanguageSettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
