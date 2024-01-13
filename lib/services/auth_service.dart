@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:jbus_app/constants/strings.dart';
+import 'package:jbus_app/services/service_locator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -18,8 +19,7 @@ class AuthService {
     if (authToken == null) {
       return UserStatus.notLoggedIn;
     }
-
-    var response = await http.get(Uri.https(baseUrl, '/status'), headers: {
+    var response = await http.get(Uri.parse('$baseUrl/status'), headers: {
       "Accept": "application/json",
       "Authentication": "Bearer $authToken",
     });
