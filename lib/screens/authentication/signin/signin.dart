@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jbus_app/screens/authentication/email_verification/email_verification.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jbus_app/screens/authentication/signin/cubit/signin_cubit.dart';
 import 'package:jbus_app/screens/authentication/signin/cubit/signin_state.dart';

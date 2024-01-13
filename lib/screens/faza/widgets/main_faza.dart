@@ -11,8 +11,6 @@ class FazaMainPage extends StatefulWidget {
 
 class _FazaMainPageState extends State<FazaMainPage> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
