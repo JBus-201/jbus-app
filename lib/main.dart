@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
             return MaterialApp(
               navigatorKey: sl<NavigationService>().navigatorKey,
               home: authService.isLoggedIn()
-                  ? const Dashbourd()
+                  ? const SignupScreen()
                   : const Dashbourd(),
               locale: Locale(localizationState.languageCode),
               localizationsDelegates: const [
