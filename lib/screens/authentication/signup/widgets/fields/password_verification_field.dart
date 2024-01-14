@@ -26,6 +26,8 @@ class PasswordVerificationTextField extends StatelessWidget {
             enableSuggestions: false,
             obscureText: state.obscureText,
             autocorrect: false,
+            bottomPadding: 24,
+            sizedBoxHeight: 65,
             maxLength: 40,
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -33,7 +35,7 @@ class PasswordVerificationTextField extends StatelessWidget {
                     .sorryPleaseReEnterYourPassword;
               }
 
-              if (PasswordTextField.password != value.trim()) {
+              if (PasswordTextFieldForSignUp.password != value.trim()) {
                 return AppLocalizations.of(context)!.sorryPasswordDoesNotMatch;
                 //'Sorry, Password does not match, please re enter your password correctly.';
               }

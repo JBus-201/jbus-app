@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jbus_app/screens/authentication/mobile_number_verification/bloc/mobile_number_bloc.dart';
-import 'package:jbus_app/screens/authentication/mobile_number_verification/mobile_number_verification.dart';
 import 'package:jbus_app/screens/settings/settings/settings.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';

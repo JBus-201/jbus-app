@@ -3,7 +3,7 @@ import 'package:jbus_app/screens/authentication/signin/signin.dart';
 import 'package:jbus_app/widgets/buttons/text_button.dart';
 
 class SignInButtonSUS extends StatelessWidget {
-  const SignInButtonSUS({Key? key}) : super(key: key);
+  const SignInButtonSUS({super.key});
   @override
   Widget build(BuildContext context) {
     return 
@@ -13,7 +13,7 @@ class SignInButtonSUS extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const SigninScreen(),
+            builder: (context) => const SignInScreen(),
           ),
         );
       },
