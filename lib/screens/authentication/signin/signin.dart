@@ -19,79 +19,69 @@ class SignInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
 
-    return BlocProvider(
-      create: (context) =>
-          SigninCubit(apiService: sl(), authService: sl(), prefs: sl()),
-      child: BlocListener<SigninCubit, SigninState>(
-        listener: (context, state) {
-          if (state is SigninSuccess) {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const Dashbourd()));
-          }
-        },
-        child: BlocBuilder<SigninCubit, SigninState>(
-          builder: (context, state) {
-            return GestureDetector(
-              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-              child: Scaffold(
-                body: SafeArea(
-                  child: CustomScrollView(
-                    slivers: [
-                      const SliverAppBar(
-                        title: JbusAppBarTitle(),
-                        automaticallyImplyLeading: false,
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        body: SafeArea(
+          child: CustomScrollView(
+            slivers: [
+              const SliverAppBar(
+                title: JbusAppBarTitle(),
+                automaticallyImplyLeading: false,
 
-                        //const AppBarTitleLogo(),
-                        //     Text(
-                        //   AppLocalizations.of(context)!.signIn,
-                        // ),
-                        floating: false,
-                        pinned: false,
-                      ),
-                      SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                          childCount: 1,
-                          (context, index) => Padding(
-                            padding: const EdgeInsets.all(8),
-                            child: Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Form(
-                                    key: formKey,
-                                    child: const Column(
-                                      children: [
-                                        EmailTextFieldForSignIn(),
-                                        PasswordTextFieldForSignIn(),
-                                      ],
-                                    ),
-                                  ),
-                                  // const SizedBox(
-                                  //   height: 8,
-                                  // ),
-
-                                  SignInButtonSIS(
-                                    emailControllerText: EmailTextFieldForSignUp
-                                        .emailController.text,
-                                    passwordControllerText:
-                                        PasswordTextFieldForSignUp
-                                            .passwordController.text,
-                                    formKey: formKey,
-                                  ),
-
-                                  const SignUpButtonSIS(),
-                                ],
-                              ),
+                //const AppBarTitleLogo(),
+                //     Text(
+                //   AppLocalizations.of(context)!.signIn,
+                // ),
+                floating: false,
+                pinned: false,
+              ),
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  childCount: 1,
+                  (context, index) => Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Form(
+                            key: formKey,
+                            child: const Column(
+                              children: [
+                                EmailTextFieldForSignIn(),
+                                PasswordTextFieldForSignIn(),
+                              ],
                             ),
                           ),
-                        ),
+                          // const SizedBox(
+                          //   height: 8,
+                          // ),
+
+                          BlocProvider(
+                            create: (context) => SigninCubit(
+                              apiService: sl(),
+                              authService: sl(),
+                              prefs: sl(),
+                            ),
+                            child: SignInButtonSIS(
+                              emailController:
+                                  EmailTextFieldForSignIn.emailController,
+                              passwordController:
+                                  PasswordTextFieldForSignIn.passwordController,
+                              formKey: formKey,
+                            ),
+                          ),
+
+                          const SignUpButtonSIS(),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ),
-            );
-          },
+            ],
+          ),
         ),
       ),
     );
