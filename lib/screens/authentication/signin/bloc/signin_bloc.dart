@@ -7,7 +7,7 @@ part 'signin_state.dart';
 class SigninBloc extends Bloc<SigninEvent, SigninState> {
   SigninBloc() : super(SigninInitial()) {
     on<SigninEvent>((event, emit) {
-      // TODO: implement event handler
+      
     });
   }
 }

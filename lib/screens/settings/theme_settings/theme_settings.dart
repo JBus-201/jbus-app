@@ -6,7 +6,7 @@ import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 
 class ThemeSettingsScreen extends StatelessWidget {
-  const ThemeSettingsScreen({Key? key}) : super(key: key);
+  const ThemeSettingsScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

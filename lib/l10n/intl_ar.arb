@@ -81,6 +81,21 @@
     "userAuthenticationDemo": "عرض مصادقة المستخدم",
     "drawer": "قائمة منبثقة",
     "systemTheme": "نمط النظام",
-    "alreadyHaveAnAccount": "لدي حساب بالفعل، تسجيل الدخول",
-    "verify": "تأكيد"
+    "alreadyHaveAnAccount": "لديك حساب بالفعل، تسجيل الدخول",
+    "creatANewAccount": "أنشئ حسابًا جديدًا",
+    "verify": "تأكيد",
+    "favoriteStops": "نقاط النزول المفضلة",
+    "tripsHistory": "سجل الرحلات",
+    "transfereBalance": "تحويل الرصيد",
+    "rewardPoints": "نقاط المكافأة",
+    "fazaa": "فزعة",
+    "walletBalance": "رصيد المحفظة",
+    "chargeWallet": "شحن المحفظة",
+    "cards": "البطاقات",
+    "add": "إضافة",
+    "visa": "visa",
+    "edit": "تعديل",
+    "yourPaymentDataIsStoredSecurely": "بيانات الدفع الخاصة بك مخزنة بأمان",
+    "jod":"د.أ"
+
 }

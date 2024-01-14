@@ -6,11 +6,11 @@ import 'package:jbus_app/screens/authentication/signup/widgets/fields/first_name
 import 'package:jbus_app/screens/authentication/signup/widgets/fields/last_name_text_field.dart';
 import 'package:jbus_app/screens/authentication/signup/widgets/fields/mobile_number_text_field.dart';
 import 'package:jbus_app/screens/authentication/signup/widgets/fields/password_text_fields.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jbus_app/screens/authentication/signup/widgets/fields/password_verification_field.dart';
+import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
 
 class SignupScreen extends StatelessWidget {
-  const SignupScreen({Key? key}) : super(key: key);
+  const SignupScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +22,12 @@ class SignupScreen extends StatelessWidget {
         body: SafeArea(
           child: CustomScrollView(
             slivers: [
-              SliverAppBar(
-                title:
-                    //const AppBarTitleLogo(),
-                    Text(
-                  AppLocalizations.of(context)!.signUp,
-                ),
+              const SliverAppBar(
+                title: AppBarTitleLogo(),
+                //const AppBarTitleLogo(),
+                // Text(
+                //   AppLocalizations.of(context)!.signUp,
+                // ),
                 floating: false,
                 pinned: false,
               ),
@@ -55,9 +55,9 @@ class SignupScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                EmailTextField(),
+                                EmailTextFieldForSignUp(),
                                 MobileNumberTextField(),
-                                PasswordTextField(),
+                                PasswordTextFieldForSignUp(),
                                 PasswordVerificationTextField()
                               ],
                             ),
@@ -72,11 +72,11 @@ class SignupScreen extends StatelessWidget {
                             lastNameControllerText:
                                 LastNameTextField.lastNameController.text,
                             emailControllerText:
-                                EmailTextField.emailController.text,
+                                EmailTextFieldForSignUp.emailController.text,
                             phoneNumberControllerText: MobileNumberTextField
                                 .phoneNumberController.text,
-                            passwordControllerText:
-                                PasswordTextField.passwordController.text,
+                            passwordControllerText: PasswordTextFieldForSignUp
+                                .passwordController.text,
                             formKey: formKey,
                           ),
 
