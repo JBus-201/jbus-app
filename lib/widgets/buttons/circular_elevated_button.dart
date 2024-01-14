@@ -5,13 +5,13 @@ import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 
 class CircularElevatedButton extends StatelessWidget {
   const CircularElevatedButton({
-    Key? key,
+    super.key,
     required this.onPressed,
     this.gradient = blueButtonGradient,
     this.gradientForDark = orangeButtonGradient,
     this.icon,
     this.size = 50,
-  }) : super(key: key);
+  });
 
   final Function()? onPressed;
   final Gradient? gradient;

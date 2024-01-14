@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AppBarTitleLogo extends StatelessWidget {
-  const AppBarTitleLogo({super.key});
+class JbusAppBarTitle extends StatelessWidget {
+  const JbusAppBarTitle({super.key});
 
   @override
   Widget build(BuildContext context) {

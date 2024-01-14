@@ -62,11 +62,22 @@ class AppLightTheme extends AppTheme {
         //TabBarTheme
         tabBarTheme: TabBarTheme(
             labelStyle:
-                const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-            labelColor: getMainOrange(),
-            indicatorColor: getMainOrange(),
-            dividerColor: getMainOrange()),
+                const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+            labelColor: getMainBlue(),
+            indicatorColor: getMainBlue(),
+            dividerColor: getMainBlue()),
 
+        //bottomNavigationTheme
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: ourWhite,
+          elevation: 0,
+          unselectedIconTheme: IconThemeData(color: ourBlue50),
+          unselectedLabelStyle: TextStyle(color: ourBlue50),
+          unselectedItemColor: ourBlue50,
+          selectedIconTheme: const IconThemeData(color: ourBlue),
+          selectedLabelStyle: const TextStyle(color: ourBlue),
+          selectedItemColor: ourBlue,
+        ),
         // FloatingActionButton
         floatingActionButtonTheme: FloatingActionButtonThemeData(
             backgroundColor: getMainBlue(), foregroundColor: ourWhite));

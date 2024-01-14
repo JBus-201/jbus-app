@@ -27,6 +27,8 @@ Future main() async {
   await setupLocator();
   WidgetsFlutterBinding.ensureInitialized();
 
+  final status = await sl<AuthService>().getApiStatus();
+
   runApp(
     MultiBlocProvider(
       providers: [
@@ -37,15 +39,28 @@ Future main() async {
           create: (BuildContext context) => LocalizationBloc(),
         ),
       ],
-      child: MyApp(authService: sl()),
+      child: MyApp(homeScreen: _getHomeScreen(status)),
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
-  final AuthService authService;
+Widget _getHomeScreen(UserStatus status) {
+  switch (status) {
+    case UserStatus.notLoggedIn:
+      return SignupScreen();
+    case UserStatus.loggedIn:
+      return const Dashbourd();
+    case UserStatus.inTrip:
+      return const Dashbourd();
+    default:
+      return SignupScreen();
+  }
+}
 
-  const MyApp({super.key, required this.authService});
+class MyApp extends StatelessWidget {
+  final Widget homeScreen;
+
+  const MyApp({super.key, required this.homeScreen});
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +71,7 @@ class MyApp extends StatelessWidget {
             GoogleMapsApi.askForLocationPermission();
             return MaterialApp(
               navigatorKey: sl<NavigationService>().navigatorKey,
-              home: authService.isLoggedIn()
-                  ? const Dashbourd()
-                  : const SignupScreen(),
+              home: homeScreen,
               locale: Locale(localizationState.languageCode),
               localizationsDelegates: const [
                 AppLocalizations.delegate,

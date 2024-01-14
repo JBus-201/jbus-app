@@ -23,7 +23,7 @@ class SignupScreen extends StatelessWidget {
           child: CustomScrollView(
             slivers: [
               const SliverAppBar(
-                title: AppBarTitleLogo(),
+                title: JbusAppBarTitle(),
                 //const AppBarTitleLogo(),
                 // Text(
                 //   AppLocalizations.of(context)!.signUp,

@@ -43,7 +43,7 @@ class _DashbourdState extends State<Dashbourd> {
           automaticallyImplyLeading: false,
           elevation: 0,
           backgroundColor: ourBlack.withOpacity(0),
-          title: const AppBarTitleLogo(),
+          title: const JbusAppBarTitle(),
           flexibleSpace: const AppBarStyle(),
           leading: CustomEndDrawerButton(
             onTap: () {

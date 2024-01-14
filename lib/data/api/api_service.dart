@@ -15,59 +15,59 @@ part 'api_service.g.dart';
 
 @RestApi(baseUrl: baseUrl)
 abstract class ApiService {
-  factory ApiService(Dio dio) = _ApiService;
+  factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
 
-  @POST("PassengerAccount/register")
+  @POST("/PassengerAccount/register")
   Future<LoginResponse> register(@Body() RegisterRequest registerRequest);
 
-  @POST("PassengerAccount/login")
+  @POST("/PassengerAccount/login")
   Future<LoginResponse> login(@Body() LoginRequest loginRequest);
 
-  @POST("PassengerAccount/sendOTP")
+  @POST("/PassengerAccount/sendOTP")
   Future<HttpResponse> sendOTP(@Field() String email);
 
-  @POST("FavoritePoint/addfavoritepoint")
+  @POST("/FavoritePoint/addfavoritepoint")
   Future<HttpResponse> addFavoritePoint(
       @Body() FavoritePointCreateRequest favoritePointRequest);
 
-  @DELETE("FavoritePoint/{id}")
+  @DELETE("/FavoritePoint/{id}")
   Future<List<FavoritePoint>> deleteFavoritePoint(@Path("id") int id);
 
-  @GET("FavoritePoint/{id}")
+  @GET("/FavoritePoint/{id}")
   Future<FavoritePoint> getFavoritePoint(@Path("id") int id);
 
-  @GET("FavoritePoint/favoritepoints")
+  @GET("/FavoritePoint/favoritepoints")
   Future<List<FavoritePoint>> getFavoritePoints();
 
-  @GET("Route/getroutes")
+  @GET("/Route/getroutes")
   Future<List<BusRoute>> getRoutes();
 
-  @GET("Route/{id}")
+  @GET("/Route/{id}")
   Future<BusRoute> getRoute(@Path("id") int id);
 
-  @GET("Route/{id}/favoritepoints")
+  @GET("/Route/{id}/favoritepoints")
   Future<List<FavoritePoint>> getFavoritePointsInRoute(@Path("id") int id);
 
-  @POST("Fazaa/storeFazaas")
+  @POST("/Fazaa/storeFazaas")
   Future<HttpResponse> storeFazaas(
       @Body() List<FazaaCreateRequest> fazaaStoreRequest);
 
-  @POST("Friends/sendFriendRequest")
+  @POST("/Friends/sendFriendRequest")
   Future<HttpResponse> sendFriendRequest(
       @Body() FriendsCreateRequest friendRequest);
 
-  @PUT("Friends/confirmFriendRequest")
+  @PUT("/Friends/confirmFriendRequest")
   Future<HttpResponse> confirmFriendRequest(@Body() int friendId);
 
-  @GET("Friends/getFriendById")
+  @GET("/Friends/getFriendById")
   Future<Friends> getFriendById(@Query("id") int friendId);
 
-  @GET("Friends/getFriends")
+  @GET("/Friends/getFriends")
   Future<List<Friends>> getFriends();
 
-  @GET("Friends/getFriendRequests")
+  @GET("/Friends/getFriendRequests")
   Future<List<Friends>> getFriendRequests();
 
-  @DELETE("Friends/deleteFriend")
+  @DELETE("/Friends/deleteFriend")
   Future<HttpResponse> deleteFriend(@Query("id") int friendId);
 }

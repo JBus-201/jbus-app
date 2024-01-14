@@ -6,9 +6,9 @@ import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 
 class OtpTextField extends StatelessWidget {
   const OtpTextField({
-    Key? key,
+    super.key,
     this.first = false,
-  }) : super(key: key);
+  });
 
   final bool first;
 

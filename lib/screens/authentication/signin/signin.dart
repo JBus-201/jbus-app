@@ -21,7 +21,7 @@ class SignInScreen extends StatelessWidget {
           child: CustomScrollView(
             slivers: [
               const SliverAppBar(
-                title: AppBarTitleLogo(),
+                title: JbusAppBarTitle(),
                 automaticallyImplyLeading: false,
 
                 //const AppBarTitleLogo(),

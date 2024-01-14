@@ -29,7 +29,7 @@ dependencies:
   http: ^1.1.2
   geolocator: ^10.1.0
   retrofit: any
-  dio: any
+  dio: 5.0.0
   json_annotation: ^4.8.1
   firebase_database: ^10.3.8
   firebase_auth: ^4.15.3

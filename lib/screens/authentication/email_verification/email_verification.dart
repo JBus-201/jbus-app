@@ -6,13 +6,13 @@ import 'package:jbus_app/widgets/text_fields/otp_text_field.dart';
 
 class EmailVerificationScreen extends StatelessWidget {
   const EmailVerificationScreen({
-    Key? key,
+    super.key,
     this.firstName,
     this.lastName,
     this.email,
     this.phoneNumber,
     this.password,
-  }) : super(key: key);
+  });
 
   final String? firstName;
   final String? lastName;
@@ -53,7 +53,7 @@ class EmailVerificationScreen extends StatelessWidget {
                         child: Directionality(
                           textDirection: TextDirection.ltr,
                           child: Row(
-                            //textDirection: TextDirection.ltr,
+                            // textDirection: TextDirection.ltr,
                             children: [
                               OtpTextField(first: true),
                               OtpTextField(),
@@ -68,7 +68,7 @@ class EmailVerificationScreen extends StatelessWidget {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(    
+                              MaterialPageRoute(
                                   builder: (context) => const SettingsScreen()),
                             );
                           }),

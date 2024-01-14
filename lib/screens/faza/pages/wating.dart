@@ -66,7 +66,7 @@ class _FazaWaitingPageState extends State<FazaWaitingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const AppBarTitleLogo(),
+        title: const JbusAppBarTitle(),
       ),
       body: Center(
         child: Column(
@@ -92,6 +92,7 @@ class _FazaWaitingPageState extends State<FazaWaitingPage> {
       setState(() {
         if (_secondsRemaining > 0) {
           _secondsRemaining--;
+          writeFazaTimer(myId, _secondsRemaining);
         } else {
           timer.cancel();
           writeNeedFaza(myId, false);
