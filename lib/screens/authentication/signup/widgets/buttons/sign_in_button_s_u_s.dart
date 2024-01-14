@@ -12,10 +12,7 @@ class SignInButtonSUS extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => SigninScreen(
-              emailController: TextEditingController(),
-              passwordController: TextEditingController(),
-            ),
+            builder: (context) => const SignInScreen(),
           ),
         );
       },

@@ -27,9 +27,10 @@ class OurTextFormField extends StatelessWidget {
     this.icon,
     this.suffixIcon,
     this.leftPadding = 4,
-    this.topPadding = 12,
+    this.topPadding = 8,
     this.rightPadding = 4,
-    this.bottomPadding = 12,
+    this.bottomPadding = 8,
+    this.sizedBoxHeight = 85,
   });
 
   final String label;
@@ -54,6 +55,7 @@ class OurTextFormField extends StatelessWidget {
   final double topPadding;
   final double rightPadding;
   final double bottomPadding;
+  final double sizedBoxHeight;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
@@ -65,7 +67,8 @@ class OurTextFormField extends StatelessWidget {
           bottom: bottomPadding,
         ),
         child: SizedBox(
-          height: 75,
+          //height: 85,
+          height: sizedBoxHeight,
           child: TextFormField(
             validator: validator,
             focusNode: focusNode,
@@ -95,8 +98,10 @@ class OurTextFormField extends StatelessWidget {
                 //suffixIcon: Icon(suffixIcon),
                 suffix: suffixIcon != null
                     ? IconButton(
+                        //iconSize: 200,
                         icon: Icon(
                           suffixIcon,
+                          //size: 30,
                           color: ourNavey,
                         ),
                         color: ourNavey,
@@ -112,7 +117,6 @@ class OurTextFormField extends StatelessWidget {
                           }
                         })
                     : null,
-
                 focusColor: themeState.thememode == ThemeMode.light
                     ? ourBlue
                     : ourOrange,

@@ -11,6 +11,7 @@ dependencies:
   bloc: ^8.1.2
   flutter_bloc: ^8.1.3
   cupertino_icons: ^1.0.2
+  image_picker: ^1.0.7
   equatable: ^2.0.5
   firebase_core: ^2.24.2
   firebase_messaging: ^14.7.6
@@ -60,5 +61,12 @@ flutter:
   uses-material-design: true
   generate: true
   assets:
+    - assets/
     - assets/images/
+    - assets/images/profile_photos/
+    - assets/images/profile_photos/boys_avatars/
+    - assets/images/profile_photos/girls_avatars/
     - assets/logos/
+    - assets/images/galery.png
+    - assets/images/protected.png
+    - assets/images/visa.png

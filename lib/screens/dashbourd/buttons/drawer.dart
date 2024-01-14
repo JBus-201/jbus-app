@@ -14,21 +14,21 @@ class CustomDrawerButton extends StatelessWidget {
         decoration: const BoxDecoration(shape: BoxShape.circle),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            shape: CircleBorder(
+            shape: const CircleBorder(
               side: BorderSide(
-                  color: Colors.black.withOpacity(0),
-                  width: 0.5), // Add the border here
+                  color: ourNavey, width: 1.7), // Add the border here
             ),
             foregroundColor:
                 themeState.thememode == ThemeMode.light ? ourWhite : ourOrange,
             backgroundColor: themeState.thememode == ThemeMode.light
-                ? ourBlack
+                ? ourWhite
                 : ourDarkThemeBackgroundNavey,
             elevation: 0,
           ),
           onPressed: onTap,
           child: const Icon(
             Icons.menu_rounded,
+            color: ourNavey,
           ),
         ),
       );

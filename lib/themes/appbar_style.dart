@@ -10,6 +10,7 @@ class AppBarStyle extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
       return Container(
+        
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: const Alignment(0, -0.1),

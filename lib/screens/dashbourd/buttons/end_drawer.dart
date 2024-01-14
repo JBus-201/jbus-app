@@ -25,10 +25,9 @@ class CustomEndDrawerButton extends StatelessWidget {
                 shape: BoxShape.circle),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                shape: CircleBorder(
+                shape: const CircleBorder(
                   side: BorderSide(
-                      color: Colors.black.withOpacity(0),
-                      width: 0.5), // Add the border here
+                      color: ourNavey, width: 1.7), // Add the border here
                 ),
                 foregroundColor: themeState.thememode == ThemeMode.light
                     ? ourBlack
@@ -47,7 +46,7 @@ class CustomEndDrawerButton extends StatelessWidget {
             child: Icon(
               Icons.notifications,
               color: themeState.thememode == ThemeMode.light
-                  ? ourBlack
+                  ? ourNavey
                   : ourOrange,
             ),
           )

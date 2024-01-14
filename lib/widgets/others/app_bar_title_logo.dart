@@ -9,7 +9,7 @@ class JbusAppBarTitle extends StatelessWidget {
         child: Column(
       children: [
         const SizedBox(
-          height: 20,
+          height: 12,
         ),
         Image.asset(
           'assets/logos/jbus-logo.png',

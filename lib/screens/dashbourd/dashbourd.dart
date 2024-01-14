@@ -40,6 +40,7 @@ class _DashbourdState extends State<Dashbourd> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(115.0),
         child: AppBar(
+          automaticallyImplyLeading: false,
           elevation: 0,
           backgroundColor: ourBlack.withOpacity(0),
           title: const JbusAppBarTitle(),

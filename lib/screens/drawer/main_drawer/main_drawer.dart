@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/constants/colors/gradients.dart';
+import 'package:jbus_app/screens/others/wallet/wallet.dart';
 import 'package:jbus_app/screens/faza/widgets/main_faza.dart';
 import 'package:jbus_app/screens/settings/language_settings/language_settings.dart';
 import 'package:jbus_app/themes/bloc/theme_bloc.dart';
@@ -44,42 +47,47 @@ class MainDrawer extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.favorite_border_rounded),
-              title: const Text("Favorite points"),
+              title: Text(AppLocalizations.of(context)!.favoriteStops),
               onTap: () {},
             ),
             ListTile(
               leading: const Icon(Icons.history),
-              title: const Text("Trips History"),
+              title: Text(AppLocalizations.of(context)!.tripsHistory),
               onTap: () {},
             ),
             ListTile(
               leading: const Icon(Icons.map),
-              title: const Text("Routs"),
+              title: Text(AppLocalizations.of(context)!.routes),
               onTap: () {},
             ),
             ListTile(
               leading: const Icon(Icons.wallet),
-              title: const Text("Wallet"),
-              onTap: () {},
+              title: Text(AppLocalizations.of(context)!.wallet),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const WalletScreen()));
+              },
             ),
             ListTile(
               leading: const Icon(Icons.currency_exchange_rounded),
-              title: const Text("Balance transfer"),
+              title: Text(AppLocalizations.of(context)!.transfereBalance),
               onTap: () {},
             ),
             ListTile(
               leading: const Icon(Icons.monetization_on_sharp),
-              title: const Text("Rewadr points"),
+              title: Text(AppLocalizations.of(context)!.rewardPoints),
               onTap: () {},
             ),
             ListTile(
               leading: const Icon(Icons.account_circle),
-              title: const Text("Manage account"),
+              title: Text(AppLocalizations.of(context)!.manageAccount),
               onTap: () {},
             ),
             ListTile(
               leading: const Icon(Icons.report_rounded),
-              title: const Text("faza'a"),
+              title: Text(AppLocalizations.of(context)!.fazaa),
               onTap: () {
                 Navigator.push(
                     context,
@@ -89,16 +97,13 @@ class MainDrawer extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.settings),
-              title: const Text("settings"),
-              onTap: () {Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const LanguageSettingsScreen()));},
+              title: Text(AppLocalizations.of(context)!.settings),
+              onTap: () {},
             ),
             const Divider(),
             const Spacer(),
             ListTile(
-                title: const Text("logout"),
+                title: Text(AppLocalizations.of(context)!.logOut),
                 leading: const Icon(Icons.exit_to_app),
                 onTap: () => {}),
           ],
