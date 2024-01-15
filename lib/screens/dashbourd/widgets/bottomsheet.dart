@@ -44,7 +44,7 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
       DraggableScrollableController();
 
   List<BusRoute> allRoutes = [];
-  late int wallet = 0;
+  late int wallet;
   Timer? _debounce;
   final TextEditingController _textEditingController = TextEditingController();
   Iterable<BusRoute> sRoutes = [];

@@ -4,20 +4,18 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:jbus_app/data/api/realtime-firebase/removers.dart';
 import 'package:jbus_app/data/api/realtime-firebase/writers.dart';
+import 'package:jbus_app/data/models/bus_route.dart';
+import 'package:jbus_app/screens/trip/tripSettup.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FazaWaitingPage extends StatefulWidget {
-  // final List<dynamic> going_waypoints;
-  // final LatLng currentLocation;
-  // final LatLng dropOff;
+  final BusRoute route;
 
   const FazaWaitingPage({
     super.key,
-    // required this.going_waypoints,
-    // required this.currentLocation,
-    // required this.dropOff
+    required this.route,
   });
 
   @override
@@ -50,13 +48,10 @@ class _FazaWaitingPageState extends State<FazaWaitingPage> {
           print('amountfaz updated: $amountfaz');
           if (amountfaz == 0) {
             done = true;
-            // Navigator.pushReplacement(
-            //     context,
-            //     MaterialPageRoute(
-            //         builder: (context) => Trip(
-            //             going_waypoints: widget.going_waypoints,
-            //             currentLocation: widget.currentLocation,
-            //             dropOff: widget.dropOff)));
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => TripSettup(route:widget.route)));
           }
         });
       }
@@ -64,13 +59,15 @@ class _FazaWaitingPageState extends State<FazaWaitingPage> {
 
     _startTimer();
   }
-void _loadUserData() async {
+
+  void _loadUserData() async {
     final userRes = sl<SharedPreferences>().getString('user');
     Map<String, dynamic> res = json.decode(userRes!);
     setState(() {
       myId = res['id'];
     });
   }
+
   ///Body
   @override
   Widget build(BuildContext context) {
@@ -106,10 +103,10 @@ void _loadUserData() async {
         } else {
           timer.cancel();
           writeNeedFaza(myId, false);
+          writeFazaTotalAmountNeeded(myId, -1);
           removeAllPayers(myId);
-          // Navigator.of(context).pop();
-          // Navigator.of(context).pop();
-          // Navigator.of(context).pop();
+          Navigator.of(context).pop();
+          Navigator.of(context).pop();
         }
       });
     });

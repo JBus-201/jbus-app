@@ -39,7 +39,8 @@ class FazaRequestBT extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const FazaWaitingPage()))
+                            builder: (context) =>
+                                FazaWaitingPage(route: route)))
                   }
                 else
                   {
