@@ -10,7 +10,7 @@ class AuthenticationInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     final token = _sharedPreferences.getString(AuthService.tokenKey);
-    if (token != null) options.headers['Authentication'] = 'Bearer $token';
+    if (token != null) options.headers['Authorization'] = 'Bearer $token';
     handler.next(options);
   }
 }

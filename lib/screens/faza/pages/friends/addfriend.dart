@@ -1,16 +1,38 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:jbus_app/data/api/api_service.dart';
-import 'package:jbus_app/data/api/google_service.dart';
-import 'package:jbus_app/data/api/realtime-firebase/writers.dart';
 import 'package:jbus_app/data/models/friends_create_request.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:jbus_app/widgets/text_fields/text_form_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jbus_app/widgets/warnings/warning.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class AddFriendForFaza extends StatelessWidget {
+class AddFriendForFaza extends StatefulWidget {
   const AddFriendForFaza({super.key});
+
+  @override
+  State<AddFriendForFaza> createState() => _AddFriendForFazaState();
+}
+
+class _AddFriendForFazaState extends State<AddFriendForFaza> {
+  late int myId;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _loadUserData();
+  }
+
+  void _loadUserData() async {
+    final userRes = sl<SharedPreferences>().getString('user');
+    Map<String, dynamic> res = json.decode(userRes!);
+    setState(() {
+      myId = res['id'];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,40 +77,43 @@ class AddFriendForFaza extends StatelessWidget {
           ),
           RectangularElevatedButton(
             text: "Send Request",
+            width: 250,
             onPressed: () {
               if (formKey.currentState!.validate()) {
-                //get User id for now 1
-
-                int responderId = 1;
                 int friendId = int.parse(friendIdController.text);
-                FriendsCreateRequest fr = FriendsCreateRequest(friendId: friendId);
+                FriendsCreateRequest fr =
+                    FriendsCreateRequest(friendId: friendId);
                 final res = sl<ApiService>().sendFriendRequest(fr);
-                print("Friend's ID as int: $res");
-                // writeFazaReqState('p', responderId, friendId).then((value) => {
-                //       if (value)
-                //         {
-                //           showDialog(
-                //             context: context,
-                //             builder: (context) => const Warning(
-                //                 isWarning: false,
-                //                 title: "Request Sent Succesfuly",
-                //                 description: ""),
-                //           ),
-                //         }
-                //       else
-                //         {
-                //           showDialog(
-                //             context: context,
-                //             builder: (context) => const Warning(
-                //                 isWarning: true,
-                //                 title: "Ops!",
-                //                 description: "Somthing went wrong"),
-                //           )
-                //         }
-                //     });
+                print("Friend's Respons: ${res}");
+                res
+                    .then((value) => {
+                          print('state code : ${value.response.statusCode}'),
+                          if (value.response.statusCode == 201)
+                            {
+                              showDialog(
+                                context: context,
+                                builder: (context) => const Warning(
+                                    isWarning: false,
+                                    title: "Great",
+                                    description: "Request Sent Succesfuly"),
+                              ),
+                            }
+                        })
+                    // ignore: body_might_complete_normally_catch_error
+                    .catchError((error) {
+                      
+                  showDialog(
+                    context: context,
+                    builder: (context) => const Warning(
+                      isWarning: true,
+                      title: "Ops!",
+                      description:
+                          'An error occurred while processing your request',
+                    ),
+                  );
+                });
               }
             },
-            width: 250,
           )
         ],
       ),
