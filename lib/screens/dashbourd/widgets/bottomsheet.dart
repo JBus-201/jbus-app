@@ -51,9 +51,8 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
   @override
   void initState() {
     super.initState();
-    // Call the API and assign the data to allRoutes when the widget initializes
     fetchRoutes();
-    // fetchWallet();
+    fetchWallet();
   }
 
   Future<void> fetchRoutes() async {
