@@ -74,5 +74,6 @@ class _FazaMainPageState extends State<FazaMainPage> {
       _selectedIndex = index;
     });
   }
+  
 }
 

@@ -1,38 +1,68 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:jbus_app/data/api/api_service.dart';
 import 'package:jbus_app/data/models/friends.dart';
 import 'package:jbus_app/services/service_locator.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AllFriendsPage extends StatefulWidget {
   const AllFriendsPage({super.key});
 
   @override
-  State<AllFriendsPage> createState() => _AllFriendsPageState();
+  _AllFriendsPageState createState() => _AllFriendsPageState();
 }
 
 class _AllFriendsPageState extends State<AllFriendsPage> {
-  late int myId;
+  late Future<List<Friends>> friendRequests;
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    _loadUserData();
-    final Future<List<Friends>> friendsList = sl<ApiService>().getFriends();
-  }
-
-  void _loadUserData() async {
-    final userRes = sl<SharedPreferences>().getString('user');
-    Map<String, dynamic> res = json.decode(userRes!);
-    setState(() {
-      myId = res['id'];
-    });
+    friendRequests = sl<ApiService>().getFriends();
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: FutureBuilder<List<Friends>>(
+        future: friendRequests,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            print('Error: ${snapshot.error}');
+            return const Center(
+                child: Text(
+              'No friends,\nSorry, but you are lonely',
+              textAlign: TextAlign.center,
+            ));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(
+                child:
+                    Text('No friends,\nSorry, but you are lonely'));
+          } else {
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                Friends friend = snapshot.data![index];
+
+                return ListTile(
+                  leading: Container(
+                    height: 50,
+                    width: 50,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle, border: Border.all(width: 0.5)),
+                    child: friend.passenger.profileImage != null
+                        ? Image.asset('${friend.passenger.profileImage}')
+                        : const Icon(Icons.person),
+                  ),
+                  title: Text('${friend.passenger.user.name}'),
+                  // subtitle:
+                  //     Text('${friend.passenger.user.name ?? 'N/A'}'),
+                );
+              },
+            );
+          }
+        },
+      ),
+    );
   }
 }
