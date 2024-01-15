@@ -49,9 +49,9 @@ Widget _getHomeScreen(UserStatus status) {
     case UserStatus.notLoggedIn:
       return SignupScreen();
     case UserStatus.loggedIn:
-      return const Dashbourd();
+      return const Dashboard();
     case UserStatus.inTrip:
-      return const Dashbourd();
+      return const Dashboard();
     default:
       return SignupScreen();
   }

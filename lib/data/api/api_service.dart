@@ -7,6 +7,7 @@ import 'package:jbus_app/data/models/friends.dart';
 import 'package:jbus_app/data/models/friends_create_request.dart';
 import 'package:jbus_app/data/models/login_request.dart';
 import 'package:jbus_app/data/models/login_response.dart';
+import 'package:jbus_app/data/models/passenger.dart';
 import 'package:jbus_app/data/models/register_request.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
@@ -63,7 +64,7 @@ abstract class ApiService {
   Future<Friends> getFriendById(@Query("id") int friendId);
 
   @GET("/Friends/getFriends")
-  Future<List<Friends>> getFriends();
+  Future<List<Passenger>> getFriends();
 
   @GET("/Friends/getFriendRequests")
   Future<List<Friends>> getFriendRequests();
