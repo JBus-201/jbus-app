@@ -15,6 +15,7 @@ class RectangularElevatedButton extends StatelessWidget {
     this.gradientForDark = orangeButtonGradient,
     this.padding = 4,
     this.textColor = ourWhite,
+    this.fontSize = 14,
   });
 
   final String text;
@@ -25,6 +26,7 @@ class RectangularElevatedButton extends StatelessWidget {
   final Gradient? gradientForDark;
   final double padding;
   final Color textColor;
+  final double fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +49,7 @@ class RectangularElevatedButton extends StatelessWidget {
             ),
             child: Text(
               text,
-              style: TextStyle(color: textColor),
+              style: TextStyle(color: textColor, fontSize: fontSize),
             ),
           ),
         ),

@@ -32,7 +32,7 @@ class FazaFriendsPage extends StatelessWidget {
         body: TabBarView(
           children: [
             AllFriendsPage(),
-            FazaFriendRequestPage(),
+            FazaFriendRequestsPage(),
             AddFriendForFaza(),
           ],
         ),
