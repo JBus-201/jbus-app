@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jbus_app/data/api/api_service.dart';
-import 'package:jbus_app/data/models/friends.dart';
+import 'package:jbus_app/data/models/passenger.dart';
 import 'package:jbus_app/services/service_locator.dart';
+import 'package:jbus_app/widgets/others/friendView.dart';
 
 class AllFriendsPage extends StatefulWidget {
   const AllFriendsPage({super.key});
@@ -11,7 +12,7 @@ class AllFriendsPage extends StatefulWidget {
 }
 
 class _AllFriendsPageState extends State<AllFriendsPage> {
-  late Future<List<Friends>> friendRequests;
+  late Future<List<Passenger>> friendRequests;
 
   @override
   void initState() {
@@ -22,7 +23,7 @@ class _AllFriendsPageState extends State<AllFriendsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<List<Friends>>(
+      body: FutureBuilder<List<Passenger>>(
         future: friendRequests,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -36,13 +37,12 @@ class _AllFriendsPageState extends State<AllFriendsPage> {
             ));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return const Center(
-                child:
-                    Text('No friends,\nSorry, but you are lonely'));
+                child: Text('No friends,\nSorry, but you are lonely'));
           } else {
             return ListView.builder(
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
-                Friends friend = snapshot.data![index];
+                Passenger friend = snapshot.data![index];
 
                 return ListTile(
                   leading: Container(
@@ -50,11 +50,20 @@ class _AllFriendsPageState extends State<AllFriendsPage> {
                     width: 50,
                     decoration: BoxDecoration(
                         shape: BoxShape.circle, border: Border.all(width: 0.5)),
-                    child: friend.passenger.profileImage != null
-                        ? Image.asset('${friend.passenger.profileImage}')
+                    child: friend.profileImage != null
+                        ? Image.asset('${friend.profileImage}')
                         : const Icon(Icons.person),
                   ),
-                  title: Text('${friend.passenger.user.name}'),
+                  title: Text('${friend.user.name}'),
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => FriendViewDialog(
+                              id: friend.id,
+                              name: friend.user.name,
+                              profileImage: friend.profileImage,
+                            ));
+                  },
                   // subtitle:
                   //     Text('${friend.passenger.user.name ?? 'N/A'}'),
                 );

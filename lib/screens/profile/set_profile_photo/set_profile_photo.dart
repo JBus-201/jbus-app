@@ -239,7 +239,7 @@ class _SetProfilePhotoScreenState extends State<SetProfilePhotoScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Dashbourd(),
+                          builder: (context) => const Dashboard(),
                         ),
                       );
                     },
@@ -250,7 +250,7 @@ class _SetProfilePhotoScreenState extends State<SetProfilePhotoScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Dashbourd(),
+                          builder: (context) => const Dashboard(),
                         ),
                       );
                     },

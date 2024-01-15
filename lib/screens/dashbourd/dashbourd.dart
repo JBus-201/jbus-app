@@ -13,14 +13,14 @@ import 'package:jbus_app/themes/appbar_style.dart';
 import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
 
-class Dashbourd extends StatefulWidget {
-  const Dashbourd({super.key});
+class Dashboard extends StatefulWidget {
+  const Dashboard({super.key});
 
   @override
-  State<Dashbourd> createState() => _DashbourdState();
+  State<Dashboard> createState() => _DashboardState();
 }
 
-class _DashbourdState extends State<Dashbourd> {
+class _DashboardState extends State<Dashboard> {
   late GoogleMapController _mapController;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GoogleMapsApi googleService = GoogleMapsApi();
