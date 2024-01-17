@@ -41,7 +41,7 @@ Future main() async {
         ),
         BlocProvider<PickupBloc>(
           create: (BuildContext context) => PickupBloc(),
-
+        ),
         BlocProvider<WalletBloc>(
           create: (BuildContext context) => WalletBloc(),
         ),
