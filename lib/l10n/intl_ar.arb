@@ -96,6 +96,22 @@
     "visa": "visa",
     "edit": "تعديل",
     "yourPaymentDataIsStoredSecurely": "بيانات الدفع الخاصة بك مخزنة بأمان",
-    "jod":"د.أ"
-
+    "jod": "د.أ",
+    "sendMoney": "أرسل المال",
+    "cardNumber": "رقم البطاقة",
+    "cvv": "Cvv",
+    "expiryYearYY": "سنة الانتهاء (yy)",
+    "expiryMonthMM": "شهر الانتهاء (mm)",
+    "cardHolderNameOptional": "اسم حامل البطاقة (اختياري)",
+    "done": "تم",
+    "visaGold": "Visa Gold",
+    "notValidCardNumber": "رقم بطاقة غير صالح",
+    "notValidMonth": "شهر غير صالح",
+    "notValidYear": "سنة غير صالحة",
+    "notValidCardHolderName": "اسم حامل بطاقة غير صالح",
+    "notValidCvvNumber": "رقم Cvv غير صالح",
+    "sorryPleaseEnterACardNumber":"عذرًا، أدخل رقم بطاقة.",
+    "sorryPleaseEnterAYear":"عذرًا، أدخل سنة،",
+    "sorryPleaseEnterAMonth":"عذرًا، أدخل شهر.",
+    "sorryPleaseEnterACvv":"عذرًا، أدخل رقم Cvv"
 }

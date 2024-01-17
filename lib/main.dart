@@ -3,9 +3,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:jbus_app/data/api/google_service.dart';
 import 'package:jbus_app/localization/bloc/localization_bloc.dart';
-import 'package:jbus_app/screens/authentication/signup/signup.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jbus_app/screens/authentication/signup/signup.dart';
 import 'package:jbus_app/screens/dashbourd/dashbourd.dart';
+import 'package:jbus_app/screens/others/wallet/bloc/wallet_bloc.dart';
 import 'package:jbus_app/services/auth_service.dart';
 import 'package:jbus_app/services/navigation_service.dart';
 import 'package:jbus_app/themes/bloc/theme_bloc.dart';
@@ -38,6 +39,9 @@ Future main() async {
         BlocProvider<LocalizationBloc>(
           create: (BuildContext context) => LocalizationBloc(),
         ),
+        BlocProvider<WalletBloc>(
+          create: (BuildContext context) => WalletBloc(),
+        ),
       ],
       child: MyApp(homeScreen: _getHomeScreen(status)),
     ),
@@ -47,13 +51,13 @@ Future main() async {
 Widget _getHomeScreen(UserStatus status) {
   switch (status) {
     case UserStatus.notLoggedIn:
-      return SignupScreen();
+      return const SignupScreen();
     case UserStatus.loggedIn:
       return const Dashbourd();
     case UserStatus.inTrip:
       return const Dashbourd();
     default:
-      return SignupScreen();
+      return const SignupScreen();
   }
 }
 

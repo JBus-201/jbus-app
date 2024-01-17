@@ -31,6 +31,8 @@ class OurTextFormField extends StatelessWidget {
     this.rightPadding = 4,
     this.bottomPadding = 8,
     this.sizedBoxHeight = 85,
+    this.labelFontSize = 16,
+    this.hintText = '',
   });
 
   final String label;
@@ -56,6 +58,9 @@ class OurTextFormField extends StatelessWidget {
   final double rightPadding;
   final double bottomPadding;
   final double sizedBoxHeight;
+  final double labelFontSize;
+  final String hintText;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
@@ -70,6 +75,8 @@ class OurTextFormField extends StatelessWidget {
           //height: 85,
           height: sizedBoxHeight,
           child: TextFormField(
+            //initialValue:initialValue,
+            
             validator: validator,
             focusNode: focusNode,
             autofocus: autofocus,
@@ -91,6 +98,7 @@ class OurTextFormField extends StatelessWidget {
                   themeState.thememode == ThemeMode.light ? ourBlack : ourWhite,
             ),
             decoration: InputDecoration(
+              hintText: hintText,
 
                 // isDense: true,
                 // contentPadding: const EdgeInsets.fromLTRB(15, 50, 50, 0),
@@ -171,7 +179,7 @@ class OurTextFormField extends StatelessWidget {
                         color: themeState.thememode == ThemeMode.light
                             ? ourNavey
                             : ourYellow,
-                        fontSize: 16,
+                        fontSize: labelFontSize,
                       ),
                     ),
                   ],
