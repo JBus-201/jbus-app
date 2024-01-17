@@ -6,6 +6,7 @@ import 'package:jbus_app/localization/bloc/localization_bloc.dart';
 import 'package:jbus_app/screens/authentication/signup/signup.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/screens/dashbourd/dashbourd.dart';
+import 'package:jbus_app/screens/trip/bloc/pickup_bloc.dart';
 import 'package:jbus_app/services/auth_service.dart';
 import 'package:jbus_app/services/navigation_service.dart';
 import 'package:jbus_app/themes/bloc/theme_bloc.dart';
@@ -37,6 +38,9 @@ Future main() async {
         ),
         BlocProvider<LocalizationBloc>(
           create: (BuildContext context) => LocalizationBloc(),
+        ),
+        BlocProvider<PickupBloc>(
+          create: (BuildContext context) => PickupBloc(),
         ),
       ],
       child: MyApp(homeScreen: _getHomeScreen(status)),

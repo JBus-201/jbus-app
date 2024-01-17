@@ -23,7 +23,7 @@ class CircularElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
       return Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(6.0),
         child: Container(
           decoration: BoxDecoration(
             gradient: themeState.thememode == ThemeMode.light
@@ -39,7 +39,7 @@ class CircularElevatedButton extends StatelessWidget {
               shadowColor: Colors.transparent,
             ),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(4.0),
               child: Icon(
                 icon,
                 size: size,

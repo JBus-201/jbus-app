@@ -8,8 +8,8 @@ class BusRoute {
   final int id;
   final String? name;
   final int fee;
-  final String? waypointsGoing;
-  final String? waypointsReturning;
+  final String waypointsGoing;
+  final String waypointsReturning;
   final DateTime createdAt;
   final DateTime updatedAt;
   final int startingPointId;
@@ -21,8 +21,8 @@ class BusRoute {
     required this.id,
     this.name,
     required this.fee,
-    this.waypointsGoing,
-    this.waypointsReturning,
+    required this.waypointsGoing,
+    required this.waypointsReturning,
     required this.createdAt,
     required this.updatedAt,
     required this.startingPointId,
