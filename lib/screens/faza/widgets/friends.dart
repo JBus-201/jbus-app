@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:jbus_app/screens/faza/pages/addfriend.dart';
-import 'package:jbus_app/screens/faza/pages/friend_request.dart';
-import 'package:jbus_app/screens/faza/pages/payers.dart';
+import 'package:jbus_app/constants/colors/colors.dart';
+import 'package:jbus_app/screens/faza/pages/friends/addfriend.dart';
+import 'package:jbus_app/screens/faza/pages/friends/allfriends.dart';
+import 'package:jbus_app/screens/faza/pages/friends/friend_request.dart';
 
 class FazaFriendsPage extends StatelessWidget {
   const FazaFriendsPage({super.key});
@@ -26,11 +27,12 @@ class FazaFriendsPage extends StatelessWidget {
               text: "Add",
             ),
           ],
+          labelColor: ourBlue,
         ),
         body: TabBarView(
           children: [
-            FazaPayersPage(),
-            FazaFriendRequestPage(),
+            AllFriendsPage(),
+            FazaFriendRequestsPage(),
             AddFriendForFaza(),
           ],
         ),

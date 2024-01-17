@@ -377,7 +377,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Friends/confirmFriendRequest',
+              '/Friends/confirmFriendRequest/$friendId',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -419,7 +419,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<Friends>> getFriends() async {
+  Future<List<Passenger>> getFriends() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -442,7 +442,7 @@ class _ApiService implements ApiService {
               baseUrl,
             ))));
     var value = _result.data!
-        .map((dynamic i) => Friends.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => Passenger.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }

@@ -16,10 +16,12 @@ class RectangularElevatedButton extends StatelessWidget {
     this.gradient = blueButtonGradient,
     this.gradientForDark = orangeButtonGradient,
     this.padding = 4,
+
     this.fontColor = ourWhite,
     this.icon = Icons.error_outline,
     this.fontSize = 20,
     this.fontWeight = FontWeight.w500,
+
   });
 
   final String text;
@@ -29,10 +31,12 @@ class RectangularElevatedButton extends StatelessWidget {
   final Gradient? gradient;
   final Gradient? gradientForDark;
   final double padding;
+
   final Color fontColor;
   final double fontSize;
   final IconData icon;
   final FontWeight fontWeight;
+
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +75,7 @@ class RectangularElevatedButton extends StatelessWidget {
                         OurIcon(icon),
                       ],
                     )),
+
         ),
       );
     });

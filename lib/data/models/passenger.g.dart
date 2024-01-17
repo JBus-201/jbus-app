@@ -9,7 +9,7 @@ part of 'passenger.dart';
 Passenger _$PassengerFromJson(Map<String, dynamic> json) => Passenger(
       id: json['id'] as int,
       profileImage: json['profileImage'] as String?,
-      wallet: json['wallet'] as int,
+      wallet: json['wallet'] != null? json['wallet'] as int : 0,
       user: User.fromJson(json['user'] as Map<String, dynamic>),
     );
 
