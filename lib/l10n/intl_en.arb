@@ -93,8 +93,30 @@
     "chargeWallet": "Charge Wallet",
     "cards": "Cards",
     "add": "Add",
-    "visa":"Visa",
-    "edit":"edit",
-    "yourPaymentDataIsStoredSecurely":"Your payment data is stored securely",
-    "jod":"JOD"
+    "visa": "Visa",
+    "edit": "edit",
+    "yourPaymentDataIsStoredSecurely": "Your payment data is stored securely",
+    "jod": "JOD",
+    "sendMoney": "Send Money",
+    "cardNumber":"Card Number",
+    "cvv":"Cvv",
+    "expiryYearYY":"Expiry Year (yy)",
+    "expiryMonthMM" : "Expiry Month (mm)",
+    "cardHolderNameOptional":"Card Holder Name (Optional)",
+    "done":"Done",
+    "visaGold":"Visa Gold",
+    "notValidCardNumber":"Not Valid Card Number",
+    "notValidMonth": "Not Valid Month",
+    "notValidYear":"Not Valid Year",
+    "notValidCardHolderName":"Not Valid Card Holder Name",
+    "notValidCvvNumber":"Not Valid Cvv Number",
+    "sorryPleaseEnterACardNumber":"Sorry, Please Enter a Card Number",
+    "sorryPleaseEnterAYear":"Sorry, Please Enter a Year",
+    "sorryPleaseEnterAMonth":"Sorry, Please Enter a Month",
+    "sorryPleaseEnterACvv":"Sorry, Please Enter a Cvv"
+
+
+
+    
+
 }
