@@ -158,58 +158,61 @@ class GoogleMapsApi {
     }
   }
 
-  Future<String?> loadRoute(List<dynamic> waypoints) async {
-    waypoints
-        .map((waypointData) {
-          final geometry = waypointData['Location'] ??
-              waypointData['Position'] ??
-              waypointData['Coordinates'] ??
-              waypointData['GeoData'] ??
-              waypointData['Place'] ??
-              waypointData['Positioning'] ??
-              waypointData['MapInfo'] ??
-              waypointData['GPS'] ??
-              waypointData['PlaceCoordinates'] ??
-              waypointData['Waypoint'];
 
-          if (geometry != null) {
-            final latitude = geometry['Latitude'];
-            final longitude = geometry['Longitude'];
-            return LatLng(latitude, longitude);
-          }
-          return null;
-        })
-        .whereType<LatLng>()
-        .toList();
+Future<String?> loadRoute(List<dynamic> waypoints) async {
+  List<LatLng> points = [];
 
-    if (waypoints.isEmpty) {
-      return null;
-    }
-
-    final waypointsString = waypoints.map((point) {
-      return "${point.latitude},${point.longitude}";
-    }).join('|');
-
-    final response = await http.get(Uri.parse(
-      'https://maps.googleapis.com/maps/api/directions/json?origin=${waypoints.first.latitude},${waypoints.first.longitude}&destination=${waypoints.last.latitude},${waypoints.last.longitude}&waypoints=$waypointsString&key=$apiKey',
-    ));
-
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      final routes = data['routes'] as List<dynamic>;
-      if (routes.isNotEmpty) {
-        final route = routes[0];
-        final overviewPolyline = route['overview_polyline'];
-        final points = overviewPolyline['points'];
-        return points;
+  for (var waypointData in waypoints) {
+    if (waypointData is List) {
+      // Handle the case where waypointsReturning is an array of arrays
+      for (var subWaypointData in waypointData) {
+        final geometry = subWaypointData['Location'];
+        if (geometry != null) {
+          final latitude = geometry['Latitude'];
+          final longitude = geometry['Longitude'];
+          points.add(LatLng(latitude, longitude));
+        }
+      }
+    } else {
+      // Handle the case where waypointsGoing is a single array
+      final geometry = waypointData['Location'];
+      if (geometry != null) {
+        final latitude = geometry['Latitude'];
+        final longitude = geometry['Longitude'];
+        points.add(LatLng(latitude, longitude));
       }
     }
+  }
+
+  if (points.isEmpty) {
     return null;
   }
 
+  final waypointsString = points.map((point) {
+    return "${point.latitude},${point.longitude}";
+  }).join('|');
+
+  final response = await http.get(Uri.parse(
+    'https://maps.googleapis.com/maps/api/directions/json?origin=${points.first.latitude},${points.first.longitude}&destination=${points.last.latitude},${points.last.longitude}&waypoints=$waypointsString&key=$apiKey',
+  ));
+
+  if (response.statusCode == 200) {
+    final data = json.decode(response.body);
+    final routes = data['routes'] as List<dynamic>;
+    if (routes.isNotEmpty) {
+      final route = routes[0];
+      final overviewPolyline = route['overview_polyline'];
+      final polylinePoints = overviewPolyline['points'];
+      return polylinePoints;
+    }
+  }
+  return null;
+}
+
+
   void handleMapLongPress(LatLng tappedPoint) {}
 
-  List<LatLng> decodePolyline(String polyline) {
+  List<LatLng> decodePolyline(String? polyline) {
     List<LatLng> points = [];
     for (var point in _decodeEncodedPolyline(polyline)) {
       points.add(LatLng(point[0], point[1]));
@@ -217,10 +220,10 @@ class GoogleMapsApi {
     return points;
   }
 
-  List<List<double>> _decodeEncodedPolyline(String encoded) {
+  List<List<double>> _decodeEncodedPolyline(String? encoded) {
     List<List<double>> poly = [];
     int index = 0;
-    int len = encoded.length;
+    int len = encoded!.length;
     int lat = 0;
     int lng = 0;
 

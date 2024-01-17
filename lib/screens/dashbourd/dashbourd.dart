@@ -70,6 +70,7 @@ class _DashboardState extends State<Dashboard> {
             rotateGesturesEnabled: true,
             zoomControlsEnabled: false,
             myLocationButtonEnabled: false,
+            
             onMapCreated: (controller) {
               _mapController = controller;
               // ignore: unrelated_type_equality_checks
