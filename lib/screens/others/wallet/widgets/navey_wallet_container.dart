@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jbus_app/screens/others/wallet/widgets/buttons/charge_wallet_button.dart';
+import 'package:jbus_app/screens/others/wallet/widgets/buttons/send_money_button.dart';
 
 class NaveyWalletContainer extends StatelessWidget {
   const NaveyWalletContainer({
@@ -10,7 +11,7 @@ class NaveyWalletContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double walletBalance = 20;
+    double walletBalance = 24.6;
     return Container(
       color: ourNavey,
       width: 500,
@@ -41,6 +42,7 @@ class NaveyWalletContainer extends StatelessWidget {
             ],
           ),
           const ChargeWalletButton(),
+          const SendMonyButton(),
         ],
       ),
     );

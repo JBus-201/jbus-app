@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/constants/colors/gradients.dart';
 import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 
@@ -31,18 +32,23 @@ class CircularElevatedButton extends StatelessWidget {
                 : gradientForDark,
             shape: BoxShape.circle,
           ),
+
+          //color: Colors.white,
           child: ElevatedButton(
             onPressed: onPressed,
             style: ElevatedButton.styleFrom(
               shape: const CircleBorder(),
               backgroundColor: Colors.transparent,
               shadowColor: Colors.transparent,
+              
             ),
+            
             child: Padding(
               padding: const EdgeInsets.all(4.0),
               child: Icon(
                 icon,
                 size: size,
+                color: ourNavey,
               ),
             ),
           ),

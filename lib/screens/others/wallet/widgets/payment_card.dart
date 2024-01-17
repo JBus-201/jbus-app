@@ -1,80 +1,93 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:jbus_app/constants/colors/colors.dart';
+import 'package:jbus_app/widgets/text/our_text.dart';
 
+// ignore: must_be_immutable
 class PaymentCard extends StatelessWidget {
-  const PaymentCard({
+  PaymentCard({
     super.key,
+    required this.cardNumber,
+    required this.cardHolderName,
+    required this.cvv,
+    required this.mm,
+    required this.yy,
   });
+
+  String cardNumber;
+  String cardHolderName;
+  String cvv;
+  String mm;
+  String yy;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(24.0),
-      child: Row(
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      padding: const EdgeInsets.only(top: 24.0, left: 24, right: 24, bottom: 0),
+      child: Column(
         children: [
-          Image.asset(
-            'assets/images/visa.png',
-            scale: 12,
-          ),
-          const SizedBox(
-            width: 30,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                AppLocalizations.of(context)!.visa,
+              Row(
+                children: [
+                  Image.asset(
+                    'assets/images/visa.png',
+                    scale: 12,
+                  ),
+                  const SizedBox(
+                    width: 30,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      OurText(
+                        AppLocalizations.of(context)!.visa,
+                        color: ourNavey,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      OurText(
+                        cardNumber,
+                        color: ourGray,
+                        fontSize: 14,
+                      ),
+                      OurText(
+                        '$mm/$yy    cvv: $cvv',
+                        color: ourGray,
+                        fontSize: 14,
+                      ),
+                    ],
+                  ),
+                  
+                ],
               ),
-              Text(
-                //'•••• 2974',
-                AppLocalizations.of(context)!.error,
-
-                style: const TextStyle(
-                  color: Color.fromARGB(255, 30, 75, 124),
+              OutlinedButton(
+                onPressed: () {
+                  //  WalletScreen.cardsList.add(
+                  // const PaymentCard(),
+                  // );
+                },
+                style: OutlinedButton.styleFrom(
+                    side: const BorderSide(color: ourNavey)),
+                child: Text(
+                  AppLocalizations.of(context)!.edit,
+                  style: const TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w500,
+                    color: ourNavey,
+                  ),
                 ),
               ),
             ],
           ),
           const SizedBox(
-            width: 120.7,
+            height: 24,
           ),
-
-          OutlinedButton(
-            onPressed: () {},
-            //  {
-            //   showDialog(
-            //     context: context,
-            //     builder: (context) => const Warning(
-            //         title: "Feature Not Implemented",
-            //         description:
-            //             "This feature is under development and will be available soon."),
-            //   );
-            // },
-            style: OutlinedButton.styleFrom(
-              side: const BorderSide(color: Color.fromARGB(255, 183, 183, 183)),
-            ),
-            child: Text(
-              AppLocalizations.of(context)!.edit,
-              style: const TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 30, 75, 124),
-              ),
-            ),
+          const Divider(
+            indent: 16,
+            endIndent: 16,
+            color: ourLightGray,
           ),
-          // ElevatedButton(
-          //   style: ElevatedButton.styleFrom(
-          //     backgroundColor: Colors.transparent,
-          //     shadowColor: Colors.transparent,
-          //     surfaceTintColor: Colors.transparent,
-          //     fixedSize: const Size(80, 24),
-          //     padding: EdgeInsets.zero,
-          //     shape: const LinearBorder(),
-          //   ),
-
-          //   onPressed: () {},
-          // ),
         ],
       ),
     );
