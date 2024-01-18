@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jbus_app/data/api/api_service.dart';
-import 'package:jbus_app/data/models/friends.dart';
+import 'package:jbus_app/data/models/friend_request.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:jbus_app/widgets/warnings/warning.dart';
@@ -13,7 +13,7 @@ class FazaFriendRequestsPage extends StatefulWidget {
 }
 
 class _FazaFriendRequestsPageState extends State<FazaFriendRequestsPage> {
-  late Future<List<Friends>> friendRequests;
+  late Future<List<FriendRequest>> friendRequests;
 
   @override
   void initState() {
@@ -24,7 +24,7 @@ class _FazaFriendRequestsPageState extends State<FazaFriendRequestsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<List<Friends>>(
+      body: FutureBuilder<List<FriendRequest>>(
         future: friendRequests,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -37,12 +37,14 @@ class _FazaFriendRequestsPageState extends State<FazaFriendRequestsPage> {
               textAlign: TextAlign.center,
             ));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No friend requests,\nSorry, but no one loves you'));
+            return const Center(
+                child:
+                    Text('No friend requests,\nSorry, but no one loves you'));
           } else {
             return ListView.builder(
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
-                Friends friend = snapshot.data![index];
+                FriendRequest friend = snapshot.data![index];
 
                 return ListTile(
                   leading: Container(

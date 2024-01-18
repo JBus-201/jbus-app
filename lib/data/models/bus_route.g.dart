@@ -25,7 +25,7 @@ BusRoute _$BusRouteFromJson(Map<String, dynamic> json) => BusRoute(
 Map<String, dynamic> _$BusRouteToJson(BusRoute instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'fee' : instance.fee,
+      'fee': instance.fee,
       'waypointsGoing': instance.waypointsGoing,
       'waypointsReturning': instance.waypointsReturning,
       'createdAt': instance.createdAt.toIso8601String(),

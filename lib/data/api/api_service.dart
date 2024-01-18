@@ -4,6 +4,7 @@ import 'package:jbus_app/data/models/favorite_point.dart';
 import 'package:jbus_app/data/models/favorite_point_create_request.dart';
 import 'package:jbus_app/data/models/fazaa_create_request.dart';
 import 'package:jbus_app/data/models/friend.dart';
+import 'package:jbus_app/data/models/friend_request.dart';
 import 'package:jbus_app/data/models/friends_create_request.dart';
 import 'package:jbus_app/data/models/login_request.dart';
 import 'package:jbus_app/data/models/login_response.dart';
@@ -68,7 +69,7 @@ abstract class ApiService {
   Future<List<Friend>> getFriends();
 
   @GET("/Friends/getFriendRequests")
-  Future<List<Friend>> getFriendRequests();
+  Future<List<FriendRequest>> getFriendRequests();
 
   @DELETE("/Friends/deleteFriend")
   Future<HttpResponse> deleteFriend(@Query("id") int friendId);

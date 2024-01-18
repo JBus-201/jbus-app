@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jbus_app/data/api/api_service.dart';
-import 'package:jbus_app/data/models/passenger.dart';
+import 'package:jbus_app/data/models/friend.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/others/friendView.dart';
 
@@ -8,11 +8,11 @@ class AllFriendsPage extends StatefulWidget {
   const AllFriendsPage({super.key});
 
   @override
-  _AllFriendsPageState createState() => _AllFriendsPageState();
+  State<AllFriendsPage> createState() => _AllFriendsPageState();
 }
 
 class _AllFriendsPageState extends State<AllFriendsPage> {
-  late Future<List<Passenger>> friendRequests;
+  late Future<List<Friend>> friendRequests;
 
   @override
   void initState() {
@@ -23,7 +23,7 @@ class _AllFriendsPageState extends State<AllFriendsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<List<Passenger>>(
+      body: FutureBuilder<List<Friend>>(
         future: friendRequests,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -42,7 +42,7 @@ class _AllFriendsPageState extends State<AllFriendsPage> {
             return ListView.builder(
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
-                Passenger friend = snapshot.data![index];
+                Friend friend = snapshot.data![index];
 
                 return ListTile(
                   leading: Container(

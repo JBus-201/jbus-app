@@ -9,7 +9,7 @@ part of 'register_request.dart';
 RegisterRequest _$RegisterRequestFromJson(Map<String, dynamic> json) =>
     RegisterRequest(
       name: json['name'] as String,
-      phoneNumber: json['phoneNumber'] as String,
+      phoneNumber: json['phoneNumber'] as String?,
       email: json['email'] as String,
       password: json['password'] as String,
     );
