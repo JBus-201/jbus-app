@@ -15,13 +15,15 @@ class ChargeWalletButton extends StatelessWidget {
       padding: const EdgeInsets.only(
         left: 16,
         right: 16,
-        bottom: 24,
+        bottom: 12,
         top: 24,
       ),
       child: RectangularElevatedButton(
         text: AppLocalizations.of(context)!.chargeWallet,
-        gradient: whiteButtonGradient,
-        textColor: ourNavey,
+        icon: Icons.attach_money_rounded,
+        
+        gradient: grayButtonGradient,
+        fontColor: ourNavey,
         onPressed: () {},
       ),
     );

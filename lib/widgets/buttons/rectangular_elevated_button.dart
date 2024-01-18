@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/constants/colors/gradients.dart';
 import 'package:jbus_app/themes/bloc/theme_bloc.dart';
+import 'package:jbus_app/widgets/icons/our_icon.dart';
+import 'package:jbus_app/widgets/text/our_text.dart';
 
 class RectangularElevatedButton extends StatelessWidget {
   const RectangularElevatedButton({
@@ -14,7 +16,12 @@ class RectangularElevatedButton extends StatelessWidget {
     this.gradient = blueButtonGradient,
     this.gradientForDark = orangeButtonGradient,
     this.padding = 4,
-    this.textColor = ourWhite,
+
+    this.fontColor = ourWhite,
+    this.icon = Icons.error_outline,
+    this.fontSize = 20,
+    this.fontWeight = FontWeight.w500,
+
   });
 
   final String text;
@@ -24,7 +31,12 @@ class RectangularElevatedButton extends StatelessWidget {
   final Gradient? gradient;
   final Gradient? gradientForDark;
   final double padding;
-  final Color textColor;
+
+  final Color fontColor;
+  final double fontSize;
+  final IconData icon;
+  final FontWeight fontWeight;
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,17 +51,31 @@ class RectangularElevatedButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(22),
           ),
           child: ElevatedButton(
-            onPressed: onPressed,
-            style: ElevatedButton.styleFrom(
-              fixedSize: Size(width, height),
-              backgroundColor: Colors.transparent,
-              shadowColor: Colors.transparent,
-            ),
-            child: Text(
-              text,
-              style: TextStyle(color: textColor),
-            ),
-          ),
+              onPressed: onPressed,
+              style: ElevatedButton.styleFrom(
+                fixedSize: Size(width, height),
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+              ),
+              child: icon == Icons.error_outline
+                  ? OurText(
+                      text,
+                      color: fontColor,
+                      fontSize: fontSize,
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        OurText(
+                          '$text ',
+                          fontSize: fontSize,
+                          color: fontColor,
+                          fontWeight: fontWeight,
+                        ),
+                        OurIcon(icon),
+                      ],
+                    )),
+
         ),
       );
     });

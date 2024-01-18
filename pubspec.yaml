@@ -60,6 +60,13 @@ flutter_icons:
 flutter:
   uses-material-design: true
   generate: true
+
+  fonts:
+  - family: PTSerif
+    fonts:
+    - asset: assets/fonts/PTSerif-Regular.ttf
+
+
   assets:
     - assets/
     - assets/images/
@@ -70,3 +77,8 @@ flutter:
     - assets/images/galery.png
     - assets/images/protected.png
     - assets/images/visa.png
+    - assets/images/chip.png
+    - assets/images/visa_background.png
+    - assets/images/visa_text.png
+    - assets/images/wifi.png
+    - assets/images/map.png

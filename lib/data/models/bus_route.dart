@@ -7,8 +7,9 @@ part 'bus_route.g.dart';
 class BusRoute {
   final int id;
   final String? name;
-  final String? waypointsGoing;
-  final String? waypointsReturning;
+  final int fee;
+  final String waypointsGoing;
+  final String waypointsReturning;
   final DateTime createdAt;
   final DateTime updatedAt;
   final int startingPointId;
@@ -19,8 +20,9 @@ class BusRoute {
   BusRoute({
     required this.id,
     this.name,
-    this.waypointsGoing,
-    this.waypointsReturning,
+    required this.fee,
+    required this.waypointsGoing,
+    required this.waypointsReturning,
     required this.createdAt,
     required this.updatedAt,
     required this.startingPointId,

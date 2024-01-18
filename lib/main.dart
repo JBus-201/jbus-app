@@ -3,15 +3,16 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:jbus_app/data/api/google_service.dart';
 import 'package:jbus_app/localization/bloc/localization_bloc.dart';
-import 'package:jbus_app/screens/authentication/signup/signup.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jbus_app/screens/authentication/signup/signup.dart';
 import 'package:jbus_app/screens/dashbourd/dashbourd.dart';
+import 'package:jbus_app/screens/trip/bloc/pickup_bloc.dart';
+import 'package:jbus_app/screens/others/wallet/bloc/wallet_bloc.dart';
 import 'package:jbus_app/services/auth_service.dart';
 import 'package:jbus_app/services/navigation_service.dart';
 import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 import 'package:jbus_app/themes/dark_theme.dart';
 import 'package:jbus_app/themes/light_theme.dart';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:jbus_app/constants/firebase_options.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -38,6 +39,12 @@ Future main() async {
         BlocProvider<LocalizationBloc>(
           create: (BuildContext context) => LocalizationBloc(),
         ),
+        BlocProvider<PickupBloc>(
+          create: (BuildContext context) => PickupBloc(),
+        ),
+        BlocProvider<WalletBloc>(
+          create: (BuildContext context) => WalletBloc(),
+        ),
       ],
       child: MyApp(homeScreen: _getHomeScreen(status)),
     ),
@@ -47,13 +54,13 @@ Future main() async {
 Widget _getHomeScreen(UserStatus status) {
   switch (status) {
     case UserStatus.notLoggedIn:
-      return SignupScreen();
+      return const SignupScreen();
     case UserStatus.loggedIn:
-      return const Dashbourd();
+      return const Dashboard();
     case UserStatus.inTrip:
-      return const Dashbourd();
+      return const Dashboard();
     default:
-      return SignupScreen();
+      return const SignupScreen();
   }
 }
 

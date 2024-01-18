@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 
+const LinearGradient naveyButtonGradient = LinearGradient(
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+  colors: [
+    ourNavey,
+    ourNavey,
+  ],
+);
+
 const LinearGradient blueButtonGradient = LinearGradient(
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
@@ -10,7 +19,7 @@ const LinearGradient blueButtonGradient = LinearGradient(
   ],
 );
 
-const LinearGradient whiteButtonGradient = LinearGradient(
+const LinearGradient grayButtonGradient = LinearGradient(
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
   colors: [
@@ -48,8 +57,5 @@ const LinearGradient redButtonGradient = LinearGradient(
 const LinearGradient goldButtonGradient = LinearGradient(
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
-  colors: [
-    ourLightGold,
-    ourGold
-  ],
+  colors: [ourLightGold, ourGold],
 );

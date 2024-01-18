@@ -1,13 +1,16 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/constants/colors/gradients.dart';
+import 'package:jbus_app/screens/authentication/signin/signin.dart';
 import 'package:jbus_app/screens/others/wallet/wallet.dart';
 import 'package:jbus_app/screens/faza/widgets/main_faza.dart';
-import 'package:jbus_app/screens/settings/language_settings/language_settings.dart';
 import 'package:jbus_app/themes/bloc/theme_bloc.dart';
+import 'package:jbus_app/widgets/containers/profile_photo.dart';
+import 'package:jbus_app/widgets/icons/our_icon.dart';
+import 'package:jbus_app/widgets/text/our_text.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
@@ -20,7 +23,12 @@ class MainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
+      //File file = File('');
+      double walletBalance = 24.6;
       return Drawer(
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(40), bottomLeft: Radius.circular(40))),
         // width: double.infinity,
         backgroundColor: themeState.thememode == ThemeMode.light
             ? ourWhite
@@ -28,41 +36,80 @@ class MainDrawer extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            DrawerHeader(
-              padding: const EdgeInsets.only(bottom: 10),
-              decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                color: themeState.thememode == ThemeMode.light
-                    ? ourBlue
-                    : ourOrange,
-                gradient: themeState.thememode == ThemeMode.light
-                    ? blueButtonGradient
-                    : orangeButtonGradient,
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(0),
-                  bottomRight: Radius.circular(0),
+            SizedBox(
+              height: 250,
+              child: DrawerHeader(
+                padding: const EdgeInsets.only(bottom: 1),
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  color: themeState.thememode == ThemeMode.light
+                      ? ourNavey
+                      : ourOrange,
+                  gradient: themeState.thememode == ThemeMode.light
+                      ? naveyButtonGradient
+                      : orangeButtonGradient,
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(0),
+                    bottomRight: Radius.circular(0),
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    ProfilePhoto(
+                      file: File(''),
+                      image:
+                          'assets/images/profile_photos/boys_avatars/green_boy_four.png',
+                      borderRadius: 50,
+                      photoRadius: 48,
+                      borderColor: ourWhite,
+                    ),
+                    Text(
+                      '${AppLocalizations.of(context)!.firstName} ${AppLocalizations.of(context)!.lastName}',
+                      style: const TextStyle(color: ourWhite),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          '$walletBalance ',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Text(
+                          AppLocalizations.of(context)!.jod,
+                          style: const TextStyle(
+                            color: ourWhite,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-              child: null,
             ),
             ListTile(
-              leading: const Icon(Icons.favorite_border_rounded),
-              title: Text(AppLocalizations.of(context)!.favoriteStops),
+              leading: const OurIcon(
+                Icons.favorite_border_rounded,
+              ),
+              title: OurText(AppLocalizations.of(context)!.favoriteStops),
               onTap: () {},
             ),
             ListTile(
-              leading: const Icon(Icons.history),
-              title: Text(AppLocalizations.of(context)!.tripsHistory),
+              leading: const OurIcon(Icons.history),
+              title: OurText(AppLocalizations.of(context)!.tripsHistory),
               onTap: () {},
             ),
             ListTile(
-              leading: const Icon(Icons.map),
-              title: Text(AppLocalizations.of(context)!.routes),
+              leading: const OurIcon(Icons.map),
+              title: OurText(AppLocalizations.of(context)!.routes),
               onTap: () {},
             ),
             ListTile(
-              leading: const Icon(Icons.wallet),
-              title: Text(AppLocalizations.of(context)!.wallet),
+              leading: const OurIcon(Icons.wallet),
+              title: OurText(AppLocalizations.of(context)!.wallet),
               onTap: () {
                 Navigator.push(
                     context,
@@ -70,24 +117,24 @@ class MainDrawer extends StatelessWidget {
                         builder: (context) => const WalletScreen()));
               },
             ),
+            // ListTile(
+            //   leading: const OurIcon(Icons.currency_exchange_rounded),
+            //   title: OurText(AppLocalizations.of(context)!.transfereBalance),
+            //   onTap: () {},
+            // ),
             ListTile(
-              leading: const Icon(Icons.currency_exchange_rounded),
-              title: Text(AppLocalizations.of(context)!.transfereBalance),
+              leading: const OurIcon(Icons.monetization_on_sharp),
+              title: OurText(AppLocalizations.of(context)!.rewardPoints),
               onTap: () {},
             ),
             ListTile(
-              leading: const Icon(Icons.monetization_on_sharp),
-              title: Text(AppLocalizations.of(context)!.rewardPoints),
+              leading: const OurIcon(Icons.account_circle),
+              title: OurText(AppLocalizations.of(context)!.manageAccount),
               onTap: () {},
             ),
             ListTile(
-              leading: const Icon(Icons.account_circle),
-              title: Text(AppLocalizations.of(context)!.manageAccount),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: const Icon(Icons.report_rounded),
-              title: Text(AppLocalizations.of(context)!.fazaa),
+              leading: const OurIcon(Icons.report_rounded),
+              title: OurText(AppLocalizations.of(context)!.fazaa),
               onTap: () {
                 Navigator.push(
                     context,
@@ -96,16 +143,24 @@ class MainDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.settings),
-              title: Text(AppLocalizations.of(context)!.settings),
+              leading: const OurIcon(Icons.settings),
+              title: OurText(AppLocalizations.of(context)!.settings),
               onTap: () {},
             ),
             const Divider(),
             const Spacer(),
             ListTile(
-                title: Text(AppLocalizations.of(context)!.logOut),
-                leading: const Icon(Icons.exit_to_app),
-                onTap: () => {}),
+              title: OurText(AppLocalizations.of(context)!.logOut),
+              leading: const OurIcon(Icons.exit_to_app),
+              onTap: () => {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SignInScreen(),
+                  ),
+                ),
+              },
+            ),
           ],
         ),
       );
