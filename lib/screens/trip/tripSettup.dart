@@ -50,7 +50,7 @@ class _TripSettupState extends State<TripSettup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const JbusAppBarTitle(),toolbarHeight: 31),
+      appBar: AppBar(title: const JbusAppBarTitle(), toolbarHeight: 31),
       body: Stack(
         children: [
           FutureBuilder<String?>(
@@ -178,17 +178,18 @@ class _TripSettupState extends State<TripSettup> {
                   Container(
                     alignment: Alignment.center,
                     decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ourWhite,
-                        ),
+                      shape: BoxShape.circle,
+                      color: ourWhite,
+                    ),
                     child: GestureDetector(
                       child: const Icon(Icons.swap_vert),
                       onTap: () {
                         setState(() {
+                          // TODO:FOR ASAEM: fix null check safety on the ongoign and returning waypoints
                           isGoing = !isGoing;
                           poly = googleApi.loadRoute(jsonDecode(isGoing
-                              ? widget.route.waypointsGoing
-                              : widget.route.waypointsReturning));
+                              ? widget.route.waypointsGoing!
+                              : widget.route.waypointsReturning!));
                         });
                       },
                     ),
