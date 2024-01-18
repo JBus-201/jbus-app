@@ -5,20 +5,25 @@ import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:jbus_app/widgets/text_fields/otp_text_field.dart';
 
 class MobileNumberVerificationScreen extends StatelessWidget {
-  const MobileNumberVerificationScreen({
-    Key? key,
+  MobileNumberVerificationScreen({
+    super.key,
     this.firstName,
     this.lastName,
     this.email,
     this.phoneNumber,
     this.password,
-  }) : super(key: key);
+  });
 
   final String? firstName;
   final String? lastName;
   final String? email;
   final String? phoneNumber;
   final String? password;
+
+  final TextEditingController otp1Controller = TextEditingController();
+  final TextEditingController otp2Controller = TextEditingController();
+  final TextEditingController otp3Controller = TextEditingController();
+  final TextEditingController otp4Controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -48,17 +53,18 @@ class MobileNumberVerificationScreen extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.all(26.0),
+                      Padding(
+                        padding: const EdgeInsets.all(26.0),
                         child: Directionality(
                           textDirection: TextDirection.ltr,
                           child: Row(
                             //textDirection: TextDirection.ltr,
                             children: [
-                              OtpTextField(first: true),
-                              OtpTextField(),
-                              OtpTextField(),
-                              OtpTextField(),
+                              OtpTextField(
+                                  first: true, digitController: otp1Controller),
+                              OtpTextField(digitController: otp2Controller),
+                              OtpTextField(digitController: otp3Controller),
+                              OtpTextField(digitController: otp4Controller),
                             ],
                           ),
                         ),

@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jbus_app/data/models/register_request.dart';
+import 'package:jbus_app/screens/authentication/email_verification/cubit/email_verify_cubit.dart';
+import 'package:jbus_app/screens/dashbourd/dashbourd.dart';
 import 'package:jbus_app/screens/settings/settings/settings.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:jbus_app/widgets/text_fields/otp_text_field.dart';
 
 class EmailVerificationScreen extends StatelessWidget {
-  const EmailVerificationScreen({
+  EmailVerificationScreen({
     super.key,
     this.firstName,
     this.lastName,
@@ -20,6 +25,11 @@ class EmailVerificationScreen extends StatelessWidget {
   final String? phoneNumber;
   final String? password;
 
+  final TextEditingController otp1Controller = TextEditingController();
+  final TextEditingController otp2Controller = TextEditingController();
+  final TextEditingController otp3Controller = TextEditingController();
+  final TextEditingController otp4Controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -31,53 +41,83 @@ class EmailVerificationScreen extends StatelessWidget {
           FocusManager.instance.primaryFocus?.previousFocus();
         }
       },
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.email),
+      child: BlocProvider(
+        create: (context) => EmailVerifyCubit(
+          apiService: sl(),
+          authService: sl(),
+          prefs: sl(),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Center(
-            child: Column(
-              children: [
-                Text(
-                  AppLocalizations.of(context)!
-                      .pleaseEnterTheCodeSentToTheEmailBelow,
+        child: BlocConsumer<EmailVerifyCubit, EmailVerifyState>(
+          listener: (context, state) {
+            if (state is EmailVerifySuccess) {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => const Dashbourd(),
                 ),
-                Form(
+              );
+            }
+          },
+          builder: (context, state) {
+            return Scaffold(
+              appBar: AppBar(
+                title: Text(AppLocalizations.of(context)!.email),
+              ),
+              body: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Center(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.all(26.0),
-                        child: Directionality(
-                          textDirection: TextDirection.ltr,
-                          child: Row(
-                            // textDirection: TextDirection.ltr,
-                            children: [
-                              OtpTextField(first: true),
-                              OtpTextField(),
-                              OtpTextField(),
-                              OtpTextField(),
-                            ],
-                          ),
+                      Text(
+                        AppLocalizations.of(context)!
+                            .pleaseEnterTheCodeSentToTheEmailBelow,
+                      ),
+                      Form(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(26.0),
+                              child: Directionality(
+                                textDirection: TextDirection.ltr,
+                                child: Row(
+                                  // textDirection: TextDirection.ltr,
+                                  children: [
+                                    OtpTextField(
+                                        first: true,
+                                        digitController: otp1Controller),
+                                    OtpTextField(
+                                        digitController: otp2Controller),
+                                    OtpTextField(
+                                        digitController: otp3Controller),
+                                    OtpTextField(
+                                        digitController: otp4Controller),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            RectangularElevatedButton(
+                                text: AppLocalizations.of(context)!.verify,
+                                onPressed: () {
+                                  context.read<EmailVerifyCubit>().signUp(
+                                        RegisterRequest(
+                                          name: '${firstName!} ${lastName!}',
+                                          email: email!,
+                                          phoneNumber: phoneNumber,
+                                          password: password!,
+                                        ),
+                                        int.parse(
+                                            '${otp1Controller.text}${otp2Controller.text}${otp3Controller.text}${otp4Controller.text}'),
+                                      );
+                                }),
+                          ],
                         ),
                       ),
-                      RectangularElevatedButton(
-                          text: AppLocalizations.of(context)!.verify,
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const SettingsScreen()),
-                            );
-                          }),
                     ],
                   ),
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
       ),
     );

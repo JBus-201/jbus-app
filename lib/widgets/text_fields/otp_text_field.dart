@@ -8,14 +8,14 @@ class OtpTextField extends StatelessWidget {
   const OtpTextField({
     super.key,
     this.first = false,
+    required this.digitController,
   });
 
   final bool first;
+  final TextEditingController digitController;
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController digitController = TextEditingController();
-
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
       return Expanded(
         child: Padding(

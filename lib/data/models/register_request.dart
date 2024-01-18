@@ -5,7 +5,7 @@ part 'register_request.g.dart';
 @JsonSerializable()
 class RegisterRequest {
   final String name;
-  final String phoneNumber;
+  final String? phoneNumber;
   final String email;
   final String password;
 

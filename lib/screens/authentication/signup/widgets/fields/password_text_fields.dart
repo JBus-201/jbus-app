@@ -35,8 +35,7 @@ class PasswordTextFieldForSignUp extends StatelessWidget {
             validator: (value) {
               password = value;
 
-              final RegExp regex = RegExp(
-                  r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+              final RegExp regex = RegExp(r'.{8,20}');
 
               if (value == null || value.isEmpty) {
                 return AppLocalizations.of(context)!.sorryPleaseEnterAPassword;

@@ -13,6 +13,8 @@ class SignUpButtonSUS extends StatelessWidget {
     required this.passwordControllerText,
     this.validator,
     required this.formKey,
+    required this.onPressed,
+    required this.isLoading,
   });
 
   final String firstNameControllerText;
@@ -22,26 +24,20 @@ class SignUpButtonSUS extends StatelessWidget {
   final String passwordControllerText;
   final String? Function(String?)? validator;
   final GlobalKey<FormState> formKey;
+  final Function() onPressed;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
     return RectangularElevatedButton(
       text: AppLocalizations.of(context)!.signUp,
-      onPressed: () {
-        if (formKey.currentState!.validate()) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => EmailVerificationScreen(
-                      firstName: firstNameControllerText,
-                      lastName: lastNameControllerText,
-                      email: emailControllerText,
-                      phoneNumber: phoneNumberControllerText,
-                      password: passwordControllerText,
-                    )),
-          );
-        }
-      },
+      onPressed: isLoading
+          ? null
+          : () {
+              if (formKey.currentState!.validate()) {
+                onPressed();
+              }
+            },
       width: double.maxFinite,
     );
   }
