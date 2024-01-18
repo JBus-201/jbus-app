@@ -21,7 +21,10 @@ class _ApiService implements ApiService {
   String? baseUrl;
 
   @override
-  Future<LoginResponse> register(RegisterRequest registerRequest) async {
+  Future<LoginResponse> register(
+    RegisterRequest registerRequest,
+    int otp,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -35,7 +38,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/PassengerAccount/register',
+              '/PassengerAccount/register/${otp}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -135,13 +138,13 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<FavoritePoint>> deleteFavoritePoint(int id) async {
+  Future<HttpResponse<dynamic>> deleteFavoritePoint(int id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<List<dynamic>>(_setStreamType<List<FavoritePoint>>(Options(
+    final _result =
+        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
       method: 'DELETE',
       headers: _headers,
       extra: _extra,
@@ -157,10 +160,9 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
-        .map((dynamic i) => FavoritePoint.fromJson(i as Map<String, dynamic>))
-        .toList();
-    return value;
+    final value = _result.data;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
   }
 
   @override
@@ -392,13 +394,13 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<Friends> getFriendById(int friendId) async {
+  Future<Friend> getFriendById(int friendId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'id': friendId};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Friends>(Options(
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Friend>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -414,18 +416,18 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = Friends.fromJson(_result.data!);
+    final value = Friend.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<List<Friends>> getFriends() async {
+  Future<List<Friend>> getFriends() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<Friends>>(Options(
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<Friend>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -442,19 +444,19 @@ class _ApiService implements ApiService {
               baseUrl,
             ))));
     var value = _result.data!
-        .map((dynamic i) => Friends.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => Friend.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }
 
   @override
-  Future<List<Friends>> getFriendRequests() async {
+  Future<List<Friend>> getFriendRequests() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<Friends>>(Options(
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<Friend>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -471,7 +473,7 @@ class _ApiService implements ApiService {
               baseUrl,
             ))));
     var value = _result.data!
-        .map((dynamic i) => Friends.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => Friend.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }

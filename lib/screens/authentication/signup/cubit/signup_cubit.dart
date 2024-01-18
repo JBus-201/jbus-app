@@ -20,10 +20,10 @@ class SignupCubit extends Cubit<SignupState> {
         _prefs = prefs,
         super(SignupInitial());
 
-  void signUp(RegisterRequest request) async {
+  void signUp(RegisterRequest request, int otp) async {
     emit(SignupLoading());
     try {
-      final res = await _apiService.register(request);
+      final res = await _apiService.register(request, otp);
       await _authService.setLoggedIn(res.token);
       await _prefs.setString('user', res.passengerDto.toString());
 

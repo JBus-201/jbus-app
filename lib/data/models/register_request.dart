@@ -8,14 +8,12 @@ class RegisterRequest {
   final String phoneNumber;
   final String email;
   final String password;
-  final int otp;
 
   RegisterRequest({
     required this.name,
     required this.phoneNumber,
     required this.email,
     required this.password,
-    required this.otp,
   });
 
   factory RegisterRequest.fromJson(Map<String, dynamic> json) =>

@@ -4,14 +4,12 @@ part 'favorite_point_create_request.g.dart';
 
 @JsonSerializable()
 class FavoritePointCreateRequest {
-  final int passengerId;
   final String name;
   final double lat;
   final double long;
   final int routeId;
 
   FavoritePointCreateRequest({
-    required this.passengerId,
     required this.name,
     required this.lat,
     required this.long,

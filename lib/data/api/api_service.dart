@@ -3,7 +3,7 @@ import 'package:jbus_app/data/models/bus_route.dart';
 import 'package:jbus_app/data/models/favorite_point.dart';
 import 'package:jbus_app/data/models/favorite_point_create_request.dart';
 import 'package:jbus_app/data/models/fazaa_create_request.dart';
-import 'package:jbus_app/data/models/friends.dart';
+import 'package:jbus_app/data/models/friend.dart';
 import 'package:jbus_app/data/models/friends_create_request.dart';
 import 'package:jbus_app/data/models/login_request.dart';
 import 'package:jbus_app/data/models/login_response.dart';
@@ -17,8 +17,9 @@ part 'api_service.g.dart';
 abstract class ApiService {
   factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
 
-  @POST("/PassengerAccount/register")
-  Future<LoginResponse> register(@Body() RegisterRequest registerRequest);
+  @POST("/PassengerAccount/register/{otp}")
+  Future<LoginResponse> register(
+      @Body() RegisterRequest registerRequest, @Path("otp") int otp);
 
   @POST("/PassengerAccount/login")
   Future<LoginResponse> login(@Body() LoginRequest loginRequest);
@@ -31,7 +32,7 @@ abstract class ApiService {
       @Body() FavoritePointCreateRequest favoritePointRequest);
 
   @DELETE("/FavoritePoint/{id}")
-  Future<List<FavoritePoint>> deleteFavoritePoint(@Path("id") int id);
+  Future<HttpResponse> deleteFavoritePoint(@Path("id") int id);
 
   @GET("/FavoritePoint/{id}")
   Future<FavoritePoint> getFavoritePoint(@Path("id") int id);
@@ -60,13 +61,13 @@ abstract class ApiService {
   Future<HttpResponse> confirmFriendRequest(@Body() int friendId);
 
   @GET("/Friends/getFriendById")
-  Future<Friends> getFriendById(@Query("id") int friendId);
+  Future<Friend> getFriendById(@Query("id") int friendId);
 
   @GET("/Friends/getFriends")
-  Future<List<Friends>> getFriends();
+  Future<List<Friend>> getFriends();
 
   @GET("/Friends/getFriendRequests")
-  Future<List<Friends>> getFriendRequests();
+  Future<List<Friend>> getFriendRequests();
 
   @DELETE("/Friends/deleteFriend")
   Future<HttpResponse> deleteFriend(@Query("id") int friendId);

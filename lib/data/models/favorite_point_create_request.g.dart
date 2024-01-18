@@ -9,7 +9,6 @@ part of 'favorite_point_create_request.dart';
 FavoritePointCreateRequest _$FavoritePointCreateRequestFromJson(
         Map<String, dynamic> json) =>
     FavoritePointCreateRequest(
-      passengerId: json['passengerId'] as int,
       name: json['name'] as String,
       lat: (json['lat'] as num).toDouble(),
       long: (json['long'] as num).toDouble(),
@@ -19,7 +18,6 @@ FavoritePointCreateRequest _$FavoritePointCreateRequestFromJson(
 Map<String, dynamic> _$FavoritePointCreateRequestToJson(
         FavoritePointCreateRequest instance) =>
     <String, dynamic>{
-      'passengerId': instance.passengerId,
       'name': instance.name,
       'lat': instance.lat,
       'long': instance.long,
