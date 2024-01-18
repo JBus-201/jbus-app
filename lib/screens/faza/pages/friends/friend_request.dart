@@ -9,7 +9,7 @@ class FazaFriendRequestsPage extends StatefulWidget {
   const FazaFriendRequestsPage({super.key});
 
   @override
-  _FazaFriendRequestsPageState createState() => _FazaFriendRequestsPageState();
+  State<FazaFriendRequestsPage> createState() => _FazaFriendRequestsPageState();
 }
 
 class _FazaFriendRequestsPageState extends State<FazaFriendRequestsPage> {

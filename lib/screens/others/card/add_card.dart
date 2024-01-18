@@ -10,7 +10,6 @@ import 'package:jbus_app/screens/others/card/widgets/text_fields/cvv_text_field.
 import 'package:jbus_app/screens/others/card/widgets/text_fields/mm_text_field.dart';
 import 'package:jbus_app/screens/others/card/widgets/text_fields/yy_text_field.dart';
 import 'package:jbus_app/screens/others/wallet/bloc/wallet_bloc.dart';
-import 'package:jbus_app/screens/others/wallet/testScreen.dart';
 import 'package:jbus_app/screens/others/wallet/wallet.dart';
 import 'package:jbus_app/screens/others/wallet/widgets/payment_card.dart';
 import 'package:jbus_app/widgets/text/our_text.dart';
@@ -80,7 +79,7 @@ class AddCardScreen extends StatelessWidget {
                                                 onPressed: () {
                                                   if (formKey.currentState!
                                                       .validate()) {
-                                                    final  walletBloc =
+                                                    final walletBloc =
                                                         BlocProvider.of<
                                                                 WalletBloc>(
                                                             context);

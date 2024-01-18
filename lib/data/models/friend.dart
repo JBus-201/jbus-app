@@ -1,4 +1,3 @@
-import 'package:jbus_app/data/models/passenger.dart';
 import 'package:jbus_app/data/models/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 

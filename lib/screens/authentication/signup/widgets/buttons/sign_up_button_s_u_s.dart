@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jbus_app/screens/authentication/email_verification/email_verification.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

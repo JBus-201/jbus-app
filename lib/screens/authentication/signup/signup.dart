@@ -21,8 +21,7 @@ class SignupScreen extends StatelessWidget {
     final formKey = GlobalKey<FormState>();
 
     return BlocProvider(
-      create: (context) =>
-          SignupCubit(apiService: sl(), authService: sl(), prefs: sl()),
+      create: (context) => SignupCubit(apiService: sl()),
       child: BlocConsumer<SignupCubit, SignupState>(
         listener: (context, state) {
           if (state is SignupOTPSent) {
