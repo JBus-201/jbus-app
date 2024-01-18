@@ -162,6 +162,7 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                           padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
                           itemBuilder: (context, index) {
                             BusRoute route = sRoutes.elementAt(index);
+                            // TODO: Fix this. the name don't always have a dash
                             int? indxOfDash = route.name?.indexOf('-');
                             String? firstStop =
                                 route.name?.substring(0, indxOfDash);
