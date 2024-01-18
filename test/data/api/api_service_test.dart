@@ -6,6 +6,7 @@ import 'package:jbus_app/constants/strings.dart';
 import 'package:jbus_app/data/models/bus_route.dart';
 import 'package:jbus_app/data/models/favorite_point.dart';
 import 'package:jbus_app/data/models/favorite_point_create_request.dart';
+import 'package:jbus_app/data/models/fazaa.dart';
 import 'package:jbus_app/data/models/fazaa_create_request.dart';
 import 'package:jbus_app/data/models/friend.dart';
 import 'package:jbus_app/data/models/friends_create_request.dart';
@@ -257,6 +258,13 @@ void main() {
         @POST("/Fazaa/storeFazaas")
   Future<HttpResponse> storeFazaas(
       @Body() List<FazaaCreateRequest> fazaaStoreRequest);
+        @GET("/Fazaa/getFazaaById/{id}")
+  Future<Fazaa> getFazaaById(@Path("id") int id);
+
+  @POST("/Friends/sendFriendRequest")
+  Future<HttpResponse> sendFriendRequest(
+      @Body() FriendsCreateRequest friendRequest);
+
       
       */
 
@@ -283,6 +291,41 @@ void main() {
         expect(response, isA<HttpResponse>());
         expect(response.response.statusCode, 201);
       }, skip: true);
+
+      test('getFazaas should return List<Fazaa>', () async {
+        // Arrange
+        final loginRequest = LoginRequest(
+          email: 'aboodsaob1139@gmail.com',
+          password: 'password',
+        );
+
+        final loginResponse = await apiService.login(loginRequest);
+        dio.options.headers['Authorization'] = 'Bearer ${loginResponse.token}';
+
+        // Act
+        final fazaas = await apiService.getFazaas();
+
+        // Assert
+        expect(fazaas, isA<List<Fazaa>>());
+      });
+
+      test('getFazaaById should return Fazaa', () async {
+        // Arrange
+        final loginRequest = LoginRequest(
+          email: 'aboodsaob1139@gmail.com',
+          password: 'password',
+        );
+
+        final loginResponse = await apiService.login(loginRequest);
+        dio.options.headers['Authorization'] = 'Bearer ${loginResponse.token}';
+        final fazaas = await apiService.getFazaas();
+
+        // Act
+        final fazaaResponse = await apiService.getFazaaById(fazaas[0].id);
+
+        // Assert
+        expect(fazaaResponse, isA<Fazaa>());
+      });
 
       /*
         @POST("/Friends/sendFriendRequest")

@@ -8,8 +8,8 @@ class BusRoute {
   final int id;
   final String? name;
   final int fee;
-  final String waypointsGoing;
-  final String waypointsReturning;
+  final String? waypointsGoing;
+  final String? waypointsReturning;
   final DateTime createdAt;
   final DateTime updatedAt;
   final int startingPointId;

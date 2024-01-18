@@ -2,6 +2,7 @@ import 'package:jbus_app/constants/strings.dart';
 import 'package:jbus_app/data/models/bus_route.dart';
 import 'package:jbus_app/data/models/favorite_point.dart';
 import 'package:jbus_app/data/models/favorite_point_create_request.dart';
+import 'package:jbus_app/data/models/fazaa.dart';
 import 'package:jbus_app/data/models/fazaa_create_request.dart';
 import 'package:jbus_app/data/models/friend.dart';
 import 'package:jbus_app/data/models/friend_request.dart';
@@ -53,6 +54,12 @@ abstract class ApiService {
   @POST("/Fazaa/storeFazaas")
   Future<HttpResponse> storeFazaas(
       @Body() List<FazaaCreateRequest> fazaaStoreRequest);
+
+  @GET("/Fazaa/getFazaas")
+  Future<List<Fazaa>> getFazaas();
+
+  @GET("/Fazaa/getFazaaById/{id}")
+  Future<Fazaa> getFazaaById(@Path("id") int id);
 
   @POST("/Friends/sendFriendRequest")
   Future<HttpResponse> sendFriendRequest(
