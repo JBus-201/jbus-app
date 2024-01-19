@@ -12,7 +12,7 @@ FazaaCreateRequest _$FazaaCreateRequestFromJson(Map<String, dynamic> json) {
     requiredKeys: const ['amount', 'creditorId'],
   );
   return FazaaCreateRequest(
-    amount: (json['amount'] as num).toDouble(),
+    amount: (json['amount'] as num).toInt(),
     creditorId: json['creditorId'] as int,
   );
 }

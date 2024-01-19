@@ -3,12 +3,14 @@
 import 'dart:async';
 
 import 'package:firebase_database/firebase_database.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jbus_app/data/api/realtime-firebase/lestiners.dart';
 
 final databaseReference = FirebaseDatabase.instance.ref();
 void writeLocationToDatabase(
-    double latitude, double longitude, int routeId, int busId) {
-  String locationPath = "Route/$routeId/Bus/$busId/currentLocation";
+    double latitude, double longitude, int routeId, int busId, bool isGoing) {
+  String locationPath =
+      "Route/$routeId/${isGoing ? "going" : "returning"}/Bus/$busId/currentLocation";
 
   // Write the location data to the database
   databaseReference.child(locationPath).update({
@@ -22,11 +24,12 @@ void writeLocationToDatabase(
   });
 }
 
-void incrementCurrentPassNum(int routeId, int busId) async {
+void incrementCurrentPassNum(int routeId, bool isGoing, int busId) async {
   try {
     // Reference to the specific bus's node in the Realtime Database
-    DatabaseReference busReference =
-        databaseReference.child('Route/$routeId/Bus').child('$busId');
+    DatabaseReference busReference = databaseReference
+        .child('Route/$routeId/${isGoing ? "going" : "returning"}/Bus')
+        .child('$busId');
 
     // Fetch the current value of currentPassNum
     DatabaseEvent busEvent = await busReference.once();
@@ -56,11 +59,12 @@ void incrementCurrentPassNum(int routeId, int busId) async {
 }
 
 // Function to write the latitude and longitude for a drop-off
-Future<void> writeDropoffLocation(double latitude, double longitude,
-    int routeId, int busId, int userId) async {
+Future<void> writeDropoffLocation(
+    LatLng location, int routeId, int busId, int userId, bool isGoing) async {
   try {
-    DatabaseReference busReference =
-        databaseReference.child('Route/$routeId/Bus').child('$busId');
+    DatabaseReference busReference = databaseReference
+        .child('Route/$routeId/${isGoing ? "going" : "returning"}/Bus')
+        .child('$busId');
 
     // Fetch the current bus data
     DatabaseEvent busEvent = await busReference.once();
@@ -78,8 +82,8 @@ Future<void> writeDropoffLocation(double latitude, double longitude,
 
         // Write the latitude and longitude to the drop-off node
         await busReference.child('dropoffs').child('$dropoffId').set({
-          'latitude': latitude,
-          'longitude': longitude,
+          'latitude': location.latitude,
+          'longitude': location.longitude,
         });
 
         print(
@@ -90,8 +94,8 @@ Future<void> writeDropoffLocation(double latitude, double longitude,
 
         await busReference.child('dropoffs').set({
           dropoffId: {
-            'latitude': latitude,
-            'longitude': longitude,
+            'latitude': location.latitude,
+            'longitude': location.longitude,
           },
         });
 
@@ -106,11 +110,12 @@ Future<void> writeDropoffLocation(double latitude, double longitude,
   }
 }
 
-Future<void> writePickupLocation(double latitude, double longitude, int routeId,
-    int busId, int userId) async {
+Future<void> writePickupLocation(
+    LatLng location, int routeId, int busId, int userId, bool isGoing) async {
   try {
-    DatabaseReference busReference =
-        databaseReference.child('Route/$routeId/Bus').child('$busId');
+    DatabaseReference busReference = databaseReference
+        .child('Route/$routeId/${isGoing ? "going" : "returning"}/Bus')
+        .child('$busId');
 
     // Fetch the current bus data
     DatabaseEvent busEvent = await busReference.once();
@@ -128,8 +133,8 @@ Future<void> writePickupLocation(double latitude, double longitude, int routeId,
 
         // Write the latitude and longitude to the drop-off node
         await busReference.child('pickups').child('$dropoffId').set({
-          'latitude': latitude,
-          'longitude': longitude,
+          'latitude': location.latitude,
+          'longitude': location.longitude,
         });
 
         print(
@@ -140,8 +145,8 @@ Future<void> writePickupLocation(double latitude, double longitude, int routeId,
 
         await busReference.child('pickups').set({
           dropoffId: {
-            'latitude': latitude,
-            'longitude': longitude,
+            'latitude': location.latitude,
+            'longitude': location.longitude,
           },
         });
 
@@ -153,24 +158,6 @@ Future<void> writePickupLocation(double latitude, double longitude, int routeId,
     }
   } catch (error) {
     print('Error writing drop-off location: $error');
-  }
-}
-
-Future<bool> writeFazaReqState(
-    String state, int responderId, int requesterId) async {
-  String locationPath =
-      "ReqForFaza/Responder/$responderId/Requester/$requesterId";
-
-  try {
-    await databaseReference.child(locationPath).update({
-      "requestState": state,
-    });
-
-    print("Faza'a Request state written successfully!\nState:$state");
-    return true;
-  } catch (error) {
-    print("Error writing State: $error");
-    return false;
   }
 }
 
@@ -228,7 +215,8 @@ void writeFazaTotalAmountNeeded(int requesterId, int amount) {
     print("Error writing totalAmount: $error");
   });
 }
-void writeFazaTimer(int requesterId,int timer) {
+
+void writeFazaTimer(int requesterId, int timer) {
   String locationPath = "Faza/$requesterId/";
 
   databaseReference.child(locationPath).update({

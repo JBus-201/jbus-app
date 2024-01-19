@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:jbus_app/data/api/api_service.dart';
 import 'package:jbus_app/data/models/friends_create_request.dart';
@@ -21,7 +20,6 @@ class _AddFriendForFazaState extends State<AddFriendForFaza> {
   late int myId;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _loadUserData();
   }
@@ -101,7 +99,6 @@ class _AddFriendForFazaState extends State<AddFriendForFaza> {
                         })
                     // ignore: body_might_complete_normally_catch_error
                     .catchError((error) {
-                      
                   showDialog(
                     context: context,
                     builder: (context) => const Warning(

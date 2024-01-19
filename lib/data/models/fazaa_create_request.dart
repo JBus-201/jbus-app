@@ -5,7 +5,7 @@ part 'fazaa_create_request.g.dart';
 @JsonSerializable()
 class FazaaCreateRequest {
   @JsonKey(required: true)
-  final double amount;
+  final int amount;
 
   @JsonKey(required: true)
   final int creditorId;

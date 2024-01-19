@@ -49,7 +49,6 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
   List<FavoritePoint>? favoritePointsList;
 
   void initState() {
-    // TODO: implement initState
     super.initState();
     route = widget.route;
     isGoing = widget.isGoing;
