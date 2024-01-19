@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:jbus_app/screens/faza/pages/history/history.dart';
 import 'package:jbus_app/screens/faza/widgets/friends.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
@@ -63,8 +64,8 @@ class _FazaMainPageState extends State<FazaMainPage> {
 
   List<Widget> get _widgetOptions {
     return [
-      FazaFriendsPage(),
-      Text('history'),
+      const FazaFriendsPage(),
+      const FazaHistoryPage(),
       Text('dain'),
     ];
   }
@@ -74,6 +75,4 @@ class _FazaMainPageState extends State<FazaMainPage> {
       _selectedIndex = index;
     });
   }
-  
 }
-

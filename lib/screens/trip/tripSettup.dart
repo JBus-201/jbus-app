@@ -8,6 +8,7 @@ import 'package:jbus_app/data/models/point.dart';
 import 'package:jbus_app/screens/trip/edit_point.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
+import 'package:jbus_app/widgets/warnings/warning.dart';
 
 class TripSettup extends StatefulWidget {
   final BusRoute route;
@@ -33,7 +34,6 @@ class _TripSettupState extends State<TripSettup> {
   dynamic route;
   late Future<String?> poly;
   void initState() {
-    // TODO: implement initState
     super.initState();
     route = widget.route;
     isGoing = widget.isGoing;
@@ -185,11 +185,19 @@ class _TripSettupState extends State<TripSettup> {
                       child: const Icon(Icons.swap_vert),
                       onTap: () {
                         setState(() {
-                          // TODO:FOR ASAEM: fix null check safety on the ongoign and returning waypoints
-                          isGoing = !isGoing;
-                          poly = googleApi.loadRoute(jsonDecode(isGoing
-                              ? widget.route.waypointsGoing!
-                              : widget.route.waypointsReturning!));
+                          if (widget.route.waypointsGoing != null &&
+                              widget.route.waypointsReturning != null) {
+                            isGoing = !isGoing;
+                            poly = googleApi.loadRoute(jsonDecode(isGoing
+                                ? widget.route.waypointsGoing!
+                                : widget.route.waypointsReturning!));
+                          } else {
+                            showDialog(
+                                context: context,
+                                builder: (context) => const Warning(
+                                    title: "Sawp Error",
+                                    description: "There's no other direction"));
+                          }
                         });
                       },
                     ),

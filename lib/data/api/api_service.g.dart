@@ -308,11 +308,11 @@ class _ApiService implements ApiService {
 
   @override
   Future<HttpResponse<dynamic>> storeFazaas(
-      List<FazaaCreateRequest> fazaaStoreRequest) async {
+      FazaaCreateRequest fazaaStoreRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = fazaaStoreRequest.map((e) => e.toJson()).toList();
+    final _data = fazaaStoreRequest;
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
       method: 'POST',

@@ -12,7 +12,6 @@ import 'package:jbus_app/data/models/login_response.dart';
 import 'package:jbus_app/data/models/register_request.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
-
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: baseUrl)
@@ -53,7 +52,7 @@ abstract class ApiService {
 
   @POST("/Fazaa/storeFazaas")
   Future<HttpResponse> storeFazaas(
-      @Body() List<FazaaCreateRequest> fazaaStoreRequest);
+      @Body() FazaaCreateRequest fazaaStoreRequest);
 
   @GET("/Fazaa/getFazaas")
   Future<List<Fazaa>> getFazaas();

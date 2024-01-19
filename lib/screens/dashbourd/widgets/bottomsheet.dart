@@ -63,7 +63,7 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
         sRoutes = allRoutes;
       });
     } catch (error) {
-      // Handle error
+      // ignore: avoid_print
       print("Error fetching routes: $error");
     }
   }
@@ -162,90 +162,89 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                           padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
                           itemBuilder: (context, index) {
                             BusRoute route = sRoutes.elementAt(index);
-                            // TODO: Fix this. the name don't always have a dash
-                            int? indxOfDash = route.name?.indexOf('-');
-                            String? firstStop =
-                                route.name?.substring(0, indxOfDash);
-                            String? finalStop =
-                                route.name?.substring(indxOfDash! + 1);
-                            return GestureDetector(
-                              onTap: () {
-                                if (wallet < route.fee) {
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) => NeedFazaDialog(
-                                            title: 'Obs!',
-                                            description:
-                                                'You don\'t have mony\nDo you need Faza?',
-                                            amount: route.fee - wallet,
-                                            route: route,
-                                          ));
-                                } else {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              TripSettup(route: route)));
-                                }
-                              },
-                              child: Container(
-                                height: 100,
-                                width: double.infinity,
-                                decoration: const BoxDecoration(
-                                    color: Color.fromARGB(255, 236, 236, 236),
-                                    shape: BoxShape.rectangle,
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: ourLightGray,
-                                          offset: Offset(2, 4),
-                                          blurRadius: 5)
-                                    ],
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(15))),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          firstStop ?? 'N/A',
-                                          style:
-                                              const TextStyle(color: ourBlue),
-                                        ),
-                                        const SizedBox(
-                                          width: 15,
-                                        ),
-                                        const Icon(
-                                          Icons.linear_scale_outlined,
-                                          color: ourOrange,
-                                        ),
-                                        const SizedBox(
-                                          width: 15,
-                                        ),
-                                        Text(
-                                          finalStop ?? 'N/A',
-                                          style:
-                                              const TextStyle(color: ourBlue),
-                                        ),
+                            String? firstStop = route.startingPoint.name;
+                            String? finalStop = route.endingPoint.name;
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 20),
+                              child: GestureDetector(
+                                onTap: () {
+                                  if (wallet < route.fee) {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) => NeedFazaDialog(
+                                              title: 'Obs!',
+                                              description:
+                                                  'You don\'t have mony\nDo you need Faza?',
+                                              amount: route.fee - wallet,
+                                              route: route,
+                                            ));
+                                  } else {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                TripSettup(route: route)));
+                                  }
+                                },
+                                child: Container(
+                                  height: 150,
+                                  width: double.infinity,
+                                  decoration: const BoxDecoration(
+                                      color: Color.fromARGB(255, 236, 236, 236),
+                                      shape: BoxShape.rectangle,
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: ourLightGray,
+                                            offset: Offset(2, 4),
+                                            blurRadius: 5)
                                       ],
-                                    ),
-                                    const SizedBox(
-                                      height: 15,
-                                    ),
-                                    Text(
-                                      'Fee: ${route.fee}',
-                                      style: TextStyle(
-                                        color: wallet >= route.fee
-                                            ? ourGreen
-                                            : ourRed,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(15))),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            firstStop ?? 'N/A',
+                                            style:
+                                                const TextStyle(color: ourBlue),
+                                          ),
+                                          const SizedBox(
+                                            width: 15,
+                                          ),
+                                          const Icon(
+                                            Icons.linear_scale_outlined,
+                                            color: ourOrange,
+                                          ),
+                                          const SizedBox(
+                                            width: 15,
+                                          ),
+                                          Text(
+                                            finalStop ?? 'N/A',
+                                            style:
+                                                const TextStyle(color: ourBlue),
+                                          ),
+                                        ],
                                       ),
-                                    )
-                                  ],
+                                      const SizedBox(
+                                        height: 15,
+                                      ),
+                                      Text(
+                                        'Fee: ${route.fee}',
+                                        style: TextStyle(
+                                          color: wallet >= route.fee
+                                              ? ourGreen
+                                              : ourRed,
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                             );
