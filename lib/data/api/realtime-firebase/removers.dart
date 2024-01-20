@@ -15,8 +15,9 @@ removeRoute(int routeId) {
 removeBus(
   int routeId,
   int busId,
+  bool isGoing
 ) {
-  databaseReference.child('Route/$routeId/Bus/$busId').remove();
+  databaseReference.child('Route/$routeId${isGoing ? "going" : "returning"}/Bus/$busId').remove();
 }
 
 removeCurrentLocountion(
