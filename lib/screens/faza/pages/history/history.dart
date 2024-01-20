@@ -34,12 +34,12 @@ class _FazaHistoryPageState extends State<FazaHistoryPage> {
             print('Error: ${snapshot.error}');
             return const Center(
                 child: Text(
-              'No friends,\nSorry, but you are lonely',
+              'Somthing went wrong while geting your data',
               textAlign: TextAlign.center,
             ));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return const Center(
-                child: Text('No friends,\nSorry, but you are lonely'));
+                child: Text('There is no faza\'s'));
           } else {
             return ListView.builder(
                 itemCount: snapshot.data!.length,
