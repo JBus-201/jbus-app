@@ -7,7 +7,7 @@ part 'pickup_event.dart';
 part 'pickup_state.dart';
 
 class PickupBloc extends Bloc<PickupEvent, PickupState> {
-  PickupBloc() : super(const PickupState(isPickup: true)) {
+  PickupBloc() : super(const PickupState(isPickup: false)) {
     on<PickupEvent>((event, emit) {
       on<IsPickupEvent>(_switchtoPickEvent);
       on<IsDropoffEvent>(_switchtoDropEvent);

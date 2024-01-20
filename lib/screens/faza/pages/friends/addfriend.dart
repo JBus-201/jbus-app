@@ -58,7 +58,7 @@ class _AddFriendForFazaState extends State<AddFriendForFaza> {
                     return null;
                   }
                   final bool numberValid =
-                      RegExp('^[0-9]\$').hasMatch(value.trim());
+                      RegExp('^[0-9]+\$').hasMatch(value.trim());
 
                   if (numberValid) {
                     return null;

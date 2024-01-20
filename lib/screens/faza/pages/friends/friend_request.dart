@@ -57,10 +57,10 @@ class _FazaFriendRequestsPageState extends State<FazaFriendRequestsPage> {
                         : const Icon(Icons.person),
                   ),
                   title: Text('User ID: ${friend.passenger.id}'),
-                  subtitle:
-                      Text('User Name: ${friend.passenger.user.name ?? 'N/A'}'),
+                  subtitle: Text(friend.passenger.user.name ?? 'N/A'),
                   trailing: RectangularElevatedButton(
                     text: 'Accept',
+                    fontSize: 15,
                     padding: 1,
                     height: 15,
                     width: 100,

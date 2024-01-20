@@ -2,8 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:jbus_app/constants/colors/gradients.dart';
+import 'package:jbus_app/data/api/api_service.dart';
 import 'package:jbus_app/data/api/realtime-firebase/writers.dart';
 import 'package:jbus_app/data/models/bus_route.dart';
+import 'package:jbus_app/data/models/friend.dart';
 import 'package:jbus_app/screens/faza/pages/wating.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
@@ -23,36 +25,47 @@ class FazaRequestBT extends StatelessWidget {
   Widget build(BuildContext context) {
     return RectangularElevatedButton(
         gradient: redButtonGradient,
-        width: 100,
-        text: "Faza'a?",
+        width: 130,
+        text: "فزعة",
         onPressed: () {
-          /// TO DO
-          final userRes = sl<SharedPreferences>().getString('user');
-          Map<String, dynamic> res = json.decode(userRes!);
+          sl<ApiService>().getFriends().then((List<Friend> friends) {
+            if (friends.isNotEmpty) {
+              final userRes = sl<SharedPreferences>().getString('user');
+              Map<String, dynamic> res = json.decode(userRes!);
 
-          int myId = res['id'];
-          print('Faza Request My ID: $myId');
-          writeNeedFaza(myId, true).then((value) => {
-                if (value)
-                  {
-                    writeFazaTotalAmountNeeded(myId, totalAmountNeeded),
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                FazaWaitingPage(route: route)))
-                  }
-                else
-                  {
-                    showDialog(
-                      context: context,
-                      builder: (context) => const Warning(
-                          isWarning: true,
-                          title: "Ops!",
-                          description: "Somthing went wrong"),
-                    )
-                  }
-              });
+              int myId = res['id'];
+              print('Faza Request My ID: $myId');
+              writeNeedFaza(myId, true).then((value) => {
+                    if (value)
+                      {
+                        writeFazaTotalAmountNeeded(myId, totalAmountNeeded),
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    FazaWaitingPage(route: route)))
+                      }
+                    else
+                      {
+                        showDialog(
+                          context: context,
+                          builder: (context) => const Warning(
+                              isWarning: true,
+                              title: "Ops!",
+                              description: "Something went wrong\nPlease try again"),
+                        ).then((value) => Navigator.pop(context))
+                      }
+                  });
+            } else {
+              showDialog(
+                context: context,
+                builder: (context) => const Warning(
+                    isWarning: true,
+                    title: "Ops!",
+                    description: "You don't have friends"),
+              ).then((value) => Navigator.pop(context));
+            }
+          });
         });
   }
 }

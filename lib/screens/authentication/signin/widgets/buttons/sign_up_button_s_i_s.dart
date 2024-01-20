@@ -10,11 +10,10 @@ class SignUpButtonSIS extends StatelessWidget {
     return OurTextButton(
       text: AppLocalizations.of(context)!.createAccount,
       onPressed: () {
-        Navigator.pop(
+        Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(
-            builder: (context) => const SignupScreen(),
-          ),
+          MaterialPageRoute(builder: (context) => const SignupScreen()),
+          (Route<dynamic> route) => false,
         );
       },
     );

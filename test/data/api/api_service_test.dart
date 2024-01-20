@@ -283,12 +283,12 @@ void main() {
         dio.options.headers['Authorization'] = 'Bearer ${loginResponse.token}';
 
         // Act
-        final response = await apiService.storeFazaas([
+        final response = await apiService.storeFazaas(
           FazaaCreateRequest(
             amount: 1000,
             creditorId: loginResponse.passengerDto.id,
           ),
-        ]);
+        );
 
         // Assert
 

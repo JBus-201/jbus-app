@@ -47,7 +47,7 @@ class _FazaHistoryPageState extends State<FazaHistoryPage> {
                   Fazaa fazaa = snapshot.data![index];
 
                   return FutureBuilder<Friend>(
-                    future: sl<ApiService>().getFriendById(fazaa.inDebtId),
+                    future: sl<ApiService>().getFriendById(fazaa.creditorId),
                     builder: (context, snapshot) {
                       Friend friend = snapshot.data!;
                       if (snapshot.data == null) {

@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
@@ -35,6 +34,7 @@ class _TripSettupState extends State<TripSettup> {
   late Future<String?> poly;
   void initState() {
     super.initState();
+    print(widget.route.waypointsGoing);
     route = widget.route;
     isGoing = widget.isGoing;
 
@@ -42,9 +42,6 @@ class _TripSettupState extends State<TripSettup> {
 
     endingPoint = widget.endingPoint ?? route.endingPoint.location;
 
-    poly = isGoing
-        ? googleApi.loadRoute(jsonDecode(route.waypointsGoing))
-        : googleApi.loadRoute(jsonDecode(route.waypointsReturning));
   }
 
   @override
@@ -53,59 +50,36 @@ class _TripSettupState extends State<TripSettup> {
       appBar: AppBar(title: const JbusAppBarTitle(), toolbarHeight: 31),
       body: Stack(
         children: [
-          FutureBuilder<String?>(
-              future: poly,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (snapshot.hasError) {
-                  return Center(
-                    child: Text('Error: ${snapshot.error}'),
-                  );
-                } else if (!snapshot.hasData) {
-                  return const Center(
-                    child: Text('No data available'),
-                  );
-                } else {
-                  final _polyline = snapshot.data;
-
-                  return GoogleMap(
-                      zoomControlsEnabled: false,
-                      myLocationButtonEnabled: false,
-                      myLocationEnabled: true,
-                      initialCameraPosition: CameraPosition(
-                          target: isGoing
-                              ? LatLng(startingPoint.latitude,
-                                  startingPoint.longitude)
-                              : LatLng(
-                                  endingPoint.latitude, endingPoint.longitude),
-                          zoom: 10),
-                      markers: {
-                        Marker(
-                          markerId: const MarkerId("startpoint"),
-                          position: LatLng(
-                              startingPoint.latitude, startingPoint.longitude),
-                        ),
-                        Marker(
-                          markerId: const MarkerId("endpoint"),
-                          position: LatLng(
-                              endingPoint.latitude, endingPoint.longitude),
-                        ),
-                      },
-                      polylines: {
-                        if (route.waypointsGoing != null ||
-                            route.waypointsReturning != null)
-                          Polyline(
-                            polylineId: const PolylineId('route'),
-                            color: ourBlue,
-                            visible: true,
-                            width: 3,
-                            points: googleApi.decodePolyline(_polyline),
-                          ),
-                      });
-                }
+          GoogleMap(
+              zoomControlsEnabled: false,
+              myLocationButtonEnabled: false,
+              myLocationEnabled: true,
+              initialCameraPosition: CameraPosition(
+                  target: isGoing
+                      ? LatLng(startingPoint.latitude, startingPoint.longitude)
+                      : LatLng(endingPoint.latitude, endingPoint.longitude),
+                  zoom: 10),
+              markers: {
+                Marker(
+                  markerId: const MarkerId("startpoint"),
+                  position:
+                      LatLng(startingPoint.latitude, startingPoint.longitude),
+                ),
+                Marker(
+                  markerId: const MarkerId("endpoint"),
+                  position: LatLng(endingPoint.latitude, endingPoint.longitude),
+                ),
+              },
+              polylines: {
+                if (route.waypointsGoing != null ||
+                    route.waypointsReturning != null)
+                  Polyline(
+                      polylineId: PolylineId("1"),
+                      points: googleApi.decodePolyline(isGoing
+                              ? widget.route.waypointsGoing!
+                              : widget.route.waypointsReturning!),
+                      color: ourBlue,
+                      width: 5)
               }),
           Container(
             height: 150,
@@ -188,9 +162,9 @@ class _TripSettupState extends State<TripSettup> {
                           if (widget.route.waypointsGoing != null &&
                               widget.route.waypointsReturning != null) {
                             isGoing = !isGoing;
-                            poly = googleApi.loadRoute(jsonDecode(isGoing
-                                ? widget.route.waypointsGoing!
-                                : widget.route.waypointsReturning!));
+                            // googleApi.decodePolyline(isGoing
+                            //   ? widget.route.waypointsGoing!
+                            //   : widget.route.waypointsReturning!);
                           } else {
                             showDialog(
                                 context: context,
