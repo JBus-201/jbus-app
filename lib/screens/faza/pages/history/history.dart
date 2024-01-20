@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/data/api/api_service.dart';
 import 'package:jbus_app/data/models/fazaa.dart';
-import 'package:jbus_app/data/models/friend.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/others/friendView.dart';
 
@@ -25,73 +24,58 @@ class _FazaHistoryPageState extends State<FazaHistoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<List<Fazaa>>(
-        future: fazaHistoryList,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            print('Error: ${snapshot.error}');
-            return const Center(
-                child: Text(
-              'Somthing went wrong while geting your data',
-              textAlign: TextAlign.center,
-            ));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(
-                child: Text('There is no faza\'s'));
-          } else {
-            return ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (context, index) {
-                  Fazaa fazaa = snapshot.data![index];
+        body: FutureBuilder<List<Fazaa>>(
+            future: fazaHistoryList,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                print('Error: ${snapshot.error}');
+                return const Center(
+                    child: Text(
+                  'Somthing went wrong while geting your data',
+                  textAlign: TextAlign.center,
+                ));
+              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return const Center(child: Text('There is no faza\'s'));
+              } else {
+                return ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) {
+                      Fazaa fazaa = snapshot.data![index];
 
-                  return FutureBuilder<Friend>(
-                    future: sl<ApiService>().getFriendById(fazaa.creditorId),
-                    builder: (context, snapshot) {
-                      Friend friend = snapshot.data!;
-                      if (snapshot.data == null) {
-                        return const Center(
-                          child: Text("There is no faza's"),
-                        );
-                      } else {
-                        return ListTile(
-                          leading: Container(
-                            height: 50,
-                            width: 50,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(width: 0.5)),
-                            child: friend.profileImage != null
-                                ? Image.asset('${friend.profileImage}')
-                                : const Icon(Icons.person),
-                          ),
-                          title: Text('${friend.user.name}'),
-                          onTap: () {
-                            showDialog(
-                                context: context,
-                                builder: (context) => FriendViewDialog(
-                                      id: friend.id,
-                                      name: friend.user.name,
-                                      profileImage: friend.profileImage,
-                                    ));
-                          },
-                          trailing: Text(
-                            'Amount\n${fazaa.amount}',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: fazaa.paid ? ourGreen : ourRed),
-                          ),
-                          // subtitle:
-                          //     Text('${friend.passenger.user.name ?? 'N/A'}'),
-                        );
-                      }
-                    },
-                  );
-                });
-          }
-        },
-      ),
-    );
+                      return ListTile(
+                        leading: Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(width: 0.5)),
+                          child: fazaa.inDebt.profileImage != null
+                              ? Image.asset('${fazaa.inDebt.profileImage}')
+                              : const Icon(Icons.person),
+                        ),
+                        title: Text('${fazaa.inDebt.user.name}'),
+                        // onTap: () {
+                        //   showDialog(
+                        //       context: context,
+                        //       builder: (context) => FriendViewDialog(
+                        //             id: fazaa.inDebt.id,
+                        //             name: fazaa.inDebt.user.name,
+                        //             profileImage: fazaa.inDebt.profileImage,
+                        //           ));
+                        // },
+                        trailing: Text(
+                          'Amount: ${fazaa.amount}',
+                          textAlign: TextAlign.center,
+                          style:
+                              TextStyle(color: fazaa.paid ? ourGreen : ourRed,fontSize: 15,fontWeight: FontWeight.bold),
+                        ),
+                        // subtitle:
+                        //     Text('${friend.passenger.user.name ?? 'N/A'}'),
+                      );
+                    });
+              }
+            }));
   }
 }
