@@ -33,26 +33,7 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
       key: _scaffoldKey,
       extendBodyBehindAppBar: true,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(115.0),
-        child: AppBar(
-          automaticallyImplyLeading: false,
-          elevation: 0,
-          backgroundColor: ourBlack.withOpacity(0),
-          title: const JbusAppBarTitle(),
-          flexibleSpace: const AppBarStyle(),
-          leading: CustomEndDrawerButton(
-            onTap: () {
-              _scaffoldKey.currentState!.openDrawer();
-            },
-          ),
-          actions: [
-            CustomDrawerButton(onTap: () {
-              _scaffoldKey.currentState!.openEndDrawer();
-            })
-          ],
-        ),
-      ),
+      // appBar:
       drawerEnableOpenDragGesture: true,
       endDrawerEnableOpenDragGesture: true,
       drawer: const NotificationsDrawer(),
@@ -80,6 +61,28 @@ class _DashboardState extends State<Dashboard> {
             ),
           );
         }),
+        Container(
+          alignment: Alignment.topCenter,
+          height: 150,
+          child: AppBar(
+            automaticallyImplyLeading: false,
+            // elevation: 0,
+            backgroundColor: ourBlack.withOpacity(0),
+            title: const JbusAppBarTitle(),
+            flexibleSpace: const AppBarStyle(),
+            leading: CustomEndDrawerButton(
+              onTap: () {
+                _scaffoldKey.currentState!.openDrawer();
+              },
+            ),
+            actions: [
+              CustomDrawerButton(onTap: () {
+                _scaffoldKey.currentState!.openEndDrawer();
+              })
+            ],
+          ),
+        ),
+      
         const BottomSearchSheet()
       ]),
       floatingActionButton: FloatingActionButton(

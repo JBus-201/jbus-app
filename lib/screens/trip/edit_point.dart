@@ -43,8 +43,7 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
   GoogleMapsApi googleApi = GoogleMapsApi();
   late GoogleMapController _mapController;
   dynamic route;
-  late Future<String?> poly;
-  int currentIndex = 0;
+  int currentIndex = -1;
   List<FavoritePoint>? favoritePointsList;
 
   void initState() {
@@ -61,10 +60,11 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(115.0),
         child: AppBar(
-          automaticallyImplyLeading: false,
+          automaticallyImplyLeading: true,
           elevation: 0,
           backgroundColor: ourBlack.withOpacity(0),
           title: const JbusAppBarTitle(),
