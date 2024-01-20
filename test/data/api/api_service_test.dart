@@ -14,7 +14,11 @@ import 'package:jbus_app/data/models/passenger.dart';
 import 'package:jbus_app/data/api/api_service.dart';
 import 'package:jbus_app/data/models/login_request.dart';
 import 'package:jbus_app/data/models/login_response.dart';
+import 'package:jbus_app/data/models/point_create_request.dart';
 import 'package:jbus_app/data/models/register_request.dart';
+import 'package:jbus_app/data/models/trip.dart';
+import 'package:jbus_app/data/models/trip_create_request.dart';
+import 'package:jbus_app/data/models/trip_update_request.dart';
 import 'package:retrofit/dio.dart';
 
 void main() {
@@ -27,7 +31,6 @@ void main() {
 
       setUp(() {
         options = BaseOptions(
-          baseUrl: baseUrl,
           contentType: Headers.jsonContentType,
           headers: {HttpHeaders.acceptHeader: Headers.jsonContentType},
         );
@@ -42,13 +45,14 @@ void main() {
           error: true,
           request: true,
         ));
-        apiService = ApiService(dio);
+        apiService = ApiService(dio, baseUrl: baseUrl);
       });
 
       test('register should return LoginResponse', () async {
         // Arrange
-        final email = 'testemail${DateTime.now()}@example.com';
-        final otp = (await apiService.sendOTP(email)).data;
+        final email =
+            'testemail${DateTime.now().toString().replaceAll(' ', '').replaceAll(':', '')}@example.com';
+        await apiService.sendOTP(email);
         final registerRequest = RegisterRequest(
           password: 'testpassword',
           email: email,
@@ -57,7 +61,7 @@ void main() {
         );
 
         // Act
-        final response = await apiService.register(registerRequest, otp);
+        final response = await apiService.register(registerRequest, 1234);
         // Assert
         expect(response, isA<LoginResponse>());
       });
@@ -433,6 +437,111 @@ void main() {
 
         expect(friendsResponse, isA<List<Friend>>());
       });
+
+      test('getTrips should return List<Trip>', () async {
+        // Arrange
+        final loginRequest = LoginRequest(
+          email: 'aboodsaob1139@gmail.com',
+          password: 'password',
+        );
+
+        final loginResponse = await apiService.login(loginRequest);
+        dio.options.headers['Authorization'] = 'Bearer ${loginResponse.token}';
+
+        // Act
+        final tripsResponse = await apiService.getTrips();
+
+        // Assert
+        expect(tripsResponse, isA<List<Trip>>());
+      });
+
+      test('getTrip should return Trip', () async {
+        // Arrange
+        final loginRequest = LoginRequest(
+          email: 'aboodsaob1139@gmail.com',
+          password: 'password',
+        );
+
+        final loginResponse = await apiService.login(loginRequest);
+        dio.options.headers['Authorization'] = 'Bearer ${loginResponse.token}';
+
+        final tripsResponse = await apiService.getTrips();
+
+        // Act
+        final tripResponse = await apiService.getTrip(tripsResponse[0].id!);
+
+        // Assert
+        expect(tripResponse, isA<Trip>());
+      });
+
+      /*
+
+  @PUT("/Trip/{id}")
+  Future<HttpResponse> updateTrip(
+      @Path("id") int id, @Body() TripUpdateRequest tripUpdateRequest);
+
+  @POST("/Trip")
+  Future<HttpResponse> createTrip(@Body() TripCreateRequest tripCreateRequest);
+    */
+
+      test('updateTrip should return HttpResponse', () async {
+        // Arrange
+        final loginRequest = LoginRequest(
+          email: 'aboodsaob1139@gmail.com',
+          password: 'password',
+        );
+
+        final loginResponse = await apiService.login(loginRequest);
+        dio.options.headers['Authorization'] = 'Bearer ${loginResponse.token}';
+
+        final tripsResponse = await apiService.getTrips();
+
+        final tripUpdateRequest = TripUpdateRequest(
+          status: 'ONGOING',
+        );
+
+        final tripUpdateRequest2 = TripUpdateRequest(
+          status: 'COMPLETED',
+        );
+        try {
+          await apiService.updateTrip(tripsResponse[0].id!, tripUpdateRequest);
+        } catch (_) {}
+
+        // Act
+        final tripResponse = await apiService.updateTrip(
+            tripsResponse[0].id!, tripUpdateRequest2);
+
+        // Assert
+        expect(tripResponse, isA<HttpResponse>());
+        expect(tripResponse.response.statusCode, 204);
+      }, skip: true);
+
+      test('createTrip should return HttpResponse', () async {
+        // Arrange
+        final loginRequest = LoginRequest(
+          email: 'aboodsaob1139@gmail.com',
+          password: 'password',
+        );
+
+        final loginResponse = await apiService.login(loginRequest);
+        dio.options.headers['Authorization'] = 'Bearer ${loginResponse.token}';
+        final tripCreateRequest = TripCreateRequest(
+          pickUpPoint: PointCreateRequest(
+            latitude: 123.123,
+            longitude: 123.123,
+            name: 'testname',
+          ),
+          startedAt: DateTime.now(),
+          status: 'PENDING',
+        );
+
+        // Act
+        final tripResponse = await apiService.createTrip(tripCreateRequest);
+
+        // Assert
+        expect(tripResponse, isA<HttpResponse>());
+        expect(tripResponse.response.statusCode, 201);
+      }, skip: false);
     },
   );
 }

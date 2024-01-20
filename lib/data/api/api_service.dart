@@ -10,6 +10,9 @@ import 'package:jbus_app/data/models/friends_create_request.dart';
 import 'package:jbus_app/data/models/login_request.dart';
 import 'package:jbus_app/data/models/login_response.dart';
 import 'package:jbus_app/data/models/register_request.dart';
+import 'package:jbus_app/data/models/trip.dart';
+import 'package:jbus_app/data/models/trip_create_request.dart';
+import 'package:jbus_app/data/models/trip_update_request.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
 
@@ -79,4 +82,17 @@ abstract class ApiService {
 
   @DELETE("/Friends/deleteFriend")
   Future<HttpResponse> deleteFriend(@Query("id") int friendId);
+
+  @GET("/Trip/getTrips")
+  Future<List<Trip>> getTrips();
+
+  @GET("/Trip/{id}")
+  Future<Trip> getTrip(@Path("id") int id);
+
+  @PUT("/Trip/{id}")
+  Future<HttpResponse> updateTrip(
+      @Path("id") int id, @Body() TripUpdateRequest tripUpdateRequest);
+
+  @POST("/Trip")
+  Future<HttpResponse> createTrip(@Body() TripCreateRequest tripCreateRequest);
 }
