@@ -31,17 +31,14 @@ class _TripSettupState extends State<TripSettup> {
   late bool isGoing;
   GoogleMapsApi googleApi = GoogleMapsApi();
   dynamic route;
-  late Future<String?> poly;
   void initState() {
     super.initState();
-    print(widget.route.waypointsGoing);
     route = widget.route;
     isGoing = widget.isGoing;
 
     startingPoint = widget.startingPoint ?? route.startingPoint.location;
 
     endingPoint = widget.endingPoint ?? route.endingPoint.location;
-
   }
 
   @override
@@ -74,10 +71,10 @@ class _TripSettupState extends State<TripSettup> {
                 if (route.waypointsGoing != null ||
                     route.waypointsReturning != null)
                   Polyline(
-                      polylineId: PolylineId("1"),
+                      polylineId: const PolylineId("1"),
                       points: googleApi.decodePolyline(isGoing
-                              ? widget.route.waypointsGoing!
-                              : widget.route.waypointsReturning!),
+                          ? widget.route.waypointsGoing!
+                          : widget.route.waypointsReturning!),
                       color: ourBlue,
                       width: 5)
               }),
