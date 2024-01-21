@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/data/api/api_service.dart';
 import 'package:jbus_app/data/models/fazaa.dart';
+import 'package:jbus_app/screens/faza/widgets/view_faza.dart';
 import 'package:jbus_app/services/service_locator.dart';
-import 'package:jbus_app/widgets/others/friendView.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FazaHistoryPage extends StatefulWidget {
   const FazaHistoryPage({super.key});
@@ -14,11 +16,20 @@ class FazaHistoryPage extends StatefulWidget {
 
 class _FazaHistoryPageState extends State<FazaHistoryPage> {
   late Future<List<Fazaa>> fazaHistoryList;
-
+  late int myId;
   @override
   void initState() {
     super.initState();
     fazaHistoryList = sl<ApiService>().getFazaas();
+    _loadUserData();
+  }
+
+  void _loadUserData() async {
+    final userRes = sl<SharedPreferences>().getString('user');
+    Map<String, dynamic> res = json.decode(userRes!);
+    setState(() {
+      myId = res['id'];
+    });
   }
 
   @override
@@ -55,24 +66,24 @@ class _FazaHistoryPageState extends State<FazaHistoryPage> {
                               ? Image.asset('${fazaa.inDebt.profileImage}')
                               : const Icon(Icons.person),
                         ),
-                        title: Text('${fazaa.inDebt.user.name}'),
-                        // onTap: () {
-                        //   showDialog(
-                        //       context: context,
-                        //       builder: (context) => FriendViewDialog(
-                        //             id: fazaa.inDebt.id,
-                        //             name: fazaa.inDebt.user.name,
-                        //             profileImage: fazaa.inDebt.profileImage,
-                        //           ));
-                        // },
+                        title: Text(
+                            '${fazaa.inDebt.id != myId ? fazaa.inDebt.user.name : "YOU"}'),
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) => FazaInfoViewDialog(
+                                    myId: myId,
+                                    fazaa: fazaa,
+                                  ));
+                        },
                         trailing: Text(
                           'Amount: ${fazaa.amount}',
                           textAlign: TextAlign.center,
-                          style:
-                              TextStyle(color: fazaa.paid ? ourGreen : ourRed,fontSize: 15,fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              color: fazaa.paid ? ourGreen : ourRed,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
                         ),
-                        // subtitle:
-                        //     Text('${friend.passenger.user.name ?? 'N/A'}'),
                       );
                     });
               }
