@@ -13,9 +13,19 @@ Passenger _$PassengerFromJson(Map<String, dynamic> json) => Passenger(
       user: User.fromJson(json['user'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$PassengerToJson(Passenger instance) => <String, dynamic>{
-      'id': instance.id,
-      'profileImage': instance.profileImage,
-      'wallet': instance.wallet,
-      'user': instance.user,
-    };
+Map<String, dynamic> _$PassengerToJson(Passenger instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('profileImage', instance.profileImage);
+  val['wallet'] = instance.wallet;
+  val['user'] = instance.user.toJson();
+  return val;
+}

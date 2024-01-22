@@ -17,11 +17,20 @@ FriendRequest _$FriendRequestFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['confirmedAt'] as String),
     );
 
-Map<String, dynamic> _$FriendRequestToJson(FriendRequest instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'friend': instance.friend,
-      'passenger': instance.passenger,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'confirmedAt': instance.confirmedAt?.toIso8601String(),
-    };
+Map<String, dynamic> _$FriendRequestToJson(FriendRequest instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+    'friend': instance.friend.toJson(),
+    'passenger': instance.passenger.toJson(),
+    'createdAt': instance.createdAt.toIso8601String(),
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('confirmedAt', instance.confirmedAt?.toIso8601String());
+  return val;
+}

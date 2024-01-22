@@ -1,4 +1,5 @@
 import 'package:jbus_app/constants/strings.dart';
+import 'package:jbus_app/data/models/bus.dart';
 import 'package:jbus_app/data/models/bus_route.dart';
 import 'package:jbus_app/data/models/favorite_point.dart';
 import 'package:jbus_app/data/models/favorite_point_create_request.dart';
@@ -9,6 +10,7 @@ import 'package:jbus_app/data/models/friend_request.dart';
 import 'package:jbus_app/data/models/friends_create_request.dart';
 import 'package:jbus_app/data/models/login_request.dart';
 import 'package:jbus_app/data/models/login_response.dart';
+import 'package:jbus_app/data/models/predefined_stops.dart';
 import 'package:jbus_app/data/models/register_request.dart';
 import 'package:jbus_app/data/models/trip.dart';
 import 'package:jbus_app/data/models/trip_create_request.dart';
@@ -94,4 +96,10 @@ abstract class ApiService {
 
   @POST("/Trip")
   Future<HttpResponse> createTrip(@Body() TripCreateRequest tripCreateRequest);
+
+  @GET("/Bus/getActiveBuses")
+  Future<List<Bus>> getActiveBuses();
+
+  @GET("/PredefinedStops/{id}")
+  Future<PredefinedStops> getPredefinedStop(@Path("id") int id);
 }

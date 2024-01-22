@@ -20,6 +20,6 @@ Map<String, dynamic> _$FavoritePointToJson(FavoritePoint instance) =>
       'id': instance.id,
       'createdAt': instance.createdAt.toIso8601String(),
       'pointId': instance.pointId,
-      'point': instance.point,
+      'point': instance.point.toJson(),
       'routeId': instance.routeId,
     };

@@ -3,6 +3,7 @@ import 'dart:io' hide HttpResponse;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:dio/dio.dart';
 import 'package:jbus_app/constants/strings.dart';
+import 'package:jbus_app/data/models/bus.dart';
 import 'package:jbus_app/data/models/bus_route.dart';
 import 'package:jbus_app/data/models/favorite_point.dart';
 import 'package:jbus_app/data/models/favorite_point_create_request.dart';
@@ -15,6 +16,7 @@ import 'package:jbus_app/data/api/api_service.dart';
 import 'package:jbus_app/data/models/login_request.dart';
 import 'package:jbus_app/data/models/login_response.dart';
 import 'package:jbus_app/data/models/point_create_request.dart';
+import 'package:jbus_app/data/models/predefined_stops.dart';
 import 'package:jbus_app/data/models/register_request.dart';
 import 'package:jbus_app/data/models/trip.dart';
 import 'package:jbus_app/data/models/trip_create_request.dart';
@@ -543,6 +545,74 @@ void main() {
         expect(tripResponse, isA<HttpResponse>());
         expect(tripResponse.response.statusCode, 201);
       }, skip: false);
+
+      /* 
+        @POST('/PaymentTransaction')
+  Future<HttpResponse> createPaymentTransaction(
+      @Body() PaymentTransactionCreate paymentTransactionCreate);
+
+  @GET("Bus/getActiveBuses")
+  Future<List<Bus>> getActiveBuses();
+
+  @GET("PredefinedStops/{id}")
+  Future<PredefinedStops> getPredefinedStop(@Path("id") int id);
+  */
+
+      // test('createPaymentTransaction should return HttpResponse', () async {
+      //   // Arrange
+      //   final loginRequest = LoginRequest(
+      //     email: 'aboodsaob1139@gmail.com',
+      //     password: 'password',
+      //   );
+
+      //   final loginResponse = await apiService.login(loginRequest);
+      //   dio.options.headers['Authorization'] = 'Bearer ${loginResponse.token}';
+      //   final paymentTransactionCreate = PaymentTransactionCreate(
+      //     busId: 1,
+      //     driverId: 1,
+      //     routeId: 1,
+      //     tripId: 1,
+      //     amount: 1000,
+      //     passengerId: loginResponse.passengerDto.id,
+      //   );
+
+      //   // Act
+      //   final paymentTransactionResponse =
+      //       await apiService.createPaymentTransaction(paymentTransactionCreate);
+
+      //   // Assert
+      //   expect(paymentTransactionResponse, isA<HttpResponse>());
+      //   expect(paymentTransactionResponse.response.statusCode, 200);
+      // }, skip: true);
+
+      test('getActiveBuses should return List<Bus>', () async {
+        // Arrange
+        final loginRequest = LoginRequest(
+          email: 'aboodsaob1139@gmail.com',
+          password: 'password',
+        );
+
+        final loginResponse = await apiService.login(loginRequest);
+        dio.options.headers['Authorization'] = 'Bearer ${loginResponse.token}';
+
+        // Act
+        final activeBusesResponse = await apiService.getActiveBuses();
+
+        // Assert
+        expect(activeBusesResponse, isA<List<Bus>>());
+      });
+
+      test('getPredefinedStop should return PredefinedStops', () async {
+        // Arrange
+        const predefinedStopsId = 1;
+
+        // Act
+        final predefinedStopsResponse =
+            await apiService.getPredefinedStop(predefinedStopsId);
+
+        // Assert
+        expect(predefinedStopsResponse, isA<PredefinedStops>());
+      });
     },
   );
 }

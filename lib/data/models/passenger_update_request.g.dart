@@ -16,10 +16,18 @@ PassengerUpdateRequest _$PassengerUpdateRequestFromJson(
     );
 
 Map<String, dynamic> _$PassengerUpdateRequestToJson(
-        PassengerUpdateRequest instance) =>
-    <String, dynamic>{
-      'profileImage': instance.profileImage,
-      'wallet': instance.wallet,
-      'updatedAt': instance.updatedAt.toIso8601String(),
-      'user': instance.user,
-    };
+    PassengerUpdateRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('profileImage', instance.profileImage);
+  val['wallet'] = instance.wallet;
+  val['updatedAt'] = instance.updatedAt.toIso8601String();
+  val['user'] = instance.user.toJson();
+  return val;
+}

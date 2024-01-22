@@ -19,9 +19,9 @@ Fazaa _$FazaaFromJson(Map<String, dynamic> json) => Fazaa(
 Map<String, dynamic> _$FazaaToJson(Fazaa instance) => <String, dynamic>{
       'amount': instance.amount,
       'createdAt': instance.createdAt.toIso8601String(),
-      'creditor': instance.creditor,
+      'creditor': instance.creditor.toJson(),
       'id': instance.id,
-      'inDebt': instance.inDebt,
+      'inDebt': instance.inDebt.toJson(),
       'paid': instance.paid,
       'returnedAt': instance.returnedAt.toIso8601String(),
     };
