@@ -23,8 +23,8 @@ class NeedFazaDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
-      elevation: 5,
-      backgroundColor: Colors.white,
+      elevation:0,
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -57,12 +57,12 @@ class NeedFazaDialog extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FazaRequestBT(totalAmountNeeded: amount, route: route),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text("Cancel"),
-                ),
+                // TextButton(
+                //   onPressed: () {
+                //     Navigator.of(context).pop();
+                //   },
+                //   child: const Text("Cancel"),
+                // ),
               ],
             )
           ],

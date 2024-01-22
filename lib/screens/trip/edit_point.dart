@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -44,8 +43,7 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
   GoogleMapsApi googleApi = GoogleMapsApi();
   late GoogleMapController _mapController;
   dynamic route;
-  late Future<String?> poly;
-  int currentIndex = 0;
+  int currentIndex = -1;
   List<FavoritePoint>? favoritePointsList;
 
   void initState() {
@@ -57,19 +55,16 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
     endingPoint = route.endingPoint.location;
     pickupSelectedPoint = startingPoint;
     dropoffSelectedPoint = endingPoint;
-
-    poly = isGoing
-        ? googleApi.loadRoute(jsonDecode(route.waypointsGoing))
-        : googleApi.loadRoute(jsonDecode(route.waypointsReturning));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(115.0),
         child: AppBar(
-          automaticallyImplyLeading: false,
+          automaticallyImplyLeading: true,
           elevation: 0,
           backgroundColor: ourBlack.withOpacity(0),
           title: const JbusAppBarTitle(),
@@ -78,100 +73,79 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
       ),
       body: Stack(
         children: [
-          FutureBuilder<String?>(
-            future: poly,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
+          FutureBuilder<List<FavoritePoint>>(
+            future: sl<ApiService>().getFavoritePointsInRoute(widget.route.id),
+            builder: (context, favPointsSnapshot) {
+              if (favPointsSnapshot.connectionState ==
+                  ConnectionState.waiting) {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (snapshot.hasError) {
+              } else if (favPointsSnapshot.hasError) {
                 return Center(
-                  child: Text('Error: ${snapshot.error}'),
+                  child: Text('Error: ${favPointsSnapshot.error}'),
                 );
-              } else if (!snapshot.hasData) {
+              } else if (!favPointsSnapshot.hasData) {
                 return const Center(
-                  child: Text('No data available'),
+                  child: Text('No favorite points available'),
                 );
               } else {
-                final _polyline = snapshot.data;
-
-                return FutureBuilder<List<FavoritePoint>>(
-                  future: sl<ApiService>()
-                      .getFavoritePointsInRoute(widget.route.id),
-                  builder: (context, favPointsSnapshot) {
-                    if (favPointsSnapshot.connectionState ==
-                        ConnectionState.waiting) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    } else if (favPointsSnapshot.hasError) {
-                      return Center(
-                        child: Text('Error: ${favPointsSnapshot.error}'),
-                      );
-                    } else if (!favPointsSnapshot.hasData) {
-                      return const Center(
-                        child: Text('No favorite points available'),
-                      );
-                    } else {
-                      favoritePointsList = favPointsSnapshot.data;
-                      print(
-                          '\n\nfav list lengetth${favoritePointsList!.length}\n\n');
-                      Set<Marker> markers = {
-                        Marker(
-                          markerId: const MarkerId("startpoint"),
-                          position: LatLng(
-                              startingPoint.latitude, startingPoint.longitude),
-                        ),
-                        Marker(
-                          markerId: const MarkerId("endpoint"),
-                          position: LatLng(
-                              endingPoint.latitude, endingPoint.longitude),
-                        ),
-                      };
-                      for (var favPoint in favoritePointsList!) {
-                        markers.add(Marker(
-                          markerId: MarkerId(favPoint.id.toString()),
-                          position: LatLng(favPoint.point.latitude,
-                              favPoint.point.longitude),
-                          icon: BitmapDescriptor.defaultMarkerWithHue(
-                              BitmapDescriptor.hueGreen),
-                          infoWindow: InfoWindow(
-                            title: "Favorite Point",
-                            snippet: favPoint.point.name,
-                          ),
-                        ));
-                      }
-
-                      return GoogleMap(
-                        zoomControlsEnabled: false,
-                        myLocationButtonEnabled: false,
-                        myLocationEnabled: true,
-                        onMapCreated: (controler) {
-                          _mapController = controler;
-                        },
-                        initialCameraPosition: CameraPosition(
-                          target: widget.isPickup
-                              ? LatLng(startingPoint.latitude,
-                                  startingPoint.longitude)
-                              : LatLng(
-                                  endingPoint.latitude, endingPoint.longitude),
-                          zoom: 14,
-                        ),
-                        markers: markers,
-                        polylines: {
-                          if (route.waypointsGoing != null ||
-                              route.waypointsReturning != null)
-                            Polyline(
-                              polylineId: const PolylineId('route'),
-                              color: ourBlue,
-                              visible: true,
-                              width: 5,
-                              points: googleApi.decodePolyline(_polyline),
-                            ),
-                        },
-                      );
-                    }
+                favoritePointsList = favPointsSnapshot.data;
+                print('\n\nfav list lengetth${favoritePointsList!.length}\n\n');
+                Set<Marker> markers = {
+                  Marker(
+                    markerId: const MarkerId("startpoint"),
+                    position:
+                        LatLng(startingPoint.latitude, startingPoint.longitude),
+                  ),
+                };
+                for (var favPoint in favoritePointsList!) {
+                  markers.add(Marker(
+                    markerId: MarkerId(favPoint.id.toString()),
+                    position: LatLng(
+                        favPoint.point.latitude, favPoint.point.longitude),
+                    icon: BitmapDescriptor.defaultMarkerWithHue(
+                        BitmapDescriptor.hueGreen),
+                    infoWindow: InfoWindow(
+                      title: "Favorite Point",
+                      snippet: favPoint.point.name,
+                    ),
+                  ));
+                }
+                markers.add(
+                  Marker(
+                    markerId: const MarkerId("endpoint"),
+                    position:
+                        LatLng(endingPoint.latitude, endingPoint.longitude),
+                  ),
+                );
+                return GoogleMap(
+                  zoomControlsEnabled: false,
+                  myLocationButtonEnabled: false,
+                  myLocationEnabled: true,
+                  onMapCreated: (controler) {
+                    _mapController = controler;
+                  },
+                  initialCameraPosition: CameraPosition(
+                    target: widget.isPickup
+                        ? LatLng(
+                            startingPoint.latitude, startingPoint.longitude)
+                        : LatLng(endingPoint.latitude, endingPoint.longitude),
+                    zoom: 14,
+                  ),
+                  markers: markers,
+                  polylines: {
+                    if (route.waypointsGoing != null ||
+                        route.waypointsReturning != null)
+                      Polyline(
+                        polylineId: const PolylineId('route'),
+                        color: ourBlue,
+                        visible: true,
+                        width: 5,
+                        points: googleApi.decodePolyline(isGoing
+                            ? widget.route.waypointsGoing!
+                            : widget.route.waypointsReturning!),
+                      ),
                   },
                 );
               }
@@ -221,7 +195,7 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                       },
                     ),
                     RectangularElevatedButton(
-                      text: "Select Points",
+                        text: "Select Points",
                         width: 175,
                         onPressed: () {
                           if (BlocProvider.of<PickupBloc>(context)
@@ -229,11 +203,9 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                               .isPickup) {
                             pickupSelectedPoint =
                                 favoritePointsList![currentIndex].point;
-                            // BlocProvider.of<PickupBloc>(context).add(IsDropoffEvent());
                           } else {
                             dropoffSelectedPoint =
                                 favoritePointsList![currentIndex].point;
-                            // BlocProvider.of<PickupBloc>(context).add(IsPickupEvent());
                           }
                           Navigator.pushReplacement(
                               context,

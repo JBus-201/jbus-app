@@ -436,7 +436,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Friends/confirmFriendRequest',
+              '/Friends/confirmFriendRequest/$friendId',
               queryParameters: queryParameters,
               data: _data,
             )

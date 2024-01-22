@@ -23,7 +23,6 @@ class _DashboardState extends State<Dashboard> {
   late GoogleMapController _mapController;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GoogleMapsApi googleService = GoogleMapsApi();
-
   @override
   void initState() {
     super.initState();
@@ -34,26 +33,7 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
       key: _scaffoldKey,
       extendBodyBehindAppBar: true,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(115.0),
-        child: AppBar(
-          automaticallyImplyLeading: false,
-          elevation: 0,
-          backgroundColor: ourBlack.withOpacity(0),
-          title: const JbusAppBarTitle(),
-          flexibleSpace: const AppBarStyle(),
-          leading: CustomEndDrawerButton(
-            onTap: () {
-              _scaffoldKey.currentState!.openDrawer();
-            },
-          ),
-          actions: [
-            CustomDrawerButton(onTap: () {
-              _scaffoldKey.currentState!.openEndDrawer();
-            })
-          ],
-        ),
-      ),
+      // appBar:
       drawerEnableOpenDragGesture: true,
       endDrawerEnableOpenDragGesture: true,
       drawer: const NotificationsDrawer(),
@@ -67,7 +47,6 @@ class _DashboardState extends State<Dashboard> {
             rotateGesturesEnabled: true,
             zoomControlsEnabled: false,
             myLocationButtonEnabled: false,
-            
             onMapCreated: (controller) {
               _mapController = controller;
               // ignore: unrelated_type_equality_checks
@@ -77,12 +56,33 @@ class _DashboardState extends State<Dashboard> {
               googleService.moveToCurrentLocation(_mapController);
             },
             initialCameraPosition: CameraPosition(
-              target: GoogleMapsApi
-                  .curentLocation, // Initial camera position, it will be overridden later
+              target: GoogleMapsApi.curentLocation,
               zoom: 15.0,
             ),
           );
         }),
+        Container(
+          alignment: Alignment.topCenter,
+          height: 150,
+          child: AppBar(
+            automaticallyImplyLeading: false,
+            // elevation: 0,
+            backgroundColor: ourBlack.withOpacity(0),
+            title: const JbusAppBarTitle(),
+            flexibleSpace: const AppBarStyle(),
+            leading: CustomEndDrawerButton(
+              onTap: () {
+                _scaffoldKey.currentState!.openDrawer();
+              },
+            ),
+            actions: [
+              CustomDrawerButton(onTap: () {
+                _scaffoldKey.currentState!.openEndDrawer();
+              })
+            ],
+          ),
+        ),
+      
         const BottomSearchSheet()
       ]),
       floatingActionButton: FloatingActionButton(

@@ -1,9 +1,8 @@
 // ignore_for_file: unused_local_variable
 
-import 'dart:convert';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -158,102 +157,12 @@ class GoogleMapsApi {
     }
   }
 
-
-Future<String?> loadRoute(List<dynamic> waypoints) async {
-  List<LatLng> points = [];
-
-  for (var waypointData in waypoints) {
-    if (waypointData is List) {
-      // Handle the case where waypointsReturning is an array of arrays
-      for (var subWaypointData in waypointData) {
-        final geometry = subWaypointData['Location'];
-        if (geometry != null) {
-          final latitude = geometry['Latitude'];
-          final longitude = geometry['Longitude'];
-          points.add(LatLng(latitude, longitude));
-        }
-      }
-    } else {
-      // Handle the case where waypointsGoing is a single array
-      final geometry = waypointData['Location'];
-      if (geometry != null) {
-        final latitude = geometry['Latitude'];
-        final longitude = geometry['Longitude'];
-        points.add(LatLng(latitude, longitude));
-      }
-    }
-  }
-
-  if (points.isEmpty) {
-    return null;
-  }
-
-  final waypointsString = points.map((point) {
-    return "${point.latitude},${point.longitude}";
-  }).join('|');
-
-  final response = await http.get(Uri.parse(
-    'https://maps.googleapis.com/maps/api/directions/json?origin=${points.first.latitude},${points.first.longitude}&destination=${points.last.latitude},${points.last.longitude}&waypoints=$waypointsString&key=$apiKey',
-  ));
-
-  if (response.statusCode == 200) {
-    final data = json.decode(response.body);
-    final routes = data['routes'] as List<dynamic>;
-    if (routes.isNotEmpty) {
-      final route = routes[0];
-      final overviewPolyline = route['overview_polyline'];
-      final polylinePoints = overviewPolyline['points'];
-      return polylinePoints;
-    }
-  }
-  return null;
-}
-
-
   void handleMapLongPress(LatLng tappedPoint) {}
 
-  List<LatLng> decodePolyline(String? polyline) {
-    List<LatLng> points = [];
-    for (var point in _decodeEncodedPolyline(polyline)) {
-      points.add(LatLng(point[0], point[1]));
-    }
-    return points;
-  }
-
-  List<List<double>> _decodeEncodedPolyline(String? encoded) {
-    List<List<double>> poly = [];
-    int index = 0;
-    int len = encoded!.length;
-    int lat = 0;
-    int lng = 0;
-
-    while (index < len) {
-      int b;
-      int shift = 0;
-      int result = 0;
-
-      do {
-        b = encoded.codeUnitAt(index++) - 63;
-        result |= (b & 0x1f) << shift;
-        shift += 5;
-      } while (b >= 0x20);
-
-      lat += ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
-
-      shift = 0;
-      result = 0;
-
-      do {
-        b = encoded.codeUnitAt(index++) - 63;
-        result |= (b & 0x1f) << shift;
-        shift += 5;
-      } while (b >= 0x20);
-
-      lng += ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
-
-      poly.add([lat / 1E5, lng / 1E5]);
-    }
-
-    return poly;
+  List<LatLng> decodePolyline(String polyline) {
+    return PolylinePoints()
+        .decodePolyline(polyline)
+        .map((point) => LatLng(point.latitude, point.longitude))
+        .toList();
   }
 }

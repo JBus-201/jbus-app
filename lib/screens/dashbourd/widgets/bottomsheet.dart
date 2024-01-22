@@ -83,9 +83,13 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
 
     _debounce = Timer(const Duration(milliseconds: 50), () {
       setState(() {
-        sRoutes = allRoutes.where(
-          (element) => element.name!.toLowerCase().contains(text.toLowerCase()),
-        );
+        sRoutes = allRoutes.where((element) =>
+            element.startingPoint.name!
+                .toLowerCase()
+                .contains(text.toLowerCase()) ||
+            element.endingPoint.name!
+                .toLowerCase()
+                .contains(text.toLowerCase()));
       });
     });
   }
@@ -198,10 +202,11 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                                             offset: Offset(2, 4),
                                             blurRadius: 5)
                                       ],
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(15))),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(15))),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Column(

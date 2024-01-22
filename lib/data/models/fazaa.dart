@@ -1,6 +1,5 @@
 import 'package:jbus_app/data/models/passenger.dart';
 import 'package:json_annotation/json_annotation.dart';
-
 part 'fazaa.g.dart';
 
 @JsonSerializable(

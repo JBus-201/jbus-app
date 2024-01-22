@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:jbus_app/screens/faza/pages/history/history.dart';
 import 'package:jbus_app/screens/faza/widgets/friends.dart';
@@ -51,10 +50,7 @@ class _FazaMainPageState extends State<FazaMainPage> {
             icon: Icon(Icons.history),
             label: 'History',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.monetization_on_outlined),
-            label: 'Dians',
-          ),
+        
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
@@ -66,7 +62,6 @@ class _FazaMainPageState extends State<FazaMainPage> {
     return [
       const FazaFriendsPage(),
       const FazaHistoryPage(),
-      Text('dain'),
     ];
   }
 
