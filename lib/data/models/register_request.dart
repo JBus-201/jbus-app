@@ -2,7 +2,10 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'register_request.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(
+  explicitToJson: true,
+  includeIfNull: false,
+)
 class RegisterRequest {
   final String name;
   final String? phoneNumber;

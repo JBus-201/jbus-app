@@ -8,8 +8,10 @@ part of 'trip_create_request.dart';
 
 TripCreateRequest _$TripCreateRequestFromJson(Map<String, dynamic> json) =>
     TripCreateRequest(
-      dropOffPoint: PointCreateRequest.fromJson(
-          json['dropOffPoint'] as Map<String, dynamic>),
+      dropOffPoint: json['dropOffPoint'] == null
+          ? null
+          : PointCreateRequest.fromJson(
+              json['dropOffPoint'] as Map<String, dynamic>),
       finishedAt: json['finishedAt'] == null
           ? null
           : DateTime.parse(json['finishedAt'] as String),

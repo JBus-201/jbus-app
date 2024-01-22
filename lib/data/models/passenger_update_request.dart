@@ -3,7 +3,10 @@ import 'package:jbus_app/data/models/user.dart';
 
 part 'passenger_update_request.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(
+  explicitToJson: true,
+  includeIfNull: false,
+)
 class PassengerUpdateRequest {
   final String? profileImage;
   final double wallet;

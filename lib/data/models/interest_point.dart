@@ -3,7 +3,10 @@ import 'package:jbus_app/data/models/point.dart';
 
 part 'interest_point.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(
+  explicitToJson: true,
+  includeIfNull: false,
+)
 class InterestPoint {
   final int id;
   final String? name;

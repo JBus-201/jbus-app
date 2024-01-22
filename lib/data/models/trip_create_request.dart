@@ -3,19 +3,16 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'trip_create_request.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(
+  explicitToJson: true,
+  includeIfNull: false,
+)
 class TripCreateRequest {
-  @JsonKey(name: "dropOffPoint", includeIfNull: false)
   final PointCreateRequest? dropOffPoint;
-  @JsonKey(name: "finishedAt", includeIfNull: false)
   final DateTime? finishedAt;
-  @JsonKey(name: "paymentTransactionId", includeIfNull: false)
   final int? paymentTransactionId;
-  @JsonKey(name: "pickUpPoint")
   final PointCreateRequest pickUpPoint;
-  @JsonKey(name: "startedAt")
   final DateTime startedAt;
-  @JsonKey(name: "status")
   final String status;
 
   TripCreateRequest({

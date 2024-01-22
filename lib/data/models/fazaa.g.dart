@@ -9,19 +9,19 @@ part of 'fazaa.dart';
 Fazaa _$FazaaFromJson(Map<String, dynamic> json) => Fazaa(
       amount: (json['amount'] as num).toDouble(),
       createdAt: DateTime.parse(json['createdAt'] as String),
-      creditorId: json['creditorId'] as int,
       id: json['id'] as int,
-      inDebtId: json['inDebtId'] as int,
+      inDebt: Passenger.fromJson(json['inDebt'] as Map<String, dynamic>),
       paid: json['paid'] as bool,
       returnedAt: DateTime.parse(json['returnedAt'] as String),
+      creditor: Passenger.fromJson(json['creditor'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$FazaaToJson(Fazaa instance) => <String, dynamic>{
       'amount': instance.amount,
       'createdAt': instance.createdAt.toIso8601String(),
-      'creditorId': instance.creditorId,
+      'creditor': instance.creditor,
       'id': instance.id,
-      'inDebtId': instance.inDebtId,
+      'inDebt': instance.inDebt,
       'paid': instance.paid,
       'returnedAt': instance.returnedAt.toIso8601String(),
     };

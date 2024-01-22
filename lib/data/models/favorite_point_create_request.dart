@@ -2,7 +2,10 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'favorite_point_create_request.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(
+  explicitToJson: true,
+  includeIfNull: false,
+)
 class FavoritePointCreateRequest {
   final String name;
   final double lat;

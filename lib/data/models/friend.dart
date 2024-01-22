@@ -3,7 +3,10 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'friend.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(
+  explicitToJson: true,
+  includeIfNull: false,
+)
 class Friend {
   final int id;
   final String? profileImage;

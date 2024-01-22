@@ -1,25 +1,29 @@
+import 'package:jbus_app/data/models/passenger.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'fazaa.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(
+  explicitToJson: true,
+  includeIfNull: false,
+)
 class Fazaa {
   double amount;
   DateTime createdAt;
-  int creditorId;
+  Passenger creditor;
   int id;
-  int inDebtId;
+  Passenger inDebt;
   bool paid;
   DateTime returnedAt;
 
   Fazaa({
     required this.amount,
     required this.createdAt,
-    required this.creditorId,
     required this.id,
-    required this.inDebtId,
+    required this.inDebt,
     required this.paid,
     required this.returnedAt,
+    required this.creditor,
   });
 
   factory Fazaa.fromJson(Map<String, dynamic> json) => _$FazaaFromJson(json);

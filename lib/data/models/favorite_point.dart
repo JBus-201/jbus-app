@@ -3,7 +3,10 @@ import 'package:jbus_app/data/models/point.dart';
 
 part 'favorite_point.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(
+  explicitToJson: true,
+  includeIfNull: false,
+)
 class FavoritePoint {
   final int id;
   final DateTime createdAt;

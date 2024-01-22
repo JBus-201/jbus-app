@@ -312,7 +312,8 @@ class _ApiService implements ApiService {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = fazaaStoreRequest;
+    final _data = <String, dynamic>{};
+    _data.addAll(fazaaStoreRequest.toJson());
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
       method: 'POST',

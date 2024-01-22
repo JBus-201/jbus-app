@@ -5,7 +5,10 @@ import 'package:jbus_app/data/models/user.dart';
 
 part 'passenger.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(
+  explicitToJson: true,
+  includeIfNull: false,
+)
 class Passenger {
   final int id;
   final String? profileImage;

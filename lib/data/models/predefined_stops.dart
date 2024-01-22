@@ -3,7 +3,10 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'predefined_stops.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(
+  explicitToJson: true,
+  includeIfNull: false,
+)
 class PredefinedStops {
   final int id;
   final DateTime createdAt;

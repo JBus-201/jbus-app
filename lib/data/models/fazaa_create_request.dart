@@ -2,7 +2,10 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'fazaa_create_request.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(
+  explicitToJson: true,
+  includeIfNull: false,
+)
 class FazaaCreateRequest {
   @JsonKey(required: true)
   final int amount;

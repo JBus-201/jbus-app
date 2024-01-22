@@ -22,16 +22,26 @@ BusRoute _$BusRouteFromJson(Map<String, dynamic> json) => BusRoute(
           InterestPoint.fromJson(json['endingPoint'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$BusRouteToJson(BusRoute instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'fee': instance.fee,
-      'waypointsGoing': instance.waypointsGoing,
-      'waypointsReturning': instance.waypointsReturning,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt.toIso8601String(),
-      'startingPointId': instance.startingPointId,
-      'startingPoint': instance.startingPoint,
-      'endingPointId': instance.endingPointId,
-      'endingPoint': instance.endingPoint,
-    };
+Map<String, dynamic> _$BusRouteToJson(BusRoute instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('name', instance.name);
+  val['fee'] = instance.fee;
+  writeNotNull('waypointsGoing', instance.waypointsGoing);
+  writeNotNull('waypointsReturning', instance.waypointsReturning);
+  val['createdAt'] = instance.createdAt.toIso8601String();
+  val['updatedAt'] = instance.updatedAt.toIso8601String();
+  val['startingPointId'] = instance.startingPointId;
+  val['startingPoint'] = instance.startingPoint.toJson();
+  val['endingPointId'] = instance.endingPointId;
+  val['endingPoint'] = instance.endingPoint.toJson();
+  return val;
+}

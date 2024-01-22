@@ -2,13 +2,13 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'point_create_request.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(
+  explicitToJson: true,
+  includeIfNull: false,
+)
 class PointCreateRequest {
-  @JsonKey(name: "latitude")
   final double latitude;
-  @JsonKey(name: "longitude")
   final double longitude;
-  @JsonKey(name: "name")
   final String name;
 
   PointCreateRequest({

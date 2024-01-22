@@ -3,7 +3,10 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'trip.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(
+  explicitToJson: true,
+  includeIfNull: false,
+)
 class Trip {
   Trip({
     required this.id,
@@ -70,13 +73,13 @@ class Trip {
     name: 'dropOffPointId',
     includeIfNull: false,
   )
-  final int dropOffPointId;
+  final int? dropOffPointId;
 
   @JsonKey(
     name: 'dropOffPoint',
     includeIfNull: false,
   )
-  final Point dropOffPoint;
+  final Point? dropOffPoint;
 
   Map<String, dynamic> toJson() => _$TripToJson(this);
   @override

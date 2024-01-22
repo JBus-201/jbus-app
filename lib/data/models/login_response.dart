@@ -3,7 +3,10 @@ import 'package:jbus_app/data/models/passenger.dart';
 
 part 'login_response.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(
+  explicitToJson: true,
+  includeIfNull: false,
+)
 class LoginResponse {
   final Passenger passengerDto;
   final String token;

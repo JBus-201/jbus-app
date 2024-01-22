@@ -3,7 +3,10 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'trip_update_request.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(
+  explicitToJson: true,
+  includeIfNull: false,
+)
 class TripUpdateRequest {
   @JsonKey(name: "dropOffPoint", includeIfNull: false)
   final PointCreateRequest? dropOffPoint;

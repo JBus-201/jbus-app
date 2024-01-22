@@ -14,10 +14,19 @@ RegisterRequest _$RegisterRequestFromJson(Map<String, dynamic> json) =>
       password: json['password'] as String,
     );
 
-Map<String, dynamic> _$RegisterRequestToJson(RegisterRequest instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-      'phoneNumber': instance.phoneNumber,
-      'email': instance.email,
-      'password': instance.password,
-    };
+Map<String, dynamic> _$RegisterRequestToJson(RegisterRequest instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('phoneNumber', instance.phoneNumber);
+  val['email'] = instance.email;
+  val['password'] = instance.password;
+  return val;
+}

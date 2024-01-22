@@ -283,12 +283,12 @@ void main() {
         dio.options.headers['Authorization'] = 'Bearer ${loginResponse.token}';
 
         // Act
-        final response = await apiService.storeFazaas([
+        final response = await apiService.storeFazaas(
           FazaaCreateRequest(
             amount: 1000,
             creditorId: loginResponse.passengerDto.id,
           ),
-        ]);
+        );
 
         // Assert
 
@@ -531,8 +531,9 @@ void main() {
             longitude: 123.123,
             name: 'testname',
           ),
-          startedAt: DateTime.now(),
+          startedAt: DateTime.now().toUtc(),
           status: 'PENDING',
+          finishedAt: DateTime.now().add(Duration(minutes: 10)).toUtc(),
         );
 
         // Act

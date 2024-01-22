@@ -17,11 +17,20 @@ PredefinedStops _$PredefinedStopsFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$PredefinedStopsToJson(PredefinedStops instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt.toIso8601String(),
-      'routeId': instance.routeId,
-      'points': instance.points,
-    };
+Map<String, dynamic> _$PredefinedStopsToJson(PredefinedStops instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+    'createdAt': instance.createdAt.toIso8601String(),
+    'updatedAt': instance.updatedAt.toIso8601String(),
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('routeId', instance.routeId);
+  writeNotNull('points', instance.points?.map((e) => e.toJson()).toList());
+  return val;
+}

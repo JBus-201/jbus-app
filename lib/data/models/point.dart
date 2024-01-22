@@ -2,7 +2,10 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'point.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(
+  explicitToJson: true,
+  includeIfNull: false,
+)
 class Point {
   final int id;
   final String? name;

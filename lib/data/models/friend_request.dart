@@ -3,7 +3,10 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'friend_request.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(
+  explicitToJson: true,
+  includeIfNull: false,
+)
 class FriendRequest {
   final int id;
   final Friend friend;
