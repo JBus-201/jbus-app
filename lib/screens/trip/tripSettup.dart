@@ -4,6 +4,7 @@ import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/data/api/google_service.dart';
 import 'package:jbus_app/data/models/bus_route.dart';
 import 'package:jbus_app/data/models/point.dart';
+import 'package:jbus_app/screens/trip/av_buses.dart';
 import 'package:jbus_app/screens/trip/edit_point.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
@@ -14,12 +15,13 @@ class TripSettup extends StatefulWidget {
   final bool isGoing;
   final Point? startingPoint;
   final Point? endingPoint;
-  const TripSettup(
-      {super.key,
-      required this.route,
-      this.isGoing = true,
-      this.startingPoint,
-      this.endingPoint});
+  const TripSettup({
+    super.key,
+    required this.route,
+    this.isGoing = true,
+    this.startingPoint,
+    this.endingPoint,
+  });
 
   @override
   State<TripSettup> createState() => _TripSettupState();
@@ -229,7 +231,19 @@ class _TripSettupState extends State<TripSettup> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: RectangularElevatedButton(
-          text: "Available Buses", width: 200, onPressed: () {}),
+          text: "Available Buses",
+          width: 200,
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => TripAvailableBuses(
+                          route: widget.route,
+                          isGoing: isGoing,
+                          startingPoint: startingPoint,
+                          endingPoint: endingPoint,
+                        )));
+          }),
     );
   }
 }

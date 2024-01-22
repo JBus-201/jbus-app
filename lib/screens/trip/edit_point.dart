@@ -107,8 +107,8 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                     icon: BitmapDescriptor.defaultMarkerWithHue(
                         BitmapDescriptor.hueGreen),
                     infoWindow: InfoWindow(
-                      title: "Favorite Point",
-                      snippet: favPoint.point.name,
+                      title: favPoint.point.name,
+                      snippet: "Favorite Point",
                     ),
                   ));
                 }
