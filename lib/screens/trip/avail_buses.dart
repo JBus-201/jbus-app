@@ -67,8 +67,9 @@ class _TripAvailableBusesState extends State<TripAvailableBuses> {
         zoomControlsEnabled: false,
         myLocationButtonEnabled: false,
         myLocationEnabled: true,
-        initialCameraPosition: const CameraPosition(
-          target: LatLng(0, 0), // Set to a default value
+        initialCameraPosition: CameraPosition(
+          target: LatLng(widget.startingPoint.latitude,
+              widget.startingPoint.latitude), // Set to a default value
           zoom: 12.0,
         ),
         markers: markers,
@@ -112,7 +113,8 @@ class _TripAvailableBusesState extends State<TripAvailableBuses> {
                 Marker existingMarker = markers.firstWhere(
                   (marker) => marker.markerId.value == markerId,
                   orElse: () => Marker(
-                      markerId: MarkerId(markerId), icon: googleApi.customBusIcon!),
+                      markerId: MarkerId(markerId),
+                      icon: googleApi.customBusIcon!),
                 );
 
                 markers.remove(existingMarker); // Remove the existing marker
@@ -161,7 +163,6 @@ class _TripAvailableBusesState extends State<TripAvailableBuses> {
                                                           endingPoint: widget
                                                               .endingPoint,
                                                         )),
-                                                
                                               )
                                             }
                                         })
@@ -220,5 +221,4 @@ class _TripAvailableBusesState extends State<TripAvailableBuses> {
       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
     ));
   }
-
 }

@@ -4,7 +4,7 @@ import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/data/api/google_service.dart';
 import 'package:jbus_app/data/models/bus_route.dart';
 import 'package:jbus_app/data/models/point.dart';
-import 'package:jbus_app/screens/trip/av_buses.dart';
+import 'package:jbus_app/screens/trip/avail_buses.dart';
 import 'package:jbus_app/screens/trip/edit_point.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
