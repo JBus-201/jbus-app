@@ -99,7 +99,4 @@ abstract class ApiService {
 
   @GET("/Bus/getActiveBuses")
   Future<List<Bus>> getActiveBuses();
-
-  @GET("/PredefinedStops/{id}")
-  Future<PredefinedStops> getPredefinedStop(@Path("id") int id);
 }

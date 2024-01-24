@@ -1,5 +1,7 @@
 import 'dart:io' hide HttpResponse;
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:dio/dio.dart';
 import 'package:jbus_app/constants/strings.dart';
@@ -600,18 +602,6 @@ void main() {
 
         // Assert
         expect(activeBusesResponse, isA<List<Bus>>());
-      });
-
-      test('getPredefinedStop should return PredefinedStops', () async {
-        // Arrange
-        const predefinedStopsId = 1;
-
-        // Act
-        final predefinedStopsResponse =
-            await apiService.getPredefinedStop(predefinedStopsId);
-
-        // Assert
-        expect(predefinedStopsResponse, isA<PredefinedStops>());
       });
     },
   );

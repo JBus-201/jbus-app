@@ -12,6 +12,7 @@ RegisterRequest _$RegisterRequestFromJson(Map<String, dynamic> json) =>
       phoneNumber: json['phoneNumber'] as String?,
       email: json['email'] as String,
       password: json['password'] as String,
+      fcmToken: json['fcmToken'] as String?,
     );
 
 Map<String, dynamic> _$RegisterRequestToJson(RegisterRequest instance) {
@@ -28,5 +29,6 @@ Map<String, dynamic> _$RegisterRequestToJson(RegisterRequest instance) {
   writeNotNull('phoneNumber', instance.phoneNumber);
   val['email'] = instance.email;
   val['password'] = instance.password;
+  writeNotNull('fcmToken', instance.fcmToken);
   return val;
 }
