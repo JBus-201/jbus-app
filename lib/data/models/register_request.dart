@@ -11,12 +11,14 @@ class RegisterRequest {
   final String? phoneNumber;
   final String email;
   final String password;
+  final String? fcmToken;
 
   RegisterRequest({
     required this.name,
     required this.phoneNumber,
     required this.email,
     required this.password,
+    this.fcmToken,
   });
 
   factory RegisterRequest.fromJson(Map<String, dynamic> json) =>

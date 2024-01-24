@@ -1,3 +1,4 @@
+import 'package:jbus_app/data/models/predefined_stops.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:jbus_app/data/models/interest_point.dart';
 
@@ -15,10 +16,9 @@ class BusRoute {
   final String? waypointsReturning;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final int startingPointId;
   final InterestPoint startingPoint;
-  final int endingPointId;
   final InterestPoint endingPoint;
+  final PredefinedStops? predefinedStops;
 
   BusRoute({
     required this.id,
@@ -28,10 +28,9 @@ class BusRoute {
     required this.waypointsReturning,
     required this.createdAt,
     required this.updatedAt,
-    required this.startingPointId,
     required this.startingPoint,
-    required this.endingPointId,
     required this.endingPoint,
+    this.predefinedStops,
   });
 
   factory BusRoute.fromJson(Map<String, dynamic> json) =>

@@ -14,12 +14,14 @@ BusRoute _$BusRouteFromJson(Map<String, dynamic> json) => BusRoute(
       waypointsReturning: json['waypointsReturning'] as String?,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
-      startingPointId: json['startingPointId'] as int,
       startingPoint:
           InterestPoint.fromJson(json['startingPoint'] as Map<String, dynamic>),
-      endingPointId: json['endingPointId'] as int,
       endingPoint:
           InterestPoint.fromJson(json['endingPoint'] as Map<String, dynamic>),
+      predefinedStops: json['predefinedStops'] == null
+          ? null
+          : PredefinedStops.fromJson(
+              json['predefinedStops'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$BusRouteToJson(BusRoute instance) {
@@ -39,9 +41,8 @@ Map<String, dynamic> _$BusRouteToJson(BusRoute instance) {
   writeNotNull('waypointsReturning', instance.waypointsReturning);
   val['createdAt'] = instance.createdAt.toIso8601String();
   val['updatedAt'] = instance.updatedAt.toIso8601String();
-  val['startingPointId'] = instance.startingPointId;
   val['startingPoint'] = instance.startingPoint.toJson();
-  val['endingPointId'] = instance.endingPointId;
   val['endingPoint'] = instance.endingPoint.toJson();
+  writeNotNull('predefinedStops', instance.predefinedStops?.toJson());
   return val;
 }

@@ -12,7 +12,6 @@ class InterestPoint {
   final String? name;
   final String? logo;
   final DateTime updatedAt;
-  final int locationId;
   final Point location;
 
   InterestPoint({
@@ -20,7 +19,6 @@ class InterestPoint {
     this.name,
     this.logo,
     required this.updatedAt,
-    required this.locationId,
     required this.location,
   });
 
