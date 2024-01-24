@@ -113,5 +113,10 @@
     "sorryPleaseEnterACardNumber":"عذرًا، أدخل رقم بطاقة.",
     "sorryPleaseEnterAYear":"عذرًا، أدخل سنة،",
     "sorryPleaseEnterAMonth":"عذرًا، أدخل شهر.",
-    "sorryPleaseEnterACvv":"عذرًا، أدخل رقم Cvv"
+    "sorryPleaseEnterACvv":"عذرًا، أدخل رقم Cvv",
+    "friends":"الأصدقاء",
+    "fazaHisrory":"سجل الفزعات",
+    "allFriends":"الجميع",
+    "friendRequests":"الطلبات",
+    "addFriend":"إضافة"
 }

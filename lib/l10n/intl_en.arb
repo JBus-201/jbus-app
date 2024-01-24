@@ -113,10 +113,12 @@
     "sorryPleaseEnterACardNumber":"Sorry, Please Enter a Card Number",
     "sorryPleaseEnterAYear":"Sorry, Please Enter a Year",
     "sorryPleaseEnterAMonth":"Sorry, Please Enter a Month",
-    "sorryPleaseEnterACvv":"Sorry, Please Enter a Cvv"
+    "sorryPleaseEnterACvv":"Sorry, Please Enter a Cvv",
+    "friends":"Friends",
+    "fazaHisrory":"History",
+    "allFriends":"All",
+    "friendRequests":"Requests",
+    "addFriend":"Add"
 
-
-
-    
 
 }
