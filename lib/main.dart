@@ -12,6 +12,7 @@ import 'package:jbus_app/general_blocs/password_bloc/bloc/password_bloc.dart';
 import 'package:jbus_app/localization/bloc/localization_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/screens/authentication/signup/signup.dart';
+import 'package:jbus_app/screens/dashbourd/dashbourd.dart';
 import 'package:jbus_app/screens/home/home.dart';
 import 'package:jbus_app/screens/settings/language_settings/bloc/language_settings_bloc.dart';
 import 'package:jbus_app/screens/settings/theme_settings/bloc/theme_settings_bloc.dart';
@@ -119,9 +120,9 @@ Widget _getHomeScreen(UserStatus status) {
     case UserStatus.notLoggedIn:
       return const SignupScreen();
     case UserStatus.loggedIn:
-      return const SignupScreen();
+      return const HomeScreen();
     case UserStatus.inTrip:
-      return const SignupScreen();
+      return const Dashboard();
     default:
       return const SignupScreen();
   }
