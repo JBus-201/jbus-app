@@ -33,6 +33,8 @@ class AppLightTheme extends AppTheme {
 
         // Fonts
         fontFamily: 'Roboto',
+        //fontFamily: 'PTSerif',
+        //fontFamily: '.SF UI Display',
         textTheme: const TextTheme(
             bodyMedium: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
         focusColor: ourBlue,

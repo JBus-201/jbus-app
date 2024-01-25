@@ -5,12 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:jbus_app/data/api/google_service.dart';
+import 'package:jbus_app/general_blocs/email_bloc/bloc/email_bloc.dart';
+import 'package:jbus_app/general_blocs/mobile_number_bloc/bloc/mobile_number_bloc.dart';
+import 'package:jbus_app/general_blocs/name_bloc/bloc/name_bloc.dart';
+import 'package:jbus_app/general_blocs/password_bloc/bloc/password_bloc.dart';
 import 'package:jbus_app/localization/bloc/localization_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/screens/authentication/signup/signup.dart';
-import 'package:jbus_app/screens/dashbourd/dashbourd.dart';
+import 'package:jbus_app/screens/home/home.dart';
+import 'package:jbus_app/screens/settings/language_settings/bloc/language_settings_bloc.dart';
+import 'package:jbus_app/screens/settings/theme_settings/bloc/theme_settings_bloc.dart';
 import 'package:jbus_app/screens/trip/bloc/pickup_bloc.dart';
-import 'package:jbus_app/screens/others/wallet/bloc/wallet_bloc.dart';
+import 'package:jbus_app/screens/wallet/wallet/bloc/wallet_bloc.dart';
 import 'package:jbus_app/services/auth_service.dart';
 import 'package:jbus_app/services/navigation_service.dart';
 import 'package:jbus_app/themes/bloc/theme_bloc.dart';
@@ -84,6 +90,24 @@ Future main() async {
         BlocProvider<WalletBloc>(
           create: (BuildContext context) => WalletBloc(),
         ),
+        BlocProvider<LanguageSettingsBloc>(
+          create: (BuildContext context) => LanguageSettingsBloc(),
+        ),
+        BlocProvider<ThemeSettingsBloc>(
+          create: (BuildContext context) => ThemeSettingsBloc(),
+        ),
+        BlocProvider<EmailBloc>(
+          create: (BuildContext context) => EmailBloc(),
+        ),
+         BlocProvider<MobileNumberBloc>(
+          create: (BuildContext context) => MobileNumberBloc(),
+         ),
+        BlocProvider<NameBloc>(
+          create: (BuildContext context) => NameBloc(),
+        ),
+        BlocProvider<PasswordBloc>(
+          create: (BuildContext context) => PasswordBloc(),
+        ),
       ],
       child: MyApp(homeScreen: _getHomeScreen(status)),
     ),
@@ -95,9 +119,9 @@ Widget _getHomeScreen(UserStatus status) {
     case UserStatus.notLoggedIn:
       return const SignupScreen();
     case UserStatus.loggedIn:
-      return const Dashboard();
+      return const SignupScreen();
     case UserStatus.inTrip:
-      return const Dashboard();
+      return const SignupScreen();
     default:
       return const SignupScreen();
   }

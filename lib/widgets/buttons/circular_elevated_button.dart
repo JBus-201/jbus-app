@@ -40,9 +40,7 @@ class CircularElevatedButton extends StatelessWidget {
               shape: const CircleBorder(),
               backgroundColor: Colors.transparent,
               shadowColor: Colors.transparent,
-              
             ),
-            
             child: Padding(
               padding: const EdgeInsets.all(4.0),
               child: Icon(

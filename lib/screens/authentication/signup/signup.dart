@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jbus_app/general_blocs/email_bloc/bloc/email_bloc.dart';
+import 'package:jbus_app/general_blocs/mobile_number_bloc/bloc/mobile_number_bloc.dart';
+import 'package:jbus_app/general_blocs/name_bloc/bloc/name_bloc.dart';
+import 'package:jbus_app/general_blocs/password_bloc/bloc/password_bloc.dart';
 import 'package:jbus_app/screens/authentication/email_verification/email_verification.dart';
 import 'package:jbus_app/screens/authentication/signup/cubit/signup_cubit.dart';
 import 'package:jbus_app/screens/authentication/signup/widgets/buttons/sign_in_button_s_u_s.dart';
@@ -32,15 +36,15 @@ class SignupScreen extends StatelessWidget {
             );
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => EmailVerificationScreen(
-                      firstName: FirstNameTextField.firstNameController.text,
-                      lastName: LastNameTextField.lastNameController.text,
-                      email: EmailTextFieldForSignUp.emailController.text,
-                      phoneNumber: MobileNumberTextField
-                              .phoneNumberController.text.isEmpty
-                          ? null
-                          : MobileNumberTextField.phoneNumberController.text,
-                      password:
-                          PasswordTextFieldForSignUp.passwordController.text,
+                    // firstName: FirstNameTextField.firstNameController.text,
+                    // lastName: LastNameTextField.lastNameController.text,
+                    //email: EmailTextFieldForSignUp.emailController.text,
+                    // phoneNumber: MobileNumberTextField
+                    //         .phoneNumberController.text.isEmpty
+                    //     ? null
+                    //     : MobileNumberTextField.phoneNumberController.text,
+                    // password:
+                    //     PasswordTextFieldForSignUp.passwordController.text,
                     )));
           }
         },
@@ -71,7 +75,7 @@ class SignupScreen extends StatelessWidget {
                               children: [
                                 Form(
                                   key: formKey,
-                                  child: const Column(
+                                  child: Column(
                                     children: [
                                       Row(
                                         mainAxisSize: MainAxisSize.min,
@@ -84,39 +88,81 @@ class SignupScreen extends StatelessWidget {
                                           ),
                                         ],
                                       ),
-                                      EmailTextFieldForSignUp(),
+                                      EmailTextField(),
                                       MobileNumberTextField(),
-                                      PasswordTextFieldForSignUp(),
+                                      PasswordTextField(),
                                       PasswordVerificationTextField()
                                     ],
                                   ),
                                 ),
-                                // const SizedBox(
-                                //   height: 8,
-                                // ),
+                                BlocBuilder<EmailBloc, EmailState>(
+                                  builder: (context, state) {
+                                    return SignUpButtonSUS(
+                                      // firstNameControllerText:
+                                      //     FirstNameTextField
+                                      //         .firstNameController.text,
+                                      // lastNameControllerText: LastNameTextField
+                                      //     .lastNameController.text,
+                                      // // emailControllerText:
+                                      // // EmailTextFieldForSignUp
+                                      // //     .emailController.text,
+                                      // phoneNumberControllerText:
+                                      //     MobileNumberTextField
+                                      //         .phoneNumberController.text,
+                                      // passwordControllerText:
+                                      //     PasswordTextFieldForSignUp
+                                      //         .passwordController.text,
+                                      formKey: formKey,
+                                      onPressed: () {
+                                        final emailBloc =
+                                            BlocProvider.of<EmailBloc>(context);
+                                        emailBloc.add(UpdateEmailEvent(
+                                            EmailTextField.email!));
 
-                                SignUpButtonSUS(
-                                  firstNameControllerText: FirstNameTextField
-                                      .firstNameController.text,
-                                  lastNameControllerText:
-                                      LastNameTextField.lastNameController.text,
-                                  emailControllerText: EmailTextFieldForSignUp
-                                      .emailController.text,
-                                  phoneNumberControllerText:
-                                      MobileNumberTextField
-                                          .phoneNumberController.text,
-                                  passwordControllerText:
-                                      PasswordTextFieldForSignUp
-                                          .passwordController.text,
-                                  formKey: formKey,
-                                  onPressed: () {
-                                    context.read<SignupCubit>().sendOTP(
-                                        EmailTextFieldForSignUp
-                                            .emailController.text);
+                                        final firstnameBloc =
+                                            BlocProvider.of<NameBloc>(context);
+                                        firstnameBloc.add(
+                                          UpdateNameEvent(
+                                            firstName:
+                                                FirstNameTextField.firstName!,
+                                            lastName: '',
+                                          ),
+                                        );
+
+                                        final lastnameBloc =
+                                            BlocProvider.of<NameBloc>(context);
+                                        lastnameBloc.add(
+                                          UpdateNameEvent(
+                                            firstName: '',
+                                            lastName:
+                                                LastNameTextField.lastName!,
+                                          ),
+                                        );
+
+                                        final mobileNumberBloc =
+                                            BlocProvider.of<MobileNumberBloc>(
+                                                context);
+                                        mobileNumberBloc.add(
+                                            UpdateMobileNumberEvent(
+                                                MobileNumberTextField
+                                                    .mobileNumber!));
+
+                                        final passwordBloc =
+                                            BlocProvider.of<PasswordBloc>(
+                                                context);
+                                        passwordBloc.add(UpdatePasswordEvent(
+                                            PasswordTextField.password!));
+
+                                        context.read<SignupCubit>().sendOTP(
+                                              // EmailTextFieldForSignUp
+                                              //     .emailController.text
+                                              state.email,
+                                            );
+                                      },
+                                      isLoading: state is SignupLoading,
+                                    );
                                   },
-                                  isLoading: state is SignupLoading,
                                 ),
-
                                 const SignInButtonSUS(),
                               ],
                             ),

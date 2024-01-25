@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:jbus_app/general_blocs/name_bloc/bloc/name_bloc.dart';
 import 'package:jbus_app/widgets/text_fields/text_form_field.dart';
 
 class LastNameTextField extends StatelessWidget {
-  const LastNameTextField({super.key});
+  LastNameTextField({super.key});
 
-  static final TextEditingController lastNameController =
-      TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
+  static String? lastName;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,7 @@ class LastNameTextField extends StatelessWidget {
         final bool firstNameValid =
             RegExp('^[A-Za-z]{1,15}\$').hasMatch(value.trim());
         if (firstNameValid) {
+          lastName = value.trim();
           return null;
         } else {
           return AppLocalizations.of(context)!.sorryPleaseEnterAValidName;
