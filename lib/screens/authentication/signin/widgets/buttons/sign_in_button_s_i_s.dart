@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/data/models/login_request.dart';
@@ -48,21 +49,27 @@ class SignInButtonSIS extends StatelessWidget {
               builder: (context, emailState) {
                 return RectangularElevatedButton(
                   text: AppLocalizations.of(context)!.signIn,
-                  onPressed: () {
+                  onPressed: () async {
                     if (formKey.currentState!.validate() || true) {
+                      final fcmToken = await FirebaseMessaging.instance.getToken();
                       final credential = LoginRequest(
                         email: emailState.email,
                         password: passwordState.password,
+                        fcmToken: fcmToken,
                         // email: emailController.text,
                         // password: passwordController.text,
                       );
-                      context.read<SigninCubit>().login(credential);
+                      
+                      if (context.mounted) {
+                context.read<SigninCubit>().login(credential);
+              }
                     }
                   },
                   width: double.maxFinite,
                 );
               },
             );
+
           },
         );
       },

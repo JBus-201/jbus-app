@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -31,6 +34,42 @@ Future main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  final firebaseMessaging = FirebaseMessaging.instance;
+  firebaseMessaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    print('Got a message whilst in the foreground!');
+    print('Message data: ${json.decode(message.data['value'])['Body']}');
+
+    if (message.notification != null) {
+      print(
+          'Message also contained a notification: ${message.notification!.body}');
+    }
+  });
+
+  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    print('A new onMessageOpenedApp event was published!');
+    print('Message data: ${json.decode(message.data['value'])['Body']}');
+  });
+
+  FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
+    print('Got a message whilst in the background!');
+    print('Message data: ${json.decode(message.data['value'])['Body']}');
+
+    if (message.notification != null) {
+      print(
+          'Message also contained a notification: ${message.notification!.body}');
+    }
+  });
+
   await setupLocator();
   WidgetsFlutterBinding.ensureInitialized();
 

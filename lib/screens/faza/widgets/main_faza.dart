@@ -5,6 +5,7 @@ import 'package:jbus_app/screens/faza/widgets/friends.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FazaMainPage extends StatefulWidget {
   const FazaMainPage({super.key});
@@ -41,14 +42,14 @@ class _FazaMainPageState extends State<FazaMainPage> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items:  <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.group),
-            label: 'Friends',
+            icon: const Icon(Icons.group),
+            label: AppLocalizations.of(context)!.friends,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.history),
-            label: 'History',
+            icon: const Icon(Icons.history),
+            label: AppLocalizations.of(context)!.fazaHisrory,
           ),
         
         ],

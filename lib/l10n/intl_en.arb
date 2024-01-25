@@ -127,4 +127,11 @@
     "history":"History",
     "startYourTrip":"Start Your Trip",
     "changePassword":"Change password"
+    "friends":"Friends",
+    "fazaHisrory":"History",
+    "allFriends":"All",
+    "friendRequests":"Requests",
+    "addFriend":"Add"
+
+
 }

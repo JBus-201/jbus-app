@@ -12,7 +12,6 @@ InterestPoint _$InterestPointFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String?,
       logo: json['logo'] as String?,
       updatedAt: DateTime.parse(json['updatedAt'] as String),
-      locationId: json['locationId'] as int,
       location: Point.fromJson(json['location'] as Map<String, dynamic>),
     );
 
@@ -30,7 +29,6 @@ Map<String, dynamic> _$InterestPointToJson(InterestPoint instance) {
   writeNotNull('name', instance.name);
   writeNotNull('logo', instance.logo);
   val['updatedAt'] = instance.updatedAt.toIso8601String();
-  val['locationId'] = instance.locationId;
   val['location'] = instance.location.toJson();
   return val;
 }

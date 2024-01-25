@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:jbus_app/constants/strings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -17,9 +19,10 @@ class AuthService {
     if (authToken == null) {
       return UserStatus.notLoggedIn;
     }
-    var response = await http.get(Uri.parse('$baseUrl/status'), headers: {
+    var response =
+        await http.get(Uri.parse('$baseUrl/PassengerAccount/status'), headers: {
       "Accept": "application/json",
-      "Authentication": "Bearer $authToken",
+      "Authorization": "Bearer $authToken",
     });
 
     if (response.statusCode != 200) {
@@ -48,6 +51,7 @@ class AuthService {
 
   // Set the authentication state to unauthenticated
   Future<void> setLoggedOut() async {
+    FirebaseMessaging.instance.deleteToken();
     await prefs.remove(tokenKey);
   }
 }

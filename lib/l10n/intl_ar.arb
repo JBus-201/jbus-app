@@ -110,6 +110,7 @@
     "notValidYear": "سنة غير صالحة",
     "notValidCardHolderName": "اسم حامل بطاقة غير صالح",
     "notValidCvvNumber": "رقم Cvv غير صالح",
+
     "sorryPleaseEnterACardNumber": "عذرًا، أدخل رقم بطاقة.",
     "sorryPleaseEnterAYear": "عذرًا، أدخل سنة،",
     "sorryPleaseEnterAMonth": "عذرًا، أدخل شهر.",
@@ -127,5 +128,10 @@
     "history": "السجل",
     "startYourTrip": "ابدأ رحلتك",
     "changePassword":"غير كلمة المرور"
+    "friends":"الأصدقاء",
+    "fazaHisrory":"سجل الفزعات",
+    "allFriends":"الجميع",
+    "friendRequests":"الطلبات",
+    "addFriend":"إضافة"
 
 }
