@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:jbus_app/general_blocs/password_bloc/bloc/password_bloc.dart';
 import 'package:jbus_app/screens/authentication/signup/bloc/signup_bloc.dart';
 import 'package:jbus_app/widgets/text_fields/text_form_field.dart';
 
-class PasswordTextFieldForSignUp extends StatelessWidget {
-  const PasswordTextFieldForSignUp({super.key});
+class PasswordTextField extends StatelessWidget {
+  PasswordTextField({super.key});
 
-  static final TextEditingController passwordController =
-      TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   // static final TextEditingController confirmPasswordController =
   //     TextEditingController();
   static String? password;
+  
+
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +34,12 @@ class PasswordTextFieldForSignUp extends StatelessWidget {
             bottomPadding: 24,
             sizedBoxHeight: 65,
             maxLength: 40,
+            // onChanged: (value) {
+            //   final emailBloc = BlocProvider.of<PasswordBloc>(context);
+            //   emailBloc.add(UpdatePasswordEvent(value.trim()));
+            //},
             validator: (value) {
-              password = value;
+             
 
               final RegExp regex = RegExp(r'.{8,20}');
 
@@ -43,7 +49,12 @@ class PasswordTextFieldForSignUp extends StatelessWidget {
                 return AppLocalizations.of(context)!
                     .sorryPleaseEnterAValidPassword;
               }
+
+              
+              password = value.trim();
               return null;
+
+              
             },
           );
         },

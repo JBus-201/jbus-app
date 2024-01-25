@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:jbus_app/general_blocs/mobile_number_bloc/bloc/mobile_number_bloc.dart';
 import 'package:jbus_app/widgets/text_fields/text_form_field.dart';
 
 class MobileNumberTextField extends StatelessWidget {
-  const MobileNumberTextField({super.key});
-  static final TextEditingController phoneNumberController =
-      TextEditingController();
-
+  MobileNumberTextField({super.key});
+  final TextEditingController phoneNumberController = TextEditingController();
+  static String? mobileNumber = '';
   @override
   Widget build(BuildContext context) {
     return OurTextFormField(
@@ -27,6 +28,7 @@ class MobileNumberTextField extends StatelessWidget {
               RegExp('^07[789][0-9]{7}\$').hasMatch(value.trim());
 
           if (numberValid) {
+            mobileNumber = value.trim();
             return null;
           } else {
             return AppLocalizations.of(context)!

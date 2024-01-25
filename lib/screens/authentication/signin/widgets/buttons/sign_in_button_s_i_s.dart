@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/data/models/login_request.dart';
+import 'package:jbus_app/general_blocs/email_bloc/bloc/email_bloc.dart';
+import 'package:jbus_app/general_blocs/password_bloc/bloc/password_bloc.dart';
 import 'package:jbus_app/screens/authentication/signin/cubit/signin_cubit.dart';
 import 'package:jbus_app/screens/authentication/signin/cubit/signin_state.dart';
 import 'package:jbus_app/screens/dashbourd/dashbourd.dart';
@@ -10,14 +12,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class SignInButtonSIS extends StatelessWidget {
   const SignInButtonSIS({
     super.key,
-    required this.emailController,
-    required this.passwordController,
+    // required this.emailController,
+    // required this.passwordController,
     this.validator,
     required this.formKey,
   });
 
-  final TextEditingController emailController;
-  final TextEditingController passwordController;
+  // final TextEditingController emailController;
+  // final TextEditingController passwordController;
   final String? Function(String?)? validator;
   final GlobalKey<FormState> formKey;
 
@@ -40,18 +42,28 @@ class SignInButtonSIS extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         }
-        return RectangularElevatedButton(
-          text: AppLocalizations.of(context)!.signIn,
-          onPressed: () {
-            if (formKey.currentState!.validate() || true) {
-              final credential = LoginRequest(
-                email: emailController.text,
-                password: passwordController.text,
-              );
-              context.read<SigninCubit>().login(credential);
-            }
+        return BlocBuilder<PasswordBloc, PasswordState>(
+          builder: (context, passwordState) {
+            return BlocBuilder<EmailBloc, EmailState>(
+              builder: (context, emailState) {
+                return RectangularElevatedButton(
+                  text: AppLocalizations.of(context)!.signIn,
+                  onPressed: () {
+                    if (formKey.currentState!.validate() || true) {
+                      final credential = LoginRequest(
+                        email: emailState.email,
+                        password: passwordState.password,
+                        // email: emailController.text,
+                        // password: passwordController.text,
+                      );
+                      context.read<SigninCubit>().login(credential);
+                    }
+                  },
+                  width: double.maxFinite,
+                );
+              },
+            );
           },
-          width: double.maxFinite,
         );
       },
     );

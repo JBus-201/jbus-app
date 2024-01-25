@@ -36,6 +36,16 @@ const LinearGradient orangeButtonGradient = LinearGradient(
     ourOrange,
   ],
 );
+
+const LinearGradient darkOrangeButtonGradient = LinearGradient(
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+  colors: [
+    ourOrange,
+    ourDarkOrange,
+  ],
+);
+
 const LinearGradient greenButtonGradient = LinearGradient(
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
