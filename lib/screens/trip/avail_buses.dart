@@ -20,13 +20,13 @@ class TripAvailableBuses extends StatefulWidget {
   final Point startingPoint;
   final Point endingPoint;
 
-  TripAvailableBuses({
-    Key? key,
+  const TripAvailableBuses({
+    super.key,
     required this.route,
     required this.isGoing,
     required this.startingPoint,
     required this.endingPoint,
-  }) : super(key: key);
+  });
 
   @override
   _TripAvailableBusesState createState() => _TripAvailableBusesState();
