@@ -100,9 +100,9 @@ Future main() async {
         BlocProvider<EmailBloc>(
           create: (BuildContext context) => EmailBloc(),
         ),
-         BlocProvider<MobileNumberBloc>(
+        BlocProvider<MobileNumberBloc>(
           create: (BuildContext context) => MobileNumberBloc(),
-         ),
+        ),
         BlocProvider<NameBloc>(
           create: (BuildContext context) => NameBloc(),
         ),

@@ -20,7 +20,7 @@ class BottomSearchSheet extends StatefulWidget {
 class _BottomSearchSheetState extends State<BottomSearchSheet>
     with TickerProviderStateMixin {
   final double min = 0.2;
-  final double max = 0.8;
+  final double max = 1;
 
   double _dragSheetPosition = 0.21;
   void _handleDragUpdate(DragUpdateDetails details) {
@@ -269,6 +269,6 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
 
   void expand() {
     _draggableScrollableController.animateTo(max,
-        duration: const Duration(milliseconds: 10), curve: Curves.linear);
+        duration: const Duration(milliseconds: 50), curve: Curves.linear);
   }
 }

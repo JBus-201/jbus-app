@@ -92,7 +92,7 @@ abstract class ApiService {
 
   @PUT("/Trip/{id}")
   Future<HttpResponse> updateTrip(
-      @Path("id") int id, @Body() TripUpdateRequest tripUpdateRequest);
+       @Body() TripUpdateRequest tripUpdateRequest);
 
   @POST("/Trip")
   Future<HttpResponse> createTrip(@Body() TripCreateRequest tripCreateRequest);

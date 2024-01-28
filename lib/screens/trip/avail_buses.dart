@@ -3,6 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:jbus_app/data/api/api_service.dart';
 import 'package:jbus_app/data/api/google_service.dart';
+import 'package:jbus_app/data/models/bus.dart';
 import 'package:jbus_app/data/models/bus_route.dart';
 import 'package:jbus_app/data/models/point.dart';
 import 'package:jbus_app/data/models/point_create_request.dart';
@@ -42,6 +43,7 @@ class _TripAvailableBusesState extends State<TripAvailableBuses> {
   @override
   void initState() {
     super.initState();
+
     listenToBusesLocations();
     startLatLng =
         LatLng(widget.startingPoint.latitude, widget.startingPoint.latitude);
@@ -68,8 +70,7 @@ class _TripAvailableBusesState extends State<TripAvailableBuses> {
         myLocationButtonEnabled: false,
         myLocationEnabled: true,
         initialCameraPosition: CameraPosition(
-          target: LatLng(widget.startingPoint.latitude,
-              widget.startingPoint.latitude), // Set to a default value
+          target: startLatLng!,
           zoom: 12.0,
         ),
         markers: markers,
@@ -80,121 +81,114 @@ class _TripAvailableBusesState extends State<TripAvailableBuses> {
     );
   }
 
-  void listenToBusesLocations() {
+  void listenToBusesLocations() async {
+    List<Bus> activeBuses = await sl<ApiService>().getActiveBuses();
+
+    if (activeBuses.isNotEmpty) {
+      for (var i = 0; i < activeBuses.length; i++) {
+        listenToDriverLocation(activeBuses[i].id!, activeBuses);
+      }
+    } else {
+      // ignore: use_build_context_synchronously
+      showDialog(
+              context: context,
+              builder: (context) => const Warning(
+                  title: "Oops!", description: "No Available busses"))
+          .then((value) => {Navigator.pop(context)});
+    }
+  }
+
+  void listenToDriverLocation(int busId, List<Bus> activeBuses) {
+    final databaseReference = FirebaseDatabase.instance.ref();
     databaseReference
         .child(
-            'Route/${widget.route.id}/${widget.isGoing ? 'going' : 'returning'}')
+            'Route/${widget.route.id}/${widget.isGoing ? 'going' : 'returning'}/Bus/$busId/currentLocation')
         .onValue
         .listen((event) {
+      print('Waiting: ${event.snapshot.value}');
       if (event.snapshot.value != null) {
-        Map<Object?, Object?> busesData =
-            event.snapshot.value as Map<Object?, Object?>;
-        print('BusData: ${busesData.toString()}');
-        List<dynamic>? busesList = busesData['Bus'] as List<dynamic>?;
+        final Map<Object?, Object?>? driverLocation =
+            event.snapshot.value as Map<Object?, Object?>?;
 
-        // Check if busesList is not null and contains data
-        if (busesList != null) {
+        if (driverLocation != null) {
+          // Access the location data using the Object? keys
+          final double latitude = driverLocation['latitude'] as double;
+          final double longitude = driverLocation['longitude'] as double;
+
+          // Create a LatLng object from the location data
+          final LatLng driverLatLng = LatLng(latitude, longitude);
+          // Update the marker
+          Marker existingMarker = markers.firstWhere(
+            (marker) => marker.markerId.value == busId.toString(),
+            orElse: () => Marker(
+                markerId: MarkerId(busId.toString()),
+                icon: googleApi.customBusIcon!),
+          );
           setState(() {
-            // Update existing markers
-            for (int i = 0; i < busesList.length; i++) {
-              Map<dynamic, dynamic>? busData =
-                  busesList[i] as Map<dynamic, dynamic>?;
-
-              if (busData != null && busData.containsKey('currentLocation')) {
-                double latitude =
-                    busData['currentLocation']?['latitude'] as double? ?? 0.0;
-                double longitude =
-                    busData['currentLocation']?['longitude'] as double? ?? 0.0;
-
-                // Use the index of the busData as a unique identifier for the bus
-                String markerId = i.toString();
-
-                // Find the existing marker with the same id and update its position
-                Marker existingMarker = markers.firstWhere(
-                  (marker) => marker.markerId.value == markerId,
-                  orElse: () => Marker(
-                      markerId: MarkerId(markerId),
-                      icon: googleApi.customBusIcon!),
-                );
-
-                markers.remove(existingMarker); // Remove the existing marker
-                markers.add(
-                  existingMarker.copyWith(
-                    positionParam: LatLng(latitude, longitude),
-                    iconParam: googleApi.customBusIcon!,
-                    onTapParam: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) => ETAViewDialog(
-                              onPress: () {
-                                DateTime currentUtcDateTime =
-                                    DateTime.now().toUtc();
-
-                                print(
-                                    'Current UTC Date and Time: $currentUtcDateTime');
-                                PointCreateRequest pick = PointCreateRequest(
-                                    latitude: startLatLng!.latitude,
-                                    longitude: startLatLng!.longitude,
-                                    name: widget.startingPoint.name!);
-                                PointCreateRequest drop = PointCreateRequest(
-                                    latitude: endLatLng!.latitude,
-                                    longitude: endLatLng!.longitude,
-                                    name: widget.endingPoint.name!);
-                                TripCreateRequest trip = TripCreateRequest(
-                                    pickUpPoint: pick,
-                                    startedAt: currentUtcDateTime,
-                                    status: "PENDDING",
-                                    dropOffPoint: drop);
-                                sl<ApiService>()
-                                    .createTrip(trip)
-                                    .then((value) => {
-                                          if (value.response.statusCode == 201)
-                                            {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        TripBusWaitingPage(
-                                                          route: widget.route,
-                                                          isGoing:
-                                                              widget.isGoing,
-                                                          startingPoint: widget
-                                                              .startingPoint,
-                                                          endingPoint: widget
-                                                              .endingPoint,
-                                                        )),
-                                              )
-                                            }
-                                        })
-                                    // ignore: body_might_complete_normally_catch_error
-                                    .catchError((error, stackTrace) {
-                                  print('Error: ${error.toString()}');
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) => const Warning(
-                                          title: "Oops!",
-                                          description: "Sonthing went wrong"));
-                                });
-                              },
-                              first: LatLng(latitude, longitude),
-                              second: startLatLng!));
-                    },
-                  ),
-                );
-              } else {
-                print('Invalid busData: $busData');
-              }
-            }
-
-            // Add markers for starting and ending points
-            addStartAndEndMarkers();
-
-            // Update the map camera position to include all markers
-            if (markers.isNotEmpty && mapController != null) {
-              GoogleMapsApi().moveToLocation(
-                  mapController!, markers.elementAt(0).position);
-            }
+            markers.remove(existingMarker);
+            markers.add(
+              existingMarker.copyWith(
+                positionParam: driverLatLng,
+                iconParam: googleApi.customBusIcon!,
+                onTapParam: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) => ETAViewDialog(
+                          onPress: () {
+                            DateTime currentUtcDateTime =
+                                DateTime.now().toUtc();
+                            PointCreateRequest pick = PointCreateRequest(
+                                latitude: startLatLng!.latitude,
+                                longitude: startLatLng!.longitude,
+                                name: widget.startingPoint.name!);
+                            PointCreateRequest drop = PointCreateRequest(
+                                latitude: endLatLng!.latitude,
+                                longitude: endLatLng!.longitude,
+                                name: widget.endingPoint.name!);
+                            TripCreateRequest trip = TripCreateRequest(
+                                pickUpPoint: pick,
+                                startedAt: currentUtcDateTime,
+                                status: "Pending",
+                                dropOffPoint: drop);
+                            sl<ApiService>()
+                                .createTrip(trip)
+                                .then((value) => {
+                                      if (value.response.statusCode == 201)
+                                        {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    TripBusWaitingPage(
+                                                      route: widget.route,
+                                                      isGoing: widget.isGoing,
+                                                      startingPoint:
+                                                          widget.startingPoint,
+                                                      endingPoint:
+                                                          widget.endingPoint,
+                                                      bus: activeBuses[busId],
+                                                    )),
+                                          )
+                                        }
+                                    })
+                                // ignore: body_might_complete_normally_catch_error
+                                .catchError((error, stackTrace) {
+                              print('Error: ${error.toString()}');
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => const Warning(
+                                      title: "Oops!",
+                                      description: "Somthing went wrog"));
+                            });
+                          },
+                          first: LatLng(latitude, longitude),
+                          second: startLatLng!));
+                },
+              ),
+            );
           });
+
+          googleApi.moveToLocation(mapController!, LatLng(latitude, longitude));
         }
       }
     });
