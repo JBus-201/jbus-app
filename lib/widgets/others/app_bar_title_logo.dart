@@ -5,17 +5,16 @@ class JbusAppBarTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Column(
+    return Column(
       children: [
         const SizedBox(
           height: 12,
         ),
         Image.asset(
           'assets/logos/jbus-logo.png',
-          scale: 17,
+          scale: 20,
         ),
       ],
-    ));
+    );
   }
 }

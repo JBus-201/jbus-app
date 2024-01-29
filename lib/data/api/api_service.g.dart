@@ -621,7 +621,6 @@ class _ApiService implements ApiService {
 
   @override
   Future<HttpResponse<dynamic>> updateTrip(
-    int id,
     TripUpdateRequest tripUpdateRequest,
   ) async {
     const _extra = <String, dynamic>{};
@@ -637,7 +636,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Trip/${id}',
+              '/Trip',
               queryParameters: queryParameters,
               data: _data,
             )

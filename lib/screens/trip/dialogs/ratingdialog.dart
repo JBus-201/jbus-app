@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
+import 'package:jbus_app/widgets/others/rating.dart';
 
-class ConfirmationDialog extends StatelessWidget {
+class RatingDialog extends StatelessWidget {
   final String title;
   final String description;
   final dynamic Function()? onConfirm;
 
-  const ConfirmationDialog({
+  const RatingDialog({
     super.key,
     required this.title,
     required this.description,
@@ -27,12 +27,6 @@ class ConfirmationDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            const Icon(
-              Icons.question_mark_rounded,
-              size: 48,
-              color: ourOrange,
-            ),
-            const SizedBox(height: 16),
             Text(
               title,
               style: const TextStyle(
@@ -49,18 +43,27 @@ class ConfirmationDialog extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
+            RatingWidget(
+              initialRating: 0,
+              onRatingChanged: (newRating) {},
+            ),
+            const SizedBox(
+              height: 16,
+            ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 RectangularElevatedButton(
                   width: 110,
                   onPressed: onConfirm,
-                  text: "Yes",
+                  text: "Submit",
+                  fontSize: 14,
                 ),
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Text("Cancel"),
+                  child: const Text("skip"),
                 ),
               ],
             )

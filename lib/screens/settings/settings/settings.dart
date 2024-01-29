@@ -4,6 +4,7 @@ import 'package:jbus_app/screens/settings/notification_settings/notification_set
 import 'package:jbus_app/screens/settings/settings/widgets/settings_tab.dart';
 import 'package:jbus_app/screens/settings/theme_settings/theme_settings.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -11,15 +12,17 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('SettingsScreen'),
+        title: const JbusAppBarTitle(),
+        
+            
       ),
       body: Center(
-        child: Column(
+        child: ListView(
           children: [
-            SettingsTab(
-              icon: Icons.language_outlined,
-              title: AppLocalizations.of(context)!.language,
-              subTitle: AppLocalizations.of(context)!.english,
+            ListTile(
+              leading: Icon(Icons.language_outlined),
+              title: Text(AppLocalizations.of(context)!.language),
+              subtitle: Text(AppLocalizations.of(context)!.english),
               onTap: () {
                 Navigator.push(
                   context,
@@ -28,6 +31,7 @@ class SettingsScreen extends StatelessWidget {
                   ),
                 );
               },
+              trailing: Icon(Icons.arrow_forward_ios_rounded),
             ),
             SettingsTab(
               icon: Icons.color_lens_outlined,
