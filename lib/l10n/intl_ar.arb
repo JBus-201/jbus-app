@@ -161,6 +161,18 @@
     "accept":"قبول",
     "youAreFriendsMsg":"لقد أصبحتم أصدقاء",
     "noFaza":"لا توجد فزعات سابقة",
-    "fazaNoFriendMsg":"لا يوجد لديك أصدقاء"
+    "fazaNoFriendMsg":"لا يوجد لديك أصدقاء",
+    "from":"من",
+    "to":"إلى",
+    "sawpError":"مشكلة في التحويل",
+    "noOtherDirectionMsg":"لا يوجد إتجاه آخر لهذا المسار",
+    "activeBuses":"الحافلات المتاحة",
+    "noFavePointsMsg":"لا توجد مواقف مفضلة",
+    "selectPoints":"إختيار النقاط",
+    "noAvailableBuses":"لا توجد حافلات متاحة",
+    "selectBus":"إختر الحافلة",
+    "exitTripMsg":"هل أنت متأكد من إلغاء الرحلة؟",
+    "youArived":"لقد وصلت",
+    "howWasTripMsg":"كيف كانت رحلتك؟"
 
 }

@@ -15,7 +15,7 @@ import 'package:jbus_app/themes/appbar_style.dart';
 import 'package:jbus_app/widgets/buttons/circular_elevated_button.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class EditPickupPointPage extends StatefulWidget {
   final BusRoute route;
   final bool isGoing;
@@ -86,8 +86,8 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                   child: Text('Error: ${favPointsSnapshot.error}'),
                 );
               } else if (!favPointsSnapshot.hasData) {
-                return const Center(
-                  child: Text('No favorite points available'),
+                return Center(
+                  child: Text(AppLocalizations.of(context)!.noFavePointsMsg),
                 );
               } else {
                 favoritePointsList = favPointsSnapshot.data;
@@ -108,7 +108,7 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                         BitmapDescriptor.hueGreen),
                     infoWindow: InfoWindow(
                       title: favPoint.point.name,
-                      snippet: "Favorite Point",
+                      snippet: AppLocalizations.of(context)!.favoriteStops,
                     ),
                   ));
                 }
@@ -195,7 +195,7 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                       },
                     ),
                     RectangularElevatedButton(
-                        text: "Select Points",
+                        text: AppLocalizations.of(context)!.selectPoints,
                         width: 175,
                         onPressed: () {
                           if (BlocProvider.of<PickupBloc>(context)

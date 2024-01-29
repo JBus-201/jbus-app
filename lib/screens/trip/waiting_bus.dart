@@ -17,6 +17,7 @@ import 'package:jbus_app/themes/appbar_style.dart';
 import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
 import 'package:jbus_app/widgets/warnings/confirm.dart';
 import 'package:jbus_app/widgets/warnings/warning.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TripBusWaitingPage extends StatefulWidget {
   final BusRoute route;
@@ -104,7 +105,7 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
                         showDialog(
                             context: context,
                             builder: (context) => ConfirmationDialog(
-                                title: 'Sure to Exit trip?',
+                                title: AppLocalizations.of(context)!.exitTripMsg,
                                 description: "",
                                 onConfirm: () {
                                   // DateTime currentUtcDateTime =
@@ -202,9 +203,9 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
                               print('Error: ${error.toString()}');
                               showDialog(
                                   context: context,
-                                  builder: (context) => const Warning(
-                                      title: "Oops!",
-                                      description: "Somthing went wrog"));
+                                  builder: (context) => Warning(
+                                      title: AppLocalizations.of(context)!.ops,
+                                      description: AppLocalizations.of(context)!.somthingWrong));
                             });
                             ;
                           },
@@ -263,10 +264,6 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
                 markerId: const MarkerId('driverMarker'),
                 position: driverLatLng,
                 icon: googleApi.customBusIcon!,
-                infoWindow: InfoWindow(
-                  title: 'Driver Location',
-                  snippet: 'Latitude: $latitude, Longitude: $longitude',
-                ),
               ),
             );
             addStartAndEndMarkers();

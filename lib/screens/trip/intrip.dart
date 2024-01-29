@@ -16,6 +16,7 @@ import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/themes/appbar_style.dart';
 import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
 import 'package:jbus_app/widgets/warnings/warning.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InTripPage extends StatefulWidget {
   final BusRoute route;
@@ -100,18 +101,6 @@ class _InTripPageState extends State<InTripPage> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    // FloatingActionButton(
-                    //   backgroundColor: ourRed,
-                    //   child: const Icon(Icons.exit_to_app_rounded),
-                    //   onPressed: () {
-                    //     Navigator.pushAndRemoveUntil(
-                    //       context,
-                    //       MaterialPageRoute(
-                    //           builder: (context) => const HomeScreen()),
-                    //       (Route<dynamic> route) => false,
-                    //     );
-                    //   },
-                    // ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -125,21 +114,6 @@ class _InTripPageState extends State<InTripPage> {
                         const SizedBox(
                           height: 15,
                         ),
-                        // FloatingActionButton(
-                        //   child: const Icon(Icons.location_searching_sharp),
-                        //   onPressed: () {
-                        //     googleApi.moveToCurrentLocation(mapController!);
-                        //   },
-                        // ),
-                        // const SizedBox(
-                        //   height: 15,
-                        // ),
-                        // FloatingActionButton(
-                        //   backgroundColor: ourBlack,
-                        //   foregroundColor: ourWhite,
-                        //   child: const Icon(Icons.qr_code_rounded),
-                        //   onPressed: () {},
-                        // ),
                       ],
                     ),
                   ],
@@ -184,30 +158,15 @@ class _InTripPageState extends State<InTripPage> {
             markerId: const MarkerId('driverMarker'),
             position: busLocation,
             icon: googleApi.customBusIcon!,
-            infoWindow: InfoWindow(
-              title: 'Driver Location',
-              snippet: 'Latitude: $latitude, Longitude: $longitude',
-            ),
           ),
         );
-        addStartAndEndMarkers();
+        addEndMarkers();
       });
       googleApi.moveToLocation(mapController!, LatLng(latitude, longitude));
     });
   }
 
-  void addStartAndEndMarkers() {
-    // Add marker for the starting point
-    // markers.add(Marker(
-    //   markerId: MarkerId('startingPoint'),
-    //   position: LatLng(
-    //     widget.startingPoint.latitude,
-    //     widget.startingPoint.longitude,
-    //   ),
-    //   icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
-    // ));
-
-    // Add marker for the ending point
+  void addEndMarkers() {
     markers.add(Marker(
       markerId: MarkerId('endingPoint'),
       position: LatLng(
@@ -231,8 +190,9 @@ class _InTripPageState extends State<InTripPage> {
                     showDialog(
                         context: context,
                         builder: (context) => RatingDialog(
-                              title: 'Your arived',
-                              description: 'How was your Trip?',
+                              title: AppLocalizations.of(context)!.youArived,
+                              description:
+                                  AppLocalizations.of(context)!.howWasTripMsg,
                               onConfirm: () {
                                 //TODO Rating
                                 Navigator.pop(context);
@@ -250,8 +210,9 @@ class _InTripPageState extends State<InTripPage> {
             print('Error: ${error.toString()}');
             showDialog(
                 context: context,
-                builder: (context) => const Warning(
-                    title: "Oops!", description: "Somthing went wrog"));
+                builder: (context) => Warning(
+                    title: AppLocalizations.of(context)!.ops,
+                    description: AppLocalizations.of(context)!.somthingWrong));
           });
           ;
         }

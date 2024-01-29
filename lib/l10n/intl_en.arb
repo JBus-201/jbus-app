@@ -160,7 +160,20 @@
     "accept":"Accept",
     "youAreFriendsMsg":"You are friends now",
     "noFaza":"There is no previous faza",
-    "fazaNoFriendMsg":"You don't have friends"
+    "fazaNoFriendMsg":"You don't have friends",
+    "from":"from",
+    "to":"to",
+    "sawpError":"Sawp Error",
+    "noOtherDirectionMsg":"There's no other direction",
+    "activeBuses":"Active Buses",
+    "noFavePointsMsg":"No favorite points available",
+    "selectPoints":"Select Points",
+    "noAvailableBuses":"No Available busses",
+    "selectBus":"Select Bus",
+    "exitTripMsg":"Sure to Exit trip?",
+    "youArived":"You'r arived",
+    "howWasTripMsg":"How was your Trip?"
+
 
 
 

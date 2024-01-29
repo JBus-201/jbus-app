@@ -14,6 +14,7 @@ import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/themes/appbar_style.dart';
 import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
 import 'package:jbus_app/widgets/warnings/warning.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TripAvailableBuses extends StatefulWidget {
   final BusRoute route;
@@ -93,8 +94,8 @@ class _TripAvailableBusesState extends State<TripAvailableBuses> {
       // ignore: use_build_context_synchronously
       showDialog(
               context: context,
-              builder: (context) => const Warning(
-                  title: "Oops!", description: "No Available busses"))
+              builder: (context) => Warning(
+                  title:  AppLocalizations.of(context)!.ops, description: AppLocalizations.of(context)!.noAvailableBuses))
           .then((value) => {Navigator.pop(context)});
     }
   }
@@ -177,9 +178,9 @@ class _TripAvailableBusesState extends State<TripAvailableBuses> {
                               print('Error: ${error.toString()}');
                               showDialog(
                                   context: context,
-                                  builder: (context) => const Warning(
-                                      title: "Oops!",
-                                      description: "Somthing went wrog"));
+                                  builder: (context) => Warning(
+                                      title: AppLocalizations.of(context)!.ops,
+                                      description: AppLocalizations.of(context)!.somthingWrong));
                             });
                           },
                           first: LatLng(latitude, longitude),

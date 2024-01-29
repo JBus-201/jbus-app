@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class Warning extends StatelessWidget {
   final String title;
   final String description;
@@ -53,7 +53,7 @@ class Warning extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              text: "OK",
+              text: AppLocalizations.of(context)!.ok,
             ),
           ],
         ),
