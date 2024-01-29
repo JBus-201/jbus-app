@@ -10,8 +10,6 @@ import 'package:jbus_app/data/api/google_service.dart';
 import 'package:jbus_app/data/models/bus.dart';
 import 'package:jbus_app/data/models/bus_route.dart';
 import 'package:jbus_app/data/models/point.dart';
-import 'package:jbus_app/data/models/point_create_request.dart';
-import 'package:jbus_app/data/models/trip_update_request.dart';
 import 'package:jbus_app/screens/home/home.dart';
 import 'package:jbus_app/screens/trip/dialogs/ratingdialog.dart';
 import 'package:jbus_app/services/service_locator.dart';
@@ -227,20 +225,6 @@ class _InTripPageState extends State<InTripPage> {
           _secondsRemaining--;
         } else {
           timer.cancel();
-          DateTime currentUtcDateTime = DateTime.now().toUtc();
-          PointCreateRequest pick = PointCreateRequest(
-              latitude: widget.startingPoint.latitude,
-              longitude: widget.startingPoint.longitude,
-              name: widget.startingPoint.name!);
-          PointCreateRequest drop = PointCreateRequest(
-              latitude: widget.endingPoint.latitude,
-              longitude: widget.endingPoint.longitude,
-              name: widget.endingPoint.name!);
-          TripUpdateRequest trip = TripUpdateRequest(
-              // finishedAt: currentUtcDateTime,
-              pickUpPoint: pick,
-              status: "Finished",
-              dropOffPoint: drop);
           sl<ApiService>()
               .finishTrip()
               .then((value) => {
