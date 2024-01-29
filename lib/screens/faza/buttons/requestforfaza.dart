@@ -28,44 +28,66 @@ class FazaRequestBT extends StatelessWidget {
         width: 130,
         text: AppLocalizations.of(context)!.fazaa,
         onPressed: () {
-          sl<ApiService>().getFriends().then((List<Friend> friends) {
-            if (friends.isNotEmpty) {
-              final userRes = sl<SharedPreferences>().getString('user');
-              Map<String, dynamic> res = json.decode(userRes!);
+          sl<ApiService>().isPassengerFazaaAble().then((value) => {
+                if (value.response.statusCode! == 200)
+                  {
+                    sl<ApiService>().getFriends().then((List<Friend> friends) {
+                      if (friends.isNotEmpty) {
+                        final userRes =
+                            sl<SharedPreferences>().getString('user');
+                        Map<String, dynamic> res = json.decode(userRes!);
 
-              int myId = res['id'];
-              print('Faza Request My ID: $myId');
-              writeNeedFaza(myId, true).then((value) => {
-                    if (value)
-                      {
-                        writeFazaTotalAmountNeeded(myId, totalAmountNeeded),
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    FazaWaitingPage(route: route)))
-                      }
-                    else
-                      {
+                        int myId = res['id'];
+                        print('Faza Request My ID: $myId');
+                        writeNeedFaza(myId, true).then((value) => {
+                              if (value)
+                                {
+                                  writeFazaTotalAmountNeeded(
+                                      myId, totalAmountNeeded),
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              FazaWaitingPage(route: route)))
+                                }
+                              else
+                                {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => Warning(
+                                        isWarning: true,
+                                        title:
+                                            AppLocalizations.of(context)!.ops,
+                                        description:
+                                            AppLocalizations.of(context)!
+                                                .somthingWrong),
+                                  ).then((value) => Navigator.pop(context))
+                                }
+                            });
+                      } else {
                         showDialog(
                           context: context,
                           builder: (context) => Warning(
                               isWarning: true,
                               title: AppLocalizations.of(context)!.ops,
-                              description: AppLocalizations.of(context)!.somthingWrong),
-                        ).then((value) => Navigator.pop(context))
+                              description: AppLocalizations.of(context)!
+                                  .fazaNoFriendMsg),
+                        ).then((value) => Navigator.pop(context));
                       }
-                  });
-            } else {
-              showDialog(
-                context: context,
-                builder: (context) => Warning(
-                    isWarning: true,
-                    title: AppLocalizations.of(context)!.ops,
-                    description: AppLocalizations.of(context)!.fazaNoFriendMsg),
-              ).then((value) => Navigator.pop(context));
-            }
-          });
+                    })
+                  }
+                else
+                  {
+                    showDialog(
+                      context: context,
+                      builder: (context) => Warning(
+                          isWarning: true,
+                          title: AppLocalizations.of(context)!.ops,
+                          description:
+                              AppLocalizations.of(context)!.somthingWrong),
+                    ).then((value) => Navigator.pop(context))
+                  }
+              });
         });
   }
 }
