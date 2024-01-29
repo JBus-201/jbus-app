@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jbus_app/screens/authentication/signin/signin.dart';
 import 'package:jbus_app/screens/settings/language_settings/language_settings.dart';
 import 'package:jbus_app/screens/settings/notification_settings/notification_settings.dart';
 import 'package:jbus_app/screens/settings/settings/widgets/settings_tab.dart';
@@ -13,8 +14,6 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const JbusAppBarTitle(),
-        
-            
       ),
       body: Center(
         child: ListView(
@@ -55,6 +54,19 @@ class SettingsScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => const NotificationSettingsScreen(),
+                  ),
+                );
+              },
+            ),
+            SettingsTab(
+              icon: Icons.exit_to_app,
+              title: AppLocalizations.of(context)!.logOut,
+              subTitle: AppLocalizations.of(context)!.logOut,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SignInScreen(),
                   ),
                 );
               },
