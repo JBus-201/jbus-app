@@ -6,6 +6,7 @@ import 'package:jbus_app/data/models/fazaa.dart';
 import 'package:jbus_app/screens/faza/widgets/view_faza.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FazaHistoryPage extends StatefulWidget {
   const FazaHistoryPage({super.key});
@@ -42,13 +43,17 @@ class _FazaHistoryPageState extends State<FazaHistoryPage> {
                 return const Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
                 print('Error: ${snapshot.error}');
-                return const Center(
+                return Center(
                     child: Text(
-                  'Somthing went wrong while geting your data',
+                  AppLocalizations.of(context)!.somthingWrong,
                   textAlign: TextAlign.center,
                 ));
               } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                return const Center(child: Text('There is no faza\'s'));
+                return Center(
+                    child: Text(
+                  AppLocalizations.of(context)!.noFaza,
+                  textAlign: TextAlign.center,
+                ));
               } else {
                 return ListView.builder(
                     itemCount: snapshot.data!.length,
@@ -67,7 +72,7 @@ class _FazaHistoryPageState extends State<FazaHistoryPage> {
                               : const Icon(Icons.person),
                         ),
                         title: Text(
-                            '${fazaa.inDebt.id != myId ? fazaa.inDebt.user.name : "YOU"}'),
+                            '${fazaa.inDebt.id != myId ? fazaa.inDebt.user.name : AppLocalizations.of(context)!.you}'),
                         onTap: () {
                           showDialog(
                               context: context,
@@ -77,7 +82,7 @@ class _FazaHistoryPageState extends State<FazaHistoryPage> {
                                   ));
                         },
                         trailing: Text(
-                          'Amount: ${fazaa.amount}',
+                          '${AppLocalizations.of(context)!.amount}: ${fazaa.amount}',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: fazaa.paid ? ourGreen : ourRed,

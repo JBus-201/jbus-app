@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/data/models/fazaa.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class FazaInfoViewDialog extends StatelessWidget {
   final Fazaa fazaa;
   final int myId;
@@ -27,13 +27,13 @@ class FazaInfoViewDialog extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text("Amount: ${fazaa.amount}",
+            Text("${AppLocalizations.of(context)!.amount}: ${fazaa.amount}",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     color: fazaa.paid ? ourGreen : ourRed,
                     fontSize: 18,
                     fontWeight: FontWeight.bold)),
-            Text('Date: ${fazaa.createdAt.toString().substring(0, 11)}',
+            Text('${AppLocalizations.of(context)!.date}: ${fazaa.createdAt.toString().substring(0, 11)}',
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                     fontSize: 15, fontWeight: FontWeight.normal)),
@@ -45,7 +45,7 @@ class FazaInfoViewDialog extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    const Text("Creditor"),
+                    Text(AppLocalizations.of(context)!.creditor),
                     Container(
                       height: 70,
                       width: 70,
@@ -58,19 +58,19 @@ class FazaInfoViewDialog extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      'User Id: ${fazaa.creditor.id}',
+                      '${AppLocalizations.of(context)!.userId}: ${fazaa.creditor.id}',
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      '${fazaa.creditor.id != myId ? fazaa.creditor.user.name : "YOU"}',
+                      '${fazaa.creditor.id != myId ? fazaa.creditor.user.name : AppLocalizations.of(context)!.you}',
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 16),
                   ],
                 ),
                 Column(children: [
-                  const Text("InDebt"),
+                  Text(AppLocalizations.of(context)!.inDebt),
                   Container(
                     height: 70,
                     width: 70,
@@ -82,12 +82,12 @@ class FazaInfoViewDialog extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'User Id: ${fazaa.inDebt.id}',
+                    '${AppLocalizations.of(context)!.userId}: ${fazaa.inDebt.id}',
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    '${fazaa.inDebt.id != myId ? fazaa.inDebt.user.name : "YOU"}',
+                    '${fazaa.inDebt.id != myId ? fazaa.inDebt.user.name : AppLocalizations.of(context)!.you}',
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 16),
@@ -102,7 +102,7 @@ class FazaInfoViewDialog extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              text: "OK",
+              text: AppLocalizations.of(context)!.ok,
             ),
           ],
         ),

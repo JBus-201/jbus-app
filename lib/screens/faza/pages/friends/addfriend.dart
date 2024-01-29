@@ -41,7 +41,7 @@ class _AddFriendForFazaState extends State<AddFriendForFaza> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Text("Enter your Friend's Id number"),
+          Text(AppLocalizations.of(context)!.enterId),
           Form(
             key: formKey,
             child: OurTextFormField(
@@ -52,7 +52,7 @@ class _AddFriendForFazaState extends State<AddFriendForFaza> {
                 showCursor: true,
                 textAlign: TextAlign.center,
                 icon: Icons.person,
-                label: "ID",
+                label: AppLocalizations.of(context)!.id,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return null;
@@ -74,7 +74,7 @@ class _AddFriendForFazaState extends State<AddFriendForFaza> {
                 controller: friendIdController),
           ),
           RectangularElevatedButton(
-            text: "Send Request",
+            text: AppLocalizations.of(context)!.sendRequest,
             width: 250,
             onPressed: () {
               if (formKey.currentState!.validate()) {
@@ -90,10 +90,11 @@ class _AddFriendForFazaState extends State<AddFriendForFaza> {
                             {
                               showDialog(
                                 context: context,
-                                builder: (context) => const Warning(
+                                builder: (context) => Warning(
                                     isWarning: false,
-                                    title: "Great",
-                                    description: "Request Sent Succesfuly"),
+                                    title: AppLocalizations.of(context)!.great,
+                                    description: AppLocalizations.of(context)!
+                                        .requestSentSuccesfuly),
                               ),
                             }
                         })
@@ -101,11 +102,10 @@ class _AddFriendForFazaState extends State<AddFriendForFaza> {
                     .catchError((error) {
                   showDialog(
                     context: context,
-                    builder: (context) => const Warning(
+                    builder: (context) => Warning(
                       isWarning: true,
-                      title: "Ops!",
-                      description:
-                          'An error occurred while processing your request',
+                      title: AppLocalizations.of(context)!.ops,
+                      description: AppLocalizations.of(context)!.somthingWrong,
                     ),
                   );
                 });

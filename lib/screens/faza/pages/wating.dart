@@ -9,6 +9,7 @@ import 'package:jbus_app/screens/trip/tripSettup.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FazaWaitingPage extends StatefulWidget {
   final BusRoute route;
@@ -81,13 +82,13 @@ class _FazaWaitingPageState extends State<FazaWaitingPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              'total amount neede: $amountfaz',
+              '${AppLocalizations.of(context)!.totalAmountNeeded}: $amountfaz',
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
             const SizedBox(
               height: 20,
             ),
-            Text('Time remaining: $_secondsRemaining')
+            Text('${AppLocalizations.of(context)!.timeRemaining}: $_secondsRemaining')
           ],
         ),
       ),

@@ -13,6 +13,7 @@ import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
 import 'package:jbus_app/widgets/warnings/confirm.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FazaPayersPage extends StatefulWidget {
   final int requestorId;
@@ -97,13 +98,13 @@ class _FazaPayersPageState extends State<FazaPayersPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              'total amount neede: $amountfaz',
+              '${AppLocalizations.of(context)!.totalAmountNeeded}: $amountfaz',
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
             const SizedBox(
               height: 20,
             ),
-            Text('Time remaining: $_secondsRemaining',
+            Text('${AppLocalizations.of(context)!.timeRemaining}: $_secondsRemaining',
                 style: TextStyle(
                     color: _secondsRemaining <= 15
                         ? _secondsRemaining < 5
@@ -114,7 +115,7 @@ class _FazaPayersPageState extends State<FazaPayersPage> {
               height: 50,
             ),
             RectangularElevatedButton(
-              text: "pay: 0.05",
+              text: "${AppLocalizations.of(context)!.pay}: ${0.05}",
               width: 250,
               onPressed: () {
                 if (wallet > 5) {
@@ -122,9 +123,9 @@ class _FazaPayersPageState extends State<FazaPayersPage> {
                     showDialog(
                         context: context,
                         builder: (context) => ConfirmationDialog(
-                            title: "Faza'a",
+                            title: AppLocalizations.of(context)!.fazaa,
                             description:
-                                "Are you sure to pay\nthis amount: 0.05",
+                                "${AppLocalizations.of(context)!.sureToPay}: ${0.05}",
                             onConfirm: () {
                               Navigator.pop(context);
                               if (amountfaz > 0 && amountfaz - 5 >= 0) {
@@ -145,15 +146,15 @@ class _FazaPayersPageState extends State<FazaPayersPage> {
               },
             ),
             RectangularElevatedButton(
-              text: "pay: 0.10",
+              text: AppLocalizations.of(context)!.payTen,
               width: 250,
               onPressed: () {
                 if (amountfaz > 0) {
                   showDialog(
                       context: context,
                       builder: (context) => ConfirmationDialog(
-                          title: "Faza'a",
-                          description: "Are you sure to pay\nthis amount: 0.10",
+                          title: AppLocalizations.of(context)!.fazaa,
+                          description: "${AppLocalizations.of(context)!.sureToPay}: ${0.10}",
                           onConfirm: () {
                             Navigator.pop(context);
                             if (amountfaz > 0 && amountfaz - 10 >= 0) {
@@ -173,15 +174,15 @@ class _FazaPayersPageState extends State<FazaPayersPage> {
               },
             ),
             RectangularElevatedButton(
-              text: "pay: 0.25",
+              text: AppLocalizations.of(context)!.payTwoFive,
               width: 250,
               onPressed: () {
                 if (amountfaz > 0) {
                   showDialog(
                       context: context,
                       builder: (context) => ConfirmationDialog(
-                          title: "Faza'a",
-                          description: "Are you sure to pay\nthis amount: 0.25",
+                          title: AppLocalizations.of(context)!.fazaa,
+                          description: "${AppLocalizations.of(context)!.sureToPay}: ${0.25}",
                           onConfirm: () {
                             Navigator.pop(context);
                             if (amountfaz > 0 && amountfaz - 25 >= 0) {
@@ -201,16 +202,16 @@ class _FazaPayersPageState extends State<FazaPayersPage> {
               },
             ),
             RectangularElevatedButton(
-              text: "pay: $amountfaz",
+              text: "${AppLocalizations.of(context)!.pay}: $amountfaz",
               width: 250,
               onPressed: () {
                 if (amountfaz > 0) {
                   showDialog(
                       context: context,
                       builder: (context) => ConfirmationDialog(
-                          title: "Faza'a",
+                          title: AppLocalizations.of(context)!.fazaa,
                           description:
-                              "Are you sure to pay\nthis amount: $amountfaz",
+                              "${AppLocalizations.of(context)!.sureToPay}: $amountfaz",
                           onConfirm: () {
                             writeFazaPayers(
                                 widget.requestorId, myId, amountfaz);

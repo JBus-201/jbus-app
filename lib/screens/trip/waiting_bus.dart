@@ -171,6 +171,7 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
                                         startingPoint: widget.startingPoint,
                                       )),
                               (Route<dynamic> route) => false,
+                            // ignore: body_might_complete_normally_catch_error
                             )}).catchError((error, stackTrace) {
                               print('Error: ${error.toString()}');
                               showDialog(

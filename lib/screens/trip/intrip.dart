@@ -11,7 +11,6 @@ import 'package:jbus_app/data/models/bus.dart';
 import 'package:jbus_app/data/models/bus_route.dart';
 import 'package:jbus_app/data/models/point.dart';
 import 'package:jbus_app/data/models/point_create_request.dart';
-import 'package:jbus_app/data/models/trip_create_request.dart';
 import 'package:jbus_app/data/models/trip_update_request.dart';
 import 'package:jbus_app/screens/home/home.dart';
 import 'package:jbus_app/screens/trip/dialogs/ratingdialog.dart';
@@ -251,7 +250,7 @@ class _InTripPageState extends State<InTripPage> {
                               title: 'Your arived',
                               description: 'How was your Trip?',
                               onConfirm: () {
-                                //TODO
+                                //TODO Rating
                                 Navigator.pop(context);
                               },
                             )).then((value) => {
@@ -262,6 +261,7 @@ class _InTripPageState extends State<InTripPage> {
                               (Route<dynamic> route) => false)
                         })
                   })
+              // ignore: body_might_complete_normally_catch_error
               .catchError((error, stackTrace) {
             print('Error: ${error.toString()}');
             showDialog(
