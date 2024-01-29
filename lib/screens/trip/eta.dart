@@ -3,6 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/data/api/google_service.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ETAViewDialog extends StatelessWidget {
   final dynamic Function()? onPress;
@@ -60,7 +61,7 @@ class ETAViewDialog extends StatelessWidget {
                 RectangularElevatedButton(
                   width: 150,
                   onPressed: onPress,
-                  text: "Select Bus",
+                  text:  AppLocalizations.of(context)!.selectBus,
                 ),
                 // TextButton(
                 //   onPressed: () {

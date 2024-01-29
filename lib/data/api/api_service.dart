@@ -10,6 +10,8 @@ import 'package:jbus_app/data/models/friend_request.dart';
 import 'package:jbus_app/data/models/friends_create_request.dart';
 import 'package:jbus_app/data/models/login_request.dart';
 import 'package:jbus_app/data/models/login_response.dart';
+// ignore: unused_import
+import 'package:jbus_app/data/models/predefined_stops.dart';
 import 'package:jbus_app/data/models/register_request.dart';
 import 'package:jbus_app/data/models/trip.dart';
 import 'package:jbus_app/data/models/trip_create_request.dart';
@@ -63,6 +65,9 @@ abstract class ApiService {
 
   @GET("/Fazaa/getFazaaById/{id}")
   Future<Fazaa> getFazaaById(@Path("id") int id);
+  
+  @GET("/Passenger/isPassengerFaza\'aable")
+  Future<HttpResponse<dynamic>> isPassengerFazaaAble();
 
   @POST("/Friends/sendFriendRequest")
   Future<HttpResponse> sendFriendRequest(
@@ -90,12 +95,18 @@ abstract class ApiService {
   Future<Trip> getTrip(@Path("id") int id);
 
   @PUT("/Trip/{id}")
-  Future<HttpResponse> updateTrip(
-      @Path("id") int id, @Body() TripUpdateRequest tripUpdateRequest);
+  Future<HttpResponse> updateTrip(@Body() TripUpdateRequest tripUpdateRequest);
+
+  @PUT("/Trip/{id}")
+  Future<HttpResponse> finishTrip();
 
   @POST("/Trip")
-  Future<HttpResponse> createTrip(@Body() TripCreateRequest tripCreateRequest);
+  Future<HttpResponse> createTrip(
+      @Body() TripCreateRequest tripCreateRequest,@Path("id") int id);
 
   @GET("/Bus/getActiveBuses")
   Future<List<Bus>> getActiveBuses();
+
+  @GET("/Bus/getActiveBusesById/{id}")
+  Future<List<Bus>> getActiveBusesById(@Path("id") int id);
 }

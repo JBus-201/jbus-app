@@ -3,6 +3,7 @@ import 'package:jbus_app/data/api/api_service.dart';
 import 'package:jbus_app/data/models/friend.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/others/friendView.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AllFriendsPage extends StatefulWidget {
   const AllFriendsPage({super.key});
@@ -30,14 +31,17 @@ class _AllFriendsPageState extends State<AllFriendsPage> {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             print('Error: ${snapshot.error}');
-            return const Center(
+            return Center(
                 child: Text(
-              'No friends,\nSorry, but you are lonely',
+              AppLocalizations.of(context)!.noFriendsMsg,
               textAlign: TextAlign.center,
             ));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(
-                child: Text('No friends,\nSorry, but you are lonely'));
+            return Center(
+                child: Text(
+              AppLocalizations.of(context)!.noFriendsMsg,
+              textAlign: TextAlign.center,
+            ));
           } else {
             return ListView.builder(
               itemCount: snapshot.data!.length,

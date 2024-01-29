@@ -4,6 +4,7 @@ import 'package:jbus_app/data/models/friend_request.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:jbus_app/widgets/warnings/warning.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FazaFriendRequestsPage extends StatefulWidget {
   const FazaFriendRequestsPage({super.key});
@@ -31,15 +32,15 @@ class _FazaFriendRequestsPageState extends State<FazaFriendRequestsPage> {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             print('Error: ${snapshot.error}');
-            return const Center(
+            return Center(
                 child: Text(
-              'No friend requests,\nSorry, but no one loves you',
+              AppLocalizations.of(context)!.noFriendReqMsg,
               textAlign: TextAlign.center,
             ));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(
-                child:
-                    Text('No friend requests,\nSorry, but no one loves you'));
+            return Center(
+                child: Text(AppLocalizations.of(context)!.noFriendReqMsg,
+                    textAlign: TextAlign.center));
           } else {
             return ListView.builder(
               itemCount: snapshot.data!.length,
@@ -56,10 +57,10 @@ class _FazaFriendRequestsPageState extends State<FazaFriendRequestsPage> {
                         ? Image.asset('${friend.passenger.profileImage}')
                         : const Icon(Icons.person),
                   ),
-                  title: Text('User ID: ${friend.passenger.id}'),
+                  title: Text('${AppLocalizations.of(context)!.userId}: ${friend.passenger.id}'),
                   subtitle: Text(friend.passenger.user.name ?? 'N/A'),
                   trailing: RectangularElevatedButton(
-                    text: 'Accept',
+                    text: AppLocalizations.of(context)!.accept,
                     fontSize: 15,
                     padding: 1,
                     height: 15,
@@ -75,10 +76,10 @@ class _FazaFriendRequestsPageState extends State<FazaFriendRequestsPage> {
                                   {
                                     showDialog(
                                       context: context,
-                                      builder: (context) => const Warning(
+                                      builder: (context) => Warning(
                                           isWarning: false,
-                                          title: "Great",
-                                          description: "You are friends now"),
+                                          title: AppLocalizations.of(context)!.great,
+                                          description: AppLocalizations.of(context)!.youAreFriendsMsg),
                                     ),
                                   }
                               })
@@ -86,11 +87,11 @@ class _FazaFriendRequestsPageState extends State<FazaFriendRequestsPage> {
                           .catchError((error) {
                         showDialog(
                           context: context,
-                          builder: (context) => const Warning(
+                          builder: (context) => Warning(
                             isWarning: true,
-                            title: "Ops!",
+                            title: AppLocalizations.of(context)!.ops,
                             description:
-                                'An error occurred while processing your request',
+                                AppLocalizations.of(context)!.somthingWrong,
                           ),
                         );
                       });

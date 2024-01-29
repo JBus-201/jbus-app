@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:jbus_app/constants/colors/gradients.dart';
 import 'package:jbus_app/data/api/api_service.dart';
@@ -11,6 +10,7 @@ import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:jbus_app/widgets/warnings/warning.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FazaRequestBT extends StatelessWidget {
   final int totalAmountNeeded;
@@ -26,7 +26,7 @@ class FazaRequestBT extends StatelessWidget {
     return RectangularElevatedButton(
         gradient: redButtonGradient,
         width: 130,
-        text: "فزعة",
+        text: AppLocalizations.of(context)!.fazaa,
         onPressed: () {
           sl<ApiService>().getFriends().then((List<Friend> friends) {
             if (friends.isNotEmpty) {
@@ -49,20 +49,20 @@ class FazaRequestBT extends StatelessWidget {
                       {
                         showDialog(
                           context: context,
-                          builder: (context) => const Warning(
+                          builder: (context) => Warning(
                               isWarning: true,
-                              title: "Ops!",
-                              description: "Something went wrong\nPlease try again"),
+                              title: AppLocalizations.of(context)!.ops,
+                              description: AppLocalizations.of(context)!.somthingWrong),
                         ).then((value) => Navigator.pop(context))
                       }
                   });
             } else {
               showDialog(
                 context: context,
-                builder: (context) => const Warning(
+                builder: (context) => Warning(
                     isWarning: true,
-                    title: "Ops!",
-                    description: "You don't have friends"),
+                    title: AppLocalizations.of(context)!.ops,
+                    description: AppLocalizations.of(context)!.fazaNoFriendMsg),
               ).then((value) => Navigator.pop(context));
             }
           });

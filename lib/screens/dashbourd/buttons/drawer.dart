@@ -27,7 +27,7 @@ class CustomDrawerButton extends StatelessWidget {
           ),
           onPressed: onTap,
           child: const Icon(
-            Icons.menu_rounded,
+            Icons.home_rounded,
             color: ourNavey,
           ),
         ),

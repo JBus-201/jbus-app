@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-class Warning extends StatelessWidget {
+import 'package:jbus_app/widgets/others/rating.dart';
+
+class RatingDialog extends StatelessWidget {
   final String title;
   final String description;
-  final bool isWarning;
-  const Warning(
-      {super.key,
-      required this.title,
-      required this.description,
-      this.isWarning = true});
+  final dynamic Function()? onConfirm;
+
+  const RatingDialog({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.onConfirm,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,15 +27,8 @@ class Warning extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Icon(
-              isWarning ? Icons.warning : Icons.task_alt_rounded,
-              size: 48,
-              color: isWarning ? ourRed : ourGreen,
-            ),
-            const SizedBox(height: 16),
             Text(
               title,
-              textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -48,13 +43,30 @@ class Warning extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            RectangularElevatedButton(
-              width: 150,
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              text: AppLocalizations.of(context)!.ok,
+            RatingWidget(
+              initialRating: 0,
+              onRatingChanged: (newRating) {},
             ),
+            const SizedBox(
+              height: 16,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                RectangularElevatedButton(
+                  width: 110,
+                  onPressed: onConfirm,
+                  text: "Submit",
+                  fontSize: 14,
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text("skip"),
+                ),
+              ],
+            )
           ],
         ),
       ),

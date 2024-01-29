@@ -9,6 +9,7 @@ import 'package:jbus_app/screens/trip/edit_point.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
 import 'package:jbus_app/widgets/warnings/warning.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TripSettup extends StatefulWidget {
   final BusRoute route;
@@ -114,9 +115,9 @@ class _TripSettupState extends State<TripSettup> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        const Text(
-                          'from:',
-                          style: TextStyle(
+                        Text(
+                          AppLocalizations.of(context)!.from,
+                          style: const TextStyle(
                               fontSize: 16, fontWeight: FontWeight.normal),
                         ),
                         Container(
@@ -167,9 +168,11 @@ class _TripSettupState extends State<TripSettup> {
                           } else {
                             showDialog(
                                 context: context,
-                                builder: (context) => const Warning(
-                                    title: "Sawp Error",
-                                    description: "There's no other direction"));
+                                builder: (context) => Warning(
+                                    title:
+                                        AppLocalizations.of(context)!.sawpError,
+                                    description: AppLocalizations.of(context)!
+                                        .noOtherDirectionMsg));
                           }
                         });
                       },
@@ -189,9 +192,9 @@ class _TripSettupState extends State<TripSettup> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        const Text(
-                          'to   :',
-                          style: TextStyle(
+                        Text(
+                          '${AppLocalizations.of(context)!.to}   :',
+                          style: const TextStyle(
                               fontSize: 16, fontWeight: FontWeight.normal),
                         ),
                         Container(
@@ -231,7 +234,7 @@ class _TripSettupState extends State<TripSettup> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: RectangularElevatedButton(
-          text: "Available Buses",
+          text: AppLocalizations.of(context)!.activeBuses,
           width: 200,
           onPressed: () {
             Navigator.push(

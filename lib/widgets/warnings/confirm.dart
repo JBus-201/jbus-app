@@ -50,9 +50,10 @@ class ConfirmationDialog extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 RectangularElevatedButton(
-                  width: 150,
+                  width: 110,
                   onPressed: onConfirm,
                   text: "Yes",
                 ),
