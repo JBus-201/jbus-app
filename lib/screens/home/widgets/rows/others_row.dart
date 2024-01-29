@@ -51,7 +51,7 @@ class OthersRow extends StatelessWidget {
               ),
               OurTab(
                 text: AppLocalizations.of(context)!.account,
-                image: 'assets/images/profile_photos/new_boy.png',
+                image: 'assets/images/profile_photos/boy_four.png',
                 scale: 24,
                 topPadding: 12,
                 //leftPadding: 1,
