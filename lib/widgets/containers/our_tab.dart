@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
-import 'package:jbus_app/main.dart';
 import 'package:jbus_app/widgets/text/our_text.dart';
 
 class OurTab extends StatelessWidget {
@@ -31,8 +30,10 @@ class OurTab extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(18),
       child: Container(
-        height: 116,
-        width: 116,
+        height: MediaQuery.of(context).size.height * 0.14,
+        //116,
+        width: MediaQuery.of(context).size.width * 0.29,
+        //116,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [

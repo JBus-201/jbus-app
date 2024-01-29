@@ -52,7 +52,7 @@
     "requestARide": "طلب ركوب",
     "currentBalance": "الرصيد الحالي",
     "jordanianDinar": "د.أ",
-    "favorite": "المفضلة",
+    "favorites": "المفضلة",
     "roadsAndTracks": "الطرق والمسارات",
     "wallet": "المحفظة",
     "manageAccount": "إدارة الحساب",
@@ -133,6 +133,7 @@
     "allFriends":"الجميع",
     "friendRequests":"الطلبات",
     "addFriend":"إضافة",
+    "account":"الحساب",
     "amount":"القيمة",
     "date":"التاريخ",
     "creditor":"الدائن",
@@ -174,5 +175,4 @@
     "exitTripMsg":"هل أنت متأكد من إلغاء الرحلة؟",
     "youArived":"لقد وصلت",
     "howWasTripMsg":"كيف كانت رحلتك؟"
-
 }

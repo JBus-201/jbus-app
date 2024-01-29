@@ -33,24 +33,31 @@ class ProfilePhoto extends StatelessWidget {
         customBorder: const CircleBorder(),
         onTap: onTap,
         child: CircleAvatar(
-          backgroundColor: borderColor,
+          backgroundColor: ourOrange,
           radius: borderRadius,
-          child: CircleAvatar(
-            // backgroundImage: hasBeenChoosenFromGallery == true
-            //     ? Image.file(file) as ImageProvider
-            //     : (isActualPhoto == true)
-            //         ? AssetImage(state.photoUrl)
-            //         : AssetImage(image) as ImageProvider,
-            radius: photoRadius,
-            child: hasBeenChoosenFromGallery == true
-                ? (file != File(''))
-                    ? Image.file(file)
-                    : //(isActualPhoto == true)
-                    //? Image.asset(state.photoUrl)
-                    Image.asset(image)
-                : Image.asset(image),
-          ),
+          child: hasBeenChoosenFromGallery == true
+              ? (file != File(''))
+                  ? Image.file(file)
+                  : //(isActualPhoto == true)
+                  //? Image.asset(state.photoUrl)
+                  Image.asset(image)
+              : Image.asset(
+                  image,
+                  scale: 15,
+                ),
         ),
+
+        //  CircleAvatar(
+        //   backgroundColor: ourWhite,
+        //   // backgroundImage: hasBeenChoosenFromGallery == true
+        //   //     ? Image.file(file) as ImageProvider
+        //   //     : (isActualPhoto == true)
+        //   //         ? AssetImage(state.photoUrl)
+        //   //         : AssetImage(image) as ImageProvider,
+        //   radius: photoRadius,
+        // child:
+        //),
+        //),
       ),
     );
   }

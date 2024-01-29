@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/screens/home/widgets/profile_container.dart';
@@ -27,6 +28,9 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             children: [
               ProfileContainer(walletBalance: walletBalance),
+              const SizedBox(
+                height: 20,
+              ),
               const StartYourTripRow(),
               const MoneyRow(),
               const OthersRow(),

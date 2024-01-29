@@ -3,7 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jbus_app/general_blocs/email_bloc/bloc/email_bloc.dart';
+import 'package:jbus_app/general_blocs/mobile_number_bloc/bloc/mobile_number_bloc.dart';
+import 'package:jbus_app/general_blocs/name_bloc/bloc/name_bloc.dart';
 import 'package:jbus_app/screens/profile/edit_profile/widgets/edit_profile_tab.dart';
+import 'package:jbus_app/screens/profile/set_profile_photo/set_profile_photo.dart';
 import 'package:jbus_app/screens/profile/update/update_email/update_email.dart';
 import 'package:jbus_app/screens/profile/update/update_mobile_number/update_mobile_number.dart';
 import 'package:jbus_app/screens/profile/update/update_name/update_name.dart';
@@ -22,16 +25,34 @@ class EditProfileScreen extends StatelessWidget {
               height: 50,
             ),
             EditProfileTab(
-                icon: Icons.person_outline_outlined,
-                onTap: () {
-                  Navigator.push(
+              icon: Icons.person_pin_outlined,
+              onTap: () {
+                Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const UpdateNameScreen(),
-                    ),
-                  );
-                },
-                info: 'Ahmad King'),
+                        builder: (context) => const SetProfilePhotoScreen()));
+              },
+              info: 'Change your personal photo',
+            ),
+            const Divider(
+              color: ourLightGray,
+              indent: 40,
+            ),
+            BlocBuilder<NameBloc, NameState>(
+              builder: (context, state) {
+                return EditProfileTab(
+                    icon: Icons.person_outline_outlined,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const UpdateNameScreen(),
+                        ),
+                      );
+                    },
+                    info: '${state.firstName} ${state.lastName}');
+              },
+            ),
 
             const Divider(
               color: ourLightGray,
@@ -57,17 +78,22 @@ class EditProfileScreen extends StatelessWidget {
               color: ourLightGray,
               indent: 40,
             ),
-            EditProfileTab(
-                icon: Icons.phone_iphone,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const UpdateMobileNumberScreen(),
-                    ),
-                  );
-                },
-                info: '0798240771'),
+            BlocBuilder<MobileNumberBloc, MobileNumberState>(
+              builder: (context, state) {
+                return EditProfileTab(
+                    icon: Icons.phone_iphone,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const UpdateMobileNumberScreen(),
+                        ),
+                      );
+                    },
+                    info: state.mobileNumber);
+              },
+            ),
 
             const Divider(
               color: ourLightGray,

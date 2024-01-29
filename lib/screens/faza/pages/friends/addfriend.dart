@@ -82,7 +82,7 @@ class _AddFriendForFazaState extends State<AddFriendForFaza> {
                 FriendsCreateRequest fr =
                     FriendsCreateRequest(friendId: friendId);
                 final res = sl<ApiService>().sendFriendRequest(fr);
-                print("Friend's Respons: ${res}");
+                print("Friend's Respons: $res");
                 res
                     .then((value) => {
                           print('state code : ${value.response.statusCode}'),

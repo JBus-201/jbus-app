@@ -12,7 +12,8 @@ class StartYourTripRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding:
+          const EdgeInsets.only(top: 10, bottom: 10, right: 16.0, left: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -43,14 +44,14 @@ class StartYourTripRow extends StatelessWidget {
               OurTab(
                 text: AppLocalizations.of(context)!.routes,
                 image: 'assets/images/routes.png',
-                scale: 8,
+                scale: 9,
                 topPadding: 15,
                 onTap: () {},
               ),
               OurTab(
-                text: AppLocalizations.of(context)!.favorite,
-                image: 'assets/images/favorite.png',
-                scale: 17,
+                text: AppLocalizations.of(context)!.favorites,
+                image: 'assets/images/favorites.png',
+                scale: 16,
                 topPadding: 19,
                 onTap: () {},
               ),

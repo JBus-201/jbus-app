@@ -7,7 +7,8 @@ part 'mobile_number_event.dart';
 part 'mobile_number_state.dart';
 
 class MobileNumberBloc extends Bloc<MobileNumberEvent, MobileNumberState> {
-  MobileNumberBloc() : super(const MobileNumberState()) {
+  MobileNumberBloc()
+      : super(const MobileNumberState(mobileNumber: 'Add a mobile number')) {
     on<MobileNumberEvent>((event, emit) {});
 
     on<UpdateMobileNumberEvent>(_updateMobileNumberEvent);

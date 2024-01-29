@@ -171,8 +171,8 @@ class GoogleMapsApi {
   }
 
   Future<String> calculateETA(LatLng origin, LatLng destination) async {
-    print('start: ${origin}');
-    print('start: ${destination}');
+    print('start: $origin');
+    print('start: $destination');
     try{final String apiUrl =
     'https://maps.googleapis.com/maps/api/directions/json?origin=${origin.latitude},${origin.longitude}&destination=${destination.latitude},${destination.longitude}&mode=driving&traffic_mode=optimistic&key=$apiKey';
 
@@ -216,7 +216,7 @@ Future<Duration> calculateDrivingEta(LatLng origin, LatLng destination) async {
 
   if (response.statusCode == 200) {
     final data = json.decode(response.body);
-print('ETA: ${data}');
+print('ETA: $data');
     if (data['status'] == 'OK') {
       final element = data['rows'][0]['elements'][0];
       final durationInSeconds = element['duration']['value'];
@@ -235,8 +235,8 @@ print('ETA: ${data}');
     // Load the icon as an image using the image package
     final img.Image image = img.decodeImage(Uint8List.fromList(bytes))!;
 
-    final double targetWidth = 130.0; // Set your desired width here
-    final double targetHeight = 130.0; // Set your desired height here
+    const double targetWidth = 130.0; // Set your desired width here
+    const double targetHeight = 130.0; // Set your desired height here
 
     // Resize the image
     final img.Image resizedImage = img.copyResize(

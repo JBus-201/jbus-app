@@ -14,6 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/screens/authentication/signup/signup.dart';
 import 'package:jbus_app/screens/dashbourd/dashbourd.dart';
 import 'package:jbus_app/screens/home/home.dart';
+import 'package:jbus_app/screens/profile/set_profile_photo/bloc/set_profile_photo_bloc.dart';
 import 'package:jbus_app/screens/settings/language_settings/bloc/language_settings_bloc.dart';
 import 'package:jbus_app/screens/settings/theme_settings/bloc/theme_settings_bloc.dart';
 import 'package:jbus_app/screens/trip/bloc/pickup_bloc.dart';
@@ -108,6 +109,9 @@ Future main() async {
         ),
         BlocProvider<PasswordBloc>(
           create: (BuildContext context) => PasswordBloc(),
+        ),
+        BlocProvider<SetProfilePhotoBloc>(
+          create: (BuildContext context) => SetProfilePhotoBloc(),
         ),
       ],
       child: MyApp(homeScreen: _getHomeScreen(status)),

@@ -1,8 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
+import 'package:jbus_app/general_blocs/name_bloc/bloc/name_bloc.dart';
 import 'package:jbus_app/screens/profile/edit_profile/edit_profile.dart';
+import 'package:jbus_app/screens/profile/set_profile_photo/bloc/set_profile_photo_bloc.dart';
 import 'package:jbus_app/widgets/containers/profile_photo.dart';
 import 'package:jbus_app/widgets/text/our_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -17,80 +20,90 @@ class ProfileContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      //color: ourNavey,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            ourNavey,
-            ourNavey.withOpacity(0.85),
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-      ),
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 60,
+    return BlocBuilder<NameBloc, NameState>(
+      builder: (context, state) {
+        return Container(
+          //color: ourNavey,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                ourNavey,
+                ourNavey.withOpacity(0.85),
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
           ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          child: Column(
             children: [
-              Column(
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.08,
+              ),
+              Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  ProfilePhoto(
-                    file: File(''),
-                    image:
-                        'assets/images/profile_photos/boys_avatars/green_boy_four.png',
-                    borderRadius: 50,
-                    photoRadius: 48,
-                    borderColor: ourWhite,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const EditProfileScreen(),
-                        ),
-                      );
-                    },
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      BlocBuilder<SetProfilePhotoBloc, SetProfilePhotoState>(
+                        builder: (context, state) {
+                          return ProfilePhoto(
+                            file: File(''),
+                            image: state.photoUrl,
+                            borderRadius: 60,
+                            photoRadius: 100,
+                            borderColor: ourWhite,
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const EditProfileScreen(),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      ),
+                      OurText(
+                        '${state.firstName} ${state.lastName}',
+                        //'${AppLocalizations.of(context)!.firstName} ${AppLocalizations.of(context)!.lastName}',
+                        fontWeight: FontWeight.w600,
+                        color: ourWhite,
+                      ),
+                    ],
                   ),
-                  const OurText(
-                    'Ahmad King',
-                    //'${AppLocalizations.of(context)!.firstName} ${AppLocalizations.of(context)!.lastName}',
-                    fontWeight: FontWeight.w600,
-                    color: ourWhite,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      OurText(
+                        '$walletBalance ',
+                        fontWeight: FontWeight.w800,
+                        fontSize: 60,
+                        color: ourWhite,
+                        fontFamily: 'PTSerif',
+                      ),
+                      OurText(
+                        AppLocalizations.of(context)!.jod,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 20,
+                        color: ourWhite,
+                        fontFamily: 'PTSerif',
+                      )
+                    ],
                   ),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  OurText(
-                    '$walletBalance ',
-                    fontWeight: FontWeight.w800,
-                    fontSize: 60,
-                    color: ourWhite,
-                  ),
-                  OurText(
-                    AppLocalizations.of(context)!.jod,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 20,
-                    color: ourWhite,
-                  )
-                ],
+              const SizedBox(
+                height: 30,
               ),
             ],
           ),
-          const SizedBox(
-            height: 30,
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
