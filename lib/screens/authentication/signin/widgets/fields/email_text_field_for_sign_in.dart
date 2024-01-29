@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jbus_app/widgets/text_fields/text_form_field.dart';
 
-class EmailTextField extends StatelessWidget {
-  const EmailTextField({
+class EmailTextFieldSI extends StatelessWidget {
+  const EmailTextFieldSI({
     super.key,
   });
 

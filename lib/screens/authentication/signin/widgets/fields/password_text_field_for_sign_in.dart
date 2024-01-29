@@ -4,8 +4,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jbus_app/screens/authentication/signup/bloc/signup_bloc.dart';
 import 'package:jbus_app/widgets/text_fields/text_form_field.dart';
 
-class PasswordTextField extends StatelessWidget {
-  const PasswordTextField({super.key});
+class PasswordTextFieldSI extends StatelessWidget {
+  const PasswordTextFieldSI({super.key});
 
   static final TextEditingController passwordController =
       TextEditingController();

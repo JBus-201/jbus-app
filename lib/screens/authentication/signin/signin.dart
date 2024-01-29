@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/screens/authentication/signin/cubit/signin_cubit.dart';
 import 'package:jbus_app/screens/authentication/signin/widgets/buttons/sign_up_button_s_i_s.dart';
 import 'package:jbus_app/screens/authentication/signin/widgets/buttons/sign_in_button_s_i_s.dart';
+import 'package:jbus_app/screens/authentication/signin/widgets/fields/email_text_field_for_sign_in.dart';
+import 'package:jbus_app/screens/authentication/signin/widgets/fields/password_text_field_for_sign_in.dart';
 import 'package:jbus_app/screens/authentication/signup/widgets/fields/email_text_field.dart';
 import 'package:jbus_app/screens/authentication/signup/widgets/fields/password_text_fields.dart';
 import 'package:jbus_app/services/service_locator.dart';
@@ -43,10 +45,12 @@ class SignInScreen extends StatelessWidget {
                         children: [
                           Form(
                             key: formKey,
-                            child: Column(
+                            child: const Column(
                               children: [
-                                EmailTextField(),
-                                PasswordTextField(),
+                                EmailTextFieldSI(),
+                                PasswordTextFieldSI(),
+                                //  EmailTextField(),
+                                //  PasswordTextField(),
                               ],
                             ),
                           ),
@@ -61,10 +65,15 @@ class SignInScreen extends StatelessWidget {
                               prefs: sl(),
                             ),
                             child: SignInButtonSIS(
+                              // if(EmailTextFieldSI.emailController == )
+                              // {
+                              // }
+
                               // emailController:
-                              //     EmailTextFieldForSignIn.emailController,
+                              //     EmailTextFieldSI.emailController,
                               // passwordController:
-                              //     PasswordTextFieldForSignIn.passwordController,
+                              //     PasswordTextFieldSI.passwordController,
+
                               formKey: formKey,
                             ),
                           ),

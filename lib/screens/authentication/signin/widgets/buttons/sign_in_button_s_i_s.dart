@@ -6,7 +6,11 @@ import 'package:jbus_app/general_blocs/email_bloc/bloc/email_bloc.dart';
 import 'package:jbus_app/general_blocs/password_bloc/bloc/password_bloc.dart';
 import 'package:jbus_app/screens/authentication/signin/cubit/signin_cubit.dart';
 import 'package:jbus_app/screens/authentication/signin/cubit/signin_state.dart';
+import 'package:jbus_app/screens/authentication/signin/widgets/fields/email_text_field_for_sign_in.dart';
+import 'package:jbus_app/screens/authentication/signin/widgets/fields/password_text_field_for_sign_in.dart';
+import 'package:jbus_app/screens/authentication/signup/widgets/fields/email_text_field.dart';
 import 'package:jbus_app/screens/dashbourd/dashbourd.dart';
+import 'package:jbus_app/screens/profile/update/update_password/widgets/password_text_fields.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -51,25 +55,36 @@ class SignInButtonSIS extends StatelessWidget {
                   text: AppLocalizations.of(context)!.signIn,
                   onPressed: () async {
                     if (formKey.currentState!.validate() || true) {
-                      final fcmToken = await FirebaseMessaging.instance.getToken();
+                      //print('HIIIIIIIIIIIIIIIIIIIII');
+                      // final emailBloc = BlocProvider.of<EmailBloc>(context);
+                      // emailBloc.add(UpdateEmailEvent(EmailTextField.email!));
+
+                      // final passwordBloc =
+                      //     BlocProvider.of<PasswordBloc>(context);
+                      // passwordBloc.add(
+                      //     UpdatePasswordEvent(PasswordTextField.password!));
+
+                      final fcmToken =
+                          await FirebaseMessaging.instance.getToken();
                       final credential = LoginRequest(
-                        email: emailState.email,
-                        password: passwordState.password,
+                        email: EmailTextFieldSI.emailController.text,
+                        //emailState.email,
+                        password: PasswordTextFieldSI.passwordController.text,
+                        //passwordState.password,
                         fcmToken: fcmToken,
                         // email: emailController.text,
                         // password: passwordController.text,
                       );
-                      
+
                       if (context.mounted) {
-                context.read<SigninCubit>().login(credential);
-              }
+                        context.read<SigninCubit>().login(credential);
+                      }
                     }
                   },
                   width: double.maxFinite,
                 );
               },
             );
-
           },
         );
       },
