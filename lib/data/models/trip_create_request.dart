@@ -12,16 +12,16 @@ class TripCreateRequest {
   final DateTime? finishedAt;
   final int? paymentTransactionId;
   final PointCreateRequest pickUpPoint;
-  final DateTime startedAt;
-  final String status;
+  // final DateTime? startedAt;
+  // final String? status;
 
   TripCreateRequest({
     this.dropOffPoint,
     this.finishedAt,
     this.paymentTransactionId,
     required this.pickUpPoint,
-    required this.startedAt,
-    required this.status,
+    //  this.startedAt,
+    //  this.status,
   });
 
   TripCreateRequest copyWith({
@@ -37,8 +37,8 @@ class TripCreateRequest {
         finishedAt: finishedAt ?? this.finishedAt,
         paymentTransactionId: paymentTransactionId ?? this.paymentTransactionId,
         pickUpPoint: pickUpPoint ?? this.pickUpPoint,
-        startedAt: startedAt ?? this.startedAt,
-        status: status ?? this.status,
+        // startedAt: startedAt ?? this.startedAt,
+        // status: status ?? this.status,
       );
 
   factory TripCreateRequest.fromJson(Map<String, dynamic> json) =>

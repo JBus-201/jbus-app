@@ -12,9 +12,9 @@ TripUpdateRequest _$TripUpdateRequestFromJson(Map<String, dynamic> json) =>
           ? null
           : PointCreateRequest.fromJson(
               json['dropOffPoint'] as Map<String, dynamic>),
-      finishedAt: json['finishedAt'] == null
-          ? null
-          : DateTime.parse(json['finishedAt'] as String),
+      // finishedAt: json['finishedAt'] == null
+      //     ? null
+      //     : DateTime.parse(json['finishedAt'] as String),
       paymentTransactionId: json['paymentTransactionId'] as int?,
       pickUpPoint: json['pickUpPoint'] == null
           ? null
@@ -33,7 +33,7 @@ Map<String, dynamic> _$TripUpdateRequestToJson(TripUpdateRequest instance) {
   }
 
   writeNotNull('dropOffPoint', instance.dropOffPoint?.toJson());
-  writeNotNull('finishedAt', instance.finishedAt?.toIso8601String());
+  // writeNotNull('finishedAt', instance.finishedAt?.toIso8601String());
   writeNotNull('paymentTransactionId', instance.paymentTransactionId);
   writeNotNull('pickUpPoint', instance.pickUpPoint?.toJson());
   writeNotNull('status', instance.status);

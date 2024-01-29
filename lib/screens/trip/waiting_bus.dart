@@ -107,13 +107,32 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
                                 title: 'Sure to Exit trip?',
                                 description: "",
                                 onConfirm: () {
-                                  Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const HomeScreen()),
-                                    (Route<dynamic> route) => false,
-                                  );
+                                  DateTime currentUtcDateTime =
+                                      DateTime.now().toUtc();
+                                  PointCreateRequest pick = PointCreateRequest(
+                                      latitude: widget.startingPoint.latitude,
+                                      longitude: widget.startingPoint.longitude,
+                                      name: widget.startingPoint.name!);
+                                  PointCreateRequest drop = PointCreateRequest(
+                                      latitude: widget.endingPoint.latitude,
+                                      longitude: widget.endingPoint.longitude,
+                                      name: widget.endingPoint.name!);
+                                  TripUpdateRequest trip = TripUpdateRequest(
+                                      // finishedAt: currentUtcDateTime,
+                                      pickUpPoint: pick,
+                                      status: "Canceled",
+                                      dropOffPoint: drop);
+                                  sl<ApiService>()
+                                      .updateTrip(trip)
+                                      .then((value) => {
+                                            Navigator.pushAndRemoveUntil(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const HomeScreen()),
+                                              (Route<dynamic> route) => false,
+                                            )
+                                          });
                                 }));
                       },
                     ),
@@ -155,32 +174,39 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
                                 longitude: widget.endingPoint.longitude,
                                 name: widget.endingPoint.name!);
                             TripUpdateRequest trip = TripUpdateRequest(
-                                finishedAt: currentUtcDateTime,
+                                // finishedAt: currentUtcDateTime,
                                 pickUpPoint: pick,
-                                status: "Completed",
+                                status: "Ongoing",
                                 dropOffPoint: drop);
-                            sl<ApiService>().updateTrip(trip).then((value) => {
-                              Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => InTripPage(
-                                        bus: widget.bus,
-                                        endingPoint: widget.endingPoint,
-                                        isGoing: widget.isGoing,
-                                        route: widget.route,
-                                        startingPoint: widget.startingPoint,
-                                      )),
-                              (Route<dynamic> route) => false,
-                            // ignore: body_might_complete_normally_catch_error
-                            )}).catchError((error, stackTrace) {
+                            sl<ApiService>()
+                                .updateTrip(trip)
+                                .then((value) => {
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => InTripPage(
+                                                  bus: widget.bus,
+                                                  endingPoint:
+                                                      widget.endingPoint,
+                                                  isGoing: widget.isGoing,
+                                                  route: widget.route,
+                                                  startingPoint:
+                                                      widget.startingPoint,
+                                                )),
+                                        (Route<dynamic> route) => true,
+                                        // ignore: body_might_complete_normally_catch_error
+                                      )
+                                    })
+                                // ignore: body_might_complete_normally_catch_error
+                                .catchError((error, stackTrace) {
                               print('Error: ${error.toString()}');
                               showDialog(
                                   context: context,
                                   builder: (context) => const Warning(
                                       title: "Oops!",
                                       description: "Somthing went wrog"));
-                            });;
-                            
+                            });
+                            ;
                           },
                         ),
                       ],

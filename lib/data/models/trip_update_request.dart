@@ -10,8 +10,8 @@ part 'trip_update_request.g.dart';
 class TripUpdateRequest {
   @JsonKey(name: "dropOffPoint", includeIfNull: false)
   final PointCreateRequest? dropOffPoint;
-  @JsonKey(name: "finishedAt", includeIfNull: false)
-  final DateTime? finishedAt;
+  // @JsonKey(name: "finishedAt", includeIfNull: false)
+  // final DateTime? finishedAt;
   @JsonKey(name: "paymentTransactionId", includeIfNull: false)
   final int? paymentTransactionId;
   @JsonKey(name: "pickUpPoint", includeIfNull: false)
@@ -21,7 +21,7 @@ class TripUpdateRequest {
 
   TripUpdateRequest({
     this.dropOffPoint,
-    this.finishedAt,
+    // this.finishedAt,
     this.paymentTransactionId,
     this.pickUpPoint,
     this.status,
@@ -36,7 +36,7 @@ class TripUpdateRequest {
   }) =>
       TripUpdateRequest(
         dropOffPoint: dropOffPoint ?? this.dropOffPoint,
-        finishedAt: finishedAt ?? this.finishedAt,
+        // finishedAt: finishedAt ?? this.finishedAt,
         paymentTransactionId: paymentTransactionId ?? this.paymentTransactionId,
         pickUpPoint: pickUpPoint ?? this.pickUpPoint,
         status: status ?? this.status,

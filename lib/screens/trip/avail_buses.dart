@@ -82,11 +82,12 @@ class _TripAvailableBusesState extends State<TripAvailableBuses> {
   }
 
   void listenToBusesLocations() async {
-    List<Bus> activeBuses = await sl<ApiService>().getActiveBuses();
-
+    List<Bus> activeBuses =
+        await sl<ApiService>().getActiveBusesById(widget.route.id);
+    print('Acitve Buses:$activeBuses');
     if (activeBuses.isNotEmpty) {
       for (var i = 0; i < activeBuses.length; i++) {
-        listenToDriverLocation(activeBuses[i].id!, activeBuses);
+        listenToDriverLocation(i, activeBuses[i].id!, activeBuses);
       }
     } else {
       // ignore: use_build_context_synchronously
@@ -98,7 +99,7 @@ class _TripAvailableBusesState extends State<TripAvailableBuses> {
     }
   }
 
-  void listenToDriverLocation(int busId, List<Bus> activeBuses) {
+  void listenToDriverLocation(int index, int busId, List<Bus> activeBuses) {
     final databaseReference = FirebaseDatabase.instance.ref();
     databaseReference
         .child(
@@ -135,8 +136,8 @@ class _TripAvailableBusesState extends State<TripAvailableBuses> {
                       context: context,
                       builder: (context) => ETAViewDialog(
                           onPress: () {
-                            DateTime currentUtcDateTime =
-                                DateTime.now().toUtc();
+                            // DateTime currentUtcDateTime =
+                            //     DateTime.now().toUtc();
                             PointCreateRequest pick = PointCreateRequest(
                                 latitude: startLatLng!.latitude,
                                 longitude: startLatLng!.longitude,
@@ -147,11 +148,11 @@ class _TripAvailableBusesState extends State<TripAvailableBuses> {
                                 name: widget.endingPoint.name!);
                             TripCreateRequest trip = TripCreateRequest(
                                 pickUpPoint: pick,
-                                startedAt: currentUtcDateTime,
-                                status: "Pending",
+                                // startedAt: currentUtcDateTime,
+                                // status: "Pending",
                                 dropOffPoint: drop);
                             sl<ApiService>()
-                                .createTrip(trip)
+                                .createTrip(trip, busId)
                                 .then((value) => {
                                       if (value.response.statusCode == 201)
                                         {
@@ -166,7 +167,7 @@ class _TripAvailableBusesState extends State<TripAvailableBuses> {
                                                           widget.startingPoint,
                                                       endingPoint:
                                                           widget.endingPoint,
-                                                      bus: activeBuses[busId],
+                                                      bus: activeBuses[index],
                                                     )),
                                           )
                                         }

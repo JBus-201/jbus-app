@@ -237,12 +237,12 @@ class _InTripPageState extends State<InTripPage> {
               longitude: widget.endingPoint.longitude,
               name: widget.endingPoint.name!);
           TripUpdateRequest trip = TripUpdateRequest(
-              finishedAt: currentUtcDateTime,
+              // finishedAt: currentUtcDateTime,
               pickUpPoint: pick,
-              status: "Ongoing",
+              status: "Finished",
               dropOffPoint: drop);
           sl<ApiService>()
-              .updateTrip(trip)
+              .finishTrip()
               .then((value) => {
                     showDialog(
                         context: context,
