@@ -107,8 +107,8 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
                                 title: 'Sure to Exit trip?',
                                 description: "",
                                 onConfirm: () {
-                                  DateTime currentUtcDateTime =
-                                      DateTime.now().toUtc();
+                                  // DateTime currentUtcDateTime =
+                                  //     DateTime.now().toUtc();
                                   PointCreateRequest pick = PointCreateRequest(
                                       latitude: widget.startingPoint.latitude,
                                       longitude: widget.startingPoint.longitude,
@@ -163,8 +163,8 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
                           foregroundColor: ourWhite,
                           child: const Icon(Icons.qr_code_rounded),
                           onPressed: () {
-                            DateTime currentUtcDateTime =
-                                DateTime.now().toUtc();
+                            // DateTime currentUtcDateTime =
+                            //     DateTime.now().toUtc();
                             PointCreateRequest pick = PointCreateRequest(
                                 latitude: widget.startingPoint.latitude,
                                 longitude: widget.startingPoint.longitude,
