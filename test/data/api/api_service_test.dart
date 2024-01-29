@@ -1,7 +1,5 @@
 import 'dart:io' hide HttpResponse;
 
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:dio/dio.dart';
 import 'package:jbus_app/constants/strings.dart';
@@ -18,7 +16,6 @@ import 'package:jbus_app/data/api/api_service.dart';
 import 'package:jbus_app/data/models/login_request.dart';
 import 'package:jbus_app/data/models/login_response.dart';
 import 'package:jbus_app/data/models/point_create_request.dart';
-import 'package:jbus_app/data/models/predefined_stops.dart';
 import 'package:jbus_app/data/models/register_request.dart';
 import 'package:jbus_app/data/models/trip.dart';
 import 'package:jbus_app/data/models/trip_create_request.dart';
@@ -472,7 +469,7 @@ void main() {
         final tripsResponse = await apiService.getTrips();
 
         // Act
-        final tripResponse = await apiService.getTrip(tripsResponse[0].id!);
+        final tripResponse = await apiService.getTrip(tripsResponse[0].id);
 
         // Assert
         expect(tripResponse, isA<Trip>());
@@ -508,12 +505,12 @@ void main() {
           status: 'COMPLETED',
         );
         try {
-          await apiService.updateTrip(tripsResponse[0].id!, tripUpdateRequest);
+          await apiService.updateTrip(tripsResponse[0].id, tripUpdateRequest);
         } catch (_) {}
 
         // Act
         final tripResponse = await apiService.updateTrip(
-            tripsResponse[0].id!, tripUpdateRequest2);
+            tripsResponse[0].id, tripUpdateRequest2);
 
         // Assert
         expect(tripResponse, isA<HttpResponse>());
@@ -537,7 +534,7 @@ void main() {
           ),
           startedAt: DateTime.now().toUtc(),
           status: 'PENDING',
-          finishedAt: DateTime.now().add(Duration(minutes: 10)).toUtc(),
+          finishedAt: DateTime.now().add(const Duration(minutes: 10)).toUtc(),
         );
 
         // Act

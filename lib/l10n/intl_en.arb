@@ -52,7 +52,7 @@
     "requestARide": "Request a ride",
     "currentBalance": "Current balance",
     "jordanianDinar": "JOD",
-    "favorite": "Favorite",
+    "favorites": "Favorites",
     "roadsAndTracks": "Roads and tracks",
     "wallet": "Wallet",
     "manageAccount": "Manage account",
@@ -126,12 +126,13 @@
     "others":"Others",
     "history":"History",
     "startYourTrip":"Start Your Trip",
-    "changePassword":"Change password"
+    "changePassword":"Change password",
     "friends":"Friends",
     "fazaHisrory":"History",
     "allFriends":"All",
     "friendRequests":"Requests",
-    "addFriend":"Add"
+    "addFriend":"Add",
+    "account":"Account"
 
 
 }

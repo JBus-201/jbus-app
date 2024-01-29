@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jbus_app/general_blocs/password_bloc/bloc/password_bloc.dart';
 import 'package:jbus_app/screens/authentication/signin/cubit/signin_cubit.dart';
 import 'package:jbus_app/screens/authentication/signin/widgets/buttons/sign_up_button_s_i_s.dart';
 import 'package:jbus_app/screens/authentication/signin/widgets/buttons/sign_in_button_s_i_s.dart';
@@ -8,7 +7,6 @@ import 'package:jbus_app/screens/authentication/signup/widgets/fields/email_text
 import 'package:jbus_app/screens/authentication/signup/widgets/fields/password_text_fields.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
-import 'package:jbus_app/widgets/text/our_text.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});

@@ -13,7 +13,8 @@ class MoneyRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding:
+          const EdgeInsets.only(top: 10, bottom: 10, right: 16.0, left: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -50,9 +51,9 @@ class MoneyRow extends StatelessWidget {
               ),
               OurTab(
                 text: AppLocalizations.of(context)!.fazaa,
-                image: 'assets/images/fazaa.png',
-                scale: 11,
-                topPadding: 16,
+                image: 'assets/images/hands.png',
+                scale: 22,
+                topPadding: 0,
                 onTap: () {
                   Navigator.push(
                     context,

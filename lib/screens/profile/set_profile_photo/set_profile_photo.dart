@@ -48,219 +48,208 @@ class _SetProfilePhotoScreenState extends State<SetProfilePhotoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SetProfilePhotoBloc(),
-      child: BlocBuilder<SetProfilePhotoBloc, SetProfilePhotoState>(
-        builder: (context, state) {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text(
-                AppLocalizations.of(context)!.choosePhoto,
-                style: const TextStyle(color: ourNavey),
-              ),
+    return BlocBuilder<SetProfilePhotoBloc, SetProfilePhotoState>(
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(
+              AppLocalizations.of(context)!.choosePhoto,
+              style: const TextStyle(color: ourNavey),
             ),
-            body: Center(
-              child: Column(
-                children: [
-                  // Main photo
-                  ProfilePhoto(
-                    borderRadius: 100,
-                    photoRadius: 96,
-                    image: state.photoUrl,
-                    hasBeenChoosenFromGallery: hasBeenChoosenFromGallery,
-                    //file: state.file,
-                    file: file,
-                  ),
-                  const SizedBox(
-                    height: 18,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ProfilePhoto(
-                        hasBeenChoosenFromGallery: hasBeenChoosenFromGallery,
-                        borderRadius: 50,
-                        photoRadius: 48,
-                        image: 'assets/images/galery.png',
-                        onTap: () => chooseImageFromGallary(),
-                        file: File('assets/images/galery.png'),
+          ),
+          body: Center(
+            child: Column(
+              children: [
+                // Main photo
+                ProfilePhoto(
+                  borderRadius: 100,
+                  photoRadius: 96,
+                  image: state.photoUrl,
+                  hasBeenChoosenFromGallery: hasBeenChoosenFromGallery,
+                  //file: state.file,
+                  file: file,
+                ),
+                const SizedBox(
+                  height: 18,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ProfilePhoto(
+                      hasBeenChoosenFromGallery: hasBeenChoosenFromGallery,
+                      borderRadius: 50,
+                      photoRadius: 48,
+                      image: 'assets/images/galery.png',
+                      onTap: () => chooseImageFromGallary(),
+                      file: File('assets/images/galery.png'),
+                    ),
+                    ProfilePhoto(
+                      file: File(''),
+                      borderRadius: 50,
+                      photoRadius: 48,
+                      image: 'assets/images/profile_photos/boy_one.png',
+                      onTap: () {
+                        final setProfilePhotoBloc =
+                            context.read<SetProfilePhotoBloc>();
+                        setProfilePhotoBloc.add(
+                          ChangeProfilePhotoEvent(
+                            profilePhotoUrl:
+                                'assets/images/profile_photos/boy_one.png',
+                          ),
+                        );
+                      },
+                    ),
+                    ProfilePhoto(
+                      file: File(''),
+                      borderRadius: 50,
+                      photoRadius: 48,
+                      image: 'assets/images/profile_photos/boy_tow.png',
+                      onTap: () {
+                        final setProfilePhotoBloc =
+                            context.read<SetProfilePhotoBloc>();
+    
+                        setProfilePhotoBloc.add(
+                          ChangeProfilePhotoEvent(
+                            profilePhotoUrl:
+                                'assets/images/profile_photos/boy_tow.png',
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ProfilePhoto(
+                      file: File(''),
+                      borderRadius: 50,
+                      photoRadius: 48,
+                      image: 'assets/images/profile_photos/boy_three.png',
+                      onTap: () {
+                        final setProfilePhotoBloc =
+                            context.read<SetProfilePhotoBloc>();
+    
+                        setProfilePhotoBloc.add(
+                          ChangeProfilePhotoEvent(
+                            profilePhotoUrl:
+                                'assets/images/profile_photos/boy_three.png',
+                          ),
+                        );
+                      },
+                    ),
+                    ProfilePhoto(
+                      file: File(''),
+                      borderRadius: 50,
+                      photoRadius: 48,
+                      image: 'assets/images/profile_photos/boy_four.png',
+                      onTap: () {
+                        final setProfilePhotoBloc =
+                            context.read<SetProfilePhotoBloc>();
+    
+                        setProfilePhotoBloc.add(
+                          ChangeProfilePhotoEvent(
+                            profilePhotoUrl:
+                                'assets/images/profile_photos/boy_four.png',
+                          ),
+                        );
+                      },
+                    ),
+                    ProfilePhoto(
+                      file: File(''),
+                      borderRadius: 50,
+                      photoRadius: 48,
+                      image: 'assets/images/profile_photos/girl_one.png',
+                      onTap: () {
+                        final setProfilePhotoBloc =
+                            context.read<SetProfilePhotoBloc>();
+    
+                        setProfilePhotoBloc.add(
+                          ChangeProfilePhotoEvent(
+                            profilePhotoUrl:
+                                'assets/images/profile_photos/girl_one.png',
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ProfilePhoto(
+                      file: File(''),
+                      borderRadius: 50,
+                      photoRadius: 48,
+                      image: 'assets/images/profile_photos/girl_two.png',
+                      onTap: () {
+                        final setProfilePhotoBloc =
+                            context.read<SetProfilePhotoBloc>();
+    
+                        setProfilePhotoBloc.add(
+                          ChangeProfilePhotoEvent(
+                            profilePhotoUrl:
+                                'assets/images/profile_photos/girl_two.png',
+                          ),
+                        );
+                      },
+                    ),
+                    ProfilePhoto(
+                      file: File(''),
+                      borderRadius: 50,
+                      photoRadius: 48,
+                      image: 'assets/images/profile_photos/girl_three.png',
+                      onTap: () {
+                        final setProfilePhotoBloc =
+                            context.read<SetProfilePhotoBloc>();
+    
+                        setProfilePhotoBloc.add(
+                          ChangeProfilePhotoEvent(
+                            profilePhotoUrl:
+                                'assets/images/profile_photos/girl_three.png',
+                          ),
+                        );
+                      },
+                    ),
+                    ProfilePhoto(
+                      file: File(''),
+                      borderRadius: 50,
+                      photoRadius: 48,
+                      image: 'assets/images/camera.png',
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 18,
+                ),
+                RectangularElevatedButton(
+                  text: AppLocalizations.of(context)!.save,
+                  width: 336,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Dashboard(),
                       ),
-                      ProfilePhoto(
-                        file: File(''),
-                        borderRadius: 50,
-                        photoRadius: 48,
-                        image:
-                            'assets/images/profile_photos/boys_avatars/red_boy_four.png',
-                        onTap: () {
-                          
-                          final setProfilePhotoBloc =
-                              context.read<SetProfilePhotoBloc>();
-                          setProfilePhotoBloc.add(
-                            ChangeProfilePhotoEvent(
-                              profilePhotoUrl:
-                                  'assets/images/profile_photos/boys_avatars/red_boy_four.png',
-                            ),
-                          );
-                        },
+                    );
+                  },
+                ),
+                OurTextButton(
+                  text: AppLocalizations.of(context)!.skip,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Dashboard(),
                       ),
-                      ProfilePhoto(
-                        file: File(''),
-                        borderRadius: 50,
-                        photoRadius: 48,
-                        image:
-                            'assets/images/profile_photos/boys_avatars/blue_boy_four.png',
-                        onTap: () {
-                          final setProfilePhotoBloc =
-                              context.read<SetProfilePhotoBloc>();
-
-                          setProfilePhotoBloc.add(
-                            ChangeProfilePhotoEvent(
-                              profilePhotoUrl:
-                                  'assets/images/profile_photos/boys_avatars/blue_boy_four.png',
-                            ),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ProfilePhoto(
-                        file: File(''),
-                        borderRadius: 50,
-                        photoRadius: 48,
-                        image:
-                            'assets/images/profile_photos/boys_avatars/green_boy_four.png',
-                        onTap: () {
-                          final setProfilePhotoBloc =
-                              context.read<SetProfilePhotoBloc>();
-
-                          setProfilePhotoBloc.add(
-                            ChangeProfilePhotoEvent(
-                              profilePhotoUrl:
-                                  'assets/images/profile_photos/boys_avatars/green_boy_four.png',
-                            ),
-                          );
-                        },
-                      ),
-                      ProfilePhoto(
-                        file: File(''),
-                        borderRadius: 50,
-                        photoRadius: 48,
-                        image:
-                            'assets/images/profile_photos/girls_avatars/blue_girl_four.png',
-                        onTap: () {
-                          final setProfilePhotoBloc =
-                              context.read<SetProfilePhotoBloc>();
-
-                          setProfilePhotoBloc.add(
-                            ChangeProfilePhotoEvent(
-                              profilePhotoUrl:
-                                  'assets/images/profile_photos/girls_avatars/blue_girl_four.png',
-                            ),
-                          );
-                        },
-                      ),
-                      ProfilePhoto(
-                        file: File(''),
-                        borderRadius: 50,
-                        photoRadius: 48,
-                        image:
-                            'assets/images/profile_photos/girls_avatars/green_girl_four.png',
-                        onTap: () {
-                          final setProfilePhotoBloc =
-                              context.read<SetProfilePhotoBloc>();
-
-                          setProfilePhotoBloc.add(
-                            ChangeProfilePhotoEvent(
-                              profilePhotoUrl:
-                                  'assets/images/profile_photos/girls_avatars/green_girl_four.png',
-                            ),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ProfilePhoto(
-                        file: File(''),
-                        borderRadius: 50,
-                        photoRadius: 48,
-                        image:
-                            'assets/images/profile_photos/girls_avatars/pink_girl_four.png',
-                        onTap: () {
-                          final setProfilePhotoBloc =
-                              context.read<SetProfilePhotoBloc>();
-
-                          setProfilePhotoBloc.add(
-                            ChangeProfilePhotoEvent(
-                              profilePhotoUrl:
-                                  'assets/images/profile_photos/girls_avatars/pink_girl_four.png',
-                            ),
-                          );
-                        },
-                      ),
-                      ProfilePhoto(
-                        file: File(''),
-                        borderRadius: 50,
-                        photoRadius: 48,
-                        image:
-                            'assets/images/profile_photos/girls_avatars/yellow_girl_four.png',
-                        onTap: () {
-                          final setProfilePhotoBloc =
-                              context.read<SetProfilePhotoBloc>();
-
-                          setProfilePhotoBloc.add(
-                            ChangeProfilePhotoEvent(
-                              profilePhotoUrl:
-                                  'assets/images/profile_photos/girls_avatars/yellow_girl_four.png',
-                            ),
-                          );
-                        },
-                      ),
-                      ProfilePhoto(
-                        file: File(''),
-                        borderRadius: 50,
-                        photoRadius: 48,
-                        image: 'assets/images/camera.png',
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 18,
-                  ),
-                  RectangularElevatedButton(
-                    text: AppLocalizations.of(context)!.save,
-                    width: 336,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Dashboard(),
-                        ),
-                      );
-                    },
-                  ),
-                  OurTextButton(
-                    text: AppLocalizations.of(context)!.skip,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Dashboard(),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
+                    );
+                  },
+                ),
+              ],
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

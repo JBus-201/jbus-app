@@ -1,7 +1,7 @@
 part of 'email_bloc.dart';
 
 class EmailState extends Equatable {
-  const EmailState({this.email = 'There\'s no email yet!'});
+  const EmailState({this.email = 'Add an email'});
 
   final String email;
 

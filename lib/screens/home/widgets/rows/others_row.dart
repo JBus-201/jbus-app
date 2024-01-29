@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jbus_app/screens/authentication/signup/signup.dart';
+import 'package:jbus_app/screens/profile/edit_profile/edit_profile.dart';
 import 'package:jbus_app/screens/settings/settings/settings.dart';
 import 'package:jbus_app/widgets/containers/our_tab.dart';
 import 'package:jbus_app/widgets/text/our_text.dart';
@@ -13,7 +13,8 @@ class OthersRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding:
+          const EdgeInsets.only(top: 10, bottom: 10, right: 16.0, left: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -29,16 +30,16 @@ class OthersRow extends StatelessWidget {
             children: [
               OurTab(
                 text: AppLocalizations.of(context)!.history,
-                image: 'assets/images/history.png',
-                scale: 9,
+                image: 'assets/images/calendar.png',
+                scale: 8.5,
                 topPadding: 14,
                 onTap: () {},
               ),
               OurTab(
                 text: AppLocalizations.of(context)!.settings,
                 image: 'assets/images/settings.png',
-                scale: 9,
-                topPadding: 14,
+                scale: 9.2,
+                topPadding: 15,
                 onTap: () {
                   Navigator.push(
                     context,
@@ -49,16 +50,16 @@ class OthersRow extends StatelessWidget {
                 },
               ),
               OurTab(
-                text: AppLocalizations.of(context)!.logOut,
-                image: 'assets/images/logout.png',
-                scale: 8,
-                topPadding: 14,
-                leftPadding: 15,
+                text: AppLocalizations.of(context)!.account,
+                image: 'assets/images/profile_photos/new_boy.png',
+                scale: 24,
+                topPadding: 12,
+                //leftPadding: 1,
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const SignupScreen(),
+                      builder: (context) => const EditProfileScreen(),
                     ),
                   );
                 },

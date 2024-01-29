@@ -1,9 +1,7 @@
 part of 'name_bloc.dart';
 
 class NameState extends Equatable {
-  const NameState(
-      {this.firstName = 'Add a first Name',
-      this.lastName = "Add a second Name"});
+  const NameState({this.firstName = 'User Name', this.lastName = ""});
 
   final String firstName;
   final String lastName;

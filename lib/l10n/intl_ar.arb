@@ -52,7 +52,7 @@
     "requestARide": "طلب ركوب",
     "currentBalance": "الرصيد الحالي",
     "jordanianDinar": "د.أ",
-    "favorite": "المفضلة",
+    "favorites": "المفضلة",
     "roadsAndTracks": "الطرق والمسارات",
     "wallet": "المحفظة",
     "manageAccount": "إدارة الحساب",
@@ -127,11 +127,11 @@
     "others": "أخرى",
     "history": "السجل",
     "startYourTrip": "ابدأ رحلتك",
-    "changePassword":"غير كلمة المرور"
+    "changePassword":"غير كلمة المرور",
     "friends":"الأصدقاء",
     "fazaHisrory":"سجل الفزعات",
     "allFriends":"الجميع",
     "friendRequests":"الطلبات",
-    "addFriend":"إضافة"
-
+    "addFriend":"إضافة",
+    "account":"الحساب"
 }

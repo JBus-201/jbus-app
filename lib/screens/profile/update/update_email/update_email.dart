@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jbus_app/general_blocs/email_bloc/bloc/email_bloc.dart';
 import 'package:jbus_app/screens/authentication/signup/widgets/fields/email_text_field.dart';
 import 'package:jbus_app/widgets/text/our_text.dart';
 

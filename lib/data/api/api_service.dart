@@ -10,7 +10,6 @@ import 'package:jbus_app/data/models/friend_request.dart';
 import 'package:jbus_app/data/models/friends_create_request.dart';
 import 'package:jbus_app/data/models/login_request.dart';
 import 'package:jbus_app/data/models/login_response.dart';
-import 'package:jbus_app/data/models/predefined_stops.dart';
 import 'package:jbus_app/data/models/register_request.dart';
 import 'package:jbus_app/data/models/trip.dart';
 import 'package:jbus_app/data/models/trip_create_request.dart';

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
-import 'package:jbus_app/screens/settings/language_settings/language_settings.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jbus_app/widgets/text/our_text.dart';
 
 class SettingsTab extends StatelessWidget {
