@@ -19,7 +19,8 @@ class QrScreenCubit extends Cubit<QrScreenState> {
     controller.scannedDataStream.listen((scanData) async {
       controller.pauseCamera();
       emit(QrScreenLoading());
-      final res = await apiService.scanQrCode(scanData.code!);
+      final res =
+          await apiService.scanQrCode({"encryptedData": scanData.code!});
 
       if (res.response.statusCode == 200) {
         emit(QrScreenSuccess(res.response.data));
