@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/data/api/api_service.dart';
-import 'package:jbus_app/data/models/favorite_point_create_request.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/others/textDialog.dart';
 

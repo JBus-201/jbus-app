@@ -58,6 +58,7 @@ class TextDialog extends StatelessWidget {
                   textAlign: TextAlign.center,
                   icon: Icons.location_on,
                   label: AppLocalizations.of(context)!.enterPointName,
+                  // ignore: body_might_complete_normally_nullable
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return null;
