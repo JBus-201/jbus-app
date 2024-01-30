@@ -180,6 +180,8 @@ class _TripSettupState extends State<TripSettup> {
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         EditPickupPointPage(
+                                                          startingPoint: startingPoint,
+                                                          endingPoint: endingPoint,
                                                           route: widget.route,
                                                           isGoing: isGoing,
                                                           isPickup: true,
@@ -258,6 +260,8 @@ class _TripSettupState extends State<TripSettup> {
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         EditPickupPointPage(
+                                                          startingPoint: startingPoint,
+                                                          endingPoint: endingPoint,
                                                           route: widget.route,
                                                           isGoing:
                                                               widget.isGoing,

@@ -30,7 +30,7 @@ class ETAViewDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             const Icon(
-              Icons.bus_alert_rounded,
+              Icons.directions_bus_rounded,
               size: 48,
               color: ourOrange,
             ),

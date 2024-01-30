@@ -10,6 +10,8 @@ import 'package:jbus_app/data/models/bus_route.dart';
 import 'package:jbus_app/data/models/point.dart';
 import 'package:jbus_app/data/models/point_create_request.dart';
 import 'package:jbus_app/data/models/trip_update_request.dart';
+import 'package:jbus_app/screens/dashbourd/buttons/drawer.dart';
+import 'package:jbus_app/screens/dashbourd/buttons/end_drawer.dart';
 import 'package:jbus_app/screens/home/home.dart';
 import 'package:jbus_app/screens/trip/intrip.dart';
 import 'package:jbus_app/services/service_locator.dart';
@@ -42,6 +44,7 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
   BitmapDescriptor? customBusIcon;
   Set<Marker> markers = {};
   GoogleMapsApi googleApi = GoogleMapsApi();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   GoogleMapController? mapController;
   LatLng busLocation = const LatLng(0, 0);
   @override
@@ -61,6 +64,7 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _scaffoldKey,
         extendBodyBehindAppBar: true,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(115.0),
@@ -70,6 +74,16 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
             backgroundColor: Colors.black.withOpacity(0),
             title: const JbusAppBarTitle(),
             flexibleSpace: const AppBarStyle(),
+            leading: CustomEndDrawerButton(
+              onTap: () {
+                _scaffoldKey.currentState!.openDrawer();
+              },
+            ),
+            actions: [
+              CustomDrawerButton(onTap: () {
+                Navigator.pop(context);
+              })
+            ],
           ),
         ),
         body: Stack(children: [
@@ -105,7 +119,8 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
                         showDialog(
                             context: context,
                             builder: (context) => ConfirmationDialog(
-                                title: AppLocalizations.of(context)!.exitTripMsg,
+                                title:
+                                    AppLocalizations.of(context)!.exitTripMsg,
                                 description: "",
                                 onConfirm: () {
                                   // DateTime currentUtcDateTime =
@@ -205,7 +220,8 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
                                   context: context,
                                   builder: (context) => Warning(
                                       title: AppLocalizations.of(context)!.ops,
-                                      description: AppLocalizations.of(context)!.somthingWrong));
+                                      description: AppLocalizations.of(context)!
+                                          .somthingWrong));
                             });
                             ;
                           },
@@ -221,14 +237,15 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
                   alignment: Alignment.center,
                   width: double.infinity,
                   height: 50,
-                  decoration: const BoxDecoration(
-                      color: ourWhite,
-                      borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(15),
-                          topLeft: Radius.circular(15))),
-                  child: const Text(
-                    'ETA',
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.center,
+                        colors: [ourWhite.withOpacity(0), ourWhite]),
                   ),
+                  child: const Text('ETA',
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.w300)),
                 ),
               ],
             ),
