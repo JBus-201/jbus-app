@@ -13,19 +13,28 @@ class QrScreenCubit extends Cubit<QrScreenState> {
   GlobalKey qrKey = GlobalKey();
   QRViewController? controller;
   ApiService apiService = sl<ApiService>();
+  bool scanned = false;
 
   void onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) async {
+      if (scanned) {
+        return;
+      }
+      scanned = true;
       controller.pauseCamera();
       emit(QrScreenLoading());
-      final res =
+      try {
+        final res =
           await apiService.scanQrCode({"encryptedData": scanData.code!});
 
       if (res.response.statusCode == 200) {
         emit(QrScreenSuccess(res.response.data));
       } else {
         emit(QrScreenFailure(res.response.data));
+      }
+      } catch (e) {
+        emit(const QrScreenFailure("Saob Error"));
       }
     });
   }

@@ -13,6 +13,7 @@ import 'package:jbus_app/data/models/trip_update_request.dart';
 import 'package:jbus_app/screens/dashbourd/buttons/drawer.dart';
 import 'package:jbus_app/screens/dashbourd/buttons/end_drawer.dart';
 import 'package:jbus_app/screens/home/home.dart';
+import 'package:jbus_app/screens/qr_screen/pages/qr_screen.dart';
 import 'package:jbus_app/screens/trip/intrip.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/themes/appbar_style.dart';
@@ -139,7 +140,7 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
                                       status: "Canceled",
                                       dropOffPoint: drop);
                                   sl<ApiService>()
-                                      .updateTrip(trip)
+                                      .updateTrip(trip, widget.bus.id!)
                                       .then((value) => {
                                             Navigator.pushAndRemoveUntil(
                                               context,
@@ -179,39 +180,32 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
                           foregroundColor: ourWhite,
                           child: const Icon(Icons.qr_code_rounded),
                           onPressed: () {
-                            // DateTime currentUtcDateTime =
-                            //     DateTime.now().toUtc();
-                            PointCreateRequest pick = PointCreateRequest(
-                                latitude: widget.startingPoint.latitude,
-                                longitude: widget.startingPoint.longitude,
-                                name: widget.startingPoint.name!);
-                            PointCreateRequest drop = PointCreateRequest(
-                                latitude: widget.endingPoint.latitude,
-                                longitude: widget.endingPoint.longitude,
-                                name: widget.endingPoint.name!);
-                            TripUpdateRequest trip = TripUpdateRequest(
-                                // finishedAt: currentUtcDateTime,
-                                pickUpPoint: pick,
-                                status: "Ongoing",
-                                dropOffPoint: drop);
-                            sl<ApiService>()
-                                .updateTrip(trip)
+                            
+                            Navigator.push<bool?>(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const QrScreen()))
                                 .then((value) => {
-                                      Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => InTripPage(
-                                                  bus: widget.bus,
-                                                  endingPoint:
-                                                      widget.endingPoint,
-                                                  isGoing: widget.isGoing,
-                                                  route: widget.route,
-                                                  startingPoint:
-                                                      widget.startingPoint,
-                                                )),
-                                        (Route<dynamic> route) => true,
-                                        // ignore: body_might_complete_normally_catch_error
-                                      )
+                                      value ??= false,
+                                      if (value)
+                                        {
+                                          Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    InTripPage(
+                                                      bus: widget.bus,
+                                                      endingPoint:
+                                                          widget.endingPoint,
+                                                      isGoing: widget.isGoing,
+                                                      route: widget.route,
+                                                      startingPoint:
+                                                          widget.startingPoint,
+                                                    )),
+                                            (Route<dynamic> route) => true,
+                                            // ignore: body_might_complete_normally_catch_error
+                                          )
+                                        }
                                     })
                                 // ignore: body_might_complete_normally_catch_error
                                 .catchError((error, stackTrace) {
@@ -223,7 +217,6 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
                                       description: AppLocalizations.of(context)!
                                           .somthingWrong));
                             });
-                            ;
                           },
                         ),
                       ],
