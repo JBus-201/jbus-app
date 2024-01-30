@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/data/api/api_service.dart';
 import 'package:jbus_app/data/api/google_service.dart';
 import 'package:jbus_app/data/models/bus.dart';
@@ -12,6 +13,7 @@ import 'package:jbus_app/screens/trip/eta.dart';
 import 'package:jbus_app/screens/trip/waiting_bus.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/themes/appbar_style.dart';
+import 'package:jbus_app/widgets/buttons/circular_elevated_button.dart';
 import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
 import 'package:jbus_app/widgets/warnings/warning.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -41,6 +43,8 @@ class _TripAvailableBusesState extends State<TripAvailableBuses> {
   GoogleMapsApi googleApi = GoogleMapsApi();
   LatLng? startLatLng;
   LatLng? endLatLng;
+  int busesNum = 0;
+  int currentIndex = 1;
   @override
   void initState() {
     super.initState();
@@ -66,18 +70,84 @@ class _TripAvailableBusesState extends State<TripAvailableBuses> {
           flexibleSpace: const AppBarStyle(),
         ),
       ),
-      body: GoogleMap(
-        zoomControlsEnabled: false,
-        myLocationButtonEnabled: false,
-        myLocationEnabled: true,
-        initialCameraPosition: CameraPosition(
-          target: startLatLng!,
-          zoom: 12.0,
-        ),
-        markers: markers,
-        onMapCreated: (controller) {
-          mapController = controller;
-        },
+      body: Stack(
+        children: [
+          GoogleMap(
+            zoomControlsEnabled: false,
+            myLocationButtonEnabled: false,
+            myLocationEnabled: true,
+            initialCameraPosition: CameraPosition(
+              target: startLatLng!,
+              zoom: 12.0,
+            ),
+            markers: markers,
+            onMapCreated: (controller) {
+              mapController = controller;
+            },
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+                alignment: Alignment.center,
+                height: 100,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  // color: Colors.white,
+                  gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [ourWhite.withOpacity(0), ourWhite]),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(15),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CircularElevatedButton(
+                      size: 30,
+                      icon: Icons.arrow_left_rounded,
+                      onPressed: () {
+                        if (markers.isNotEmpty && currentIndex > 1) {
+                          print('Currrent index: $currentIndex');
+                          currentIndex--;
+                          googleApi.moveToLocation(
+                            mapController!,
+                            markers.elementAt(currentIndex).position,
+                          );
+                        }
+                      },
+                    ),
+                    Container(
+                        alignment: Alignment.center,
+                        width: 70,
+                        height: 70,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(width: 0.5, color: ourGray)),
+                        child: Text(
+                          '$busesNum',
+                          textAlign: TextAlign.start,
+                          style: const TextStyle(
+                              fontSize: 30, fontWeight: FontWeight.w300),
+                        )),
+                    CircularElevatedButton(
+                      size: 30,
+                      icon: Icons.arrow_right_rounded,
+                      onPressed: () {
+                        if (markers.isNotEmpty &&
+                            currentIndex < markers.length - 2) {
+                          currentIndex++;
+                          googleApi.moveToLocation(mapController!,
+                              markers.elementAt(currentIndex).position);
+                        }
+                      },
+                    ),
+                  ],
+                )),
+          ),
+        ],
       ),
     );
   }
@@ -85,6 +155,9 @@ class _TripAvailableBusesState extends State<TripAvailableBuses> {
   void listenToBusesLocations() async {
     List<Bus> activeBuses =
         await sl<ApiService>().getActiveBusesById(widget.route.id);
+    setState(() {
+      busesNum = activeBuses.length;
+    });
     print('Acitve Buses:$activeBuses');
     if (activeBuses.isNotEmpty) {
       for (var i = 0; i < activeBuses.length; i++) {
@@ -95,7 +168,8 @@ class _TripAvailableBusesState extends State<TripAvailableBuses> {
       showDialog(
               context: context,
               builder: (context) => Warning(
-                  title:  AppLocalizations.of(context)!.ops, description: AppLocalizations.of(context)!.noAvailableBuses))
+                  title: AppLocalizations.of(context)!.ops,
+                  description: AppLocalizations.of(context)!.noAvailableBuses))
           .then((value) => {Navigator.pop(context)});
     }
   }
@@ -180,7 +254,8 @@ class _TripAvailableBusesState extends State<TripAvailableBuses> {
                                   context: context,
                                   builder: (context) => Warning(
                                       title: AppLocalizations.of(context)!.ops,
-                                      description: AppLocalizations.of(context)!.somthingWrong));
+                                      description: AppLocalizations.of(context)!
+                                          .somthingWrong));
                             });
                           },
                           first: LatLng(latitude, longitude),

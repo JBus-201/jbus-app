@@ -46,7 +46,7 @@ class _DashboardState extends State<Dashboard> {
       body: Stack(children: [
         BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
           return GoogleMap(
-            trafficEnabled: true,
+            // trafficEnabled: true,
             buildingsEnabled: true,
             myLocationEnabled: true,
             rotateGesturesEnabled: true,
@@ -85,6 +85,7 @@ class _DashboardState extends State<Dashboard> {
                 Navigator.pop(context);
               })
             ],
+          
           ),
         ),
       
