@@ -796,11 +796,12 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<HttpResponse<dynamic>> scanQrCode(String encryptedData) async {
+  Future<HttpResponse<dynamic>> scanQrCode(Map<String, dynamic> body) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'encryptedData': encryptedData};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(body);
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
       method: 'GET',

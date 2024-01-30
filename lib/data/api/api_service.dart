@@ -111,5 +111,5 @@ abstract class ApiService {
   Future<List<Bus>> getActiveBusesById(@Path("id") int id);
 
   @GET('/PaymentTransaction/scanQrCode')
-  Future<HttpResponse> scanQrCode(@Query("encryptedData") String encryptedData);
+  Future<HttpResponse> scanQrCode(@Body() Map<String, dynamic> body);
 }
