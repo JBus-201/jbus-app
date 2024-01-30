@@ -6,6 +6,7 @@ import 'package:jbus_app/data/api/google_service.dart';
 import 'package:jbus_app/data/models/bus_route.dart';
 import 'package:jbus_app/data/models/favorite_point.dart';
 import 'package:jbus_app/data/models/point.dart';
+import 'package:jbus_app/screens/trip/dialogs/longpressDialog.dart';
 import 'package:jbus_app/screens/trip/tripSettup.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/themes/appbar_style.dart';
@@ -167,6 +168,7 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                             : widget.route.waypointsReturning!),
                       ),
                   },
+                  onLongPress: handleLongPress,
                 );
               }
             },
@@ -228,7 +230,7 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                     RectangularElevatedButton(
                         text: AppLocalizations.of(context)!.selectDrop,
                         fontSize: 16,
-                    fontWeight: FontWeight.w300,
+                        fontWeight: FontWeight.w300,
                         width: 175,
                         onPressed: () {
                           dropoffSelectedPoint = Point(
@@ -281,4 +283,68 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
       ),
     );
   }
+
+  void handleLongPress(LatLng point) {
+  
+    currentIndex = markers.length;
+    print('Marker New: $currentIndex');
+
+    markers.add(Marker(
+      markerId: MarkerId("10000"),
+      position: point,
+      icon: BitmapDescriptor.defaultMarker,
+      visible: true,
+    ));
+    showDialog(
+          context: context,
+          builder: (context) => LongPressDialog(
+            routeId: widget.route.id,
+            location: point,
+            onPickup: () {
+              pickupSelectedPoint = Point(
+                name: "NEW POINT",
+                id: int.fromEnvironment(markers.elementAt(currentIndex).markerId.toString()),
+                latitude: point.latitude,
+                longitude: point.longitude,
+                createdAt: DateTime.now().toUtc(),
+              );
+
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TripSettup(
+                    route: widget.route,
+                    isGoing: isGoing,
+                    startingPoint: pickupSelectedPoint,
+                    endingPoint: dropoffSelectedPoint,
+                  ),
+                ),
+              );
+            },
+            onDropoff: () {
+              dropoffSelectedPoint = Point(
+                name: "NEW POINT",
+                id: int.fromEnvironment(markers.elementAt(currentIndex).markerId.toString()),
+                latitude: point.latitude,
+                longitude: point.longitude,
+                createdAt: DateTime.now().toUtc(),
+              );
+
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TripSettup(
+                    route: widget.route,
+                    isGoing: isGoing,
+                    startingPoint: pickupSelectedPoint,
+                    endingPoint: dropoffSelectedPoint,
+                  ),
+                ),
+              );
+            },
+          ),
+        );
+  
+}
+
 }
