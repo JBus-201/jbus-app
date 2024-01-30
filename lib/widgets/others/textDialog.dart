@@ -7,6 +7,7 @@ import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jbus_app/widgets/text_fields/text_form_field.dart';
+import 'package:jbus_app/widgets/warnings/warning.dart';
 
 class TextDialog extends StatelessWidget {
   final int routeId;
@@ -20,7 +21,7 @@ class TextDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
-    final TextEditingController friendIdController = TextEditingController();
+    final TextEditingController favNameController = TextEditingController();
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
@@ -49,10 +50,10 @@ class TextDialog extends StatelessWidget {
             Form(
               key: formKey,
               child: OurTextFormField(
-                  topPadding: 50,
-                  leftPadding: 70,
-                  rightPadding: 70,
-                  bottomPadding: 50,
+                  topPadding: 25,
+                  leftPadding: 5,
+                  rightPadding: 5,
+                  bottomPadding: 25,
                   showCursor: true,
                   textAlign: TextAlign.center,
                   icon: Icons.location_on,
@@ -62,33 +63,45 @@ class TextDialog extends StatelessWidget {
                       return null;
                     }
                     final bool numberValid =
-                        RegExp('^[0-9]+\$').hasMatch(value.trim());
+                        RegExp(r'^[a-z]*$').hasMatch(value.trim());
 
                     if (numberValid) {
                       return null;
-                    } else {
-                      return AppLocalizations.of(context)!
-                          .sorryPleaseEnterAValidNumberStartsWith07;
-                    }
+                    } else {}
                   },
                   autocorrect: false,
                   enableSuggestions: false,
-                  keyboardType: const TextInputType.numberWithOptions(),
-                  maxLength: 5,
-                  controller: friendIdController),
+                  keyboardType: TextInputType.name,
+                  maxLength: 20,
+                  controller: favNameController),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 RectangularElevatedButton(
-                  width: 70,
+                  width: 100,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w300,
                   onPressed: () {
                     final newFav = FavoritePointCreateRequest(
-                        name: friendIdController.text,
+                        name: favNameController.text,
                         lat: location.latitude,
                         long: location.longitude,
                         routeId: routeId);
-                    sl<ApiService>().addFavoritePoint(newFav);
+                    sl<ApiService>()
+                        .addFavoritePoint(newFav)
+                        .then((value) => {
+                              Navigator.pop(context),
+                            })
+                        // ignore: argument_type_not_assignable_to_error_handler, body_might_complete_normally_catch_error
+                        .catchError(() {
+                      showDialog(
+                          context: context,
+                          builder: (context) => Warning(
+                              title: AppLocalizations.of(context)!.ops,
+                              description:
+                                  AppLocalizations.of(context)!.somthingWrong));
+                    });
                   },
                   text: AppLocalizations.of(context)!.add,
                 ),
@@ -99,9 +112,20 @@ class TextDialog extends StatelessWidget {
                         lat: location.latitude,
                         long: location.longitude,
                         routeId: routeId);
-                    sl<ApiService>().addFavoritePoint(newFav);
+                    sl<ApiService>().addFavoritePoint(newFav).then((value) => {
+                              Navigator.pop(context),
+                            })
+                        // ignore: argument_type_not_assignable_to_error_handler, body_might_complete_normally_catch_error
+                        .catchError(() {
+                      showDialog(
+                          context: context,
+                          builder: (context) => Warning(
+                              title: AppLocalizations.of(context)!.ops,
+                              description:
+                                  AppLocalizations.of(context)!.somthingWrong));
+                    });
                   },
-                  child: Text(AppLocalizations.of(context)!.cancel),
+                  child: Text(AppLocalizations.of(context)!.skip),
                 ),
               ],
             )
