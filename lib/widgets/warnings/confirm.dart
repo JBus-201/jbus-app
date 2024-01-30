@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ConfirmationDialog extends StatelessWidget {
   final String title;
@@ -55,13 +56,13 @@ class ConfirmationDialog extends StatelessWidget {
                 RectangularElevatedButton(
                   width: 110,
                   onPressed: onConfirm,
-                  text: "Yes",
+                  text: AppLocalizations.of(context)!.yes,
                 ),
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Text("Cancel"),
+                  child: Text(AppLocalizations.of(context)!.cancel),
                 ),
               ],
             )

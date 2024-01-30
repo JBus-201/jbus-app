@@ -177,5 +177,6 @@
     "howWasTripMsg":"كيف كانت رحلتك؟",
     "selectPick":"إختيار نقطة الركوب",
     "selectDrop":"إختيار نقطة النزول",
-    "predefinedStop":"موقف معرف"
+    "predefinedStop":"موقف معرف",
+    "enterPointName":"أدخل اسم النقطة"
 }

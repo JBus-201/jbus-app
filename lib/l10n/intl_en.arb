@@ -176,7 +176,8 @@
     "howWasTripMsg":"How was your Trip?",
     "selectPick":"Select PickUp",
     "selectDrop":"Select DropOff",
-    "predefinedStop":"Predefined Stop"
+    "predefinedStop":"Predefined Stop",
+    "enterPointName":"Enter Point Name"
 
 
 }

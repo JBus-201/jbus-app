@@ -167,6 +167,7 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                             : widget.route.waypointsReturning!),
                       ),
                   },
+                  onLongPress: handleLongPress,
                 );
               }
             },
@@ -228,7 +229,7 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                     RectangularElevatedButton(
                         text: AppLocalizations.of(context)!.selectDrop,
                         fontSize: 16,
-                    fontWeight: FontWeight.w300,
+                        fontWeight: FontWeight.w300,
                         width: 175,
                         onPressed: () {
                           dropoffSelectedPoint = Point(
@@ -281,4 +282,9 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
       ),
     );
   }
+handleLongPress(LatLng point){
+showDialog(context: context, builder: (context)=> LongPressDialog());
+
 }
+}
+
