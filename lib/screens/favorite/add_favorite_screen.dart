@@ -30,6 +30,7 @@ class _AddFavoriteScreenState extends State<AddFavoriteScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (routeId == null) {
         showModalBottomSheet(
+          isDismissible: false,
           context: context,
           builder: (context) {
             return SingleChildScrollView(
@@ -80,17 +81,17 @@ class _AddFavoriteScreenState extends State<AddFavoriteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        extendBodyBehindAppBar: true, 
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(115.0),
-        child: AppBar(
-          automaticallyImplyLeading: true,
-          elevation: 0,
-          backgroundColor: Colors.black.withOpacity(0),
-          title: const JbusAppBarTitle(),
-          flexibleSpace: const AppBarStyle(),
+        extendBodyBehindAppBar: true,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(115.0),
+          child: AppBar(
+            automaticallyImplyLeading: true,
+            elevation: 0,
+            backgroundColor: Colors.black.withOpacity(0),
+            title: const JbusAppBarTitle(),
+            flexibleSpace: const AppBarStyle(),
+          ),
         ),
-      ),
         body: loading
             ? const Center(
                 child: CircularProgressIndicator(),
