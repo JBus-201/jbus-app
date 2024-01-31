@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/data/models/register_request.dart';
 import 'package:jbus_app/screens/authentication/email_verification/cubit/email_verify_cubit.dart';
-import 'package:jbus_app/screens/dashbourd/dashbourd.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:jbus_app/screens/home/home.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:jbus_app/widgets/text_fields/otp_text_field.dart';
@@ -49,11 +49,10 @@ class EmailVerificationScreen extends StatelessWidget {
         child: BlocConsumer<EmailVerifyCubit, EmailVerifyState>(
           listener: (context, state) {
             if (state is EmailVerifySuccess) {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => const Dashboard(),
-                ),
-              );
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                  (Route<dynamic> route) => false);
             }
           },
           builder: (context, state) {

@@ -8,9 +8,7 @@ import 'package:jbus_app/screens/authentication/signin/cubit/signin_cubit.dart';
 import 'package:jbus_app/screens/authentication/signin/cubit/signin_state.dart';
 import 'package:jbus_app/screens/authentication/signin/widgets/fields/email_text_field_for_sign_in.dart';
 import 'package:jbus_app/screens/authentication/signin/widgets/fields/password_text_field_for_sign_in.dart';
-import 'package:jbus_app/screens/authentication/signup/widgets/fields/email_text_field.dart';
-import 'package:jbus_app/screens/dashbourd/dashbourd.dart';
-import 'package:jbus_app/screens/profile/update/update_password/widgets/password_text_fields.dart';
+import 'package:jbus_app/screens/home/home.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -33,12 +31,10 @@ class SignInButtonSIS extends StatelessWidget {
     return BlocConsumer<SigninCubit, SigninState>(
       listener: (context, state) {
         if (state is SigninSuccess) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const Dashboard(),
-            ),
-          );
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
+              (Route<dynamic> route) => false);
         }
       },
       builder: (context, state) {
