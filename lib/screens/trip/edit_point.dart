@@ -98,6 +98,10 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                     markerId: MarkerId(widget.startingPoint.id.toString()),
                     position: LatLng(pickupSelectedPoint.latitude,
                         pickupSelectedPoint.longitude),
+                        infoWindow: InfoWindow(
+                        title: widget.startingPoint.name,
+                        snippet: AppLocalizations.of(context)!.predefinedStop,
+                      ),
                   ),
                 };
                 if (favoritePointsList!.isNotEmpty &&
@@ -137,6 +141,10 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                     markerId: MarkerId(widget.endingPoint.id.toString()),
                     position: LatLng(dropoffSelectedPoint.latitude,
                         dropoffSelectedPoint.longitude),
+                        infoWindow: InfoWindow(
+                        title: widget.endingPoint.name,
+                        snippet: AppLocalizations.of(context)!.predefinedStop,
+                      ),
                   ),
                 );
                 return GoogleMap(
@@ -189,10 +197,22 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                       pickupSelectedPoint = Point(
                           name:
                               markers.elementAt(currentIndex).infoWindow.title,
-                          id: int.fromEnvironment(markers
-                              .elementAt(currentIndex)
-                              .markerId
-                              .toString()),
+                          id:  markers
+                                          .elementAt(currentIndex)
+                                          .markerId
+                                          .toString() ==
+                                      widget.startingPoint.id.toString()
+                                  ? markers
+                                              .elementAt(currentIndex)
+                                              .markerId
+                                              .toString() ==
+                                          widget.endingPoint.id.toString()
+                                      ? widget.startingPoint.id
+                                      : widget.endingPoint.id
+                                  : int.fromEnvironment(markers
+                                      .elementAt(currentIndex)
+                                      .markerId
+                                      .toString()),
                           latitude:
                               markers.elementAt(currentIndex).position.latitude,
                           longitude: markers
@@ -238,10 +258,22 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                                   .elementAt(currentIndex)
                                   .infoWindow
                                   .title,
-                              id: int.fromEnvironment(markers
-                                  .elementAt(currentIndex)
-                                  .markerId
-                                  .toString()),
+                              id: markers
+                                          .elementAt(currentIndex)
+                                          .markerId
+                                          .toString() ==
+                                      widget.startingPoint.id.toString()
+                                  ? markers
+                                              .elementAt(currentIndex)
+                                              .markerId
+                                              .toString() ==
+                                          widget.endingPoint.id.toString()
+                                      ? widget.startingPoint.id
+                                      : widget.endingPoint.id
+                                  : int.fromEnvironment(markers
+                                      .elementAt(currentIndex)
+                                      .markerId
+                                      .toString()),
                               latitude: markers
                                   .elementAt(currentIndex)
                                   .position
@@ -285,7 +317,6 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
   }
 
   void handleLongPress(LatLng point) {
-  
     currentIndex = markers.length;
     print('Marker New: $currentIndex');
 
@@ -296,55 +327,55 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
       visible: true,
     ));
     showDialog(
-          context: context,
-          builder: (context) => LongPressDialog(
-            routeId: widget.route.id,
-            location: point,
-            onPickup: () {
-              pickupSelectedPoint = Point(
-                name: "NEW POINT",
-                id: int.fromEnvironment(markers.elementAt(currentIndex).markerId.toString()),
-                latitude: point.latitude,
-                longitude: point.longitude,
-                createdAt: DateTime.now().toUtc(),
-              );
+      context: context,
+      builder: (context) => LongPressDialog(
+        routeId: widget.route.id,
+        location: point,
+        onPickup: () {
+          pickupSelectedPoint = Point(
+            name: "NEW POINT",
+            id: int.fromEnvironment(
+                markers.elementAt(currentIndex).markerId.toString()),
+            latitude: point.latitude,
+            longitude: point.longitude,
+            createdAt: DateTime.now().toUtc(),
+          );
 
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => TripSettup(
-                    route: widget.route,
-                    isGoing: isGoing,
-                    startingPoint: pickupSelectedPoint,
-                    endingPoint: dropoffSelectedPoint,
-                  ),
-                ),
-              );
-            },
-            onDropoff: () {
-              dropoffSelectedPoint = Point(
-                name: "NEW POINT",
-                id: int.fromEnvironment(markers.elementAt(currentIndex).markerId.toString()),
-                latitude: point.latitude,
-                longitude: point.longitude,
-                createdAt: DateTime.now().toUtc(),
-              );
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => TripSettup(
+                route: widget.route,
+                isGoing: isGoing,
+                startingPoint: pickupSelectedPoint,
+                endingPoint: dropoffSelectedPoint,
+              ),
+            ),
+          );
+        },
+        onDropoff: () {
+          dropoffSelectedPoint = Point(
+            name: "NEW POINT",
+            id: int.fromEnvironment(
+                markers.elementAt(currentIndex).markerId.toString()),
+            latitude: point.latitude,
+            longitude: point.longitude,
+            createdAt: DateTime.now().toUtc(),
+          );
 
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => TripSettup(
-                    route: widget.route,
-                    isGoing: isGoing,
-                    startingPoint: pickupSelectedPoint,
-                    endingPoint: dropoffSelectedPoint,
-                  ),
-                ),
-              );
-            },
-          ),
-        );
-  
-}
-
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => TripSettup(
+                route: widget.route,
+                isGoing: isGoing,
+                startingPoint: pickupSelectedPoint,
+                endingPoint: dropoffSelectedPoint,
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
 }

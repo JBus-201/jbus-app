@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/constants/strings.dart';
+import 'package:jbus_app/data/api/google_service.dart';
 import 'package:jbus_app/screens/favorite/add_favorite_screen.dart';
 import 'package:jbus_app/screens/favorite/cubit/favorite_points_cubit.dart';
 import 'package:jbus_app/screens/trip/tripSettup.dart';
 import 'package:jbus_app/services/service_locator.dart';
+import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
 
 class FavoriteScreen extends StatelessWidget {
   const FavoriteScreen({super.key});
@@ -13,7 +16,7 @@ class FavoriteScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Favorite'),
+        title: const JbusAppBarTitle(),
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
@@ -51,14 +54,6 @@ class FavoriteScreen extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: state.points.map((point) {
-                      String staticMapUrl =
-                          'https://maps.googleapis.com/maps/api/staticmap'
-                          '?center=${point.point.latitude},${point.point.longitude}'
-                          '&zoom=16&size=600x300'
-                          '&maptype=roadmap'
-                          '&markers=color:red%7Clabel:C%7C${point.point.latitude},${point.point.longitude}'
-                          '&key=$googlApiKey';
-
                       return Card(
                         child: InkWell(
                           onTap: () {
@@ -81,16 +76,7 @@ class FavoriteScreen extends StatelessWidget {
                                     topLeft: Radius.circular(16),
                                     topRight: Radius.circular(16),
                                   ),
-                                  child: Image.network(
-                                    staticMapUrl,
-                                    errorBuilder:
-                                        (context, error, stackTrace) =>
-                                            const Text('Error loading image'),
-                                    gaplessPlayback: true,
-                                    fit: BoxFit.fill,
-                                    cacheHeight: 300,
-                                    cacheWidth: 600,
-                                  ),
+                                  child: GoogleMapsApi().getPointImage(point.point.latitude, point.point.longitude, ourBlue)
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(

@@ -72,7 +72,12 @@ class GoogleMapsApi {
   Widget getPointImage(double latitude, double longitude, Color markerColor) {
     return Image.network(
       _generateMapImageUrl(latitude, longitude, markerColor),
-      fit: BoxFit.cover,
+      errorBuilder: (context, error, stackTrace) =>
+          const Text('Error loading image'),
+      gaplessPlayback: true,
+      fit: BoxFit.fill,
+      cacheHeight: 300,
+      cacheWidth: 600,
     );
   }
 
