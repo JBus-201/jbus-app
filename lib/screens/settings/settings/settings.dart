@@ -5,6 +5,8 @@ import 'package:jbus_app/screens/settings/notification_settings/notification_set
 import 'package:jbus_app/screens/settings/settings/widgets/settings_tab.dart';
 import 'package:jbus_app/screens/settings/theme_settings/theme_settings.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:jbus_app/services/auth_service.dart';
+import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -63,11 +65,13 @@ class SettingsScreen extends StatelessWidget {
               title: AppLocalizations.of(context)!.logOut,
               subTitle: AppLocalizations.of(context)!.logOut,
               onTap: () {
-                Navigator.push(
+                sl<AuthService>().setLoggedOut();
+                Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
                     builder: (context) => const SignInScreen(),
                   ),
+                  (route) => false,
                 );
               },
             ),
