@@ -173,61 +173,68 @@ class GoogleMapsApi {
   Future<String> calculateETA(LatLng origin, LatLng destination) async {
     print('start: $origin');
     print('start: $destination');
-    try{final String apiUrl =
-    'https://maps.googleapis.com/maps/api/directions/json?origin=${origin.latitude},${origin.longitude}&destination=${destination.latitude},${destination.longitude}&mode=driving&traffic_mode=optimistic&key=$apiKey';
+    try {
+      final String apiUrl =
+          'https://maps.googleapis.com/maps/api/directions/json?origin=${origin.latitude},${origin.longitude}&destination=${destination.latitude},${destination.longitude}&mode=driving&traffic_mode=optimistic&key=$apiKey';
 
-    final response = await http.get(Uri.parse(apiUrl));
-    print('Respons ETa:${response.body}');
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      final status = data['status'] as String;
+      final response = await http.get(Uri.parse(apiUrl));
+      print('Respons ETa:${response.body}');
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final status = data['status'] as String;
 
-      if (status == 'OK') {
-        final routes = data['routes'] as List<dynamic>;
+        if (status == 'OK') {
+          final routes = data['routes'] as List<dynamic>;
 
-        if (routes.isNotEmpty) {
-          final leg = routes[0]['legs'][0];
-          final duration = leg['duration']['text'] as String;
-          return duration;
+          if (routes.isNotEmpty) {
+            final leg = routes[0]['legs'][0];
+            final duration = leg['duration']['text'] as String;
+            return duration;
+          } else {
+            // Handle no route found
+            return 'N/A';
+          }
         } else {
-          // Handle no route found
-          return 'N/A';
+          // Handle other status codes
+          throw Exception('Failed to load ETA. Status: $status');
         }
-      } else {
-        // Handle other status codes
-        throw Exception('Failed to load ETA. Status: $status');
       }
-    } }catch(error){
+    } catch (error) {
       print('Error geting ETA: $error');
     }
     return "N/a";
   }
-Future<Duration> calculateDrivingEta(LatLng origin, LatLng destination) async {
-  const apiUrl = 'https://maps.googleapis.com/maps/api/distancematrix/json';
 
-  final response = await http.get(
-    Uri.parse(
-      '$apiUrl?origins=${origin.latitude},${origin.longitude}'
-      '&destinations=${destination.latitude},${destination.longitude}'
-      '&mode=traveling'
-      '&key=$apiKey',
-    ),
-  );
+  Future<Duration> calculateDrivingEta(
+      LatLng origin, LatLng destination) async {
+    const apiUrl = 'https://maps.googleapis.com/maps/api/distancematrix/json';
 
-  if (response.statusCode == 200) {
-    final data = json.decode(response.body);
-print('ETA: $data');
-    if (data['status'] == 'OK') {
-      final element = data['rows'][0]['elements'][0];
-      final durationInSeconds = element['duration']['value'];
-      return Duration(seconds: durationInSeconds);
+    final response = await http.get(
+      Uri.parse(
+        '$apiUrl?origins=${origin.latitude},${origin.longitude}'
+        '&destinations=${destination.latitude},${destination.longitude}'
+        '&mode=traveling'
+        '&key=$apiKey',
+      ),
+    );
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      print('ETA: $data');
+      if (data['status'] == 'OK') {
+        final element = data['rows'][0]['elements'][0];
+        final durationInSeconds = element['duration']['value'];
+        return Duration(seconds: durationInSeconds);
+      } else {
+        throw Exception(
+            'Failed to retrieve Distance Matrix results. Status: ${data['status']}');
+      }
     } else {
-      throw Exception('Failed to retrieve Distance Matrix results. Status: ${data['status']}');
+      throw Exception(
+          'Failed to retrieve Distance Matrix results. Status Code: ${response.statusCode}');
     }
-  } else {
-    throw Exception('Failed to retrieve Distance Matrix results. Status Code: ${response.statusCode}');
   }
-}
+
   Future<void> loadCustomBusIcon() async {
     final ByteData data = await rootBundle.load('assets/images/bus-icon.png');
     final Uint8List bytes = data.buffer.asUint8List();

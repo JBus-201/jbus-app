@@ -80,10 +80,8 @@ class _DashboardState extends State<Dashboard> {
                 Navigator.pop(context);
               })
             ],
-          
           ),
         ),
-      
         const BottomSearchSheet()
       ]),
       floatingActionButton: FloatingActionButton(

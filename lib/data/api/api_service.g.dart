@@ -649,8 +649,9 @@ class _ApiService implements ApiService {
 
   @override
   Future<HttpResponse<dynamic>> updateTrip(
-      TripUpdateRequest tripUpdateRequest,
-      int id) async {
+    TripUpdateRequest tripUpdateRequest,
+    int id,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -658,13 +659,13 @@ class _ApiService implements ApiService {
     _data.addAll(tripUpdateRequest.toJson());
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
-      method: 'POST',
+      method: 'PUT',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/Trip/$id',
+              '/Trip/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -692,7 +693,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Trip/finishHim',
+              '/Trip/{id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -724,7 +725,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Trip/$id',
+              '/Trip',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -781,7 +782,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Bus/getActiveBusesByRoute/${id}',
+              '/Bus/getActiveBusesById/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -805,7 +806,7 @@ class _ApiService implements ApiService {
     _data.addAll(body);
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
-      method: 'POST',
+      method: 'GET',
       headers: _headers,
       extra: _extra,
     )

@@ -10,16 +10,14 @@ FavoritePoint _$FavoritePointFromJson(Map<String, dynamic> json) =>
     FavoritePoint(
       id: json['id'] as int,
       createdAt: DateTime.parse(json['createdAt'] as String),
-      pointId: json['pointId'] as int,
       point: Point.fromJson(json['point'] as Map<String, dynamic>),
-      routeId: json['routeId'] as int,
+      route: BusRoute.fromJson(json['route'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$FavoritePointToJson(FavoritePoint instance) =>
     <String, dynamic>{
       'id': instance.id,
       'createdAt': instance.createdAt.toIso8601String(),
-      'pointId': instance.pointId,
       'point': instance.point.toJson(),
-      'routeId': instance.routeId,
+      'route': instance.route.toJson(),
     };

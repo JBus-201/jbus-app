@@ -17,12 +17,14 @@ class TripSettup extends StatefulWidget {
   final bool isGoing;
   final Point? startingPoint;
   final Point? endingPoint;
+  final Point? preMarkedPoint;
   const TripSettup({
     super.key,
     required this.route,
     this.isGoing = true,
     this.startingPoint,
     this.endingPoint,
+    this.preMarkedPoint,
   });
 
   @override
@@ -81,6 +83,14 @@ class _TripSettupState extends State<TripSettup> {
                   markerId: const MarkerId("endpoint"),
                   position: LatLng(endingPoint.latitude, endingPoint.longitude),
                 ),
+                if (widget.preMarkedPoint != null)
+                  Marker(
+                    markerId: const MarkerId("premarkedpoint"),
+                    position: LatLng(widget.preMarkedPoint!.latitude,
+                        widget.preMarkedPoint!.longitude),
+                    icon: BitmapDescriptor.defaultMarkerWithHue(
+                        BitmapDescriptor.hueGreen),
+                  ),
               },
               polylines: {
                 if (route.waypointsGoing != null ||
@@ -180,8 +190,10 @@ class _TripSettupState extends State<TripSettup> {
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         EditPickupPointPage(
-                                                          startingPoint: startingPoint,
-                                                          endingPoint: endingPoint,
+                                                          startingPoint:
+                                                              startingPoint,
+                                                          endingPoint:
+                                                              endingPoint,
                                                           route: widget.route,
                                                           isGoing: isGoing,
                                                           isPickup: true,
@@ -260,8 +272,10 @@ class _TripSettupState extends State<TripSettup> {
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         EditPickupPointPage(
-                                                          startingPoint: startingPoint,
-                                                          endingPoint: endingPoint,
+                                                          startingPoint:
+                                                              startingPoint,
+                                                          endingPoint:
+                                                              endingPoint,
                                                           route: widget.route,
                                                           isGoing:
                                                               widget.isGoing,

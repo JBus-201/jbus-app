@@ -66,7 +66,7 @@ abstract class ApiService {
   @GET("/Fazaa/getFazaaById/{id}")
   Future<Fazaa> getFazaaById(@Path("id") int id);
 
-  @GET("/Passenger/isPassengerFaza\'aable")
+  @GET("/Passenger/isPassengerFaza'aable")
   Future<HttpResponse<dynamic>> isPassengerFazaaAble();
 
   @POST("/Friends/sendFriendRequest")
