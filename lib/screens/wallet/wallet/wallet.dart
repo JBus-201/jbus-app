@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -43,7 +42,7 @@ class WalletScreen extends StatelessWidget {
       builder: (context, state) {
         List<PaymentCard> paymentCardsList = [...state.paymentCardsList];
         print('bloc Builder: $paymentCardsList');
-    
+
         return Scaffold(
           extendBodyBehindAppBar: true,
           appBar: AppBar(),
@@ -72,14 +71,14 @@ class WalletScreen extends StatelessWidget {
                               color: ourNavey,
                             ),
                           ),
-    
+
                           IconButton(
                             onPressed: () {
                               Navigator.push(
                                 context,
                                 PageRouteBuilder(
-                                  pageBuilder: (context, animation,
-                                      secondaryAnimation) {
+                                  pageBuilder:
+                                      (context, animation, secondaryAnimation) {
                                     return const AddCardScreen();
                                   },
                                   transitionsBuilder: (context, animation,
@@ -91,7 +90,7 @@ class WalletScreen extends StatelessWidget {
                                         .chain(CurveTween(curve: curve));
                                     var offsetAnimation =
                                         animation.drive(tween);
-    
+
                                     return SlideTransition(
                                       position: offsetAnimation,
                                       child: child,
@@ -109,7 +108,7 @@ class WalletScreen extends StatelessWidget {
                             color: ourNavey,
                             iconSize: 35,
                           ),
-    
+
                           // OutlinedButton(
                           //   style: OutlinedButton.styleFrom(
                           //     shape: RoundedRectangleBorder(
@@ -120,7 +119,7 @@ class WalletScreen extends StatelessWidget {
                           //   onPressed: () {},
                           //   child: const Icon(Icons.add_circle_outline_outlined),
                           // ),
-    
+
                           // CircularElevatedButton(
                           //   onPressed: () {},
                           //   icon: Icons.add_circle_outline_outlined,
@@ -140,7 +139,7 @@ class WalletScreen extends StatelessWidget {
                           //   //   );
                           //   // },
                           //   // style: TextButton.styleFrom(
-    
+
                           //   // ),
                           //   child: Row(
                           //     mainAxisAlignment: MainAxisAlignment.end,
@@ -184,14 +183,7 @@ class WalletScreen extends StatelessWidget {
                                 color: Colors.amber,
                               );
                             }
-                            return PaymentCard(
-                                cardNumber:
-                                    state.paymentCardsList[index].cardNumber,
-                                cardHolderName: state
-                                    .paymentCardsList[index].cardHolderName,
-                                cvv: state.paymentCardsList[index].cvv,
-                                mm: state.paymentCardsList[index].mm,
-                                yy: state.paymentCardsList[index].yy);
+                            return paymentCardsList[index];
                           }),
                     ),
                     const SizedBox(
