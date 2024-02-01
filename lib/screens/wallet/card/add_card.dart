@@ -4,11 +4,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/screens/wallet/card/bloc/card_bloc.dart';
-import 'package:jbus_app/screens/wallet/card/widgets/text_fields/card_holder_name_text_field.dart';
-import 'package:jbus_app/screens/wallet/card/widgets/text_fields/card_number_text_field.dart';
-import 'package:jbus_app/screens/wallet/card/widgets/text_fields/cvv_text_field.dart';
-import 'package:jbus_app/screens/wallet/card/widgets/text_fields/mm_text_field.dart';
-import 'package:jbus_app/screens/wallet/card/widgets/text_fields/yy_text_field.dart';
+import 'package:jbus_app/screens/wallet/card/widgets/text_fields/add_card_text_fields/card_holder_name_text_field.dart';
+import 'package:jbus_app/screens/wallet/card/widgets/text_fields/add_card_text_fields/card_number_text_field.dart';
+import 'package:jbus_app/screens/wallet/card/widgets/text_fields/add_card_text_fields/cvv_text_field.dart';
+import 'package:jbus_app/screens/wallet/card/widgets/text_fields/add_card_text_fields/mm_text_field.dart';
+import 'package:jbus_app/screens/wallet/card/widgets/text_fields/add_card_text_fields/yy_text_field.dart';
+
 import 'package:jbus_app/screens/wallet/wallet/bloc/wallet_bloc.dart';
 import 'package:jbus_app/screens/wallet/wallet/wallet.dart';
 import 'package:jbus_app/screens/wallet/wallet/widgets/payment_card.dart';
@@ -18,13 +19,11 @@ import 'package:jbus_app/widgets/text/our_text.dart';
 class AddCardScreen extends StatelessWidget {
   const AddCardScreen({super.key});
 
-  //static CardBloc cardBloc =  CardBloc();
 
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
-    //final WalletBloc walletBloc = WalletBloc();
-    //TextEditingController? controller;
+    
     return BlocProvider(
       create: (context) => CardBloc(),
       child: GestureDetector(
@@ -33,26 +32,10 @@ class AddCardScreen extends StatelessWidget {
           body: SafeArea(
             child: CustomScrollView(
               slivers: [
-                const SliverAppBar(),
-                //   title: const JbusAppBarTitle(),
-                //   leading: OutlinedButton(
-                //     onPressed: () {},
-                //     style: OutlinedButton.styleFrom(
-                //         side: const BorderSide(color: ourNavey)),
-                //     child: Text(
-                //       AppLocalizations.of(context)!.add,
-                //       style: const TextStyle(
-                //         fontSize: 17,
-                //         fontWeight: FontWeight.w500,
-                //         color: ourNavey,
-                //       ),
-                //     ),
-                //   ),
-                //   automaticallyImplyLeading:
-                //       false, // Set this to false to remove the back button
-                //   floating: false,
-                //   pinned: false,
-                // ),
+                const SliverAppBar(
+                  foregroundColor: ourNavey,
+                ),
+               
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
                     childCount: 1,
@@ -104,19 +87,30 @@ class AddCardScreen extends StatelessWidget {
                                                                 .yyController
                                                                 .text)));
 
-                                                    Navigator.push(
+                                                    CardNumberTextField
+                                                        .cardNumberController
+                                                        .text = '';
+
+                                                    CardHolderNameTextField
+                                                        .cardHolderNameContorller
+                                                        .text = '';
+
+                                                    CVVTextField.cvvController
+                                                        .text = '';
+
+                                                    MMTextField
+                                                        .mmController.text = '';
+
+                                                    YYTextField
+                                                        .yyController.text = '';
+
+                                                    Navigator.pop(
                                                       context,
                                                       MaterialPageRoute(
                                                         builder: (context) =>
                                                             const WalletScreen(),
 
-                                                        // EmailVerificationScreen(
-                                                        //       firstName: firstNameControllerText,
-                                                        //       lastName: lastNameControllerText,
-                                                        //       email: emailControllerText,
-                                                        //       phoneNumber: phoneNumberControllerText,
-                                                        //       password: passwordControllerText,
-                                                        //     ),
+                                                       
                                                       ),
                                                     );
                                                   }
@@ -296,12 +290,7 @@ class AddCardScreen extends StatelessWidget {
                                       ),
                                     ),
 
-                                    // autocorrect: false,
-                                    // enableSuggestions: false,
-                                    // keyboardType: const TextInputType.numberWithOptions(),
-                                    // maxLength: 16,
-                                    // controller: controller,
-                                    // ),
+                                    
                                   ],
                                 ),
                               ),
