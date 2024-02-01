@@ -7,6 +7,18 @@ class WalletState extends Equatable {
   final bool isLoading;
 
   @override
+
+
+
+
+
+
+
+
+
+
+
+
   List<Object> get props => [paymentCardsList, isLoading];
 
   WalletState copyWith({List<PaymentCard>? paymentCardsList, bool? isLoading}) {
@@ -15,3 +27,4 @@ class WalletState extends Equatable {
         isLoading: isLoading ?? this.isLoading);
   }
 }
+

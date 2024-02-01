@@ -40,12 +40,16 @@ class WalletScreen extends StatelessWidget {
 
     return BlocBuilder<WalletBloc, WalletState>(
       builder: (context, state) {
-        List<PaymentCard> paymentCardsList = [...state.paymentCardsList];
-        print('bloc Builder: $paymentCardsList');
+
+        // List<PaymentCard> paymentCardsList = [...state.paymentCardsList];
+        // print('bloc Builder: $paymentCardsList');
+
 
         return Scaffold(
           extendBodyBehindAppBar: true,
-          appBar: AppBar(),
+          appBar: AppBar(
+            foregroundColor: ourWhite,
+          ),
           body: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -166,18 +170,20 @@ class WalletScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Text(
-                      '${state.paymentCardsList.length}',
-                      style: const TextStyle(color: ourNavey),
-                    ),
-                    OurText('${state.paymentCardsList.length}'),
+                    // Text(
+                    //   '${state.paymentCardsList.length}',
+                    //   style: const TextStyle(color: ourNavey),
+                    // ),
+                    // OurText('${state.paymentCardsList.length}'),
                     SizedBox(
                       height: 300,
                       child: ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          reverse: true,
                           itemCount: state.paymentCardsList.length,
                           itemBuilder: (context, index) {
-                            print(
-                                'list View Builder: ${state.paymentCardsList.length}');
+                            // print(
+                            //     'list View Builder: ${state.paymentCardsList.length}');
                             if (state.paymentCardsList.isEmpty) {
                               return Container(
                                 color: Colors.amber,

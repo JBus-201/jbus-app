@@ -4,8 +4,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jbus_app/screens/wallet/card/bloc/card_bloc.dart';
 import 'package:jbus_app/widgets/text_fields/text_form_field.dart';
 
-class CardHolderNameTextField extends StatelessWidget {
-  const CardHolderNameTextField({super.key});
+class EditCardHolderNameTextField extends StatelessWidget {
+  const EditCardHolderNameTextField({super.key});
   static final TextEditingController cardHolderNameContorller =
       TextEditingController();
 
@@ -30,7 +30,7 @@ class CardHolderNameTextField extends StatelessWidget {
             return null;
           }
           final bool nameValid =
-              RegExp('^[a-zA-z ]{1, 30}\$').hasMatch(value.trim());
+              RegExp('^[a-zA-Z ]{1,30}\$').hasMatch(value.trim());
 
           if (nameValid) {
             return null;
