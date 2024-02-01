@@ -15,6 +15,12 @@ class AppLightTheme extends AppTheme {
     return ThemeData(
         useMaterial3: true,
         //AppBar theme
+        cardTheme: const CardTheme(
+          color: ourWhite,
+          elevation: 0.5,
+          shadowColor: ourVeryLightGray,
+          surfaceTintColor: ourBlack,
+        ),
         appBarTheme: AppBarTheme(
             backgroundColor: const Color.fromARGB(255, 0, 0, 0).withOpacity(0),
             centerTitle: true,

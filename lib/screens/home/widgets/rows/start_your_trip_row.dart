@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jbus_app/screens/dashbourd/dashbourd.dart';
+import 'package:jbus_app/screens/favorite/favorite_screen.dart';
+import 'package:jbus_app/screens/view_routes/select-route.dart';
 import 'package:jbus_app/widgets/containers/our_tab.dart';
 import 'package:jbus_app/widgets/text/our_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -46,14 +48,26 @@ class StartYourTripRow extends StatelessWidget {
                 image: 'assets/images/routes.png',
                 scale: 9,
                 topPadding: 15,
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SelectRoutePage()));
+                },
               ),
               OurTab(
                 text: AppLocalizations.of(context)!.favorites,
                 image: 'assets/images/favorites.png',
                 scale: 16,
                 topPadding: 19,
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const FavoriteScreen(),
+                    ),
+                  );
+                },
               ),
             ],
           ),

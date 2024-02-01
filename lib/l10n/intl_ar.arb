@@ -174,5 +174,9 @@
     "selectBus":"إختر الحافلة",
     "exitTripMsg":"هل أنت متأكد من إلغاء الرحلة؟",
     "youArived":"لقد وصلت",
-    "howWasTripMsg":"كيف كانت رحلتك؟"
+    "howWasTripMsg":"كيف كانت رحلتك؟",
+    "selectPick":"إختيار نقطة الركوب",
+    "selectDrop":"إختيار نقطة النزول",
+    "predefinedStop":"موقف معرف",
+    "enterPointName":"أدخل اسم النقطة"
 }

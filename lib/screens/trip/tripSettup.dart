@@ -17,12 +17,14 @@ class TripSettup extends StatefulWidget {
   final bool isGoing;
   final Point? startingPoint;
   final Point? endingPoint;
+  final Point? preMarkedPoint;
   const TripSettup({
     super.key,
     required this.route,
     this.isGoing = true,
     this.startingPoint,
     this.endingPoint,
+    this.preMarkedPoint,
   });
 
   @override
@@ -34,6 +36,8 @@ class _TripSettupState extends State<TripSettup> {
   late Point endingPoint;
   late bool isGoing;
   final double max = 0.37;
+  final double min = 0.2;
+  double _dragSheetPosition = 0.35;
   GoogleMapsApi googleApi = GoogleMapsApi();
   dynamic route;
   void initState() {
@@ -44,6 +48,23 @@ class _TripSettupState extends State<TripSettup> {
     startingPoint = widget.startingPoint ?? route.startingPoint.location;
 
     endingPoint = widget.endingPoint ?? route.endingPoint.location;
+  }
+
+  void _handleDragUpdate(DragUpdateDetails details) {
+    setState(() {
+      _dragSheetPosition -=
+          details.primaryDelta! / MediaQuery.of(context).size.height;
+      _dragSheetPosition = _dragSheetPosition.clamp(min, max);
+    });
+  }
+
+  void _handleDragEnd(DragEndDetails details) {
+    setState(() {
+      _dragSheetPosition =
+          (_dragSheetPosition - max).abs() <= (_dragSheetPosition - min).abs()
+              ? max
+              : min;
+    });
   }
 
   @override
@@ -81,6 +102,14 @@ class _TripSettupState extends State<TripSettup> {
                   markerId: const MarkerId("endpoint"),
                   position: LatLng(endingPoint.latitude, endingPoint.longitude),
                 ),
+                if (widget.preMarkedPoint != null)
+                  Marker(
+                    markerId: const MarkerId("premarkedpoint"),
+                    position: LatLng(widget.preMarkedPoint!.latitude,
+                        widget.preMarkedPoint!.longitude),
+                    icon: BitmapDescriptor.defaultMarkerWithHue(
+                        BitmapDescriptor.hueGreen),
+                  ),
               },
               polylines: {
                 if (route.waypointsGoing != null ||
@@ -94,48 +123,53 @@ class _TripSettupState extends State<TripSettup> {
                       width: 5)
               }),
           GestureDetector(
+              // onVerticalDragUpdate: _handleDragUpdate,
+              // onVerticalDragEnd: _handleDragEnd,
               child: DraggableScrollableSheet(
-                  initialChildSize: max,
+                  initialChildSize: _dragSheetPosition,
+                  // minChildSize: min,
+                  // maxChildSize: max,
                   builder: (BuildContext context,
                       ScrollController scrollController) {
                     return Container(
-                        decoration: BoxDecoration(
-                          // color: Colors.white,
-                          gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.center,
-                              colors: [ourWhite.withOpacity(0), ourWhite]),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(15),
-                            topRight: Radius.circular(15),
-                          ),
+                      decoration: BoxDecoration(
+                        // color: Colors.white,
+                        gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.center,
+                            colors: [ourWhite.withOpacity(0), ourWhite]),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          topRight: Radius.circular(15),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              RectangularElevatedButton(
-                                text: AppLocalizations.of(context)!.activeBuses,
-                                padding: 15,
-                                width: 200,
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400,
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              TripAvailableBuses(
-                                                route: widget.route,
-                                                isGoing: isGoing,
-                                                startingPoint: startingPoint,
-                                                endingPoint: endingPoint,
-                                              )));
-                                },
-                              ),
-                              const SizedBox(height: 15),
-                              Row(
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            RectangularElevatedButton(
+                              text: AppLocalizations.of(context)!.activeBuses,
+                              padding: 15,
+                              width: 200,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w400,
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            TripAvailableBuses(
+                                              route: widget.route,
+                                              isGoing: isGoing,
+                                              startingPoint: startingPoint,
+                                              endingPoint: endingPoint,
+                                            )));
+                              },
+                            ),
+                            const SizedBox(height: 15),
+                            SingleChildScrollView(
+                              child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
@@ -164,8 +198,17 @@ class _TripSettupState extends State<TripSettup> {
                                           isGoing
                                               ? startingPoint.name!
                                               : endingPoint.name!,
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.w300)),
+                                          style:
+                                              TextStyle(
+                                                  fontSize: startingPoint.name!
+                                                                  .length <
+                                                              19 ||
+                                                          endingPoint.name!
+                                                                  .length >
+                                                              19
+                                                      ? 18
+                                                      : 15,
+                                                  fontWeight: FontWeight.w300)),
                                       const SizedBox(
                                         height: 20,
                                       ),
@@ -180,6 +223,10 @@ class _TripSettupState extends State<TripSettup> {
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         EditPickupPointPage(
+                                                          startingPoint:
+                                                              startingPoint,
+                                                          endingPoint:
+                                                              endingPoint,
                                                           route: widget.route,
                                                           isGoing: isGoing,
                                                           isPickup: true,
@@ -241,7 +288,15 @@ class _TripSettupState extends State<TripSettup> {
                                         isGoing
                                             ? endingPoint.name!
                                             : startingPoint.name!,
-                                        style: const TextStyle(
+                                        style: TextStyle(
+                                          fontSize: startingPoint.name!
+                                                                  .length <
+                                                              19 ||
+                                                          endingPoint.name!
+                                                                  .length >
+                                                              19
+                                                      ? 18
+                                                      : 15,
                                             fontWeight: FontWeight.w300),
                                       ),
                                       const SizedBox(
@@ -258,6 +313,10 @@ class _TripSettupState extends State<TripSettup> {
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         EditPickupPointPage(
+                                                          startingPoint:
+                                                              startingPoint,
+                                                          endingPoint:
+                                                              endingPoint,
                                                           route: widget.route,
                                                           isGoing:
                                                               widget.isGoing,
@@ -267,10 +326,12 @@ class _TripSettupState extends State<TripSettup> {
                                     ],
                                   ),
                                 ],
-                              )
-                            ],
-                          ),
-                        ));
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    );
                   }))
         ],
       ),

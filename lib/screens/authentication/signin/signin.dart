@@ -5,8 +5,6 @@ import 'package:jbus_app/screens/authentication/signin/widgets/buttons/sign_up_b
 import 'package:jbus_app/screens/authentication/signin/widgets/buttons/sign_in_button_s_i_s.dart';
 import 'package:jbus_app/screens/authentication/signin/widgets/fields/email_text_field_for_sign_in.dart';
 import 'package:jbus_app/screens/authentication/signin/widgets/fields/password_text_field_for_sign_in.dart';
-import 'package:jbus_app/screens/authentication/signup/widgets/fields/email_text_field.dart';
-import 'package:jbus_app/screens/authentication/signup/widgets/fields/password_text_fields.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
 

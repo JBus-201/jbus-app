@@ -18,8 +18,6 @@ TripCreateRequest _$TripCreateRequestFromJson(Map<String, dynamic> json) =>
       paymentTransactionId: json['paymentTransactionId'] as int?,
       pickUpPoint: PointCreateRequest.fromJson(
           json['pickUpPoint'] as Map<String, dynamic>),
-      // startedAt: DateTime.parse(json['startedAt'] as String),
-      // status: json['status'] as String,
     );
 
 Map<String, dynamic> _$TripCreateRequestToJson(TripCreateRequest instance) {
@@ -35,7 +33,5 @@ Map<String, dynamic> _$TripCreateRequestToJson(TripCreateRequest instance) {
   writeNotNull('finishedAt', instance.finishedAt?.toIso8601String());
   writeNotNull('paymentTransactionId', instance.paymentTransactionId);
   val['pickUpPoint'] = instance.pickUpPoint.toJson();
-  // val['startedAt'] = instance.startedAt!.toIso8601String();
-  // val['status'] = instance.status;
   return val;
 }

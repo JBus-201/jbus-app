@@ -10,6 +10,10 @@ import 'package:jbus_app/data/api/google_service.dart';
 import 'package:jbus_app/data/models/bus.dart';
 import 'package:jbus_app/data/models/bus_route.dart';
 import 'package:jbus_app/data/models/point.dart';
+import 'package:jbus_app/screens/dashbourd/buttons/drawer.dart';
+import 'package:jbus_app/screens/dashbourd/buttons/end_drawer.dart';
+import 'package:jbus_app/screens/drawer/main_drawer/main_drawer.dart';
+import 'package:jbus_app/screens/drawer_notification/notification_drawer.dart';
 import 'package:jbus_app/screens/home/home.dart';
 import 'package:jbus_app/screens/trip/dialogs/ratingdialog.dart';
 import 'package:jbus_app/services/service_locator.dart';
@@ -42,6 +46,7 @@ class _InTripPageState extends State<InTripPage> {
   Set<Marker> markers = {};
   GoogleMapsApi googleApi = GoogleMapsApi();
   GoogleMapController? mapController;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   LatLng busLocation = const LatLng(0, 0);
   int _secondsRemaining = 5;
   // ignore: unused_field
@@ -64,6 +69,7 @@ class _InTripPageState extends State<InTripPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _scaffoldKey,
         extendBodyBehindAppBar: true,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(115.0),
@@ -73,8 +79,20 @@ class _InTripPageState extends State<InTripPage> {
             backgroundColor: Colors.black.withOpacity(0),
             title: const JbusAppBarTitle(),
             flexibleSpace: const AppBarStyle(),
+            leading: CustomEndDrawerButton(
+              onTap: () {
+                _scaffoldKey.currentState!.openDrawer();
+              },
+            ),
+            actions: [
+              CustomDrawerButton(onTap: () {
+                Navigator.pop(context);
+              })
+            ],
           ),
         ),
+        drawer: const NotificationsDrawer(),
+        endDrawer: const MainDrawer(),
         body: Stack(children: [
           GoogleMap(
             zoomControlsEnabled: false,
@@ -125,14 +143,15 @@ class _InTripPageState extends State<InTripPage> {
                   alignment: Alignment.center,
                   width: double.infinity,
                   height: 50,
-                  decoration: const BoxDecoration(
-                      color: ourWhite,
-                      borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(15),
-                          topLeft: Radius.circular(15))),
-                  child: Text(
-                    'ETA: $_secondsRemaining',
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.center,
+                        colors: [ourWhite.withOpacity(0), ourWhite]),
                   ),
+                  child: Text('ETA: $_secondsRemaining',
+                      style: const TextStyle(
+                          fontSize: 25, fontWeight: FontWeight.w300)),
                 ),
               ],
             ),

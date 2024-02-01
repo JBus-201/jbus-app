@@ -65,8 +65,8 @@ abstract class ApiService {
 
   @GET("/Fazaa/getFazaaById/{id}")
   Future<Fazaa> getFazaaById(@Path("id") int id);
-  
-  @GET("/Passenger/isPassengerFaza\'aable")
+
+  @GET("/Passenger/isPassengerFaza'aable")
   Future<HttpResponse<dynamic>> isPassengerFazaaAble();
 
   @POST("/Friends/sendFriendRequest")
@@ -95,18 +95,22 @@ abstract class ApiService {
   Future<Trip> getTrip(@Path("id") int id);
 
   @PUT("/Trip/{id}")
-  Future<HttpResponse> updateTrip(@Body() TripUpdateRequest tripUpdateRequest);
+  Future<HttpResponse> updateTrip(
+      @Body() TripUpdateRequest tripUpdateRequest, @Path("id") int id);
 
   @PUT("/Trip/{id}")
   Future<HttpResponse> finishTrip();
 
   @POST("/Trip")
   Future<HttpResponse> createTrip(
-      @Body() TripCreateRequest tripCreateRequest,@Path("id") int id);
+      @Body() TripCreateRequest tripCreateRequest, @Path("id") int id);
 
   @GET("/Bus/getActiveBuses")
   Future<List<Bus>> getActiveBuses();
 
   @GET("/Bus/getActiveBusesById/{id}")
   Future<List<Bus>> getActiveBusesById(@Path("id") int id);
+
+  @GET('/PaymentTransaction/scanQrCode')
+  Future<HttpResponse> scanQrCode(@Body() Map<String, dynamic> body);
 }

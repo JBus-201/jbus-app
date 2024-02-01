@@ -173,7 +173,11 @@
     "selectBus":"Select Bus",
     "exitTripMsg":"Sure to Exit trip?",
     "youArived":"You'r arived",
-    "howWasTripMsg":"How was your Trip?"
+    "howWasTripMsg":"How was your Trip?",
+    "selectPick":"Select PickUp",
+    "selectDrop":"Select DropOff",
+    "predefinedStop":"Predefined Stop",
+    "enterPointName":"Enter Point Name"
 
 
 }

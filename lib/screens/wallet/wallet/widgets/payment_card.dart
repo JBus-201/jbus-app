@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
@@ -11,7 +12,7 @@ import 'package:jbus_app/screens/wallet/card/widgets/text_fields/edit_card_text_
 import 'package:jbus_app/widgets/text/our_text.dart';
 
 // ignore: must_be_immutable
-class PaymentCard extends StatelessWidget {
+class PaymentCard extends StatelessWidget implements Equatable {
   PaymentCard({
     super.key,
     required this.cardNumber,
@@ -26,6 +27,24 @@ class PaymentCard extends StatelessWidget {
   String cvv;
   String mm;
   String yy;
+
+  factory PaymentCard.fromJson(Map<String, dynamic> json) {
+    return PaymentCard(
+      cardNumber: json['cardNumber'],
+      cardHolderName: json['cardHolderName'],
+      cvv: json['cvv'],
+      mm: json['mm'],
+      yy: json['yy'],
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'cardNumber': cardNumber,
+        'cardHolderName': cardHolderName,
+        'cvv': cvv,
+        'mm': mm,
+        'yy': yy,
+      };
 
   @override
   Widget build(BuildContext context) {
@@ -144,4 +163,10 @@ class PaymentCard extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  List<Object?> get props => [cardNumber, cardHolderName, cvv, mm, yy];
+
+  @override
+  bool? get stringify => true;
 }

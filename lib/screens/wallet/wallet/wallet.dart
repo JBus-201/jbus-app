@@ -40,8 +40,10 @@ class WalletScreen extends StatelessWidget {
 
     return BlocBuilder<WalletBloc, WalletState>(
       builder: (context, state) {
+
         // List<PaymentCard> paymentCardsList = [...state.paymentCardsList];
         // print('bloc Builder: $paymentCardsList');
+
 
         return Scaffold(
           extendBodyBehindAppBar: true,
@@ -187,14 +189,7 @@ class WalletScreen extends StatelessWidget {
                                 color: Colors.amber,
                               );
                             }
-                            return PaymentCard(
-                                cardNumber:
-                                    state.paymentCardsList[index].cardNumber,
-                                cardHolderName: state
-                                    .paymentCardsList[index].cardHolderName,
-                                cvv: state.paymentCardsList[index].cvv,
-                                mm: state.paymentCardsList[index].mm,
-                                yy: state.paymentCardsList[index].yy);
+                            return paymentCardsList[index];
                           }),
                     ),
                     const SizedBox(
