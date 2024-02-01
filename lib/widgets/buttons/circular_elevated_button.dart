@@ -11,6 +11,7 @@ class CircularElevatedButton extends StatelessWidget {
     this.gradient = blueButtonGradient,
     this.gradientForDark = orangeButtonGradient,
     this.icon,
+    this.iconColor = ourWhite,
     this.size = 50,
   });
 
@@ -18,6 +19,7 @@ class CircularElevatedButton extends StatelessWidget {
   final Gradient? gradient;
   final Gradient? gradientForDark;
   final IconData? icon;
+  final Color? iconColor;
   final double size;
 
   @override
@@ -46,7 +48,7 @@ class CircularElevatedButton extends StatelessWidget {
               child: Icon(
                 icon,
                 size: size,
-                color: ourNavey,
+                color: iconColor,
               ),
             ),
           ),

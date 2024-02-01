@@ -5,7 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/constants/colors/gradients.dart';
 import 'package:jbus_app/screens/authentication/signin/signin.dart';
+import 'package:jbus_app/screens/favorite/favorite_screen.dart';
 import 'package:jbus_app/screens/faza/widgets/main_faza.dart';
+import 'package:jbus_app/screens/profile/edit_profile/edit_profile.dart';
+import 'package:jbus_app/screens/settings/settings/settings.dart';
+import 'package:jbus_app/screens/view_routes/select-route.dart';
 import 'package:jbus_app/screens/wallet/wallet/wallet.dart';
 import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 import 'package:jbus_app/widgets/containers/profile_photo.dart';
@@ -95,7 +99,12 @@ class MainDrawer extends StatelessWidget {
                 Icons.favorite_border_rounded,
               ),
               title: OurText(AppLocalizations.of(context)!.favoriteStops),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const FavoriteScreen()));
+              },
             ),
             ListTile(
               leading: const OurIcon(Icons.history),
@@ -105,7 +114,12 @@ class MainDrawer extends StatelessWidget {
             ListTile(
               leading: const OurIcon(Icons.map),
               title: OurText(AppLocalizations.of(context)!.routes),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SelectRoutePage()));
+              },
             ),
             ListTile(
               leading: const OurIcon(Icons.wallet),
@@ -130,7 +144,12 @@ class MainDrawer extends StatelessWidget {
             ListTile(
               leading: const OurIcon(Icons.account_circle),
               title: OurText(AppLocalizations.of(context)!.manageAccount),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const EditProfileScreen()));
+              },
             ),
             ListTile(
               leading: const OurIcon(Icons.report_rounded),
@@ -145,7 +164,12 @@ class MainDrawer extends StatelessWidget {
             ListTile(
               leading: const OurIcon(Icons.settings),
               title: OurText(AppLocalizations.of(context)!.settings),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SettingsScreen()));
+              },
             ),
             const Divider(),
             const Spacer(),
