@@ -17,6 +17,7 @@ import 'package:jbus_app/screens/dashbourd/dashbourd.dart';
 import 'package:jbus_app/screens/faza/pages/friends/friend_request.dart';
 import 'package:jbus_app/screens/faza/pages/payers.dart';
 import 'package:jbus_app/screens/faza/widgets/friends.dart';
+import 'package:jbus_app/screens/faza/widgets/main_faza.dart';
 import 'package:jbus_app/screens/home/home.dart';
 import 'package:jbus_app/screens/profile/set_profile_photo/bloc/set_profile_photo_bloc.dart';
 import 'package:jbus_app/screens/settings/language_settings/bloc/language_settings_bloc.dart';
@@ -69,12 +70,12 @@ Future main() async {
       sl<NavigationService>().navigatorKey.currentState?.push(MaterialPageRoute(
           builder: (context) => const FazaFriendRequestsPage()));
     }
-    if (message.data['type'] == 'friendConfirmed') {
-      sl<NavigationService>()
-          .navigatorKey
-          .currentState
-          ?.push(MaterialPageRoute(builder: (context) => const FazaFriendsPage()));
+    else if (message.data['type'] == 'friendConfirmed') {
+      sl<NavigationService>().navigatorKey.currentState?.push(
+          MaterialPageRoute(builder: (context) => const FazaFriendsPage()));
     }
+    
+    
   });
 
   FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {

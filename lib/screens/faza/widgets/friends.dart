@@ -28,7 +28,7 @@ class FazaFriendsPage extends StatelessWidget {
               text: AppLocalizations.of(context)!.addFriend,
             ),
           ],
-          labelColor: ourBlue,
+          // labelColor: ourBlue,
         ),
         body: const TabBarView(
           children: [
