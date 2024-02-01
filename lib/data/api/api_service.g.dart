@@ -492,7 +492,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Friends/getFriendById',
+              '/Friends/getFriendById/$friendId',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -577,7 +577,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Friends/deleteFriend',
+              '/Friends/deleteFriend/$friendId',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -769,7 +769,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<Bus>> getActiveBusesById(int id) async {
+  Future<List<Bus>> getActiveBusesByRoute(int id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -782,7 +782,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Bus/getActiveBusesById/${id}',
+              '/Bus/getActiveBusesByRoute/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
