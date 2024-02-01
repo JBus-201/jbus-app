@@ -21,7 +21,7 @@ class SettingsScreen extends StatelessWidget {
         child: ListView(
           children: [
             ListTile(
-              leading: Icon(Icons.language_outlined),
+              leading: const Icon(Icons.language_outlined),
               title: Text(AppLocalizations.of(context)!.language),
               subtitle: Text(AppLocalizations.of(context)!.english),
               onTap: () {
@@ -31,13 +31,14 @@ class SettingsScreen extends StatelessWidget {
                     builder: (context) => const LanguageSettingsScreen(),
                   ),
                 );
+                
               },
-              trailing: Icon(Icons.arrow_forward_ios_rounded),
+              trailing: const Icon(Icons.arrow_forward_ios_rounded),
             ),
-            SettingsTab(
-              icon: Icons.color_lens_outlined,
-              title: AppLocalizations.of(context)!.apperance,
-              subTitle: AppLocalizations.of(context)!.lightTheme,
+            ListTile(
+              leading:  const Icon(Icons.color_lens_outlined),
+              title: Text(AppLocalizations.of(context)!.apperance),
+              subtitle: Text(AppLocalizations.of(context)!.lightTheme),
               onTap: () {
                 Navigator.push(
                   context,
@@ -46,11 +47,13 @@ class SettingsScreen extends StatelessWidget {
                   ),
                 );
               },
+              trailing: const Icon(Icons.arrow_forward_ios_rounded),
+
             ),
-            SettingsTab(
-              icon: Icons.notifications_on_outlined,
-              title: AppLocalizations.of(context)!.notifications,
-              subTitle: AppLocalizations.of(context)!.turnedOff,
+            ListTile(
+              leading: const Icon(Icons.notifications_on_outlined),
+              title: Text(AppLocalizations.of(context)!.notifications),
+              subtitle: Text(AppLocalizations.of(context)!.turnedOff),
               onTap: () {
                 Navigator.push(
                   context,
@@ -59,11 +62,13 @@ class SettingsScreen extends StatelessWidget {
                   ),
                 );
               },
+              trailing: const Icon(Icons.arrow_forward_ios_rounded),
+
             ),
-            SettingsTab(
-              icon: Icons.exit_to_app,
-              title: AppLocalizations.of(context)!.logOut,
-              subTitle: AppLocalizations.of(context)!.logOut,
+            ListTile(
+              leading:  const Icon(Icons.exit_to_app),
+              title: Text(AppLocalizations.of(context)!.logOut),
+              subtitle: Text(AppLocalizations.of(context)!.logOut),
               onTap: () {
                 sl<AuthService>().setLoggedOut();
                 Navigator.pushAndRemoveUntil(
@@ -74,6 +79,8 @@ class SettingsScreen extends StatelessWidget {
                   (route) => false,
                 );
               },
+              trailing: const Icon(Icons.arrow_forward_ios_rounded),
+
             ),
           ],
         ),

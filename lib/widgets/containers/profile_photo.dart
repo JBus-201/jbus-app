@@ -43,7 +43,7 @@ class ProfilePhoto extends StatelessWidget {
                   Image.asset(image)
               : Image.asset(
                   image,
-                  scale: 15,
+                  scale: 2.2,
                 ),
         ),
 

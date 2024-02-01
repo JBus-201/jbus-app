@@ -68,7 +68,7 @@ class _FazaFriendRequestsPageState extends State<FazaFriendRequestsPage> {
                     onPressed: () {
                       print('Request Id: ${friend.id}');
                       sl<ApiService>()
-                          .confirmFriendRequest(friend.id)
+                          .confirmFriendRequest(friend.passenger.id)
                           .then((value) => {
                                 print(
                                     'state code : ${value.response.statusCode}'),

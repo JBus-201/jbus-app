@@ -397,7 +397,7 @@ class _ApiService implements ApiService {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
       method: 'GET',
@@ -464,7 +464,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Friends/confirmFriendRequest',
+              '/Friends/confirmFriendRequest/$friendId',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -693,7 +693,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Trip/{id}',
+              '/finishHim',
               queryParameters: queryParameters,
               data: _data,
             )

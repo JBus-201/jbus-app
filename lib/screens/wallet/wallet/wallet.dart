@@ -189,7 +189,7 @@ class WalletScreen extends StatelessWidget {
                                 color: Colors.amber,
                               );
                             }
-                            return paymentCardsList[index];
+                            // return paymentCardsList[index];
                           }),
                     ),
                     const SizedBox(
