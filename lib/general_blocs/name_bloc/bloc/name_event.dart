@@ -12,3 +12,11 @@ class UpdateNameEvent extends NameEvent {
   @override
   List<Object> get props => [firstName, lastName];
 }
+
+class LoadNameEvent extends NameEvent {
+  @override
+  List<Object> get props => [];
+}
+
+
+

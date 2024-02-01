@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -41,12 +40,14 @@ class WalletScreen extends StatelessWidget {
 
     return BlocBuilder<WalletBloc, WalletState>(
       builder: (context, state) {
-        List<PaymentCard> paymentCardsList = [...state.paymentCardsList];
-        print('bloc Builder: $paymentCardsList');
-    
+        // List<PaymentCard> paymentCardsList = [...state.paymentCardsList];
+        // print('bloc Builder: $paymentCardsList');
+
         return Scaffold(
           extendBodyBehindAppBar: true,
-          appBar: AppBar(),
+          appBar: AppBar(
+            foregroundColor: ourWhite,
+          ),
           body: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -72,14 +73,14 @@ class WalletScreen extends StatelessWidget {
                               color: ourNavey,
                             ),
                           ),
-    
+
                           IconButton(
                             onPressed: () {
                               Navigator.push(
                                 context,
                                 PageRouteBuilder(
-                                  pageBuilder: (context, animation,
-                                      secondaryAnimation) {
+                                  pageBuilder:
+                                      (context, animation, secondaryAnimation) {
                                     return const AddCardScreen();
                                   },
                                   transitionsBuilder: (context, animation,
@@ -91,7 +92,7 @@ class WalletScreen extends StatelessWidget {
                                         .chain(CurveTween(curve: curve));
                                     var offsetAnimation =
                                         animation.drive(tween);
-    
+
                                     return SlideTransition(
                                       position: offsetAnimation,
                                       child: child,
@@ -109,7 +110,7 @@ class WalletScreen extends StatelessWidget {
                             color: ourNavey,
                             iconSize: 35,
                           ),
-    
+
                           // OutlinedButton(
                           //   style: OutlinedButton.styleFrom(
                           //     shape: RoundedRectangleBorder(
@@ -120,7 +121,7 @@ class WalletScreen extends StatelessWidget {
                           //   onPressed: () {},
                           //   child: const Icon(Icons.add_circle_outline_outlined),
                           // ),
-    
+
                           // CircularElevatedButton(
                           //   onPressed: () {},
                           //   icon: Icons.add_circle_outline_outlined,
@@ -140,7 +141,7 @@ class WalletScreen extends StatelessWidget {
                           //   //   );
                           //   // },
                           //   // style: TextButton.styleFrom(
-    
+
                           //   // ),
                           //   child: Row(
                           //     mainAxisAlignment: MainAxisAlignment.end,
@@ -167,18 +168,20 @@ class WalletScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Text(
-                      '${state.paymentCardsList.length}',
-                      style: const TextStyle(color: ourNavey),
-                    ),
-                    OurText('${state.paymentCardsList.length}'),
+                    // Text(
+                    //   '${state.paymentCardsList.length}',
+                    //   style: const TextStyle(color: ourNavey),
+                    // ),
+                    // OurText('${state.paymentCardsList.length}'),
                     SizedBox(
                       height: 300,
                       child: ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          reverse: true,
                           itemCount: state.paymentCardsList.length,
                           itemBuilder: (context, index) {
-                            print(
-                                'list View Builder: ${state.paymentCardsList.length}');
+                            // print(
+                            //     'list View Builder: ${state.paymentCardsList.length}');
                             if (state.paymentCardsList.isEmpty) {
                               return Container(
                                 color: Colors.amber,

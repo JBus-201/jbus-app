@@ -10,7 +10,7 @@ class WalletState extends Equatable {
   List<Object> get props => [paymentCardsList];
 
   WalletState copyWith(List<PaymentCard> cardNumbersList) {
-    return WalletState(paymentCardsList: paymentCardsList);
+    return WalletState(paymentCardsList: cardNumbersList);
 }}
 
 
