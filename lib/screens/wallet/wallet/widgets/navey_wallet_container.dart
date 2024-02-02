@@ -75,7 +75,7 @@ class _NaveyWalletContainerState extends State<NaveyWalletContainer> {
               ),
             ],
           ),
-          const ChargeWalletButton(),
+          const ScratchWalletButton(),
           const SendMonyButton(),
         ],
       ),

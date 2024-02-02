@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:jbus_app/screens/wallet/charge_wallet/widgets/buttons/charge_button_with_dialog.dart';
-import 'package:jbus_app/screens/wallet/charge_wallet/widgets/text_fields/amount_of_charge_money.dart';
-import 'package:jbus_app/screens/wallet/send_money/widgets/buttons/send_button_with_dialog.dart';
-import 'package:jbus_app/screens/wallet/send_money/widgets/text_fields/account_number.dart';
-import 'package:jbus_app/screens/wallet/send_money/widgets/text_fields/amount_of_money.dart';
+import 'package:jbus_app/screens/wallet/scratch_wallet/widgets/buttons/charge_button_with_dialog.dart';
+import 'package:jbus_app/screens/wallet/scratch_wallet/widgets/text_fields/amount_of_charge_money.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ChargeWalletScreen extends StatelessWidget {
-  const ChargeWalletScreen({super.key});
+class ScratshCarkWallet extends StatelessWidget {
+  const ScratshCarkWallet({super.key});
 
   @override
   Widget build(BuildContext context) {

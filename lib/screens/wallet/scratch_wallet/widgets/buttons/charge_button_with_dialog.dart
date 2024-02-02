@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:jbus_app/constants/colors/colors.dart';
-import 'package:jbus_app/screens/wallet/charge_wallet/widgets/buttons/no_button_for_charge.dart';
-import 'package:jbus_app/screens/wallet/charge_wallet/widgets/buttons/yes_button_for_charge.dart';
-import 'package:jbus_app/screens/wallet/charge_wallet/widgets/text_fields/amount_of_charge_money.dart';
+import 'package:jbus_app/data/api/api_service.dart';
+import 'package:jbus_app/screens/wallet/scratch_wallet/widgets/text_fields/amount_of_charge_money.dart';
+import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:jbus_app/widgets/text/our_text.dart';
+import 'package:jbus_app/widgets/warnings/warning.dart';
 
 class ChargeButtonWithDialog extends StatelessWidget {
   const ChargeButtonWithDialog({
@@ -21,47 +20,29 @@ class ChargeButtonWithDialog extends StatelessWidget {
       text: AppLocalizations.of(context)!.charge,
       onPressed: () {
         if (formKey.currentState!.validate()) {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return Theme(
-                  data: Theme.of(context)
-                      .copyWith(dialogBackgroundColor: ourWhite),
-                  child: AlertDialog(
-                    iconColor: ourWhite,
-                    surfaceTintColor: ourWhite,
-                    title: Align(
-                      alignment: Alignment.center,
-                      child: OurText(
-                        AppLocalizations.of(context)!.confirmation,
-                        color: ourNavey,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    content: Container(
-                      constraints: const BoxConstraints(maxHeight: 80),
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: OurText(
-                          '${AppLocalizations.of(context)!.youAreAboutToCharge} ${AmmountOfChargeMoneyTextField.amountOfChargeMoneyController.text} ${AppLocalizations.of(context)!.jod} ${AppLocalizations.of(context)!.to} ${AppLocalizations.of(context)!.yourAccount} ${AppLocalizations.of(context)!.areYouSure}',
-                        ),
-                      ),
-                    ),
-                    actions: const [
-                      Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            YesButtonForCharging(),
-                            NoButtonForCharging(),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                );
-              });
+          print(
+              'Code:::${AmmountOfChargeMoneyTextField.amountOfChargeMoneyController.text}');
+          sl<ApiService>()
+              .chargeUsingSC(int.parse(AmmountOfChargeMoneyTextField
+                  .amountOfChargeMoneyController.text))
+              .then((value) => {
+                    if (value.response.statusCode == 200)
+                      {
+                        showDialog(
+                            context: context,
+                            builder: (context) => Warning(
+                                title: AppLocalizations.of(context)!.great,
+                                description: "Wallet charged succefuly"))
+                      }
+                  })
+              // ignore: body_might_complete_normally_catch_error
+              .catchError((error) {
+            showDialog(
+                context: context,
+                builder: (context) => Warning(
+                    title: AppLocalizations.of(context)!.ops,
+                    description: error.toString()));
+          });
         }
       },
     );
