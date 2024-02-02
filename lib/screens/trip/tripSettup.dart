@@ -143,192 +143,194 @@ class _TripSettupState extends State<TripSettup> {
                           topRight: Radius.circular(15),
                         ),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            RectangularElevatedButton(
-                              text: AppLocalizations.of(context)!.activeBuses,
-                              padding: 15,
-                              width: 200,
-                              fontSize: 17,
-                              fontWeight: FontWeight.w400,
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            TripAvailableBuses(
-                                              route: widget.route,
-                                              isGoing: isGoing,
-                                              startingPoint: startingPoint,
-                                              endingPoint: endingPoint,
-                                            )));
-                              },
-                            ),
-                            const SizedBox(height: 15),
-                            SingleChildScrollView(
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        width: 50,
-                                        height: 50,
-                                        decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: Border.all(
-                                                width: 0.5, color: ourGray)),
-                                        child: const Icon(
-                                          Icons.location_on,
-                                          color: ourGray,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text(
-                                          isGoing
-                                              ? startingPoint.name!
-                                              : endingPoint.name!,
-                                          style:
-                                              TextStyle(
-                                                  fontSize: startingPoint.name!
-                                                                  .length <
-                                                              19 ||
-                                                          endingPoint.name!
-                                                                  .length >
-                                                              19
-                                                      ? 18
-                                                      : 15,
-                                                  fontWeight: FontWeight.w300)),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      FloatingActionButton(
-                                          shape: const CircleBorder(),
-                                          backgroundColor: ourWhite,
-                                          child: const Icon(Icons.edit,
-                                              color: ourGray),
-                                          onPressed: () {
-                                            Navigator.pushReplacement(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        EditPickupPointPage(
-                                                          startingPoint:
-                                                              startingPoint,
-                                                          endingPoint:
-                                                              endingPoint,
-                                                          route: widget.route,
-                                                          isGoing: isGoing,
-                                                          isPickup: true,
-                                                        )));
-                                          }),
-                                    ],
-                                  ),
-                                  FloatingActionButton(
-                                      shape: const CircleBorder(),
-                                      backgroundColor: ourWhite,
-                                      child: const Icon(
-                                          Icons.swap_horiz_rounded,
-                                          color: ourBlack),
-                                      onPressed: () {
-                                        setState(() {
-                                          if (widget.route.waypointsGoing !=
-                                                  null &&
-                                              widget.route.waypointsReturning !=
-                                                  null) {
-                                            isGoing = !isGoing;
-                                            // googleApi.decodePolyline(isGoing
-                                            //   ? widget.route.waypointsGoing!
-                                            //   : widget.route.waypointsReturning!);
-                                          } else {
-                                            showDialog(
-                                                context: context,
-                                                builder: (context) => Warning(
-                                                    title: AppLocalizations.of(
-                                                            context)!
-                                                        .sawpError,
-                                                    description: AppLocalizations
-                                                            .of(context)!
-                                                        .noOtherDirectionMsg));
-                                          }
-                                        });
-                                      }),
-                                  Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        width: 50,
-                                        height: 50,
-                                        decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: Border.all(
-                                                width: 0.5, color: ourGray)),
-                                        child: const Icon(
-                                          Icons.location_on,
-                                          color: ourGray,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text(
-                                        isGoing
-                                            ? endingPoint.name!
-                                            : startingPoint.name!,
-                                        style: TextStyle(
-                                          fontSize: startingPoint.name!
-                                                                  .length <
-                                                              19 ||
-                                                          endingPoint.name!
-                                                                  .length >
-                                                              19
-                                                      ? 18
-                                                      : 15,
-                                            fontWeight: FontWeight.w300),
-                                      ),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      FloatingActionButton(
-                                          shape: const CircleBorder(),
-                                          backgroundColor: ourWhite,
-                                          child: const Icon(Icons.edit,
-                                              color: ourGray),
-                                          onPressed: () {
-                                            Navigator.pushReplacement(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        EditPickupPointPage(
-                                                          startingPoint:
-                                                              startingPoint,
-                                                          endingPoint:
-                                                              endingPoint,
-                                                          route: widget.route,
-                                                          isGoing:
-                                                              widget.isGoing,
-                                                          isDropoff: true,
-                                                        )));
-                                          })
-                                    ],
-                                  ),
-                                ],
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              RectangularElevatedButton(
+                                text: AppLocalizations.of(context)!.activeBuses,
+                                padding: 15,
+                                width: 200,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w400,
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              TripAvailableBuses(
+                                                route: widget.route,
+                                                isGoing: isGoing,
+                                                startingPoint: startingPoint,
+                                                endingPoint: endingPoint,
+                                              )));
+                                },
                               ),
-                            )
-                          ],
+                              const SizedBox(height: 15),
+                              SingleChildScrollView(
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          width: 50,
+                                          height: 50,
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                  width: 0.5, color: ourGray)),
+                                          child: const Icon(
+                                            Icons.location_on,
+                                            color: ourGray,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text(
+                                            isGoing
+                                                ? startingPoint.name!
+                                                : endingPoint.name!,
+                                            style:
+                                                TextStyle(
+                                                    fontSize: startingPoint.name!
+                                                                    .length <
+                                                                19 ||
+                                                            endingPoint.name!
+                                                                    .length >
+                                                                19
+                                                        ? 18
+                                                        : 15,
+                                                    fontWeight: FontWeight.w300)),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        FloatingActionButton(
+                                            shape: const CircleBorder(),
+                                            backgroundColor: ourWhite,
+                                            child: const Icon(Icons.edit,
+                                                color: ourGray),
+                                            onPressed: () {
+                                              Navigator.pushReplacement(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          EditPickupPointPage(
+                                                            startingPoint:
+                                                                startingPoint,
+                                                            endingPoint:
+                                                                endingPoint,
+                                                            route: widget.route,
+                                                            isGoing: isGoing,
+                                                            isPickup: true,
+                                                          )));
+                                            }),
+                                      ],
+                                    ),
+                                    FloatingActionButton(
+                                        shape: const CircleBorder(),
+                                        backgroundColor: ourWhite,
+                                        child: const Icon(
+                                            Icons.swap_horiz_rounded,
+                                            color: ourBlack),
+                                        onPressed: () {
+                                          setState(() {
+                                            if (widget.route.waypointsGoing !=
+                                                    null &&
+                                                widget.route.waypointsReturning !=
+                                                    null) {
+                                              isGoing = !isGoing;
+                                              // googleApi.decodePolyline(isGoing
+                                              //   ? widget.route.waypointsGoing!
+                                              //   : widget.route.waypointsReturning!);
+                                            } else {
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (context) => Warning(
+                                                      title: AppLocalizations.of(
+                                                              context)!
+                                                          .sawpError,
+                                                      description: AppLocalizations
+                                                              .of(context)!
+                                                          .noOtherDirectionMsg));
+                                            }
+                                          });
+                                        }),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          width: 50,
+                                          height: 50,
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                  width: 0.5, color: ourGray)),
+                                          child: const Icon(
+                                            Icons.location_on,
+                                            color: ourGray,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text(
+                                          isGoing
+                                              ? endingPoint.name!
+                                              : startingPoint.name!,
+                                          style: TextStyle(
+                                            fontSize: startingPoint.name!
+                                                                    .length <
+                                                                19 ||
+                                                            endingPoint.name!
+                                                                    .length >
+                                                                19
+                                                        ? 18
+                                                        : 15,
+                                              fontWeight: FontWeight.w300),
+                                        ),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        FloatingActionButton(
+                                            shape: const CircleBorder(),
+                                            backgroundColor: ourWhite,
+                                            child: const Icon(Icons.edit,
+                                                color: ourGray),
+                                            onPressed: () {
+                                              Navigator.pushReplacement(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          EditPickupPointPage(
+                                                            startingPoint:
+                                                                startingPoint,
+                                                            endingPoint:
+                                                                endingPoint,
+                                                            route: widget.route,
+                                                            isGoing:
+                                                                widget.isGoing,
+                                                            isDropoff: true,
+                                                          )));
+                                            })
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     );

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:jbus_app/data/api/google_service.dart';
-import 'package:jbus_app/data/models/friend_request.dart';
 import 'package:jbus_app/general_blocs/email_bloc/bloc/email_bloc.dart';
 import 'package:jbus_app/general_blocs/mobile_number_bloc/bloc/mobile_number_bloc.dart';
 import 'package:jbus_app/general_blocs/name_bloc/bloc/name_bloc.dart';
@@ -13,10 +12,8 @@ import 'package:jbus_app/localization/bloc/localization_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/screens/authentication/signup/signup.dart';
 import 'package:jbus_app/screens/dashbourd/dashbourd.dart';
-import 'package:jbus_app/screens/faza/pages/friends/friend_request.dart';
-import 'package:jbus_app/screens/faza/pages/payers.dart';
-import 'package:jbus_app/screens/faza/widgets/friends.dart';
-import 'package:jbus_app/screens/faza/widgets/main_faza.dart';
+import 'package:jbus_app/screens/faza/noti-pages/f-all.dart';
+import 'package:jbus_app/screens/faza/noti-pages/f-req.dart';
 import 'package:jbus_app/screens/home/home.dart';
 import 'package:jbus_app/screens/profile/set_profile_photo/bloc/set_profile_photo_bloc.dart';
 import 'package:jbus_app/screens/settings/language_settings/bloc/language_settings_bloc.dart';
@@ -34,7 +31,6 @@ import 'package:jbus_app/constants/firebase_options.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'services/service_locator.dart';
 
-GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Future.delayed(const Duration(seconds: 4));
@@ -68,11 +64,11 @@ Future main() async {
     // print('Message data: ${json.decode(message.data['value'])['Body']}');
     if (message.data['type'] == 'friendRequest') {
       sl<NavigationService>().navigatorKey.currentState?.push(MaterialPageRoute(
-          builder: (context) => const FazaFriendRequestsPage()));
+          builder: (context) => const NotificationFazaFriendRequestsPage()));
     }
     else if (message.data['type'] == 'friendConfirmed') {
       sl<NavigationService>().navigatorKey.currentState?.push(
-          MaterialPageRoute(builder: (context) => const FazaFriendsPage()));
+          MaterialPageRoute(builder: (context) => const NotificationFazaFriendsPage()));
     }
     
     

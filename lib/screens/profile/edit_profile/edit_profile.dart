@@ -11,12 +11,14 @@ import 'package:jbus_app/screens/profile/update/update_email/update_email.dart';
 import 'package:jbus_app/screens/profile/update/update_mobile_number/update_mobile_number.dart';
 import 'package:jbus_app/screens/profile/update/update_name/update_name.dart';
 import 'package:jbus_app/screens/profile/update/update_password/update_password.dart';
+import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
 
 class EditProfileScreen extends StatelessWidget {
   const EditProfileScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const JbusAppBarTitle(),),
       body: SafeArea(
         child: Center(
             child: Column(
