@@ -108,8 +108,8 @@ abstract class ApiService {
   @GET("/Bus/getActiveBuses")
   Future<List<Bus>> getActiveBuses();
 
-  @GET("/Bus/getActiveBusesById/{id}")
-  Future<List<Bus>> getActiveBusesById(@Path("id") int id);
+  @GET("/Bus/getActiveBusesByRoute/{id}")
+  Future<List<Bus>> getActiveBusesByRoute(@Path("id") int id);
 
   @GET('/PaymentTransaction/scanQrCode')
   Future<HttpResponse> scanQrCode(@Body() Map<String, dynamic> body);

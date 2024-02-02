@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/screens/faza/pages/friends/addfriend.dart';
 import 'package:jbus_app/screens/faza/pages/friends/allfriends.dart';
 import 'package:jbus_app/screens/faza/pages/friends/friend_request.dart';
@@ -28,7 +27,6 @@ class FazaFriendsPage extends StatelessWidget {
               text: AppLocalizations.of(context)!.addFriend,
             ),
           ],
-          labelColor: ourBlue,
         ),
         body: const TabBarView(
           children: [

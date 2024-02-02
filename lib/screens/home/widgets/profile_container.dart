@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -6,11 +7,13 @@ import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/general_blocs/name_bloc/bloc/name_bloc.dart';
 import 'package:jbus_app/screens/profile/edit_profile/edit_profile.dart';
 import 'package:jbus_app/screens/profile/set_profile_photo/bloc/set_profile_photo_bloc.dart';
+import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/containers/profile_photo.dart';
 import 'package:jbus_app/widgets/text/our_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ProfileContainer extends StatelessWidget {
+class ProfileContainer extends StatefulWidget {
   const ProfileContainer({
     super.key,
     required this.walletBalance,
@@ -19,6 +22,28 @@ class ProfileContainer extends StatelessWidget {
   final double walletBalance;
 
   @override
+  State<ProfileContainer> createState() => _ProfileContainerState();
+}
+
+class _ProfileContainerState extends State<ProfileContainer> {
+
+  late int walletBalance;
+  late String name;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+fetchWallet();
+  }
+  Future<void> fetchWallet() async {
+    final userRes = sl<SharedPreferences>().getString('user');
+    Map<String, dynamic> res = json.decode(userRes!);
+    print(res);
+    setState(() {
+      walletBalance = res['wallet'];
+      name = res['user']['name'];
+    });
+  }
   Widget build(BuildContext context) {
     return BlocBuilder<NameBloc, NameState>(
       builder: (context, state) {
@@ -68,7 +93,7 @@ class ProfileContainer extends StatelessWidget {
                         },
                       ),
                       OurText(
-                        '${state.firstName} ${state.lastName}',
+                        name,
                         //'${AppLocalizations.of(context)!.firstName} ${AppLocalizations.of(context)!.lastName}',
                         fontWeight: FontWeight.w600,
                         color: ourWhite,
@@ -80,7 +105,7 @@ class ProfileContainer extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       OurText(
-                        '$walletBalance ',
+                        '${walletBalance.toDouble()/100} ',
                         fontWeight: FontWeight.w800,
                         fontSize: 60,
                         color: ourWhite,

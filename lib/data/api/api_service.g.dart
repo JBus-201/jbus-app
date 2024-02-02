@@ -397,7 +397,7 @@ class _ApiService implements ApiService {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
       method: 'GET',
@@ -464,7 +464,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Friends/confirmFriendRequest',
+              '/Friends/confirmFriendRequest/$friendId',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -492,7 +492,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Friends/getFriendById',
+              '/Friends/getFriendById/$friendId',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -577,7 +577,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Friends/deleteFriend',
+              '/Friends/deleteFriend/$friendId',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -693,7 +693,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Trip/{id}',
+              '/finishHim',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -769,7 +769,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<Bus>> getActiveBusesById(int id) async {
+  Future<List<Bus>> getActiveBusesByRoute(int id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -782,7 +782,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Bus/getActiveBusesById/${id}',
+              '/Bus/getActiveBusesByRoute/${id}',
               queryParameters: queryParameters,
               data: _data,
             )

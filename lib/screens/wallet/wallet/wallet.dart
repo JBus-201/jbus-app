@@ -202,6 +202,7 @@ class WalletScreen extends StatelessWidget {
                               );
                             }
                             return state.paymentCardsList[index];
+
                           }),
                     ),
                     const SizedBox(

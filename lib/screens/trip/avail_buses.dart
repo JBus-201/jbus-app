@@ -154,7 +154,7 @@ class _TripAvailableBusesState extends State<TripAvailableBuses> {
 
   void listenToBusesLocations() async {
     List<Bus> activeBuses =
-        await sl<ApiService>().getActiveBusesById(widget.route.id);
+        await sl<ApiService>().getActiveBusesByRoute(widget.route.id);
     setState(() {
       busesNum = activeBuses.length;
     });
