@@ -153,9 +153,7 @@ class _ProfileContainerState extends State<ProfileContainer> {
                       ),
                       ElevatedButton(
                 onPressed: () => refreshData(),
-                child: isLoading
-                    ? const CircularProgressIndicator()
-                    : const Icon(Icons.refresh),
+                child: const Icon(Icons.refresh),
               ),
                     ],
                   ),
