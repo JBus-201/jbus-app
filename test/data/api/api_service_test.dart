@@ -287,7 +287,7 @@ void main() {
         final response = await apiService.storeFazaas(
           FazaaCreateRequest(
             amount: 1000,
-            creditorId: loginResponse.passengerDto.id,
+            inDebtId: loginResponse.passengerDto.id,
           ),
         );
 
