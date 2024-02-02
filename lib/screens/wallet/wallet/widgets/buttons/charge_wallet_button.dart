@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/constants/colors/gradients.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:jbus_app/screens/wallet/charge_wallet/charge_wallet.dart';
+import 'package:jbus_app/screens/wallet/scratch_wallet/charge_wallet.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 
-class ChargeWalletButton extends StatelessWidget {
-  const ChargeWalletButton({
+class ScratchWalletButton extends StatelessWidget {
+  const ScratchWalletButton({
     super.key,
   });
 
@@ -28,7 +28,7 @@ class ChargeWalletButton extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => const ChargeWalletScreen()));
+                  builder: (context) => const ScratshCarkWallet()));
         },
       ),
     );

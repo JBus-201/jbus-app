@@ -257,7 +257,9 @@ class _FazaPayersPageState extends State<FazaPayersPage> {
                             if (amountfaz > 0) {
                               writeFazaPayers(
                                   widget.requestorId, myId, amountfaz);
-                              totalPayed = amountfaz;
+                                  writeUpdatedTotalAmountNeeded(
+                                  widget.requestorId, myId, amountfaz);
+                              totalPayed += amountfaz;
                             }
                             Navigator.pop(context);
                           }));

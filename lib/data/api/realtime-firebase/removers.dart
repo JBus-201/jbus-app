@@ -51,3 +51,6 @@ removePayer(int requesterId, int payerId) {
 removeAllPayers(int requesterId) {
   databaseReference.child('Faza/$requesterId/payers').remove();
 }
+removeFaza(int requesterId) {
+  databaseReference.child('Faza/$requesterId').remove();
+}

@@ -808,7 +808,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Trip',
+              '/Trip/$id',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -889,7 +889,7 @@ class _ApiService implements ApiService {
     _data.addAll(body);
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
-      method: 'GET',
+      method: 'POST',
       headers: _headers,
       extra: _extra,
     )

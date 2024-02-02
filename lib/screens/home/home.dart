@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/screens/home/widgets/profile_container.dart';
@@ -10,7 +9,6 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    double walletBalance = 24.6;
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -24,16 +22,16 @@ class HomeScreen extends StatelessWidget {
             ], // Adjust the colors as needed
           ),
         ),
-        child: Center(
+        child: const Center(
           child: Column(
             children: [
-              ProfileContainer(walletBalance: walletBalance),
-              const SizedBox(
+              ProfileContainer(),
+              SizedBox(
                 height: 20,
               ),
-              const StartYourTripRow(),
-              const MoneyRow(),
-              const OthersRow(),
+              StartYourTripRow(),
+              MoneyRow(),
+              OthersRow(),
             ],
           ),
         ),
