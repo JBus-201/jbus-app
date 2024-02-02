@@ -20,9 +20,9 @@ class BottomSearchSheet extends StatefulWidget {
 class _BottomSearchSheetState extends State<BottomSearchSheet>
     with TickerProviderStateMixin {
   final double min = 0.2;
-  final double max = 1;
+  final double max = 0.89;
 
-  double _dragSheetPosition = 0.21;
+  double _dragSheetPosition = 0.4;
   void _handleDragUpdate(DragUpdateDetails details) {
     setState(() {
       _dragSheetPosition -=

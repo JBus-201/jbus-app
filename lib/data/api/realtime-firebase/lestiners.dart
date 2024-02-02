@@ -116,11 +116,11 @@ Future<int?> getTotalAmount(int requesterId) async {
   return null;
 }
 
-Future<int?> getTotalPayed(int requesterId, int payerId) async {
+Future<int> getTotalPayed(int requesterId, int payerId) async {
   try {
     // Create a reference to the "Faza" node in the Realtime Database
     final fazaReference =
-        FirebaseDatabase.instance.ref('Faza/$requesterId/payers/$payerId');
+        FirebaseDatabase.instance.ref('Faza/$requesterId/payers/$payerId/');
 
     // Retrieve the data at the specified location
     DatabaseEvent totalEvent = await fazaReference.once();
@@ -143,5 +143,5 @@ Future<int?> getTotalPayed(int requesterId, int payerId) async {
   }
 
   // Return null if there is an error or 'totalPayed' is null
-  return null;
+  return 0;
 }

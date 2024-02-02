@@ -36,6 +36,7 @@ class _FazaPayersPageState extends State<FazaPayersPage> {
   bool done = false;
   late DatabaseReference _amountReference;
   late DatabaseReference _timerReference;
+  int totalPayed = 0;
 
   @override
   void initState() {
@@ -58,7 +59,7 @@ class _FazaPayersPageState extends State<FazaPayersPage> {
             done = true;
             getTotalPayed(widget.requestorId, myId);
             FazaaCreateRequest fz = FazaaCreateRequest(
-                amount: getTotalPayed(widget.requestorId, myId) as int,
+                amount: totalPayed,
                 creditorId: myId);
             sl<ApiService>().storeFazaas(fz);
           }
@@ -128,9 +129,10 @@ class _FazaPayersPageState extends State<FazaPayersPage> {
                             description:
                                 "${AppLocalizations.of(context)!.sureToPay}: ${0.05}",
                             onConfirm: () {
-                              Navigator.pop(context);
+                              print("My Id:$myId, ReqId:${widget.requestorId}");
                               if (amountfaz > 0 && amountfaz - 5 >= 0) {
-                                writeFazaPayers(widget.requestorId, myId, 5);
+                                writeFazaPayers(widget.requestorId, myId, 5 + totalPayed);
+                                totalPayed = totalPayed + 5;
                               } else if (amountfaz > 0 && amountfaz - 5 < 0) {
                                 // showDialog(
                                 //     context: context,
@@ -141,6 +143,7 @@ class _FazaPayersPageState extends State<FazaPayersPage> {
                                 writeFazaPayers(
                                     widget.requestorId, myId, amountfaz);
                               }
+                              Navigator.pop(context);
                             }));
                   }
                 }
