@@ -14,6 +14,7 @@ import 'package:jbus_app/screens/authentication/signup/signup.dart';
 import 'package:jbus_app/screens/dashbourd/dashbourd.dart';
 import 'package:jbus_app/screens/faza/noti-pages/f-all.dart';
 import 'package:jbus_app/screens/faza/noti-pages/f-req.dart';
+import 'package:jbus_app/screens/faza/pages/payers.dart';
 import 'package:jbus_app/screens/home/home.dart';
 import 'package:jbus_app/screens/profile/set_profile_photo/bloc/set_profile_photo_bloc.dart';
 import 'package:jbus_app/screens/settings/language_settings/bloc/language_settings_bloc.dart';
@@ -69,6 +70,10 @@ Future main() async {
     else if (message.data['type'] == 'friendConfirmed') {
       sl<NavigationService>().navigatorKey.currentState?.push(
           MaterialPageRoute(builder: (context) => const NotificationFazaFriendsPage()));
+    }
+    else if (message.data['type'] == 'RequestFazaa') {
+      sl<NavigationService>().navigatorKey.currentState?.push(
+          MaterialPageRoute(builder: (context) => FazaPayersPage(requestorId: int.fromEnvironment(message.data['value'].toString()),)));
     }
     
     
