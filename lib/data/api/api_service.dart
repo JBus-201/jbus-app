@@ -63,6 +63,9 @@ abstract class ApiService {
   @GET("/Fazaa/getFazaas")
   Future<List<Fazaa>> getFazaas();
 
+  @POST("/Fazaa/storeFazaas")
+  Future<HttpResponse> requestFazaa(@Path() int amount);
+
   @GET("/Fazaa/getFazaaById/{id}")
   Future<Fazaa> getFazaaById(@Path("id") int id);
 

@@ -38,32 +38,45 @@ class FazaRequestBT extends StatelessWidget {
                         Map<String, dynamic> res = json.decode(userRes!);
 
                         int myId = res['id'];
+                        sl<ApiService>()
+                            .requestFazaa(totalAmountNeeded)
+                            .then((value) => {
+                                  if (value.response.statusCode == 200)
+                                    {
+                                      writeNeedFaza(myId, true).then((value) =>
+                                          {
+                                            if (value)
+                                              {
+                                                writeFazaTotalAmountNeeded(
+                                                    myId, totalAmountNeeded),
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            FazaWaitingPage(
+                                                                route: route)))
+                                              }
+                                            else
+                                              {
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (context) => Warning(
+                                                      isWarning: true,
+                                                      title:
+                                                          AppLocalizations.of(
+                                                                  context)!
+                                                              .ops,
+                                                      description:
+                                                          AppLocalizations.of(
+                                                                  context)!
+                                                              .somthingWrong),
+                                                ).then((value) =>
+                                                    Navigator.pop(context))
+                                              }
+                                          })
+                                    }
+                                });
                         print('Faza Request My ID: $myId');
-                        writeNeedFaza(myId, true).then((value) => {
-                              if (value)
-                                {
-                                  writeFazaTotalAmountNeeded(
-                                      myId, totalAmountNeeded),
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              FazaWaitingPage(route: route)))
-                                }
-                              else
-                                {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) => Warning(
-                                        isWarning: true,
-                                        title:
-                                            AppLocalizations.of(context)!.ops,
-                                        description:
-                                            AppLocalizations.of(context)!
-                                                .somthingWrong),
-                                  ).then((value) => Navigator.pop(context))
-                                }
-                            });
                       } else {
                         showDialog(
                           context: context,
