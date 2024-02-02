@@ -49,6 +49,7 @@ class _FazaWaitingPageState extends State<FazaWaitingPage> {
           print('amountfaz updated: $amountfaz');
           if (amountfaz == 0) {
             done = true;
+            removeFaza(myId);
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
@@ -103,9 +104,10 @@ class _FazaWaitingPageState extends State<FazaWaitingPage> {
           writeFazaTimer(myId, _secondsRemaining);
         } else {
           timer.cancel();
-          writeNeedFaza(myId, false);
-          writeFazaTotalAmountNeeded(myId, -1);
-          removeAllPayers(myId);
+          removeFaza(myId);
+          // writeNeedFaza(myId, false);
+          // writeFazaTotalAmountNeeded(myId, -1);
+          // removeAllPayers(myId);
           Navigator.of(context).pop();
           Navigator.of(context).pop();
         }
