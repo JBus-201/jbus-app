@@ -166,6 +166,34 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<HttpResponse> chargeUsingSC(int cn) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = cn;
+    final _result =
+        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/ScratchCards/chargeUsingSC/$cn',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = _result.data;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
   Future<FavoritePoint> getFavoritePoint(int id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
