@@ -17,41 +17,57 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileContainer extends StatefulWidget {
   const ProfileContainer({
-    super.key,
-    required this.walletBalance,
-  });
-
-  final double walletBalance;
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<ProfileContainer> createState() => _ProfileContainerState();
 }
 
 class _ProfileContainerState extends State<ProfileContainer> {
-  late int walletBalance;
   late String name;
+  late bool isLoading = false;
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    fetchWallet();
+    fetchName();
   }
 
-  Future<void> fetchWallet() async {
+  Future<void> fetchName() async {
     final userRes = sl<SharedPreferences>().getString('user');
     Map<String, dynamic> res = json.decode(userRes!);
     print(res);
     setState(() {
-      walletBalance = res['wallet'];
       name = res['user']['name'];
     });
   }
 
+  Future<void> refreshData() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      final passenger = await sl<ApiService>().getPasssenger();
+      // Update state with new passenger data
+      // You can also update other parts of the UI here if needed
+      setState(() {
+        isLoading = false;
+      });
+    } catch (error) {
+      print('Error refreshing data: $error');
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<NameBloc, NameState>(
       builder: (context, state) {
         return Container(
-          //color: ourNavey,
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
@@ -97,41 +113,50 @@ class _ProfileContainerState extends State<ProfileContainer> {
                       ),
                       OurText(
                         name,
-                        //'${AppLocalizations.of(context)!.firstName} ${AppLocalizations.of(context)!.lastName}',
                         fontWeight: FontWeight.w600,
                         color: ourWhite,
                       ),
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                  Column(
                     children: [
-                      FutureBuilder<Passenger>(
-                          future: sl<ApiService>().getPasssenger(),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return const Center(
-                                  child: CircularProgressIndicator());
-                            } else {
-                              Passenger user = snapshot.data!;
-                              return OurText(
-                                '${user.wallet / 100} ',
-                                fontWeight: FontWeight.w800,
-                                fontSize: 60,
-                                color: ourWhite,
-                                fontFamily: 'PTSerif',
-                              );
-                            }
-                          }),
-                      OurText(
-                        AppLocalizations.of(context)!.jod,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 20,
-                        color: ourWhite,
-                        fontFamily: 'PTSerif',
-                      )
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          FutureBuilder<Passenger>(
+                              future: sl<ApiService>().getPasssenger(),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                } else {
+                                  Passenger user = snapshot.data!;
+                                  return OurText(
+                                    '${user.wallet / 100} ',
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 60,
+                                    color: ourWhite,
+                                    fontFamily: 'PTSerif',
+                                  );
+                                }
+                              }),
+                          OurText(
+                            AppLocalizations.of(context)!.jod,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20,
+                            color: ourWhite,
+                            fontFamily: 'PTSerif',
+                          )
+                        ],
+                      ),
+                      ElevatedButton(
+                onPressed: () => refreshData(),
+                child: isLoading
+                    ? const CircularProgressIndicator()
+                    : const Icon(Icons.refresh),
+              ),
                     ],
                   ),
                 ],
@@ -139,6 +164,7 @@ class _ProfileContainerState extends State<ProfileContainer> {
               const SizedBox(
                 height: 30,
               ),
+              
             ],
           ),
         );
