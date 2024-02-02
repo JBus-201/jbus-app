@@ -184,7 +184,7 @@ void writeFazaPayers(int requesterId, int payerId, int amount) async {
     "totalPayed": totalPayed,
   }).then((_) {
     print("totalPayed written successfully!\nAmount:$amount");
-    writeUpdatedTotalAmountNeeded(requesterId, payerId, amount);
+    
   }).catchError((error) {
     print("Error writing NeedFaza: $error");
   });

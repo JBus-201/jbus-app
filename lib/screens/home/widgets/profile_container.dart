@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
+import 'package:jbus_app/data/api/api_service.dart';
+import 'package:jbus_app/data/models/passenger.dart';
 import 'package:jbus_app/general_blocs/name_bloc/bloc/name_bloc.dart';
 import 'package:jbus_app/screens/profile/edit_profile/edit_profile.dart';
 import 'package:jbus_app/screens/profile/set_profile_photo/bloc/set_profile_photo_bloc.dart';
@@ -26,15 +28,15 @@ class ProfileContainer extends StatefulWidget {
 }
 
 class _ProfileContainerState extends State<ProfileContainer> {
-
   late int walletBalance;
   late String name;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-fetchWallet();
+    fetchWallet();
   }
+
   Future<void> fetchWallet() async {
     final userRes = sl<SharedPreferences>().getString('user');
     Map<String, dynamic> res = json.decode(userRes!);
@@ -44,6 +46,7 @@ fetchWallet();
       name = res['user']['name'];
     });
   }
+
   Widget build(BuildContext context) {
     return BlocBuilder<NameBloc, NameState>(
       builder: (context, state) {
@@ -104,13 +107,24 @@ fetchWallet();
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      OurText(
-                        '${walletBalance.toDouble()/100} ',
-                        fontWeight: FontWeight.w800,
-                        fontSize: 60,
-                        color: ourWhite,
-                        fontFamily: 'PTSerif',
-                      ),
+                      FutureBuilder<Passenger>(
+                          future: sl<ApiService>().getPasssenger(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Center(
+                                  child: CircularProgressIndicator());
+                            } else {
+                              Passenger user = snapshot.data!;
+                              return OurText(
+                                '${user.wallet / 100} ',
+                                fontWeight: FontWeight.w800,
+                                fontSize: 60,
+                                color: ourWhite,
+                                fontFamily: 'PTSerif',
+                              );
+                            }
+                          }),
                       OurText(
                         AppLocalizations.of(context)!.jod,
                         fontWeight: FontWeight.w500,

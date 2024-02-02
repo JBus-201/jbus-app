@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/constants/colors/gradients.dart';
 import 'package:jbus_app/data/api/api_service.dart';
-import 'package:jbus_app/data/api/realtime-firebase/lestiners.dart';
 import 'package:jbus_app/data/api/realtime-firebase/writers.dart';
 import 'package:jbus_app/data/models/fazaa_create_request.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
 import 'package:jbus_app/widgets/warnings/confirm.dart';
+import 'package:jbus_app/widgets/warnings/warning.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -58,9 +58,29 @@ class _FazaPayersPageState extends State<FazaPayersPage> {
           if (amountfaz == 0) {
             done = true;
             // getTotalPayed(widget.requestorId, myId);
-            FazaaCreateRequest fz =
-                FazaaCreateRequest(amount: totalPayed, inDebtId: widget.requestorId);
-            sl<ApiService>().storeFazaas(fz);
+            FazaaCreateRequest fz = FazaaCreateRequest(
+                amount: totalPayed, inDebtId: widget.requestorId);
+            sl<ApiService>()
+                .storeFazaas(fz)
+                .then((value) => {
+                      if (value.response.statusCode == 200)
+                        {
+                          showDialog(
+                              context: context,
+                              builder: (context) => Warning(
+                                  title: AppLocalizations.of(context)!.great,
+                                  description:
+                                      "Your Faza is trasferd succefuly"))
+                        }
+                    })
+                // ignore: body_might_complete_normally_catch_error
+                .catchError((error) {
+              showDialog(
+                  context: context,
+                  builder: (context) => Warning(
+                      title: AppLocalizations.of(context)!.ops,
+                      description: error.toString()));
+            });
             Navigator.pop(context);
           }
         });
@@ -132,8 +152,11 @@ class _FazaPayersPageState extends State<FazaPayersPage> {
                             onConfirm: () {
                               print("My Id:$myId, ReqId:${widget.requestorId}");
                               if (amountfaz > 0 && amountfaz - 5 >= 0) {
-                                writeFazaPayers(widget.requestorId, myId, 5);
                                 totalPayed = totalPayed + 5;
+                                writeFazaPayers(
+                                    widget.requestorId, myId, totalPayed);
+                                writeUpdatedTotalAmountNeeded(
+                                    widget.requestorId, myId, 5);
                               } else if (amountfaz > 0 && amountfaz - 5 < 0) {
                                 // showDialog(
                                 //     context: context,
@@ -166,7 +189,10 @@ class _FazaPayersPageState extends State<FazaPayersPage> {
                             Navigator.pop(context);
                             if (amountfaz > 0 && amountfaz - 10 >= 0) {
                               totalPayed = totalPayed + 10;
-                              writeFazaPayers(widget.requestorId, myId, 10);
+                              writeFazaPayers(
+                                  widget.requestorId, myId, totalPayed);
+                              writeUpdatedTotalAmountNeeded(
+                                  widget.requestorId, myId, 10);
                             } else if (amountfaz > 0 && amountfaz - 10 < 0) {
                               // showDialog(
                               //     context: context,
@@ -196,8 +222,11 @@ class _FazaPayersPageState extends State<FazaPayersPage> {
                           onConfirm: () {
                             Navigator.pop(context);
                             if (amountfaz > 0 && amountfaz - 25 >= 0) {
-                              totalPayed = totalPayed + 5;
-                              writeFazaPayers(widget.requestorId, myId, 25);
+                              totalPayed = totalPayed + 25;
+                              writeFazaPayers(
+                                  widget.requestorId, myId, totalPayed);
+                              writeUpdatedTotalAmountNeeded(
+                                  widget.requestorId, myId, 25);
                             } else if (amountfaz > 0 && amountfaz - 25 < 0) {
                               // showDialog(
                               //     context: context,
@@ -225,9 +254,11 @@ class _FazaPayersPageState extends State<FazaPayersPage> {
                           description:
                               "${AppLocalizations.of(context)!.sureToPay}: $amountfaz",
                           onConfirm: () {
-                            writeFazaPayers(
-                                widget.requestorId, myId, amountfaz);
-                            totalPayed = amountfaz;
+                            if (amountfaz > 0) {
+                              writeFazaPayers(
+                                  widget.requestorId, myId, amountfaz);
+                              totalPayed = amountfaz;
+                            }
                             Navigator.pop(context);
                           }));
                 }

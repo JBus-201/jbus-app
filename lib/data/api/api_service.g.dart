@@ -336,9 +336,8 @@ class _ApiService implements ApiService {
     return httpResponse;
   }
 
-@override
-  Future<HttpResponse<dynamic>> requestFazaa(
-      int amount) async {
+  @override
+  Future<HttpResponse<dynamic>> requestFazaa(int amount) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -364,6 +363,7 @@ class _ApiService implements ApiService {
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
+
   @override
   Future<List<Fazaa>> getFazaas() async {
     const _extra = <String, dynamic>{};
@@ -645,6 +645,33 @@ class _ApiService implements ApiService {
     var value = _result.data!
         .map((dynamic i) => Trip.fromJson(i as Map<String, dynamic>))
         .toList();
+    return value;
+  }
+
+  @override
+  Future<Passenger> getPasssenger() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Trip>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/Passenger',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = Passenger.fromJson(_result.data!);
     return value;
   }
 
