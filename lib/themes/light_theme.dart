@@ -4,7 +4,7 @@ import 'package:jbus_app/themes/theme_controller.dart';
 
 class AppLightTheme extends AppTheme {
   @override
-  Color getMainBlue() => ourBlue;
+  Color getMainBlue() => ourNavey;
 
   @override
   Color getMainOrange() => ourOrange;

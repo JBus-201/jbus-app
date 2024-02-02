@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/constants/colors/gradients.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:jbus_app/screens/wallet/charge_wallet/charge_wallet.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 
 class ChargeWalletButton extends StatelessWidget {
@@ -21,10 +22,14 @@ class ChargeWalletButton extends StatelessWidget {
       child: RectangularElevatedButton(
         text: AppLocalizations.of(context)!.chargeWallet,
         icon: Icons.attach_money_rounded,
-        
         gradient: grayButtonGradient,
         fontColor: ourNavey,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const ChargeWalletScreen()));
+        },
       ),
     );
   }

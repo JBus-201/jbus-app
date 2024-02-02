@@ -28,3 +28,11 @@ class DeleteCardEvent extends WalletEvent {
   @override
   List<Object> get props => [paymentCard];
 }
+
+class SelectCardEvent extends WalletEvent {
+    const SelectCardEvent({required this.paymentCard});
+
+  final PaymentCard paymentCard;
+  @override
+  List<Object> get props => [paymentCard];
+}

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:jbus_app/screens/wallet/wallet/widgets/payment_card.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,6 +20,8 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
     on<LoadCardsEvent>(_loadCardsEvent);
 
     on<DeleteCardEvent>(_deleteCardEvent);
+
+    on<SelectCardEvent>(_selectCardEvent);
   }
 
   FutureOr<void> _addCardEvent(AddCardEvent event, Emitter<WalletState> emit) {
@@ -56,9 +59,15 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
 
   FutureOr<void> _deleteCardEvent(
       DeleteCardEvent event, Emitter<WalletState> emit) {
-    List<PaymentCard> paymentCardsList = state.paymentCardsList
-        .where((element) => element != event.paymentCard)
-        .toList();
+    List<PaymentCard> paymentCardsList = [...state.paymentCardsList];
+
+    paymentCardsList = paymentCardsList.where((element) {
+      return (element.cardHolderName != event.paymentCard.cardHolderName ||
+          element.cardNumber != event.paymentCard.cardNumber ||
+          element.mm != event.paymentCard.mm ||
+          element.yy != event.paymentCard.yy ||
+          element.cvv != event.paymentCard.cvv);
+    }).toList();
     // TODO: @Ahmed: check if this is working
     sl<SharedPreferences>().setStringList(
         _paymentCardsListKey,
@@ -69,5 +78,24 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
             .toList());
 
     add(const LoadCardsEvent());
+
+    emit(state.copyWith(paymentCardsList: paymentCardsList, isLoading: false));
+  }
+
+  FutureOr<void> _selectCardEvent(
+      SelectCardEvent event, Emitter<WalletState> emit) {
+    List<PaymentCard> paymentCardsList = [...state.paymentCardsList];
+
+    for (var element in paymentCardsList) {
+      if (element.cardHolderName == event.paymentCard.cardHolderName &&
+          element.cardNumber == event.paymentCard.cardNumber &&
+          element.mm == event.paymentCard.mm &&
+          element.yy == event.paymentCard.yy &&
+          element.cvv == event.paymentCard.cvv) {
+        element.icon = Icons.check_box_outlined;
+      }
+    }
+
+    emit(state.copyWith(paymentCardsList: paymentCardsList, isLoading: false));
   }
 }

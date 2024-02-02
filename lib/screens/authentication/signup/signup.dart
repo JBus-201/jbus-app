@@ -68,7 +68,7 @@ class SignupScreen extends StatelessWidget {
                       delegate: SliverChildBuilderDelegate(
                         childCount: 1,
                         (context, index) => Padding(
-                          padding: const EdgeInsets.all(8),
+                          padding: const EdgeInsets.all(12),
                           child: Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -154,9 +154,9 @@ class SignupScreen extends StatelessWidget {
                                             PasswordTextField.password!));
 
                                         context.read<SignupCubit>().sendOTP(
-                                              // EmailTextFieldForSignUp
-                                              //     .emailController.text
-                                              state.email,
+                                              EmailTextField.email!,
+
+                                              //state.email,
                                             );
                                       },
                                       isLoading: state is SignupLoading,

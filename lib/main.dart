@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -18,6 +17,7 @@ import 'package:jbus_app/screens/profile/set_profile_photo/bloc/set_profile_phot
 import 'package:jbus_app/screens/settings/language_settings/bloc/language_settings_bloc.dart';
 import 'package:jbus_app/screens/settings/theme_settings/bloc/theme_settings_bloc.dart';
 import 'package:jbus_app/screens/trip/bloc/pickup_bloc.dart';
+import 'package:jbus_app/screens/wallet/card/bloc/card_bloc.dart';
 import 'package:jbus_app/screens/wallet/wallet/bloc/wallet_bloc.dart';
 import 'package:jbus_app/services/auth_service.dart';
 import 'package:jbus_app/services/navigation_service.dart';
@@ -113,6 +113,15 @@ Future main() async {
         BlocProvider<SetProfilePhotoBloc>(
           create: (BuildContext context) => SetProfilePhotoBloc(),
         ),
+
+        BlocProvider<CardBloc>(
+          create: (BuildContext context) => CardBloc(),
+        ),
+
+        
+
+        
+
       ],
       child: MyApp(homeScreen: _getHomeScreen(status)),
     ),

@@ -1,6 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/data/models/login_request.dart';
 import 'package:jbus_app/general_blocs/email_bloc/bloc/email_bloc.dart';
 import 'package:jbus_app/general_blocs/password_bloc/bloc/password_bloc.dart';
@@ -40,7 +41,9 @@ class SignInButtonSIS extends StatelessWidget {
       builder: (context, state) {
         if (state is SigninLoading) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              color: ourNavey,
+            ),
           );
         }
         return BlocBuilder<PasswordBloc, PasswordState>(
