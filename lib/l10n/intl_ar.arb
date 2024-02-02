@@ -43,7 +43,6 @@
     "previousTrips": "الرحلات السابقة",
     "map": "الخريطة",
     "price": "السعر",
-    "date": "التاريخ",
     "boardingTime": "وقت الصعود",
     "timeToGetOff": "وقت النزول",
     "boardingPoint": "نقطة الصعود",
@@ -81,7 +80,7 @@
     "userAuthenticationDemo": "عرض مصادقة المستخدم",
     "drawer": "قائمة منبثقة",
     "systemTheme": "نمط النظام",
-    "alreadyHaveAnAccount": "لديك حساب بالفعل، تسجيل الدخول",
+    "alreadyHaveAnAccount": "لديك حساب بالفعل؟ تسجيل الدخول",
     "creatANewAccount": "أنشئ حسابًا جديدًا",
     "verify": "تأكيد",
     "favoriteStops": "نقاط النزول المفضلة",
@@ -99,7 +98,7 @@
     "jod": "د.أ",
     "sendMoney": "أرسل المال",
     "cardNumber": "رقم البطاقة",
-    "cvv": "Cvv",
+    "cvv": "CVV",
     "expiryYearYY": "سنة الانتهاء (yy)",
     "expiryMonthMM": "شهر الانتهاء (mm)",
     "cardHolderNameOptional": "اسم حامل البطاقة (اختياري)",
@@ -178,5 +177,37 @@
     "selectPick":"إختيار نقطة الركوب",
     "selectDrop":"إختيار نقطة النزول",
     "predefinedStop":"موقف معرف",
-    "enterPointName":"أدخل اسم النقطة"
+    "enterPointName":"أدخل اسم النقطة",
+    "sorryPleaseEnterAValidAmountOfMoney":"عذرًا، الرجاء إدخال مبلغ صالح.",
+    "sorryPleaseEnterTheAmountOfMoneyToBeSent":"عذرًا، قم بإدخال مبلغ ليتم إرساله.",
+    "send":"إرسال",
+    "amountOfMoney":"المبلغ المراد تحويله",
+    "accountNumber":"رقم الحساب",
+    "sorryPleseEnterAValidAccountNumber":"عذرًا، الرجاء إدخال رقم حساب صالح.",
+    "sorryPleaseEnterAnAccountNumberToSendMoney":"عذرًا، قم بإدخال رقم حساب ليتم إرسال المال.",
+    "confirmation":"تأكيد",
+    "areYouSureYouWantToUpdateYourCardInformation":"هل أنت متأكد من رغبتك في تحديث بيانات البطاقة؟",
+    "youAreAboutToSend":    "أنت على وشك إرسال",
+    "areYouSure":"هل أنت متأكد؟",
+    "moneyHasBeenSentSuccessfully":"لقد تم إرسال المال بنجاح.",
+    "sorryPleaseEnterTheAmountOfMoneyToBeCharged":"عذرًا، فم بإدخال المبلغ ليتم شحن المحفظة.",
+    "youAreAboutToCharge":"أنت على وشك شحن",
+    "charge":"شحن",
+    "yourAccount":"حسابك",
+    "yourWallet":"محفظتك",
+    "walletHasBeenChargedSuccessfully":"لقد تم شحن المحفظة بنجاح.",
+    "cvvc":"CVV:",
+    "sorryPleaseEnterAValidAccountNumber":"عذرًا، الرجاء إدخال رقم حساب صالح."
+
+
+
+
+
+
+
+
+
+
+
+
 }

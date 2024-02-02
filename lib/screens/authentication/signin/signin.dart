@@ -36,7 +36,7 @@ class SignInScreen extends StatelessWidget {
                 delegate: SliverChildBuilderDelegate(
                   childCount: 1,
                   (context, index) => Padding(
-                    padding: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(12),
                     child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,

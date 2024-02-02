@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/screens/wallet/card/add_card.dart';
+import 'package:jbus_app/screens/wallet/card/bloc/card_bloc.dart';
 import 'package:jbus_app/screens/wallet/wallet/bloc/wallet_bloc.dart';
 import 'package:jbus_app/screens/wallet/wallet/widgets/navey_wallet_container.dart';
 import 'package:jbus_app/screens/wallet/wallet/widgets/payment_card.dart';
@@ -40,10 +41,8 @@ class WalletScreen extends StatelessWidget {
 
     return BlocBuilder<WalletBloc, WalletState>(
       builder: (context, state) {
-
         // List<PaymentCard> paymentCardsList = [...state.paymentCardsList];
         // print('bloc Builder: $paymentCardsList');
-
 
         return Scaffold(
           extendBodyBehindAppBar: true,
@@ -78,6 +77,19 @@ class WalletScreen extends StatelessWidget {
 
                           IconButton(
                             onPressed: () {
+
+                              final cardBloc = BlocProvider.of<CardBloc>(context);
+
+          cardBloc.add(const ChangeCardHolderNameEvent(cardHolderName: ''));
+          cardBloc.add(const ChangeCardNumberEvent(cardNumber: ''));
+          cardBloc.add(const ChangeCVVEvent(cvv: ''));
+          cardBloc.add(const ChangeMMEvent(mm: ''));
+          cardBloc.add(const ChangeYYEvent(yy: ''));
+
+
+
+
+
                               Navigator.push(
                                 context,
                                 PageRouteBuilder(
@@ -186,10 +198,11 @@ class WalletScreen extends StatelessWidget {
                             //     'list View Builder: ${state.paymentCardsList.length}');
                             if (state.paymentCardsList.isEmpty) {
                               return Container(
-                                color: Colors.amber,
+                                color: ourWhite,
                               );
                             }
-                            // return paymentCardsList[index];
+                            return state.paymentCardsList[index];
+
                           }),
                     ),
                     const SizedBox(
