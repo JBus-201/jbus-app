@@ -808,7 +808,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Trip',
+              '/Trip/$id',
               queryParameters: queryParameters,
               data: _data,
             )
