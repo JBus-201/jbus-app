@@ -86,6 +86,9 @@ abstract class ApiService {
   @GET("/Friends/getFriendById")
   Future<Friend> getFriendById(@Query("id") int friendId);
 
+  @PUT("/ScratchCards/chargeUsingSC/{CN}")
+  Future<HttpResponse> chargeUsingSC(@Query("CN") int cn);
+
   @GET("/Friends/getFriends")
   Future<List<Friend>> getFriends();
 
