@@ -104,7 +104,7 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                       ),
                   ),
                 };
-                if (favoritePointsList!.isNotEmpty &&
+                if (favoritePointsList!.isNotEmpty ||
                     favoritePointsList != null) {
                   for (var favPoint in favoritePointsList!) {
                     markers.add(Marker(
@@ -121,7 +121,7 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                   }
                 }
 
-                if (widget.route.predefinedStops!.points != null) {
+                if (widget.route.predefinedStops != null) {
                   final preStops = widget.route.predefinedStops!.points;
                   for (var stop in preStops!) {
                     markers.add(Marker(
