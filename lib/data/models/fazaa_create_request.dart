@@ -11,11 +11,11 @@ class FazaaCreateRequest {
   final int amount;
 
   @JsonKey(required: true)
-  final int creditorId;
+  final int inDebtId;
 
   FazaaCreateRequest({
     required this.amount,
-    required this.creditorId,
+    required this.inDebtId,
   });
 
   factory FazaaCreateRequest.fromJson(Map<String, dynamic> json) =>

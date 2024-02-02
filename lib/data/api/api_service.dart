@@ -10,6 +10,7 @@ import 'package:jbus_app/data/models/friend_request.dart';
 import 'package:jbus_app/data/models/friends_create_request.dart';
 import 'package:jbus_app/data/models/login_request.dart';
 import 'package:jbus_app/data/models/login_response.dart';
+import 'package:jbus_app/data/models/passenger.dart';
 // ignore: unused_import
 import 'package:jbus_app/data/models/predefined_stops.dart';
 import 'package:jbus_app/data/models/register_request.dart';
@@ -63,11 +64,17 @@ abstract class ApiService {
   @GET("/Fazaa/getFazaas")
   Future<List<Fazaa>> getFazaas();
 
+  @POST("/Fazaa/storeFazaas")
+  Future<HttpResponse> requestFazaa(@Path() int amount);
+
   @GET("/Fazaa/getFazaaById/{id}")
   Future<Fazaa> getFazaaById(@Path("id") int id);
 
   @GET("/Passenger/isPassengerFaza'aable")
   Future<HttpResponse<dynamic>> isPassengerFazaaAble();
+
+  @GET("/Passenger")
+  Future<Passenger> getPasssenger();
 
   @POST("/Friends/sendFriendRequest")
   Future<HttpResponse> sendFriendRequest(

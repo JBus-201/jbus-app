@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jbus_app/data/api/realtime-firebase/lestiners.dart';
+import 'package:jbus_app/screens/faza/pages/payers.dart';
 
 final databaseReference = FirebaseDatabase.instance.ref();
 void writeLocationToDatabase(
@@ -177,14 +178,13 @@ Future<bool> writeNeedFaza(int requesterId, bool state) async {
 }
 
 void writeFazaPayers(int requesterId, int payerId, int amount) async {
-  String locationPath = "Faza/$requesterId/payers/$payerId";
-  int? totalPayed = await getTotalPayed(requesterId, payerId);
-  totalPayed = (totalPayed! + amount);
+  String locationPath = "Faza/$requesterId/payers/$payerId/";
+  int totalPayed = amount;
   databaseReference.child(locationPath).update({
     "totalPayed": totalPayed,
   }).then((_) {
     print("totalPayed written successfully!\nAmount:$amount");
-    writeUpdatedTotalAmountNeeded(requesterId, payerId, amount);
+    
   }).catchError((error) {
     print("Error writing NeedFaza: $error");
   });

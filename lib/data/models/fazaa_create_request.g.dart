@@ -9,16 +9,16 @@ part of 'fazaa_create_request.dart';
 FazaaCreateRequest _$FazaaCreateRequestFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const ['amount', 'creditorId'],
+    requiredKeys: const ['amount', 'inDebtId'],
   );
   return FazaaCreateRequest(
     amount: json['amount'] as int,
-    creditorId: json['creditorId'] as int,
+    inDebtId: json['inDebtId'] as int,
   );
 }
 
 Map<String, dynamic> _$FazaaCreateRequestToJson(FazaaCreateRequest instance) =>
     <String, dynamic>{
       'amount': instance.amount,
-      'creditorId': instance.creditorId,
+      'inDebtId': instance.inDebtId,
     };

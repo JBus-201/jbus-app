@@ -26,7 +26,7 @@ class FazaWaitingPage extends StatefulWidget {
 class _FazaWaitingPageState extends State<FazaWaitingPage> {
   /// TO DO
   late int myId;
-  int _secondsRemaining = 30;
+  int _secondsRemaining = 60;
   // ignore: unused_field
   late Timer _timer;
   int amountfaz = 0;

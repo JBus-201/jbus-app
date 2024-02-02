@@ -14,6 +14,7 @@ import 'package:jbus_app/screens/authentication/signup/signup.dart';
 import 'package:jbus_app/screens/dashbourd/dashbourd.dart';
 import 'package:jbus_app/screens/faza/noti-pages/f-all.dart';
 import 'package:jbus_app/screens/faza/noti-pages/f-req.dart';
+import 'package:jbus_app/screens/faza/pages/payers.dart';
 import 'package:jbus_app/screens/home/home.dart';
 import 'package:jbus_app/screens/profile/set_profile_photo/bloc/set_profile_photo_bloc.dart';
 import 'package:jbus_app/screens/settings/language_settings/bloc/language_settings_bloc.dart';
@@ -51,11 +52,15 @@ Future main() async {
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     print('Got a message whilst in the foreground!');
-    print('Message data: ${json.decode(message.data['value'])['Body']}');
+    // print('Message data: ${json.decode(message.data['value'])['Body']}');
 
     if (message.notification != null) {
       print(
           'Message also contained a notification: ${message.notification!.body}');
+    }
+    else if (message.data['type'] == 'RequestFazaa') {
+      sl<NavigationService>().navigatorKey.currentState?.push(
+          MaterialPageRoute(builder: (context) => FazaPayersPage(requestorId: int.parse(message.data['value']),)));
     }
   });
 
@@ -70,17 +75,25 @@ Future main() async {
       sl<NavigationService>().navigatorKey.currentState?.push(
           MaterialPageRoute(builder: (context) => const NotificationFazaFriendsPage()));
     }
+    else if (message.data['type'] == 'RequestFazaa') {
+      sl<NavigationService>().navigatorKey.currentState?.push(
+          MaterialPageRoute(builder: (context) => FazaPayersPage(requestorId: int.parse(message.data['value']),)));
+    }
     
     
   });
 
   FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
     print('Got a message whilst in the background!');
-    print('Message data: ${json.decode(message.data['value'])['Body']}');
+    // print('Message data: ${json.decode(message.data['value'])['Body']}');
 
     if (message.notification != null) {
       print(
           'Message also contained a notification: ${message.notification!.body}');
+    }
+    else if (message.data['type'] == 'RequestFazaa') {
+      sl<NavigationService>().navigatorKey.currentState?.push(
+          MaterialPageRoute(builder: (context) => FazaPayersPage(requestorId: int.parse(message.data['value']),)));
     }
   });
 
