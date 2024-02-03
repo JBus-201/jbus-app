@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +10,8 @@ import 'package:jbus_app/screens/trip/tripSettup.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 import 'package:jbus_app/widgets/warnings/needFaza.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class BottomSearchSheet extends StatefulWidget {
   const BottomSearchSheet({super.key});
@@ -318,18 +318,36 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                                         const SizedBox(
                                           height: 15,
                                         ),
-                                        Text(
-                                          'Fee: ${route.fee / 100}',
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w400,
-                                            color: wallet >= route.fee
-                                                ? themeState.thememode ==
-                                                        ThemeMode.light
-                                                    ? ourGreen
-                                                    : ourLightGreen
-                                                : ourRed,
-                                          ),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              'Fee: ${route.fee / 100}',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w400,
+                                                color: wallet >= route.fee
+                                                    ? themeState.thememode ==
+                                                            ThemeMode.light
+                                                        ? ourGreen
+                                                        : ourLightGreen
+                                                    : ourRed,
+                                              ),
+                                            ),
+                                            const SizedBox(width: 15,),
+                                            Text(
+                                              AppLocalizations.of(context)!.jod,
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w300,
+                                                color:  themeState.thememode ==
+                                                            ThemeMode.light
+                                                        ? ourDarkGray
+                                                        : ourWhite,
+                                                    
+                                              ),
+                                            ),
+                                          ],
                                         )
                                       ],
                                     ),

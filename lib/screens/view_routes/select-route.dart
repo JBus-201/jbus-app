@@ -9,6 +9,7 @@ import 'package:jbus_app/screens/view_routes/view-route.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SelectRoutePage extends StatefulWidget {
   const SelectRoutePage({super.key});
@@ -214,11 +215,27 @@ class _SelectRoutePageState extends State<SelectRoutePage> {
                                   const SizedBox(
                                     height: 15,
                                   ),
-                                  Text(
-                                    'Fee: ${route.fee / 100}',
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 16),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Fee: ${route.fee / 100}',
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 15,
+                                      ),
+                                      Text(
+                                        AppLocalizations.of(context)!.jod,
+                                        style: const TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w300,
+                                        ),
+                                      ),
+                                    ],
                                   )
                                 ],
                               ),

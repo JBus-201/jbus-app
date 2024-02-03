@@ -184,7 +184,7 @@ class _ProfileContainerState extends State<ProfileContainer> {
                       ),
                       ElevatedButton(
                         onPressed: () => refreshData(),
-                        child: Icon(Icons.refresh),
+                        child: Icon(Icons.refresh, color: ourWhite,),
                         style: ElevatedButton.styleFrom(
                             backgroundColor: ourNavey.withOpacity(0), elevation: 0),
                       ),
