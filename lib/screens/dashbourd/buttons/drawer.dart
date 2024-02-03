@@ -14,9 +14,9 @@ class CustomDrawerButton extends StatelessWidget {
         decoration: const BoxDecoration(shape: BoxShape.circle),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            shape: const CircleBorder(
+            shape: CircleBorder(
               side: BorderSide(
-                  color: ourNavey, width: 1.7), // Add the border here
+                  color: themeState.thememode == ThemeMode.light?ourNavey:ourWhite, width: 1.7), // Add the border here
             ),
             foregroundColor:
                 themeState.thememode == ThemeMode.light ? ourWhite : ourOrange,
@@ -26,9 +26,9 @@ class CustomDrawerButton extends StatelessWidget {
             elevation: 0,
           ),
           onPressed: onTap,
-          child: const Icon(
+          child: Icon(
             Icons.home_rounded,
-            color: ourNavey,
+            color: themeState.thememode == ThemeMode.light?ourNavey:ourWhite,
           ),
         ),
       );

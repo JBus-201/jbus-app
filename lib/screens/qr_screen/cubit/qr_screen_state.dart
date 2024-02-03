@@ -12,12 +12,12 @@ class QrScreenInitial extends QrScreenState {}
 class QrScreenLoading extends QrScreenState {}
 
 class QrScreenSuccess extends QrScreenState {
-  final String message;
+  // final String message;
 
-  const QrScreenSuccess(this.message);
+  const QrScreenSuccess();
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [];
 }
 
 class QrScreenFailure extends QrScreenState {

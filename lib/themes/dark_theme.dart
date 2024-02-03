@@ -15,15 +15,18 @@ class AppDarkTheme extends AppTheme {
   ThemeData createTheme() {
     return ThemeData(
       useMaterial3: true,
-cardTheme: const CardTheme(
-          color: ourDarkThemeBackgroundNavey,
-          elevation: 0.5,
-          shadowColor: ourGray,
-          surfaceTintColor: ourBlack,
-        ),
+      cardTheme: const CardTheme(
+        color: ourDarkThemeBackgroundNavey,
+        elevation: 0.5,
+        shadowColor: ourGray,
+        surfaceTintColor: ourBlack,
+      ),
+      bottomSheetTheme: const BottomSheetThemeData(
+        backgroundColor: ourDarkThemeBackgroundNavey,
+      ),
       //AppBar theme
       appBarTheme: AppBarTheme(
-        iconTheme: const IconThemeData(color: ourWhite),
+          iconTheme: const IconThemeData(color: ourWhite),
           backgroundColor: const Color.fromARGB(255, 0, 0, 0).withOpacity(0),
           centerTitle: true,
           elevation: 0,

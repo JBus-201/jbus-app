@@ -4,7 +4,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/data/api/google_service.dart';
 import 'package:jbus_app/screens/dashbourd/buttons/drawer.dart';
-import 'package:jbus_app/screens/dashbourd/buttons/end_drawer.dart';
 import 'package:jbus_app/screens/dashbourd/widgets/bottomsheet.dart';
 import 'package:jbus_app/screens/drawer/main_drawer/main_drawer.dart';
 import 'package:jbus_app/screens/drawer_notification/notification_drawer.dart';
@@ -70,11 +69,11 @@ class _DashboardState extends State<Dashboard> {
             backgroundColor: ourBlack.withOpacity(0),
             title: const JbusAppBarTitle(),
             flexibleSpace: const AppBarStyle(),
-            leading: CustomEndDrawerButton(
-              onTap: () {
-                _scaffoldKey.currentState!.openDrawer();
-              },
-            ),
+            // leading: CustomEndDrawerButton(
+            //   onTap: () {
+            //     _scaffoldKey.currentState!.openDrawer();
+            //   },
+            // ),
             actions: [
               CustomDrawerButton(onTap: () {
                 Navigator.pop(context);

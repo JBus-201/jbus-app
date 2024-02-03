@@ -10,10 +10,11 @@ class AppBarStyle extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
       return Container(
-        
         decoration: BoxDecoration(
             gradient: LinearGradient(
-                begin: const Alignment(0, -0.1),
+                begin: themeState.thememode == ThemeMode.light
+                    ? const Alignment(0, -0.1)
+                    : Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: <Color>[
               themeState.thememode == ThemeMode.light

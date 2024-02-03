@@ -29,7 +29,7 @@ class QrScreenCubit extends Cubit<QrScreenState> {
           await apiService.scanQrCode({"encryptedData": scanData.code!});
 
       if (res.response.statusCode == 200) {
-        emit(QrScreenSuccess(res.response.data));
+        emit(const QrScreenSuccess());
       } else {
         emit(QrScreenFailure(res.response.data));
       }
