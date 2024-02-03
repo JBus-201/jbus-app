@@ -17,6 +17,7 @@ class RectangularElevatedButton extends StatelessWidget {
     this.gradientForDark = orangeButtonGradient,
     this.padding = 4,
     this.fontColor = ourWhite,
+    this.darkfontColor = ourWhite,
     this.icon = Icons.error_outline,
     this.fontSize = 20,
     this.fontWeight = FontWeight.w500,
@@ -31,6 +32,7 @@ class RectangularElevatedButton extends StatelessWidget {
   final double padding;
 
   final Color fontColor;
+  final Color darkfontColor;
   final double fontSize;
   final IconData icon;
   final FontWeight fontWeight;
@@ -60,6 +62,7 @@ class RectangularElevatedButton extends StatelessWidget {
                       color: fontColor,
                       fontSize: fontSize,
                       fontWeight: fontWeight,
+                      darkColor: darkfontColor,
                     )
                   : Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -69,6 +72,7 @@ class RectangularElevatedButton extends StatelessWidget {
                           fontSize: fontSize,
                           color: fontColor,
                           fontWeight: fontWeight,
+                          darkColor: darkfontColor,
                         ),
                         OurIcon(icon),
                       ],

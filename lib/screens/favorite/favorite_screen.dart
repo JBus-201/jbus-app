@@ -34,16 +34,16 @@ class FavoriteScreen extends StatelessWidget {
                 IconButton(
                   icon: const Icon(Icons.add),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return const AddFavoriteScreen();
-                        },
-                      ),
-                    ).then((value) => context
-                        .read<FavoritePointsCubit>()
-                        .fetchFavoritePoints());
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) {
+                    //       return const AddFavoriteScreen();
+                    //     },
+                    //   ),
+                    // ).then((value) => context
+                    //     .read<FavoritePointsCubit>()
+                    //     .fetchFavoritePoints());
                   },
                 ),
               ],
@@ -103,9 +103,9 @@ class FavoriteScreen extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(point.point.name ?? ''),
+                              Text(point.point.name ?? '',style: const TextStyle(fontWeight: FontWeight.w400),),
                               Text(point.route.name ??
-                                  '${point.route.startingPoint.name} - ${point.route.endingPoint.name}'),
+                                  '${point.route.startingPoint.name} - ${point.route.endingPoint.name}',style: const TextStyle(fontWeight: FontWeight.w300),),
                               IconButton(
                                 icon: const Icon(Icons.delete),
                                 onPressed: () {

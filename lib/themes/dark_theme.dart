@@ -16,7 +16,7 @@ class AppDarkTheme extends AppTheme {
     return ThemeData(
       useMaterial3: true,
       cardTheme: const CardTheme(
-        color: ourDarkThemeBackgroundNavey,
+        color: ourDarkGray,
         elevation: 0.5,
         shadowColor: ourGray,
         surfaceTintColor: ourBlack,
@@ -24,6 +24,8 @@ class AppDarkTheme extends AppTheme {
       bottomSheetTheme: const BottomSheetThemeData(
         backgroundColor: ourDarkThemeBackgroundNavey,
       ),
+      iconButtonTheme: const IconButtonThemeData(
+          style: ButtonStyle(iconColor: MaterialStatePropertyAll(ourWhite))),
       //AppBar theme
       appBarTheme: AppBarTheme(
           iconTheme: const IconThemeData(color: ourWhite),
