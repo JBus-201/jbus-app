@@ -160,7 +160,7 @@ class _SelectRoutePageState extends State<SelectRoutePage> {
                               decoration: BoxDecoration(
                                   color: themeState.thememode == ThemeMode.light
                                       ? ourVeryLightGray
-                                      : ourDarkGray,
+                                      : ourGray,
                                   shape: BoxShape.rectangle,
                                   boxShadow: const [
                                     BoxShadow(
