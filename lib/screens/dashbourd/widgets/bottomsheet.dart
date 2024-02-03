@@ -113,10 +113,13 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                     begin: Alignment.topCenter,
                     end: Alignment.center,
                     colors: [
-                      ourWhite.withOpacity(0),
+                      themeState.thememode == ThemeMode.light
+                      ?ourWhite.withOpacity(0.7)
+                          
+                          : ourDarkGray.withOpacity(0.7),
                       themeState.thememode == ThemeMode.light
                           ? ourWhite
-                          : ourDarkThemeBackgroundNavey.withOpacity(0.8),
+                          : ourDarkGray,
                     ]),
                 // color: themeState.thememode == ThemeMode.light ? ourWhite : our,
                 borderRadius: const BorderRadius.only(
@@ -259,7 +262,7 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                                         color: themeState.thememode ==
                                                 ThemeMode.light
                                             ? ourVeryLightGray
-                                            : ourDarkGray,
+                                            : ourGray,
                                         shape: BoxShape.rectangle,
                                         boxShadow: const [
                                           BoxShadow(
