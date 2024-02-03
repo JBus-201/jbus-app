@@ -197,8 +197,8 @@
     "yourWallet":"محفظتك",
     "walletHasBeenChargedSuccessfully":"لقد تم شحن المحفظة بنجاح.",
     "cvvc":"CVV:",
-    "sorryPleaseEnterAValidAccountNumber":"عذرًا، الرجاء إدخال رقم حساب صالح."
-
+    "sorryPleaseEnterAValidAccountNumber":"عذرًا، الرجاء إدخال رقم حساب صالح.",
+    "scratchCard":"بطاقات الشحن"
 
 
 

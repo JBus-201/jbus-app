@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jbus_app/data/api/api_service.dart';
 import 'package:jbus_app/data/models/passenger.dart';
 import 'package:jbus_app/screens/wallet/wallet/widgets/buttons/charge_wallet_button.dart';
+import 'package:jbus_app/screens/wallet/wallet/widgets/buttons/scratch_wallet_button.dart';
 import 'package:jbus_app/screens/wallet/wallet/widgets/buttons/send_money_button.dart';
 import 'package:jbus_app/services/service_locator.dart';
 
@@ -34,10 +35,9 @@ class _NaveyWalletContainerState extends State<NaveyWalletContainer> {
 
   @override
   Widget build(BuildContext context) {
-    double walletBalance = 24.6;
     return Container(
       color: ourNavey,
-      width: 500,
+      width: double.infinity,
       child: Column(
         children: [
           const SizedBox(
@@ -59,12 +59,10 @@ class _NaveyWalletContainerState extends State<NaveyWalletContainer> {
                       user = snapshot.data!;
                       return Text(
                         '${user.wallet / 100} ',
-                        style:
-                            const TextStyle(fontSize: 50, color: Colors.white),
+                        style: const TextStyle(fontSize: 50, color: ourWhite),
                       );
                     }
                   }),
-              
               Text(
                 AppLocalizations.of(context)!.jod,
                 style: const TextStyle(
@@ -75,7 +73,13 @@ class _NaveyWalletContainerState extends State<NaveyWalletContainer> {
               ),
             ],
           ),
-          const ScratchWalletButton(),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ChargeWalletButton(),
+              ScratchWalletButton(),
+            ],
+          ),
           const SendMonyButton(),
         ],
       ),

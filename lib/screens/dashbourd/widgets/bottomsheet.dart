@@ -111,12 +111,12 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.topCenter,
-                    end: const Alignment(0, -0.6),
+                    end: Alignment.center,
                     colors: [
                       ourWhite.withOpacity(0),
                       themeState.thememode == ThemeMode.light
                           ? ourWhite
-                          : ourDarkThemeBackgroundNavey,
+                          : ourDarkThemeBackgroundNavey.withOpacity(0.8),
                     ]),
                 // color: themeState.thememode == ThemeMode.light ? ourWhite : our,
                 borderRadius: const BorderRadius.only(
@@ -154,34 +154,43 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                     onTap: expand,
                     child: ListTile(
                       textColor: themeState.thememode == ThemeMode.dark
-                                    ? ourWhite
-                                    : ourGray,
-                                    focusColor: themeState.thememode == ThemeMode.dark
-                                    ? ourWhite
-                                    : ourGray,
-                                    selectedColor: themeState.thememode == ThemeMode.dark
-                                    ? ourWhite
-                                    : ourGray,
-
+                          ? ourWhite
+                          : ourGray,
+                      focusColor: themeState.thememode == ThemeMode.dark
+                          ? ourWhite
+                          : ourGray,
+                      selectedColor: themeState.thememode == ThemeMode.dark
+                          ? ourWhite
+                          : ourGray,
                       title: TextField(
                         decoration: InputDecoration(
                           hintText: "search",
                           hintStyle: TextStyle(
-                              color: themeState.thememode == ThemeMode.light
-                                  ? ourGray
-                                  : ourWhite),
+                            color: themeState.thememode == ThemeMode.light
+                                ? ourGray
+                                : ourWhite,
+                          ),
                           contentPadding: const EdgeInsets.all(12.0),
                           focusColor: themeState.thememode == ThemeMode.light
                               ? ourWhite
                               : ourGray,
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: themeState.thememode == ThemeMode.dark
+                                  ? ourWhite
+                                  : ourGray,
+                              width: 1.5, // Adjust the border width
+                            ),
+                          ),
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: themeState.thememode == ThemeMode.dark
-                                    ? ourWhite
-                                    : ourGray,
-                                width: 0.5),
+                              color: themeState.thememode == ThemeMode.dark
+                                  ? ourWhite
+                                  : ourGray,
+                              width: 0.5,
+                            ),
                             borderRadius: const BorderRadius.all(
-                              Radius.circular(50),
+                              Radius.circular(12),
                             ),
                           ),
                           prefixIcon: Icon(
@@ -191,6 +200,15 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                                 : ourGray,
                           ),
                         ),
+                        style: TextStyle(
+                          color: themeState.thememode == ThemeMode.dark
+                              ? ourWhite
+                              : ourGray,
+                        ),
+                        cursorColor: themeState.thememode == ThemeMode.dark
+                            ? ourOrange
+                            : ourBlue,
+                        
                         onChanged: _onSearchTextChanged,
                         controller: _textEditingController,
                       ),
@@ -206,6 +224,9 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                             itemCount: allRoutes.length,
                             padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
                             itemBuilder: (context, index) {
+                              if (index < 0 || index >= sRoutes.length) {
+                                return Container(); // Or any other fallback UI
+                              }
                               BusRoute route = sRoutes.elementAt(index);
                               String? firstStop = route.startingPoint.name;
                               String? finalStop = route.endingPoint.name;

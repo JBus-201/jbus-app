@@ -14,7 +14,7 @@ class ScratshCarkWallet extends StatelessWidget {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
           appBar: AppBar(
-            title: Text(AppLocalizations.of(context)!.chargeWallet),
+            title: Text(AppLocalizations.of(context)!.scratchCard),
           ),
           body: SafeArea(
             child: CustomScrollView(slivers: [
