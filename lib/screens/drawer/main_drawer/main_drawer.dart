@@ -4,13 +4,15 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/constants/colors/gradients.dart';
-import 'package:jbus_app/screens/authentication/signin/signin.dart';
+import 'package:jbus_app/data/api/api_service.dart';
+import 'package:jbus_app/data/models/passenger.dart';
 import 'package:jbus_app/screens/favorite/favorite_screen.dart';
 import 'package:jbus_app/screens/faza/widgets/main_faza.dart';
 import 'package:jbus_app/screens/profile/edit_profile/edit_profile.dart';
 import 'package:jbus_app/screens/settings/settings/settings.dart';
 import 'package:jbus_app/screens/view_routes/select-route.dart';
 import 'package:jbus_app/screens/wallet/wallet/wallet.dart';
+import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 import 'package:jbus_app/widgets/containers/profile_photo.dart';
 import 'package:jbus_app/widgets/icons/our_icon.dart';
@@ -28,7 +30,6 @@ class MainDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
       //File file = File('');
-      double walletBalance = 24.6;
       return Drawer(
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -71,25 +72,38 @@ class MainDrawer extends StatelessWidget {
                       '${AppLocalizations.of(context)!.firstName} ${AppLocalizations.of(context)!.lastName}',
                       style: const TextStyle(color: ourWhite),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '$walletBalance ',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Text(
-                          AppLocalizations.of(context)!.jod,
-                          style: const TextStyle(
-                            color: ourWhite,
-                            fontWeight: FontWeight.w300,
-                          ),
-                        ),
-                      ],
-                    ),
+                    FutureBuilder<Passenger>(
+                        future: sl<ApiService>().getPasssenger(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(
+                                child: CircularProgressIndicator(
+                              color: ourOrange.withOpacity(0),
+                            ));
+                          } else {
+                            Passenger user = snapshot.data!;
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  '${user.wallet / 100} ',
+                                  style: const TextStyle(
+                                    color: ourWhite,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                Text(
+                                  AppLocalizations.of(context)!.jod,
+                                  style: const TextStyle(
+                                    color: ourWhite,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                ),
+                              ],
+                            );
+                          }
+                        }),
                   ],
                 ),
               ),
