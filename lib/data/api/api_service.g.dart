@@ -732,9 +732,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<HttpResponse<dynamic>> updateTrip(
-    TripUpdateRequest tripUpdateRequest,
-    int id,
-  ) async {
+      TripUpdateRequest tripUpdateRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -748,7 +746,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Trip/${id}',
+              '/Trip',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -808,7 +806,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Trip',
+              '/Trip/${id}',
               queryParameters: queryParameters,
               data: _data,
             )

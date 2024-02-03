@@ -104,14 +104,14 @@ abstract class ApiService {
   @GET("/Trip/{id}")
   Future<Trip> getTrip(@Path("id") int id);
 
-  @PUT("/Trip/{id}")
+  @PUT("/Trip")
   Future<HttpResponse> updateTrip(
-      @Body() TripUpdateRequest tripUpdateRequest, @Path("id") int id);
+      @Body() TripUpdateRequest tripUpdateRequest);
 
   @PUT("/Trip/finishHim")
   Future<HttpResponse> finishTrip();
 
-  @POST("/Trip")
+  @POST("/Trip/{id}")
   Future<HttpResponse> createTrip(
       @Body() TripCreateRequest tripCreateRequest, @Path("id") int id);
 
