@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -13,7 +12,6 @@ import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/containers/profile_photo.dart';
 import 'package:jbus_app/widgets/text/our_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileContainer extends StatefulWidget {
   const ProfileContainer({
@@ -161,8 +159,8 @@ class _ProfileContainerState extends State<ProfileContainer> {
                                 color: ourWhite,
                                 fontFamily: 'PTSerif',
                               ),
-                              const OurText(
-                                "Points",
+                              OurText(
+                                AppLocalizations.of(context)!.points,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 17,
                                 color: ourWhite,
@@ -172,13 +170,13 @@ class _ProfileContainerState extends State<ProfileContainer> {
                           ),
                           ElevatedButton(
                             onPressed: () => refreshData(),
-                            child: Icon(
-                              Icons.refresh,
-                              color: ourWhite,
-                            ),
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: ourNavey.withOpacity(0),
                                 elevation: 0),
+                            child: const Icon(
+                              Icons.refresh,
+                              color: ourWhite,
+                            ),
                           ),
                         ],
                       ),

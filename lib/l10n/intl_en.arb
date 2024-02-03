@@ -198,5 +198,6 @@
     "cvvc":"CVV:",
     "sorryPleaseEnterAValidAccountNumber":"Sorry, Please enter a valid account number.",
     "scratchCard":"Scratch Card",
-    "fee":"Fee"
+    "fee":"Fee",
+    "points":"Points"
 }

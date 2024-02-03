@@ -198,5 +198,6 @@
     "cvvc":"CVC:",
     "sorryPleaseEnterAValidAccountNumber":"عذرًا، الرجاء إدخال رقم حساب صالح.",
     "scratchCard":"بطاقات الشحن",
-    "fee":"القيمة"
+    "fee":"القيمة",
+    "points":"النقاط"
     }
