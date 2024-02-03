@@ -78,14 +78,14 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
               backgroundColor: Colors.black.withOpacity(0),
               title: const JbusAppBarTitle(),
               flexibleSpace: const AppBarStyle(),
-              leading: CustomEndDrawerButton(
-                onTap: () {
-                  _scaffoldKey.currentState!.openDrawer();
-                },
-              ),
+              // leading: CustomEndDrawerButton(
+              //   onTap: () {
+              //     _scaffoldKey.currentState!.openDrawer();
+              //   },
+              // ),
               actions: [
                 CustomDrawerButton(onTap: () {
-                  Navigator.pop(context);
+                  _scaffoldKey.currentState!.openEndDrawer();
                 })
               ],
             ),

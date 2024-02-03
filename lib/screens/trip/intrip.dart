@@ -70,103 +70,106 @@ class _InTripPageState extends State<InTripPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState){return Scaffold(
-        key: _scaffoldKey,
-        extendBodyBehindAppBar: true,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(115.0),
-          child: AppBar(
-            automaticallyImplyLeading: false,
-            elevation: 0,
-            backgroundColor: Colors.black.withOpacity(0),
-            title: const JbusAppBarTitle(),
-            flexibleSpace: const AppBarStyle(),
-            leading: CustomEndDrawerButton(
-              onTap: () {
-                _scaffoldKey.currentState!.openDrawer();
-              },
-            ),
-            actions: [
-              CustomDrawerButton(onTap: () {
-                Navigator.pop(context);
-              })
-            ],
-          ),
-        ),
-        drawer: const NotificationsDrawer(),
-        endDrawer: const MainDrawer(),
-        body: Stack(children: [
-          GoogleMap(
-            zoomControlsEnabled: false,
-            myLocationButtonEnabled: false,
-            myLocationEnabled: true,
-            initialCameraPosition: CameraPosition(
-              target: LatLng(widget.startingPoint.latitude,
-                  widget.startingPoint.longitude),
-              zoom: 12.0,
-            ),
-            markers: markers,
-            onMapCreated: (controller) {
-              mapController = controller;
-              // ignore: unrelated_type_equality_checks
-              if (themeState.thememode == ThemeMode.dark) {
-                mapController!.setMapStyle(GoogleMapsApi.darkMapString);
-              }}
-          ),
-          Container(
-            height: double.infinity,
-            alignment: Alignment.bottomCenter,
-            padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        FloatingActionButton(
-                          child: const Icon(Icons.directions_bus),
-                          onPressed: () {
-                            googleApi.moveToLocation(
-                                mapController!, busLocation);
-                          },
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  width: double.infinity,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end:  Alignment.bottomCenter,
-                    colors: [
-                      ourWhite.withOpacity(0),
-                      themeState.thememode == ThemeMode.light
-                          ? ourWhite
-                          : ourDarkThemeBackgroundNavey,
-                    ]),
-                  ),
-                  child: Text('ETA: $_secondsRemaining',
-                      style: const TextStyle(
-                          fontSize: 25, fontWeight: FontWeight.w300)),
-                ),
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
+      return Scaffold(
+          key: _scaffoldKey,
+          extendBodyBehindAppBar: true,
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(115.0),
+            child: AppBar(
+              automaticallyImplyLeading: false,
+              elevation: 0,
+              backgroundColor: Colors.black.withOpacity(0),
+              title: const JbusAppBarTitle(),
+              flexibleSpace: const AppBarStyle(),
+              // leading: CustomEndDrawerButton(
+              //   onTap: () {
+              //     _scaffoldKey.currentState!.openDrawer();
+              //   },
+              // ),
+              actions: [
+                CustomDrawerButton(onTap: () {
+                  _scaffoldKey.currentState!.openEndDrawer();
+                })
               ],
             ),
           ),
-        ]));});
+          drawer: const NotificationsDrawer(),
+          endDrawer: const MainDrawer(),
+          body: Stack(children: [
+            GoogleMap(
+                zoomControlsEnabled: false,
+                myLocationButtonEnabled: false,
+                myLocationEnabled: true,
+                initialCameraPosition: CameraPosition(
+                  target: LatLng(widget.startingPoint.latitude,
+                      widget.startingPoint.longitude),
+                  zoom: 12.0,
+                ),
+                markers: markers,
+                onMapCreated: (controller) {
+                  mapController = controller;
+                  // ignore: unrelated_type_equality_checks
+                  if (themeState.thememode == ThemeMode.dark) {
+                    mapController!.setMapStyle(GoogleMapsApi.darkMapString);
+                  }
+                }),
+            Container(
+              height: double.infinity,
+              alignment: Alignment.bottomCenter,
+              padding:
+                  const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          FloatingActionButton(
+                            child: const Icon(Icons.directions_bus),
+                            onPressed: () {
+                              googleApi.moveToLocation(
+                                  mapController!, busLocation);
+                            },
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    width: double.infinity,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            ourWhite.withOpacity(0),
+                            themeState.thememode == ThemeMode.light
+                                ? ourWhite
+                                : ourDarkThemeBackgroundNavey,
+                          ]),
+                    ),
+                    child: Text('ETA: $_secondsRemaining',
+                        style: const TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.w300)),
+                  ),
+                ],
+              ),
+            ),
+          ]));
+    });
   }
 
   void listenToDriverLocation() {
