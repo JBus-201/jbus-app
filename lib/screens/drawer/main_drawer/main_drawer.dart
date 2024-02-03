@@ -173,18 +173,18 @@ class MainDrawer extends StatelessWidget {
             ),
             const Divider(),
             const Spacer(),
-            ListTile(
-              title: OurText(AppLocalizations.of(context)!.logOut),
-              leading: const OurIcon(Icons.exit_to_app),
-              onTap: () => {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SignInScreen(),
-                  ),
-                ),
-              },
-            ),
+            // ListTile(
+            //   title: OurText(AppLocalizations.of(context)!.logOut),
+            //   leading: const OurIcon(Icons.exit_to_app),
+            //   onTap: () => {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //         builder: (context) => const SignInScreen(),
+            //       ),
+            //     ),
+            //   },
+            // ),
           ],
         ),
       );
