@@ -108,7 +108,7 @@ class _ViewSelectedRoutePageState extends State<ViewSelectedRoutePage> {
                     }
                   }
 
-                  if (widget.route.predefinedStops!.points != null) {
+                  if (widget.route.predefinedStops != null) {
                     final preStops = widget.route.predefinedStops!.points;
                     for (var stop in preStops!) {
                       markers.add(Marker(
