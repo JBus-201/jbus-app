@@ -99,7 +99,7 @@
     "jod": "JOD",
     "sendMoney": "Send Money",
     "cardNumber": "Card Number",
-    "cvv": "CVV",
+    "cvv": "CVC",
     "expiryYearYY": "Expiry Year (yy)",
     "expiryMonthMM": "Expiry Month (mm)",
     "cardHolderNameOptional": "Card Holder Name (Optional)",
@@ -113,7 +113,7 @@
     "sorryPleaseEnterACardNumber": "Sorry, Please Enter a Card Number",
     "sorryPleaseEnterAYear": "Sorry, Please Enter a Year",
     "sorryPleaseEnterAMonth": "Sorry, Please Enter a Month",
-    "sorryPleaseEnterACvv": "Sorry, Please Enter a Cvv",
+    "sorryPleaseEnterACvv": "Sorry, Please Enter a CVC",
     "apperance": "Apperance",
     "turnedOn": "Turned On",
     "turnedOff": "Turned Off",
@@ -155,8 +155,8 @@
     "requestSentSuccesfuly": "Request Sent Succesfuly",
     "ops": "Oops!",
     "somthingWrong": "Somthing went wrong",
-    "noFriendsMsg": "No friends",
-    "noFriendReqMsg": "No friend requests",
+    "noFriendsMsg": "No friends.",
+    "noFriendReqMsg": "No friend requests.",
     "accept": "Accept",
     "youAreFriendsMsg": "You are friends now",
     "noFaza": "There is no previous faza",
@@ -198,5 +198,4 @@
     "cvvc":"CVV:",
     "sorryPleaseEnterAValidAccountNumber":"Sorry, Please enter a valid account number.",
     "scratchCard":"Scratch Card"
-
 }
