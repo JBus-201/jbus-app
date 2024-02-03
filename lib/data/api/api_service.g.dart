@@ -13,7 +13,7 @@ class _ApiService implements ApiService {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://vmi1560602.contaboserver.net:5678/api/v1.0';
+    baseUrl ??= 'http://vmi1560602.contaboserver.net/api/v1.0';
   }
 
   final Dio _dio;
