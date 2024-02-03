@@ -48,7 +48,7 @@ class _InTripPageState extends State<InTripPage> {
   GoogleMapController? mapController;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   LatLng busLocation = const LatLng(0, 0);
-  int _secondsRemaining = 300;
+  int _secondsRemaining = 120;
   // ignore: unused_field
   late Timer _timer;
   @override
