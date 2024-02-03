@@ -215,7 +215,7 @@ class _SelectRoutePageState extends State<SelectRoutePage> {
                                     height: 15,
                                   ),
                                   Text(
-                                    'Fee: ${route.fee}',
+                                    'Fee: ${route.fee / 100}',
                                     style: const TextStyle(
                                         fontWeight: FontWeight.w300,
                                         fontSize: 16),

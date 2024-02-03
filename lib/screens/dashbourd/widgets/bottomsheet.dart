@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/data/api/api_service.dart';
 import 'package:jbus_app/data/models/bus_route.dart';
+import 'package:jbus_app/data/models/passenger.dart';
 import 'package:jbus_app/screens/trip/tripSettup.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/themes/bloc/theme_bloc.dart';
@@ -46,7 +47,7 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
       DraggableScrollableController();
 
   List<BusRoute> allRoutes = [];
-  late int wallet;
+  int wallet = 0;
   Timer? _debounce;
   final TextEditingController _textEditingController = TextEditingController();
   Iterable<BusRoute> sRoutes = [];
@@ -71,10 +72,10 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
   }
 
   Future<void> fetchWallet() async {
-    final userRes = sl<SharedPreferences>().getString('user');
-    Map<String, dynamic> res = json.decode(userRes!);
+    Passenger passenger = await sl<ApiService>().getPasssenger();
+
     setState(() {
-      wallet = res['wallet'];
+      wallet = passenger.wallet;
     });
   }
 
@@ -114,8 +115,7 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                     end: Alignment.center,
                     colors: [
                       themeState.thememode == ThemeMode.light
-                      ?ourWhite.withOpacity(0.7)
-                          
+                          ? ourWhite.withOpacity(0.7)
                           : ourDarkGray.withOpacity(0.7),
                       themeState.thememode == ThemeMode.light
                           ? ourWhite
@@ -211,7 +211,6 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                         cursorColor: themeState.thememode == ThemeMode.dark
                             ? ourOrange
                             : ourBlue,
-                        
                         onChanged: _onSearchTextChanged,
                         controller: _textEditingController,
                       ),
@@ -320,12 +319,15 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                                           height: 15,
                                         ),
                                         Text(
-                                          'Fee: ${route.fee}',
+                                          'Fee: ${route.fee / 100}',
                                           style: TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.w400,
                                             color: wallet >= route.fee
-                                                ? ourGreen
+                                                ? themeState.thememode ==
+                                                        ThemeMode.light
+                                                    ? ourGreen
+                                                    : ourLightGreen
                                                 : ourRed,
                                           ),
                                         )

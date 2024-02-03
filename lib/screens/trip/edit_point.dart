@@ -117,7 +117,7 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                         position: LatLng(
                             favPoint.point.latitude, favPoint.point.longitude),
                         icon: BitmapDescriptor.defaultMarkerWithHue(
-                            BitmapDescriptor.hueGreen),
+                            BitmapDescriptor.hueOrange),
                         infoWindow: InfoWindow(
                           title: favPoint.point.name,
                           snippet: AppLocalizations.of(context)!.favoriteStops,
@@ -133,7 +133,7 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                         markerId: MarkerId(stop.id.toString()),
                         position: LatLng(stop.latitude, stop.longitude),
                         icon: BitmapDescriptor.defaultMarkerWithHue(
-                            BitmapDescriptor.hueGreen),
+                            BitmapDescriptor.hueAzure),
                         infoWindow: InfoWindow(
                           title: stop.name,
                           snippet: AppLocalizations.of(context)!.predefinedStop,

@@ -31,6 +31,7 @@ class ChargeButtonWithDialog extends StatelessWidget {
                         showDialog(
                             context: context,
                             builder: (context) => Warning(
+                                isWarning: false,
                                 title: AppLocalizations.of(context)!.great,
                                 description: "Wallet charged succefuly"))
                       }
