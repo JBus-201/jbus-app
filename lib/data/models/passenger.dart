@@ -14,12 +14,14 @@ class Passenger {
   final String? profileImage;
   final int wallet;
   final User user;
+  final int? rewardPoints;
 
   Passenger({
     required this.id,
     this.profileImage,
     required this.wallet,
     required this.user,
+    this.rewardPoints,
   });
 
   factory Passenger.fromJson(Map<String, dynamic> json) {

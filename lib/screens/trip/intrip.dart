@@ -1,9 +1,9 @@
 import 'dart:async';
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/data/api/api_service.dart';
@@ -12,7 +12,6 @@ import 'package:jbus_app/data/models/bus.dart';
 import 'package:jbus_app/data/models/bus_route.dart';
 import 'package:jbus_app/data/models/point.dart';
 import 'package:jbus_app/screens/dashbourd/buttons/drawer.dart';
-import 'package:jbus_app/screens/dashbourd/buttons/end_drawer.dart';
 import 'package:jbus_app/screens/drawer/main_drawer/main_drawer.dart';
 import 'package:jbus_app/screens/drawer_notification/notification_drawer.dart';
 import 'package:jbus_app/screens/home/home.dart';
@@ -173,28 +172,41 @@ class _InTripPageState extends State<InTripPage> {
   }
 
   void listenToDriverLocation() {
-    Geolocator.getPositionStream(
-      locationSettings: const LocationSettings(
-        accuracy: LocationAccuracy.best,
-      ),
-    ).listen((Position position) {
-      // Handle location updates here
-      double latitude = position.latitude;
-      double longitude = position.longitude;
-      setState(() {
-        busLocation = LatLng(latitude, longitude);
+    final databaseReference = FirebaseDatabase.instance.ref();
+    databaseReference
+        .child(
+            'Route/${widget.route.id}/${widget.isGoing ? 'going' : 'returning'}/Bus/${widget.bus.id}/currentLocation')
+        .onValue
+        .listen((event) {
+      print('Waiting: ${event.snapshot.value}');
+      if (event.snapshot.value != null) {
+        final Map<Object?, Object?>? driverLocation =
+            event.snapshot.value as Map<Object?, Object?>?;
 
-        markers.clear();
-        markers.add(
-          Marker(
-            markerId: const MarkerId('driverMarker'),
-            position: busLocation,
-            icon: googleApi.customBusIcon!,
-          ),
-        );
-        addEndMarkers();
-      });
-      googleApi.moveToLocation(mapController!, LatLng(latitude, longitude));
+        if (driverLocation != null) {
+          // Access the location data using the Object? keys
+          final double latitude = driverLocation['latitude'] as double;
+          final double longitude = driverLocation['longitude'] as double;
+
+          // Create a LatLng object from the location data
+          final LatLng driverLatLng = LatLng(latitude, longitude);
+          // Update the marker
+          setState(() {
+            busLocation = driverLatLng;
+            markers.clear();
+            markers.add(
+              Marker(
+                markerId: const MarkerId('driverMarker'),
+                position: driverLatLng,
+                icon: googleApi.customBusIcon!,
+              ),
+            );
+            addEndMarkers();
+          });
+
+          googleApi.moveToLocation(mapController!, LatLng(latitude, longitude));
+        }
+      }
     });
   }
 

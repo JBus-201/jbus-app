@@ -130,7 +130,7 @@ class _ProfileContainerState extends State<ProfileContainer> {
                                 if (snapshot.connectionState ==
                                     ConnectionState.waiting) {
                                   return const Center(
-                                      child: CircularProgressIndicator());
+                                      child: CircularProgressIndicator(color: ourOrange,));
                                 } else {
                                   Passenger user = snapshot.data!;
                                   return OurText(
@@ -151,10 +151,43 @@ class _ProfileContainerState extends State<ProfileContainer> {
                           )
                         ],
                       ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          FutureBuilder<Passenger>(
+                              future: sl<ApiService>().getPasssenger(),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return Center(
+                                      child: CircularProgressIndicator(color: ourOrange.withOpacity(0),));
+                                } else {
+                                  Passenger user = snapshot.data!;
+                                  return OurText(
+                                    '${user.rewardPoints} ',
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 30,
+                                    color: ourWhite,
+                                    fontFamily: 'PTSerif',
+                                  );
+                                }
+                              }),
+                          const OurText(
+                            "Points",
+                            fontWeight: FontWeight.w500,
+                            fontSize: 17,
+                            color: ourWhite,
+                            fontFamily: 'PTSerif',
+                          )
+                        ],
+                      ),
                       ElevatedButton(
-                onPressed: () => refreshData(),
-                child: const Icon(Icons.refresh),
-              ),
+                        onPressed: () => refreshData(),
+                        child: Icon(Icons.refresh),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: ourNavey.withOpacity(0), elevation: 0),
+                      ),
                     ],
                   ),
                 ],
@@ -162,7 +195,6 @@ class _ProfileContainerState extends State<ProfileContainer> {
               const SizedBox(
                 height: 30,
               ),
-              
             ],
           ),
         );

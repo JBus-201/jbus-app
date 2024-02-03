@@ -11,6 +11,7 @@ Passenger _$PassengerFromJson(Map<String, dynamic> json) => Passenger(
       profileImage: json['profileImage'] as String?,
       wallet: json['wallet'] as int,
       user: User.fromJson(json['user'] as Map<String, dynamic>),
+      rewardPoints: json['rewardPoints'] as int,
     );
 
 Map<String, dynamic> _$PassengerToJson(Passenger instance) {
@@ -27,5 +28,6 @@ Map<String, dynamic> _$PassengerToJson(Passenger instance) {
   writeNotNull('profileImage', instance.profileImage);
   val['wallet'] = instance.wallet;
   val['user'] = instance.user.toJson();
+  val['rewardPoints'] = instance.rewardPoints;
   return val;
 }
