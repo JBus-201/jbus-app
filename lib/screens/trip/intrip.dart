@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
@@ -18,6 +19,7 @@ import 'package:jbus_app/screens/home/home.dart';
 import 'package:jbus_app/screens/trip/dialogs/ratingdialog.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/themes/appbar_style.dart';
+import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
 import 'package:jbus_app/widgets/warnings/warning.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -68,7 +70,7 @@ class _InTripPageState extends State<InTripPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState){return Scaffold(
         key: _scaffoldKey,
         extendBodyBehindAppBar: true,
         appBar: PreferredSize(
@@ -106,7 +108,10 @@ class _InTripPageState extends State<InTripPage> {
             markers: markers,
             onMapCreated: (controller) {
               mapController = controller;
-            },
+              // ignore: unrelated_type_equality_checks
+              if (themeState.thememode == ThemeMode.dark) {
+                mapController!.setMapStyle(GoogleMapsApi.darkMapString);
+              }}
           ),
           Container(
             height: double.infinity,
@@ -145,9 +150,14 @@ class _InTripPageState extends State<InTripPage> {
                   height: 50,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.center,
-                        colors: [ourWhite.withOpacity(0), ourWhite]),
+                    begin: Alignment.topCenter,
+                    end:  Alignment.bottomCenter,
+                    colors: [
+                      ourWhite.withOpacity(0),
+                      themeState.thememode == ThemeMode.light
+                          ? ourWhite
+                          : ourDarkThemeBackgroundNavey,
+                    ]),
                   ),
                   child: Text('ETA: $_secondsRemaining',
                       style: const TextStyle(
@@ -156,7 +166,7 @@ class _InTripPageState extends State<InTripPage> {
               ],
             ),
           ),
-        ]));
+        ]));});
   }
 
   void listenToDriverLocation() {

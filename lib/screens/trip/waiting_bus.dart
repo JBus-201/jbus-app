@@ -1,6 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/data/api/api_service.dart';
@@ -17,6 +18,7 @@ import 'package:jbus_app/screens/qr_screen/pages/qr_screen.dart';
 import 'package:jbus_app/screens/trip/intrip.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/themes/appbar_style.dart';
+import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 import 'package:jbus_app/widgets/others/app_bar_title_logo.dart';
 import 'package:jbus_app/widgets/warnings/confirm.dart';
 import 'package:jbus_app/widgets/warnings/warning.dart';
@@ -64,186 +66,201 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        key: _scaffoldKey,
-        extendBodyBehindAppBar: true,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(115.0),
-          child: AppBar(
-            automaticallyImplyLeading: false,
-            elevation: 0,
-            backgroundColor: Colors.black.withOpacity(0),
-            title: const JbusAppBarTitle(),
-            flexibleSpace: const AppBarStyle(),
-            leading: CustomEndDrawerButton(
-              onTap: () {
-                _scaffoldKey.currentState!.openDrawer();
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
+      return Scaffold(
+          key: _scaffoldKey,
+          extendBodyBehindAppBar: true,
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(115.0),
+            child: AppBar(
+              automaticallyImplyLeading: false,
+              elevation: 0,
+              backgroundColor: Colors.black.withOpacity(0),
+              title: const JbusAppBarTitle(),
+              flexibleSpace: const AppBarStyle(),
+              leading: CustomEndDrawerButton(
+                onTap: () {
+                  _scaffoldKey.currentState!.openDrawer();
+                },
+              ),
+              actions: [
+                CustomDrawerButton(onTap: () {
+                  Navigator.pop(context);
+                })
+              ],
+            ),
+          ),
+          body: Stack(children: [
+            GoogleMap(
+              zoomControlsEnabled: false,
+              myLocationButtonEnabled: false,
+              myLocationEnabled: true,
+              initialCameraPosition: CameraPosition(
+                target: LatLng(widget.startingPoint.latitude,
+                    widget.startingPoint.longitude), // Set to a default value
+                zoom: 12.0,
+              ),
+              markers: markers,
+              onMapCreated: (controller) {
+                mapController = controller;
+                // ignore: unrelated_type_equality_checks
+                if (themeState.thememode == ThemeMode.dark) {
+                  mapController!.setMapStyle(GoogleMapsApi.darkMapString);
+                }
               },
             ),
-            actions: [
-              CustomDrawerButton(onTap: () {
-                Navigator.pop(context);
-              })
-            ],
-          ),
-        ),
-        body: Stack(children: [
-          GoogleMap(
-            zoomControlsEnabled: false,
-            myLocationButtonEnabled: false,
-            myLocationEnabled: true,
-            initialCameraPosition: CameraPosition(
-              target: LatLng(widget.startingPoint.latitude,
-                  widget.startingPoint.longitude), // Set to a default value
-              zoom: 12.0,
-            ),
-            markers: markers,
-            onMapCreated: (controller) {
-              mapController = controller;
-            },
-          ),
-          Container(
-            height: double.infinity,
-            alignment: Alignment.bottomCenter,
-            padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    FloatingActionButton(
-                      backgroundColor: ourRed,
-                      child: const Icon(Icons.exit_to_app_rounded),
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) => ConfirmationDialog(
-                                title:
-                                    AppLocalizations.of(context)!.exitTripMsg,
-                                description: "",
-                                onConfirm: () {
-                                  // DateTime currentUtcDateTime =
-                                  //     DateTime.now().toUtc();
-                                  PointCreateRequest pick = PointCreateRequest(
-                                      latitude: widget.startingPoint.latitude,
-                                      longitude: widget.startingPoint.longitude,
-                                      name: widget.startingPoint.name!);
-                                  PointCreateRequest drop = PointCreateRequest(
-                                      latitude: widget.endingPoint.latitude,
-                                      longitude: widget.endingPoint.longitude,
-                                      name: widget.endingPoint.name!);
-                                  TripUpdateRequest trip = TripUpdateRequest(
-                                      // finishedAt: currentUtcDateTime,
-                                      pickUpPoint: pick,
-                                      status: "Canceled",
-                                      dropOffPoint: drop);
-                                  sl<ApiService>()
-                                      .updateTrip(trip, widget.bus.id!)
-                                      .then((value) => {
+            Container(
+              height: double.infinity,
+              alignment: Alignment.bottomCenter,
+              padding:
+                  const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      FloatingActionButton(
+                        backgroundColor: ourRed,
+                        child: const Icon(Icons.exit_to_app_rounded),
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) => ConfirmationDialog(
+                                  title:
+                                      AppLocalizations.of(context)!.exitTripMsg,
+                                  description: "",
+                                  onConfirm: () {
+                                    // DateTime currentUtcDateTime =
+                                    //     DateTime.now().toUtc();
+                                    PointCreateRequest pick =
+                                        PointCreateRequest(
+                                            latitude:
+                                                widget.startingPoint.latitude,
+                                            longitude:
+                                                widget.startingPoint.longitude,
+                                            name: widget.startingPoint.name!);
+                                    PointCreateRequest drop =
+                                        PointCreateRequest(
+                                            latitude:
+                                                widget.endingPoint.latitude,
+                                            longitude:
+                                                widget.endingPoint.longitude,
+                                            name: widget.endingPoint.name!);
+                                    TripUpdateRequest trip = TripUpdateRequest(
+                                        // finishedAt: currentUtcDateTime,
+                                        pickUpPoint: pick,
+                                        status: "Canceled",
+                                        dropOffPoint: drop);
+                                    sl<ApiService>()
+                                        .updateTrip(trip, widget.bus.id!)
+                                        .then((value) => {
+                                              Navigator.pushAndRemoveUntil(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const HomeScreen()),
+                                                (Route<dynamic> route) => false,
+                                              )
+                                            });
+                                  }));
+                        },
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          FloatingActionButton(
+                            child: const Icon(Icons.directions_bus),
+                            onPressed: () {
+                              googleApi.moveToLocation(
+                                  mapController!, busLocation);
+                            },
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          FloatingActionButton(
+                            child: const Icon(Icons.location_searching_sharp),
+                            onPressed: () {
+                              googleApi.moveToCurrentLocation(mapController!);
+                            },
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          FloatingActionButton(
+                            backgroundColor: ourBlack,
+                            foregroundColor: ourWhite,
+                            child: const Icon(Icons.qr_code_rounded),
+                            onPressed: () {
+                              Navigator.push<bool?>(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const QrScreen()))
+                                  .then((value) => {
+                                        value ??= false,
+                                        if (value)
+                                          {
                                             Navigator.pushAndRemoveUntil(
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      const HomeScreen()),
-                                              (Route<dynamic> route) => false,
+                                                      InTripPage(
+                                                        bus: widget.bus,
+                                                        endingPoint:
+                                                            widget.endingPoint,
+                                                        isGoing: widget.isGoing,
+                                                        route: widget.route,
+                                                        startingPoint: widget
+                                                            .startingPoint,
+                                                      )),
+                                              (Route<dynamic> route) => true,
+                                              // ignore: body_might_complete_normally_catch_error
                                             )
-                                          });
-                                }));
-                      },
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        FloatingActionButton(
-                          child: const Icon(Icons.directions_bus),
-                          onPressed: () {
-                            googleApi.moveToLocation(
-                                mapController!, busLocation);
-                          },
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        FloatingActionButton(
-                          child: const Icon(Icons.location_searching_sharp),
-                          onPressed: () {
-                            googleApi.moveToCurrentLocation(mapController!);
-                          },
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        FloatingActionButton(
-                          backgroundColor: ourBlack,
-                          foregroundColor: ourWhite,
-                          child: const Icon(Icons.qr_code_rounded),
-                          onPressed: () {
-                            
-                            Navigator.push<bool?>(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const QrScreen()))
-                                .then((value) => {
-                                      value ??= false,
-                                      if (value)
-                                        {
-                                          Navigator.pushAndRemoveUntil(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    InTripPage(
-                                                      bus: widget.bus,
-                                                      endingPoint:
-                                                          widget.endingPoint,
-                                                      isGoing: widget.isGoing,
-                                                      route: widget.route,
-                                                      startingPoint:
-                                                          widget.startingPoint,
-                                                    )),
-                                            (Route<dynamic> route) => true,
-                                            // ignore: body_might_complete_normally_catch_error
-                                          )
-                                        }
-                                    })
-                                // ignore: body_might_complete_normally_catch_error
-                                .catchError((error, stackTrace) {
-                              print('Error: ${error.toString()}');
-                              showDialog(
-                                  context: context,
-                                  builder: (context) => Warning(
-                                      title: AppLocalizations.of(context)!.ops,
-                                      description: AppLocalizations.of(context)!
-                                          .somthingWrong));
-                            });
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  width: double.infinity,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.center,
-                        colors: [ourWhite.withOpacity(0), ourWhite]),
+                                          }
+                                      })
+                                  // ignore: body_might_complete_normally_catch_error
+                                  .catchError((error, stackTrace) {
+                                print('Error: ${error.toString()}');
+                                showDialog(
+                                    context: context,
+                                    builder: (context) => Warning(
+                                        title:
+                                            AppLocalizations.of(context)!.ops,
+                                        description:
+                                            AppLocalizations.of(context)!
+                                                .somthingWrong));
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                  child: const Text('ETA',
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.w300)),
-                ),
-              ],
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    width: double.infinity,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.center,
+                          colors: [ourWhite.withOpacity(0), ourWhite]),
+                    ),
+                    child: const Text('ETA',
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.w300)),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ]));
+          ]));
+    });
   }
 
   void listenToDriverLocation() {
