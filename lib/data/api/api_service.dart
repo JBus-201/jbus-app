@@ -64,8 +64,8 @@ abstract class ApiService {
   @GET("/Fazaa/getFazaas")
   Future<List<Fazaa>> getFazaas();
 
-  @POST("/Fazaa/storeFazaas")
-  Future<HttpResponse> requestFazaa(@Path() int amount);
+  @POST("/Fazaa/requestFazaa/{amount}")
+  Future<HttpResponse> requestFazaa(@Path("amount") int amount);
 
   @GET("/Fazaa/getFazaaById/{id}")
   Future<Fazaa> getFazaaById(@Path("id") int id);
@@ -80,14 +80,14 @@ abstract class ApiService {
   Future<HttpResponse> sendFriendRequest(
       @Body() FriendsCreateRequest friendRequest);
 
-  @PUT("/Friends/confirmFriendRequest")
-  Future<HttpResponse> confirmFriendRequest(@Body() int friendId);
+  @PUT("/Friends/confirmFriendRequest/{id}")
+  Future<HttpResponse> confirmFriendRequest(@Path("id") int friendId);
 
-  @GET("/Friends/getFriendById")
-  Future<Friend> getFriendById(@Query("id") int friendId);
+  @GET("/Friends/getFriendById/{id}")
+  Future<Friend> getFriendById(@Path("id") int friendId);
 
   @PUT("/ScratchCards/chargeUsingSC/{CN}")
-  Future<HttpResponse> chargeUsingSC(@Query("CN") int cn);
+  Future<HttpResponse> chargeUsingSC(@Path("CN") int cn);
 
   @GET("/Friends/getFriends")
   Future<List<Friend>> getFriends();
@@ -95,8 +95,8 @@ abstract class ApiService {
   @GET("/Friends/getFriendRequests")
   Future<List<FriendRequest>> getFriendRequests();
 
-  @DELETE("/Friends/deleteFriend")
-  Future<HttpResponse> deleteFriend(@Query("id") int friendId);
+  @DELETE("/Friends/deleteFriend/{id}")
+  Future<HttpResponse> deleteFriend(@Path("id") int friendId);
 
   @GET("/Trip/getTrips")
   Future<List<Trip>> getTrips();
@@ -108,7 +108,7 @@ abstract class ApiService {
   Future<HttpResponse> updateTrip(
       @Body() TripUpdateRequest tripUpdateRequest, @Path("id") int id);
 
-  @PUT("/Trip/{id}")
+  @PUT("/Trip/finishHim")
   Future<HttpResponse> finishTrip();
 
   @POST("/Trip")
