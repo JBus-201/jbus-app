@@ -197,5 +197,6 @@
     "walletHasBeenChargedSuccessfully":"لقد تم شحن المحفظة بنجاح.",
     "cvvc":"CVC:",
     "sorryPleaseEnterAValidAccountNumber":"عذرًا، الرجاء إدخال رقم حساب صالح.",
-    "scratchCard":"بطاقات الشحن"
+    "scratchCard":"بطاقات الشحن",
+    "fee":"القيمة"
     }

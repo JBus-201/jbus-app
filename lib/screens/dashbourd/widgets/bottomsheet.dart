@@ -322,7 +322,7 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             Text(
-                                              'Fee: ${route.fee / 100}',
+                                              '${AppLocalizations.of(context)!.fee}: ${route.fee / 100}',
                                               style: TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w400,

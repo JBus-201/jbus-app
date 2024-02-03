@@ -197,5 +197,6 @@
     "walletHasBeenChargedSuccessfully":"Wallet has been charged successfully.",
     "cvvc":"CVV:",
     "sorryPleaseEnterAValidAccountNumber":"Sorry, Please enter a valid account number.",
-    "scratchCard":"Scratch Card"
+    "scratchCard":"Scratch Card",
+    "fee":"Fee"
 }
