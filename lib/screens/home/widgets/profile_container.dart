@@ -25,23 +25,23 @@ class ProfileContainer extends StatefulWidget {
 }
 
 class _ProfileContainerState extends State<ProfileContainer> {
-  late String name;
+  //  String name;
   late bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    fetchName();
+    // fetchName();
   }
 
-  Future<void> fetchName() async {
-    final userRes = sl<SharedPreferences>().getString('user');
-    Map<String, dynamic> res = json.decode(userRes!);
-    print(res);
-    setState(() {
-      name = res['user']['name'];
-    });
-  }
+  // Future<void> fetchName() async {
+  //   // final userRes = sl<SharedPreferences>().getString('user');
+  //   // Map<String, dynamic> res = json.decode(userRes!);
+  //   print(res);
+  //   setState(() {
+  //     name = res['user']['name'];
+  //   });
+  // }
 
   Future<void> refreshData() async {
     setState(() {
@@ -49,7 +49,7 @@ class _ProfileContainerState extends State<ProfileContainer> {
     });
 
     try {
-      final passenger = await sl<ApiService>().getPasssenger();
+      // final passenger = await sl<ApiService>().getPasssenger();
       // Update state with new passenger data
       // You can also update other parts of the UI here if needed
       setState(() {
@@ -65,140 +65,134 @@ class _ProfileContainerState extends State<ProfileContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NameBloc, NameState>(
-      builder: (context, state) {
-        return Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                ourNavey,
-                ourNavey.withOpacity(0.85),
-              ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-          ),
-          child: Column(
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.08,
+    return BlocBuilder<NameBloc, NameState>(builder: (context, state) {
+      return FutureBuilder<Passenger>(
+        future: sl<ApiService>().getPasssenger(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+                child: CircularProgressIndicator(
+              color: ourOrange.withOpacity(0),
+            ));
+          } else {
+            Passenger user = snapshot.data!;
+            return Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    ourNavey,
+                    ourNavey.withOpacity(0.85),
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
               ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+              child: Column(
                 children: [
-                  Column(
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.08,
+                  ),
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      BlocBuilder<SetProfilePhotoBloc, SetProfilePhotoState>(
-                        builder: (context, state) {
-                          return ProfilePhoto(
-                            file: File(''),
-                            image: state.photoUrl,
-                            borderRadius: 60,
-                            photoRadius: 100,
-                            borderColor: ourWhite,
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const EditProfileScreen(),
-                                ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          BlocBuilder<SetProfilePhotoBloc,
+                              SetProfilePhotoState>(
+                            builder: (context, state) {
+                              return ProfilePhoto(
+                                file: File(''),
+                                image: state.photoUrl,
+                                borderRadius: 60,
+                                photoRadius: 100,
+                                borderColor: ourWhite,
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const EditProfileScreen(),
+                                    ),
+                                  );
+                                },
                               );
                             },
-                          );
-                        },
+                          ),
+                          OurText(
+                            user.user.name ?? "N/A",
+                            fontWeight: FontWeight.w600,
+                            color: ourWhite,
+                          ),
+                        ],
                       ),
-                      OurText(
-                        name,
-                        fontWeight: FontWeight.w600,
-                        color: ourWhite,
+                      Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              OurText(
+                                '${user.wallet / 100} ',
+                                fontWeight: FontWeight.w800,
+                                fontSize: 60,
+                                color: ourWhite,
+                                fontFamily: 'PTSerif',
+                              ),
+                              OurText(
+                                AppLocalizations.of(context)!.jod,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 20,
+                                color: ourWhite,
+                                fontFamily: 'PTSerif',
+                              )
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              OurText(
+                                '${user.rewardPoints} ',
+                                fontWeight: FontWeight.w700,
+                                fontSize: 30,
+                                color: ourWhite,
+                                fontFamily: 'PTSerif',
+                              ),
+                              const OurText(
+                                "Points",
+                                fontWeight: FontWeight.w500,
+                                fontSize: 17,
+                                color: ourWhite,
+                                fontFamily: 'PTSerif',
+                              )
+                            ],
+                          ),
+                          ElevatedButton(
+                            onPressed: () => refreshData(),
+                            child: Icon(
+                              Icons.refresh,
+                              color: ourWhite,
+                            ),
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: ourNavey.withOpacity(0),
+                                elevation: 0),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          FutureBuilder<Passenger>(
-                              future: sl<ApiService>().getPasssenger(),
-                              builder: (context, snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return const Center(
-                                      child: CircularProgressIndicator(color: ourOrange,));
-                                } else {
-                                  Passenger user = snapshot.data!;
-                                  return OurText(
-                                    '${user.wallet / 100} ',
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 60,
-                                    color: ourWhite,
-                                    fontFamily: 'PTSerif',
-                                  );
-                                }
-                              }),
-                          OurText(
-                            AppLocalizations.of(context)!.jod,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 20,
-                            color: ourWhite,
-                            fontFamily: 'PTSerif',
-                          )
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          FutureBuilder<Passenger>(
-                              future: sl<ApiService>().getPasssenger(),
-                              builder: (context, snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return Center(
-                                      child: CircularProgressIndicator(color: ourOrange.withOpacity(0),));
-                                } else {
-                                  Passenger user = snapshot.data!;
-                                  return OurText(
-                                    '${user.rewardPoints} ',
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 30,
-                                    color: ourWhite,
-                                    fontFamily: 'PTSerif',
-                                  );
-                                }
-                              }),
-                          const OurText(
-                            "Points",
-                            fontWeight: FontWeight.w500,
-                            fontSize: 17,
-                            color: ourWhite,
-                            fontFamily: 'PTSerif',
-                          )
-                        ],
-                      ),
-                      ElevatedButton(
-                        onPressed: () => refreshData(),
-                        child: Icon(Icons.refresh, color: ourWhite,),
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: ourNavey.withOpacity(0), elevation: 0),
-                      ),
-                    ],
+                  const SizedBox(
+                    height: 30,
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 30,
-              ),
-            ],
-          ),
-        );
-      },
-    );
+            );
+          }
+        },
+      );
+    });
   }
 }

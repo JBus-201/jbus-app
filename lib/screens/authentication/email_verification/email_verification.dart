@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/data/models/register_request.dart';
 import 'package:jbus_app/screens/authentication/email_verification/cubit/email_verify_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:jbus_app/screens/authentication/signin/signin.dart';
 import 'package:jbus_app/screens/home/home.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
@@ -51,7 +52,7 @@ class EmailVerificationScreen extends StatelessWidget {
             if (state is EmailVerifySuccess) {
               Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                  MaterialPageRoute(builder: (context) => const SignInScreen()),
                   (Route<dynamic> route) => false);
             }
           },

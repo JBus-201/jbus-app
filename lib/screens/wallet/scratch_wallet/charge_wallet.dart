@@ -29,7 +29,7 @@ class ScratshCarkWallet extends StatelessWidget {
                           key: formKey,
                           child: Column(
                             children: [
-                              const AmmountOfChargeMoneyTextField(),
+                              const ScratchOfChargeMoneyTextField(),
                               //const CardToBeSelected(),
                               ChargeButtonWithDialog(formKey: formKey),
                             ],
