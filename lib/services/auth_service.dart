@@ -14,7 +14,7 @@ class AuthService {
 
   Future<UserStatus> getApiStatus() async {
     final authToken = prefs.getString(tokenKey);
-
+    
     if (authToken == null) {
       return UserStatus.notLoggedIn;
     }

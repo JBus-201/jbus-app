@@ -171,6 +171,7 @@ Widget _getHomeScreen(UserStatus status) {
     case UserStatus.loggedIn:
       return const HomeScreen();
     case UserStatus.inTrip:
+      sl<AuthService>().data;
       return const Dashboard();
     default:
       return const SignupScreen();
