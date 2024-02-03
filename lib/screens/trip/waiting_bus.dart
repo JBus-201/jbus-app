@@ -132,29 +132,8 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
                                       AppLocalizations.of(context)!.exitTripMsg,
                                   description: "",
                                   onConfirm: () {
-                                    // DateTime currentUtcDateTime =
-                                    //     DateTime.now().toUtc();
-                                    PointCreateRequest pick =
-                                        PointCreateRequest(
-                                            latitude:
-                                                widget.startingPoint.latitude,
-                                            longitude:
-                                                widget.startingPoint.longitude,
-                                            name: widget.startingPoint.name!);
-                                    PointCreateRequest drop =
-                                        PointCreateRequest(
-                                            latitude:
-                                                widget.endingPoint.latitude,
-                                            longitude:
-                                                widget.endingPoint.longitude,
-                                            name: widget.endingPoint.name!);
-                                    TripUpdateRequest trip = TripUpdateRequest(
-                                        // finishedAt: currentUtcDateTime,
-                                        pickUpPoint: pick,
-                                        status: "Canceled",
-                                        dropOffPoint: drop);
                                     sl<ApiService>()
-                                        .updateTrip(trip, widget.bus.id!)
+                                        .finishTrip()
                                         .then((value) => {
                                               Navigator.pushAndRemoveUntil(
                                                 context,
