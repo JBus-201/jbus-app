@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:jbus_app/data/api/google_service.dart';
+import 'package:jbus_app/data/models/trip_states.dart';
 import 'package:jbus_app/general_blocs/email_bloc/bloc/email_bloc.dart';
 import 'package:jbus_app/general_blocs/mobile_number_bloc/bloc/mobile_number_bloc.dart';
 import 'package:jbus_app/general_blocs/name_bloc/bloc/name_bloc.dart';
@@ -19,6 +20,7 @@ import 'package:jbus_app/screens/profile/set_profile_photo/bloc/set_profile_phot
 import 'package:jbus_app/screens/settings/language_settings/bloc/language_settings_bloc.dart';
 import 'package:jbus_app/screens/settings/theme_settings/bloc/theme_settings_bloc.dart';
 import 'package:jbus_app/screens/trip/bloc/pickup_bloc.dart';
+import 'package:jbus_app/screens/trip/intrip.dart';
 import 'package:jbus_app/screens/wallet/card/bloc/card_bloc.dart';
 import 'package:jbus_app/screens/wallet/wallet/bloc/wallet_bloc.dart';
 import 'package:jbus_app/services/auth_service.dart';
@@ -55,17 +57,23 @@ Future main() async {
 
     if (message.notification != null) {
       if (message.data['type'] == 'friendRequest') {
-      sl<NavigationService>().navigatorKey.currentState?.push(MaterialPageRoute(
-          builder: (context) => const NotificationFazaFriendRequestsPage()));
-    }
-    else if (message.data['type'] == 'friendConfirmed') {
-      sl<NavigationService>().navigatorKey.currentState?.push(
-          MaterialPageRoute(builder: (context) => const NotificationFazaFriendsPage()));
-    }
-    else if (message.data['type'] == 'RequestFazaa') {
-      sl<NavigationService>().navigatorKey.currentState?.push(
-          MaterialPageRoute(builder: (context) => FazaPayersPage(requestorId: int.parse(message.data['value']),)));
-    }
+        sl<NavigationService>().navigatorKey.currentState?.push(
+            MaterialPageRoute(
+                builder: (context) =>
+                    const NotificationFazaFriendRequestsPage()));
+      } else if (message.data['type'] == 'friendConfirmed') {
+        sl<NavigationService>().navigatorKey.currentState?.push(
+            MaterialPageRoute(
+                builder: (context) => const NotificationFazaFriendsPage()));
+      } else if (message.data['type'] == 'RequestFazaa') {
+        sl<NavigationService>()
+            .navigatorKey
+            .currentState
+            ?.push(MaterialPageRoute(
+                builder: (context) => FazaPayersPage(
+                      requestorId: int.parse(message.data['value']),
+                    )));
+      }
     }
   });
 
@@ -75,17 +83,15 @@ Future main() async {
     if (message.data['type'] == 'friendRequest') {
       sl<NavigationService>().navigatorKey.currentState?.push(MaterialPageRoute(
           builder: (context) => const NotificationFazaFriendRequestsPage()));
+    } else if (message.data['type'] == 'friendConfirmed') {
+      sl<NavigationService>().navigatorKey.currentState?.push(MaterialPageRoute(
+          builder: (context) => const NotificationFazaFriendsPage()));
+    } else if (message.data['type'] == 'RequestFazaa') {
+      sl<NavigationService>().navigatorKey.currentState?.push(MaterialPageRoute(
+          builder: (context) => FazaPayersPage(
+                requestorId: int.parse(message.data['value']),
+              )));
     }
-    else if (message.data['type'] == 'friendConfirmed') {
-      sl<NavigationService>().navigatorKey.currentState?.push(
-          MaterialPageRoute(builder: (context) => const NotificationFazaFriendsPage()));
-    }
-    else if (message.data['type'] == 'RequestFazaa') {
-      sl<NavigationService>().navigatorKey.currentState?.push(
-          MaterialPageRoute(builder: (context) => FazaPayersPage(requestorId: int.parse(message.data['value']),)));
-    }
-    
-    
   });
 
   FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
@@ -94,17 +100,23 @@ Future main() async {
 
     if (message.notification != null) {
       if (message.data['type'] == 'friendRequest') {
-      sl<NavigationService>().navigatorKey.currentState?.push(MaterialPageRoute(
-          builder: (context) => const NotificationFazaFriendRequestsPage()));
-    }
-    else if (message.data['type'] == 'friendConfirmed') {
-      sl<NavigationService>().navigatorKey.currentState?.push(
-          MaterialPageRoute(builder: (context) => const NotificationFazaFriendsPage()));
-    }
-    else if (message.data['type'] == 'RequestFazaa') {
-      sl<NavigationService>().navigatorKey.currentState?.push(
-          MaterialPageRoute(builder: (context) => FazaPayersPage(requestorId: int.parse(message.data['value']),)));
-    }
+        sl<NavigationService>().navigatorKey.currentState?.push(
+            MaterialPageRoute(
+                builder: (context) =>
+                    const NotificationFazaFriendRequestsPage()));
+      } else if (message.data['type'] == 'friendConfirmed') {
+        sl<NavigationService>().navigatorKey.currentState?.push(
+            MaterialPageRoute(
+                builder: (context) => const NotificationFazaFriendsPage()));
+      } else if (message.data['type'] == 'RequestFazaa') {
+        sl<NavigationService>()
+            .navigatorKey
+            .currentState
+            ?.push(MaterialPageRoute(
+                builder: (context) => FazaPayersPage(
+                      requestorId: int.parse(message.data['value']),
+                    )));
+      }
     }
   });
 
@@ -149,15 +161,9 @@ Future main() async {
         BlocProvider<SetProfilePhotoBloc>(
           create: (BuildContext context) => SetProfilePhotoBloc(),
         ),
-
         BlocProvider<CardBloc>(
           create: (BuildContext context) => CardBloc(),
         ),
-
-        
-
-        
-
       ],
       child: MyApp(homeScreen: _getHomeScreen(status)),
     ),
@@ -171,7 +177,14 @@ Widget _getHomeScreen(UserStatus status) {
     case UserStatus.loggedIn:
       return const HomeScreen();
     case UserStatus.inTrip:
-      return const HomeScreen();
+      TripStatus trip = sl<AuthService>().data!;
+      return InTripPage(
+        busId: trip.busId,
+        endingPoint: trip.trip.dropOffPoint!,
+        route: trip.route,
+        startingPoint: trip.trip.pickUpPoint,
+        isGoing: true,
+      );
     default:
       return const SignupScreen();
   }

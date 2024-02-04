@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:jbus_app/constants/strings.dart';
+import 'package:jbus_app/data/models/trip_states.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -8,7 +9,7 @@ class AuthService {
   static const String tokenKey = 'auth_token';
   final SharedPreferences prefs;
 
-  dynamic data;
+  TripStatus? data;
 
   AuthService(this.prefs);
 
