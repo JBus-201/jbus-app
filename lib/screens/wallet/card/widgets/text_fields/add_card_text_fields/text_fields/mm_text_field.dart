@@ -12,7 +12,7 @@ class MMTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return OurTextFormField(
         label: AppLocalizations.of(context)!.expiryMonthMM,
-        labelFontSize: 12,
+        labelFontSize: 11,
         hintText: 'mm',
         icon: Icons.date_range_outlined,
         textInputAction: TextInputAction.next,
@@ -27,7 +27,7 @@ class MMTextField extends StatelessWidget {
         maxLength: 2,
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return  AppLocalizations.of(context)!.sorryPleaseEnterAMonth;
+            return AppLocalizations.of(context)!.sorryPleaseEnterAMonth;
           }
           final bool numberValid = RegExp('^[0-9]{2}\$').hasMatch(value.trim());
 

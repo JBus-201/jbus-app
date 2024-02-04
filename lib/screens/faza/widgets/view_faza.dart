@@ -42,9 +42,9 @@ class FazaInfoViewDialog extends StatelessWidget {
               Text(
                   '${AppLocalizations.of(context)!.date}: ${fazaa.createdAt.toString().substring(0, 11)}',
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style:  TextStyle(
                       fontSize: MediaQuery.of(context).size.height * 0.01760563, fontWeight: FontWeight.normal)),
-              const SizedBox(
+               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.02934272,
               ),
               Row(

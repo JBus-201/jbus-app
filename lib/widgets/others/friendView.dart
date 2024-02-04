@@ -28,7 +28,7 @@ class FriendViewDialog extends StatelessWidget {
         backgroundColor:
             themeState.thememode == ThemeMode.light ? ourWhite : ourDarkGray,
         child: Padding(
-          padding: const EdgeInsets.all(MediaQuery.of(context).size.height * 0.02347418),
+          padding:  EdgeInsets.all(MediaQuery.of(context).size.height * 0.02347418),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -41,12 +41,12 @@ class FriendViewDialog extends StatelessWidget {
                     ? Image.asset('$profileImage')
                     : const Icon(Icons.person),
               ),
-              const SizedBox(height: MediaQuery.of(context).size.height * 0.01877934),
+               SizedBox(height: MediaQuery.of(context).size.height * 0.01877934),
               Text(
                 '${AppLocalizations.of(context)!.userId}: $id',
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: MediaQuery.of(context).size.height * 0.01173709),
+               SizedBox(height: MediaQuery.of(context).size.height * 0.01173709),
               Text(
                 '$name',
                 textAlign: TextAlign.center,

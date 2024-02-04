@@ -189,7 +189,7 @@ class _ProfileContainerState extends State<ProfileContainer> {
 
                     ],
                   ),
-                  const SizedBox(
+                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.0352,
                   ),
                 ],

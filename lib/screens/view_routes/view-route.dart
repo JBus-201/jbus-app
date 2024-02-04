@@ -47,7 +47,7 @@ class _ViewSelectedRoutePageState extends State<ViewSelectedRoutePage> {
       return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(MediaQuery.of(context).size.height * 0.134976),
+          preferredSize:  Size.fromHeight(MediaQuery.of(context).size.height * 0.134976),
           child: AppBar(
             automaticallyImplyLeading: true,
             elevation: 0,

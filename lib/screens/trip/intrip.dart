@@ -74,7 +74,7 @@ class _InTripPageState extends State<InTripPage> {
           key: _scaffoldKey,
           extendBodyBehindAppBar: true,
           appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(MediaQuery.of(context).size.height * 0.13497653),
+            preferredSize:  Size.fromHeight(MediaQuery.of(context).size.height * 0.13497653),
             child: AppBar(
               automaticallyImplyLeading: false,
               elevation: 0,
@@ -119,7 +119,7 @@ class _InTripPageState extends State<InTripPage> {
               height: double.infinity,
               alignment: Alignment.bottomCenter,
               padding:
-                  const EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.01877934, left: MediaQuery.of(context).size.height * 0.01877934, right: MediaQuery.of(context).size.height * 0.01877934),
+                   EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.01877934, left: MediaQuery.of(context).size.height * 0.01877934, right: MediaQuery.of(context).size.height * 0.01877934),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [

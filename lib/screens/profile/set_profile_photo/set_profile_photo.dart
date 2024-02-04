@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/screens/dashbourd/dashbourd.dart';
+import 'package:jbus_app/screens/home/home.dart';
 import 'package:jbus_app/screens/profile/set_profile_photo/bloc/set_profile_photo_bloc.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:jbus_app/widgets/buttons/text_button.dart';
@@ -229,7 +230,7 @@ class _SetProfilePhotoScreenState extends State<SetProfilePhotoScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const Dashboard(),
+                        builder: (context) => const HomeScreen(),
                       ),
                     );
                   },
@@ -240,7 +241,7 @@ class _SetProfilePhotoScreenState extends State<SetProfilePhotoScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const Dashboard(),
+                        builder: (context) => const HomeScreen(),
                       ),
                     );
                   },
