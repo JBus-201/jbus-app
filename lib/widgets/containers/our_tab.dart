@@ -9,8 +9,8 @@ class OurTab extends StatelessWidget {
     super.key,
     this.firstColor = ourVeryLightGray,
     this.secondColor = ourVeryLightGray,
-    this.darkFirstColor = ourLightGray,
-    this.darkSecondColor = ourLightGray,
+    this.darkFirstColor = ourGray,
+    this.darkSecondColor = ourGray,
     required this.text,
     required this.image,
     this.scale,
@@ -69,8 +69,10 @@ class OurTab extends StatelessWidget {
                 child: OurText(
                   text,
                   fontWeight: FontWeight.w600,
+
                   fontSize: MediaQuery.of(context).size.height * 0.01643192,
-                  darkColor: ourDarkGray,
+                  darkColor: ourWhite,
+
                 ),
               ),
             ]),

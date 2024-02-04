@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -13,7 +12,6 @@ import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/containers/profile_photo.dart';
 import 'package:jbus_app/widgets/text/our_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileContainer extends StatefulWidget {
   const ProfileContainer({
@@ -25,23 +23,23 @@ class ProfileContainer extends StatefulWidget {
 }
 
 class _ProfileContainerState extends State<ProfileContainer> {
-  late String name;
+  //  String name;
   late bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    fetchName();
+    // fetchName();
   }
 
-  Future<void> fetchName() async {
-    final userRes = sl<SharedPreferences>().getString('user');
-    Map<String, dynamic> res = json.decode(userRes!);
-    print(res);
-    setState(() {
-      name = res['user']['name'];
-    });
-  }
+  // Future<void> fetchName() async {
+  //   // final userRes = sl<SharedPreferences>().getString('user');
+  //   // Map<String, dynamic> res = json.decode(userRes!);
+  //   print(res);
+  //   setState(() {
+  //     name = res['user']['name'];
+  //   });
+  // }
 
   Future<void> refreshData() async {
     setState(() {
@@ -49,7 +47,7 @@ class _ProfileContainerState extends State<ProfileContainer> {
     });
 
     try {
-      final passenger = await sl<ApiService>().getPasssenger();
+      // final passenger = await sl<ApiService>().getPasssenger();
       // Update state with new passenger data
       // You can also update other parts of the UI here if needed
       setState(() {
@@ -65,112 +63,143 @@ class _ProfileContainerState extends State<ProfileContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NameBloc, NameState>(
-      builder: (context, state) {
-        return Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                ourNavey,
-                ourNavey.withOpacity(0.85),
-              ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-          ),
-          child: Column(
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.08,
+    return BlocBuilder<NameBloc, NameState>(builder: (context, state) {
+      return FutureBuilder<Passenger>(
+        future: sl<ApiService>().getPasssenger(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+                child: CircularProgressIndicator(
+              color: ourOrange.withOpacity(0),
+            ));
+          } else {
+            Passenger user = snapshot.data!;
+            return Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    ourNavey,
+                    ourNavey.withOpacity(0.85),
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
               ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+              child: Column(
                 children: [
-                  Column(
+
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.08,
+
+                  ),
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      BlocBuilder<SetProfilePhotoBloc, SetProfilePhotoState>(
-                        builder: (context, state) {
-                          return ProfilePhoto(
-                            file: File(''),
-                            image: state.photoUrl,
-                            borderRadius: MediaQuery.of(context).size.height * 0.070422535211268,
-                            photoRadius: MediaQuery.of(context).size.height * 0.117370892018779,
-                            borderColor: ourWhite,
-                            onTap: () {
-                              
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const EditProfileScreen(),
-                                ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+
+                          BlocBuilder<SetProfilePhotoBloc,
+                              SetProfilePhotoState>(
+                            builder: (context, state) {
+                              return ProfilePhoto(
+                                file: File(''),
+                                image: state.photoUrl,
+                                borderRadius: 60,
+                                photoRadius: 100,
+                                borderColor: ourWhite,
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const EditProfileScreen(),
+                                    ),
+
+                                  );
+                                },
                               );
                             },
-                          );
-                        },
-                      ),
-                      OurText(
-                        name,
-                        fontWeight: FontWeight.w600,
-                        color: ourWhite,
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          FutureBuilder<Passenger>(
-                              future: sl<ApiService>().getPasssenger(),
-                              builder: (context, snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return const Center(
-                                      child: CircularProgressIndicator(
-                                    color: ourWhite,
-                                  ));
-                                } else {
-                                  Passenger user = snapshot.data!;
-                                  return OurText(
-                                    '${user.wallet / 100} ',
-                                    fontWeight: FontWeight.w800,
-                                    fontSize:
-                                        MediaQuery.of(context).size.height *
-                                            0.07042254,
-                                    color: ourWhite,
-                                    fontFamily: 'PTSerif',
-                                  );
-                                }
-                              }),
+                          ),
                           OurText(
-                            AppLocalizations.of(context)!.jod,
-                            fontWeight: FontWeight.w500,
-                            fontSize: MediaQuery.of(context).size.height * 0.023474178403756,
+
+                            user.user.name ?? "N/A",
+                            fontWeight: FontWeight.w600,
+
                             color: ourWhite,
-                            fontFamily: 'PTSerif',
-                          )
+                          ),
                         ],
                       ),
-                      ElevatedButton(
-                        onPressed: () => refreshData(),
-                        child: const Icon(Icons.refresh),
+                      Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              OurText(
+                                '${user.wallet / 100} ',
+                                fontWeight: FontWeight.w800,
+                                fontSize: 60,
+                                color: ourWhite,
+                                fontFamily: 'PTSerif',
+                              ),
+                              OurText(
+                                AppLocalizations.of(context)!.jod,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 20,
+                                color: ourWhite,
+                                fontFamily: 'PTSerif',
+                              )
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              OurText(
+                                '${user.rewardPoints} ',
+                                fontWeight: FontWeight.w700,
+                                fontSize: 30,
+                                color: ourWhite,
+                                fontFamily: 'PTSerif',
+                              ),
+                              OurText(
+                                AppLocalizations.of(context)!.points,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 17,
+                                color: ourWhite,
+                                fontFamily: 'PTSerif',
+                              )
+                            ],
+                          ),
+                          ElevatedButton(
+                            onPressed: () => refreshData(),
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: ourNavey.withOpacity(0),
+                                elevation: 0),
+                            child: const Icon(
+                              Icons.refresh,
+                              color: ourWhite,
+                            ),
+                          ),
+                        ],
                       ),
+
                     ],
+                  ),
+                  const SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.0352,
                   ),
                 ],
               ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.0352,
-              ),
-            ],
-          ),
-        );
-      },
-    );
+
+            );
+          }
+        },
+      );
+    });
+
   }
 }

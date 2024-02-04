@@ -109,7 +109,6 @@
     "notValidYear": "سنة غير صالحة",
     "notValidCardHolderName": "اسم حامل بطاقة غير صالح",
     "notValidCvvNumber": "رقم Cvv غير صالح",
-
     "sorryPleaseEnterACardNumber": "عذرًا، أدخل رقم بطاقة.",
     "sorryPleaseEnterAYear": "عذرًا، أدخل سنة،",
     "sorryPleaseEnterAMonth": "عذرًا، أدخل شهر.",
@@ -140,14 +139,14 @@
     "you":"أنت",
     "inDebt":"المدين",
     "ok":"حسنًا",
-    "submit":"إعتماد",
+    "submit":"اعتماد",
     "cancel":"إلغاء",
     "totalAmountNeeded":"المبلغ المطلوب",
     "timeRemaining":"الوقت المتبقي",
-    "payFive":"إفزع: 0.05",
-    "payTen":"إفزع: 0.10",
-    "payTwoFive":"إفزع: 0.25",
-    "pay":"إفزع",
+    "payFive":"افزع: 0.05",
+    "payTen":"افزع: 0.10",
+    "payTwoFive":"افزع: 0.25",
+    "pay":"افزع",
     "sureToPay":"هل أنت متأكد من\nالمبلغ",
     "enterId":"أدخل رمز الحساب",
     "id":"رمز الحساب",
@@ -156,8 +155,8 @@
     "requestSentSuccesfuly":"طلبك أرسل بنجاح",
     "ops":"Oops!",
     "somthingWrong":"حدث خطأ ما",
-    "noFriendsMsg":"لا يوجد أصدقاء\nنعتذر،ولكنك وحيد",
-    "noFriendReqMsg":"لا يوجد طلبات صداقة\nنعتذر، ولكن لا أحد يحبك",
+    "noFriendsMsg":"لا يوجد أصدقاء",
+    "noFriendReqMsg":"لا يوجد طلبات صداقة",
     "accept":"قبول",
     "youAreFriendsMsg":"لقد أصبحتم أصدقاء",
     "noFaza":"لا توجد فزعات سابقة",
@@ -165,17 +164,17 @@
     "from":"من",
     "to":"إلى",
     "sawpError":"مشكلة في التحويل",
-    "noOtherDirectionMsg":"لا يوجد إتجاه آخر لهذا المسار",
+    "noOtherDirectionMsg":"لا يوجد اتجاه آخر لهذا المسار",
     "activeBuses":"الحافلات المتاحة",
     "noFavePointsMsg":"لا توجد مواقف مفضلة",
-    "selectPoints":"إختيار النقاط",
+    "selectPoints":"اختيار النقاط",
     "noAvailableBuses":"لا توجد حافلات متاحة",
-    "selectBus":"إختر الحافلة",
+    "selectBus":"اختر الحافلة",
     "exitTripMsg":"هل أنت متأكد من إلغاء الرحلة؟",
     "youArived":"لقد وصلت",
     "howWasTripMsg":"كيف كانت رحلتك؟",
-    "selectPick":"إختيار نقطة الركوب",
-    "selectDrop":"إختيار نقطة النزول",
+    "selectPick":"اختيار نقطة الركوب",
+    "selectDrop":"اختيار نقطة النزول",
     "predefinedStop":"موقف معرف",
     "enterPointName":"أدخل اسم النقطة",
     "sorryPleaseEnterAValidAmountOfMoney":"عذرًا، الرجاء إدخال مبلغ صالح.",
@@ -196,18 +195,9 @@
     "yourAccount":"حسابك",
     "yourWallet":"محفظتك",
     "walletHasBeenChargedSuccessfully":"لقد تم شحن المحفظة بنجاح.",
-    "cvvc":"CVV:",
-    "sorryPleaseEnterAValidAccountNumber":"عذرًا، الرجاء إدخال رقم حساب صالح."
-
-
-
-
-
-
-
-
-
-
-
-
-}
+    "cvvc":"CVC:",
+    "sorryPleaseEnterAValidAccountNumber":"عذرًا، الرجاء إدخال رقم حساب صالح.",
+    "scratchCard":"بطاقات الشحن",
+    "fee":"القيمة",
+    "points":"النقاط"
+    }

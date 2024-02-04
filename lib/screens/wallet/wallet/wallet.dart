@@ -6,7 +6,6 @@ import 'package:jbus_app/screens/wallet/card/add_card.dart';
 import 'package:jbus_app/screens/wallet/card/bloc/card_bloc.dart';
 import 'package:jbus_app/screens/wallet/wallet/bloc/wallet_bloc.dart';
 import 'package:jbus_app/screens/wallet/wallet/widgets/navey_wallet_container.dart';
-import 'package:jbus_app/screens/wallet/wallet/widgets/payment_card.dart';
 import 'package:jbus_app/widgets/text/our_text.dart';
 
 class WalletScreen extends StatelessWidget {
@@ -37,14 +36,14 @@ class WalletScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            AppLocalizations.of(context)!.cards,
-                            style: TextStyle(
-                              fontSize: MediaQuery.of(context).size.height *
-                                  0.0410798,
+                          OurText(
+                            AppLocalizations.of(context)!.cards,                 
+                              fontSize: 35,
+
                               fontWeight: FontWeight.w600,
                               color: ourNavey,
-                            ),
+                              darkColor: ourWhite,
+                            
                           ),
                           IconButton(
                             onPressed: () {

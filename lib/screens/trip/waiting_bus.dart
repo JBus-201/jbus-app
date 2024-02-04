@@ -9,10 +9,7 @@ import 'package:jbus_app/data/api/google_service.dart';
 import 'package:jbus_app/data/models/bus.dart';
 import 'package:jbus_app/data/models/bus_route.dart';
 import 'package:jbus_app/data/models/point.dart';
-import 'package:jbus_app/data/models/point_create_request.dart';
-import 'package:jbus_app/data/models/trip_update_request.dart';
 import 'package:jbus_app/screens/dashbourd/buttons/drawer.dart';
-import 'package:jbus_app/screens/dashbourd/buttons/end_drawer.dart';
 import 'package:jbus_app/screens/home/home.dart';
 import 'package:jbus_app/screens/qr_screen/pages/qr_screen.dart';
 import 'package:jbus_app/screens/trip/intrip.dart';
@@ -78,14 +75,14 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
               backgroundColor: Colors.black.withOpacity(0),
               title: const JbusAppBarTitle(),
               flexibleSpace: const AppBarStyle(),
-              leading: CustomEndDrawerButton(
-                onTap: () {
-                  _scaffoldKey.currentState!.openDrawer();
-                },
-              ),
+              // leading: CustomEndDrawerButton(
+              //   onTap: () {
+              //     _scaffoldKey.currentState!.openDrawer();
+              //   },
+              // ),
               actions: [
                 CustomDrawerButton(onTap: () {
-                  Navigator.pop(context);
+                  _scaffoldKey.currentState!.openEndDrawer();
                 })
               ],
             ),
@@ -132,29 +129,8 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
                                       AppLocalizations.of(context)!.exitTripMsg,
                                   description: "",
                                   onConfirm: () {
-                                    // DateTime currentUtcDateTime =
-                                    //     DateTime.now().toUtc();
-                                    PointCreateRequest pick =
-                                        PointCreateRequest(
-                                            latitude:
-                                                widget.startingPoint.latitude,
-                                            longitude:
-                                                widget.startingPoint.longitude,
-                                            name: widget.startingPoint.name!);
-                                    PointCreateRequest drop =
-                                        PointCreateRequest(
-                                            latitude:
-                                                widget.endingPoint.latitude,
-                                            longitude:
-                                                widget.endingPoint.longitude,
-                                            name: widget.endingPoint.name!);
-                                    TripUpdateRequest trip = TripUpdateRequest(
-                                        // finishedAt: currentUtcDateTime,
-                                        pickUpPoint: pick,
-                                        status: "Canceled",
-                                        dropOffPoint: drop);
                                     sl<ApiService>()
-                                        .updateTrip(trip, widget.bus.id!)
+                                        .finishTrip()
                                         .then((value) => {
                                               Navigator.pushAndRemoveUntil(
                                                 context,
@@ -208,7 +184,7 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
                                               MaterialPageRoute(
                                                   builder: (context) =>
                                                       InTripPage(
-                                                        bus: widget.bus,
+                                                        busId: widget.bus.id!,
                                                         endingPoint:
                                                             widget.endingPoint,
                                                         isGoing: widget.isGoing,

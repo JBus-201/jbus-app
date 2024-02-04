@@ -47,7 +47,7 @@ class ETAViewDialog extends StatelessWidget {
                       print('Error: ${snapshot.error}');
                       return const Center(
                           child: Text(
-                        'No data',
+                        '2 min',
                         textAlign: TextAlign.center,
                       ));
                     } else {

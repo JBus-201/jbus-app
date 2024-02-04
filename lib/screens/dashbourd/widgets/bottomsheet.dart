@@ -1,16 +1,17 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/data/api/api_service.dart';
 import 'package:jbus_app/data/models/bus_route.dart';
+import 'package:jbus_app/data/models/passenger.dart';
 import 'package:jbus_app/screens/trip/tripSettup.dart';
 import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 import 'package:jbus_app/widgets/warnings/needFaza.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class BottomSearchSheet extends StatefulWidget {
   const BottomSearchSheet({super.key});
@@ -46,7 +47,7 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
       DraggableScrollableController();
 
   List<BusRoute> allRoutes = [];
-  late int wallet;
+  int wallet = 0;
   Timer? _debounce;
   final TextEditingController _textEditingController = TextEditingController();
   Iterable<BusRoute> sRoutes = [];
@@ -71,10 +72,10 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
   }
 
   Future<void> fetchWallet() async {
-    final userRes = sl<SharedPreferences>().getString('user');
-    Map<String, dynamic> res = json.decode(userRes!);
+    Passenger passenger = await sl<ApiService>().getPasssenger();
+
     setState(() {
-      wallet = res['wallet'];
+      wallet = passenger.wallet;
     });
   }
 
@@ -111,12 +112,14 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.topCenter,
-                    end: const Alignment(0, -0.6),
+                    end: Alignment.center,
                     colors: [
-                      ourWhite.withOpacity(0),
+                      themeState.thememode == ThemeMode.light
+                          ? ourWhite.withOpacity(0.7)
+                          : ourDarkGray.withOpacity(0.7),
                       themeState.thememode == ThemeMode.light
                           ? ourWhite
-                          : ourDarkThemeBackgroundNavey,
+                          : ourDarkGray,
                     ]),
                 // color: themeState.thememode == ThemeMode.light ? ourWhite : our,
                 borderRadius: const BorderRadius.only(
@@ -154,34 +157,44 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                     onTap: expand,
                     child: ListTile(
                       textColor: themeState.thememode == ThemeMode.dark
-                                    ? ourWhite
-                                    : ourGray,
-                                    focusColor: themeState.thememode == ThemeMode.dark
-                                    ? ourWhite
-                                    : ourGray,
-                                    selectedColor: themeState.thememode == ThemeMode.dark
-                                    ? ourWhite
-                                    : ourGray,
-
+                          ? ourWhite
+                          : ourGray,
+                      focusColor: themeState.thememode == ThemeMode.dark
+                          ? ourWhite
+                          : ourGray,
+                      selectedColor: themeState.thememode == ThemeMode.dark
+                          ? ourWhite
+                          : ourGray,
                       title: TextField(
                         decoration: InputDecoration(
                           hintText: "search",
                           hintStyle: TextStyle(
+
                               color: themeState.thememode == ThemeMode.light
                                   ? ourGray
                                   : ourWhite),
                           contentPadding:  EdgeInsets.all(MediaQuery.of(context).size.height * 0.014084),
+
                           focusColor: themeState.thememode == ThemeMode.light
                               ? ourWhite
                               : ourGray,
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: themeState.thememode == ThemeMode.dark
+                                  ? ourWhite
+                                  : ourGray,
+                              width: 1.5, // Adjust the border width
+                            ),
+                          ),
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
                                 color: themeState.thememode == ThemeMode.dark
                                     ? ourWhite
                                     : ourGray,
                                 width: MediaQuery.of(context).size.height * 0.00058685),
+
                             borderRadius: const BorderRadius.all(
-                              Radius.circular(50),
+                              Radius.circular(12),
                             ),
                           ),
                           prefixIcon: Icon(
@@ -191,6 +204,14 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                                 : ourGray,
                           ),
                         ),
+                        style: TextStyle(
+                          color: themeState.thememode == ThemeMode.dark
+                              ? ourWhite
+                              : ourGray,
+                        ),
+                        cursorColor: themeState.thememode == ThemeMode.dark
+                            ? ourOrange
+                            : ourBlue,
                         onChanged: _onSearchTextChanged,
                         controller: _textEditingController,
                       ),
@@ -206,6 +227,9 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                             itemCount: allRoutes.length,
                             padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
                             itemBuilder: (context, index) {
+                              if (index < 0 || index >= sRoutes.length) {
+                                return Container(); // Or any other fallback UI
+                              }
                               BusRoute route = sRoutes.elementAt(index);
                               String? firstStop = route.startingPoint.name;
                               String? finalStop = route.endingPoint.name;
@@ -238,7 +262,7 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                                         color: themeState.thememode ==
                                                 ThemeMode.light
                                             ? ourVeryLightGray
-                                            : ourDarkGray,
+                                            : ourGray,
                                         shape: BoxShape.rectangle,
                                         boxShadow: const [
                                           BoxShadow(
@@ -295,15 +319,38 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                                          SizedBox(
                                           height:  MediaQuery.of(context).size.height * 0.017605,
                                         ),
-                                        Text(
-                                          'Fee: ${route.fee}',
-                                          style: TextStyle(
-                                            fontSize:  MediaQuery.of(context).size.height * 0.02112676,
-                                            fontWeight: FontWeight.w400,
-                                            color: wallet >= route.fee
-                                                ? ourGreen
-                                                : ourRed,
-                                          ),
+
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              '${AppLocalizations.of(context)!.fee}: ${route.fee / 100}',
+                                              style: TextStyle(
+                                                fontSize: MediaQuery.of(context).size.height * 0.02112676,
+                                                fontWeight: FontWeight.w400,
+                                                color: wallet >= route.fee
+                                                    ? themeState.thememode ==
+                                                            ThemeMode.light
+                                                        ? ourGreen
+                                                        : ourLightGreen
+                                                    : ourRed,
+                                              ),
+                                            ),
+                                            const SizedBox(width: 15,),
+                                            Text(
+                                              AppLocalizations.of(context)!.jod,
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w300,
+                                                color:  themeState.thememode ==
+                                                            ThemeMode.light
+                                                        ? ourDarkGray
+                                                        : ourWhite,
+                                                    
+                                              ),
+                                            ),
+                                          ],
+
                                         )
                                       ],
                                     ),

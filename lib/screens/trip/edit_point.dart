@@ -48,7 +48,7 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
   GoogleMapsApi googleApi = GoogleMapsApi();
   late GoogleMapController _mapController;
   dynamic route;
-  int currentIndex = 0;
+  int currentIndex = 1;
   List<FavoritePoint>? favoritePointsList;
 
   void initState() {
@@ -117,7 +117,7 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                         position: LatLng(
                             favPoint.point.latitude, favPoint.point.longitude),
                         icon: BitmapDescriptor.defaultMarkerWithHue(
-                            BitmapDescriptor.hueGreen),
+                            BitmapDescriptor.hueOrange),
                         infoWindow: InfoWindow(
                           title: favPoint.point.name,
                           snippet: AppLocalizations.of(context)!.favoriteStops,
@@ -133,7 +133,7 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                         markerId: MarkerId(stop.id.toString()),
                         position: LatLng(stop.latitude, stop.longitude),
                         icon: BitmapDescriptor.defaultMarkerWithHue(
-                            BitmapDescriptor.hueGreen),
+                            BitmapDescriptor.hueAzure),
                         infoWindow: InfoWindow(
                           title: stop.name,
                           snippet: AppLocalizations.of(context)!.predefinedStop,
@@ -251,7 +251,7 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                         size: MediaQuery.of(context).size.height * 0.03521127,
                         icon: Icons.arrow_left_rounded,
                         onPressed: () {
-                          if (markers.isNotEmpty && currentIndex > 0) {
+                          if (markers.isNotEmpty && currentIndex > 1) {
                             print('Currrent index: $currentIndex');
                             currentIndex--;
                             googleApi.moveToLocation(
@@ -314,7 +314,7 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                           print(
                               'Currrent index: ${favoritePointsList!.length}');
                           if (markers.isNotEmpty &&
-                              currentIndex < markers.length - 1) {
+                              currentIndex < markers.length - 2) {
                             currentIndex++;
                             googleApi.moveToLocation(_mapController,
                                 markers.elementAt(currentIndex).position);

@@ -166,34 +166,6 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<HttpResponse> chargeUsingSC(int cn) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = cn;
-    final _result =
-        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
-      method: 'PUT',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/ScratchCards/chargeUsingSC/$cn',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = _result.data;
-    final httpResponse = HttpResponse(value, _result);
-    return httpResponse;
-  }
-
-  @override
   Future<FavoritePoint> getFavoritePoint(int id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -365,34 +337,6 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<HttpResponse<dynamic>> requestFazaa(int amount) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result =
-        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/Fazaa/requestFazaa/$amount',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = _result.data;
-    final httpResponse = HttpResponse(value, _result);
-    return httpResponse;
-  }
-
-  @override
   Future<List<Fazaa>> getFazaas() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -419,6 +363,34 @@ class _ApiService implements ApiService {
         .map((dynamic i) => Fazaa.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
+  }
+
+  @override
+  Future<HttpResponse<dynamic>> requestFazaa(int amount) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result =
+        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/Fazaa/requestFazaa/${amount}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = _result.data;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
   }
 
   @override
@@ -453,7 +425,7 @@ class _ApiService implements ApiService {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
       method: 'GET',
@@ -474,6 +446,33 @@ class _ApiService implements ApiService {
     final value = _result.data;
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
+  }
+
+  @override
+  Future<Passenger> getPasssenger() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<Passenger>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/Passenger',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = Passenger.fromJson(_result.data!);
+    return value;
   }
 
   @override
@@ -511,7 +510,7 @@ class _ApiService implements ApiService {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = friendId;
+    final Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
       method: 'PUT',
@@ -520,7 +519,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Friends/confirmFriendRequest/$friendId',
+              '/Friends/confirmFriendRequest/${friendId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -537,7 +536,7 @@ class _ApiService implements ApiService {
   @override
   Future<Friend> getFriendById(int friendId) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'id': friendId};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =
@@ -548,7 +547,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Friends/getFriendById/$friendId',
+              '/Friends/getFriendById/${friendId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -559,6 +558,34 @@ class _ApiService implements ApiService {
             ))));
     final value = Friend.fromJson(_result.data!);
     return value;
+  }
+
+  @override
+  Future<HttpResponse<dynamic>> chargeUsingSC(int cn) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result =
+        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/ScratchCards/chargeUsingSC/${cn}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = _result.data;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
   }
 
   @override
@@ -622,7 +649,7 @@ class _ApiService implements ApiService {
   @override
   Future<HttpResponse<dynamic>> deleteFriend(int friendId) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'id': friendId};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =
@@ -633,7 +660,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Friends/deleteFriend/$friendId',
+              '/Friends/deleteFriend/${friendId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -677,33 +704,6 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<Passenger> getPasssenger() async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Trip>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/Passenger',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = Passenger.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
   Future<Trip> getTrip(int id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -732,9 +732,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<HttpResponse<dynamic>> updateTrip(
-    TripUpdateRequest tripUpdateRequest,
-    int id,
-  ) async {
+      TripUpdateRequest tripUpdateRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -748,7 +746,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Trip/${id}',
+              '/Trip',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -776,7 +774,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/finishHim',
+              '/Trip/finishHim',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -808,7 +806,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Trip/$id',
+              '/Trip/${id}',
               queryParameters: queryParameters,
               data: _data,
             )

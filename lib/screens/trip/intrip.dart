@@ -1,18 +1,16 @@
 import 'dart:async';
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/data/api/api_service.dart';
 import 'package:jbus_app/data/api/google_service.dart';
-import 'package:jbus_app/data/models/bus.dart';
 import 'package:jbus_app/data/models/bus_route.dart';
 import 'package:jbus_app/data/models/point.dart';
 import 'package:jbus_app/screens/dashbourd/buttons/drawer.dart';
-import 'package:jbus_app/screens/dashbourd/buttons/end_drawer.dart';
 import 'package:jbus_app/screens/drawer/main_drawer/main_drawer.dart';
 import 'package:jbus_app/screens/drawer_notification/notification_drawer.dart';
 import 'package:jbus_app/screens/home/home.dart';
@@ -29,14 +27,14 @@ class InTripPage extends StatefulWidget {
   final bool isGoing;
   final Point startingPoint;
   final Point endingPoint;
-  final Bus bus;
+  final int busId;
   const InTripPage({
     super.key,
     required this.route,
     required this.isGoing,
     required this.startingPoint,
     required this.endingPoint,
-    required this.bus,
+    required this.busId,
   });
 
   @override
@@ -50,7 +48,7 @@ class _InTripPageState extends State<InTripPage> {
   GoogleMapController? mapController;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   LatLng busLocation = const LatLng(0, 0);
-  int _secondsRemaining = 300;
+  int _secondsRemaining = 120;
   // ignore: unused_field
   late Timer _timer;
   @override
@@ -70,128 +68,148 @@ class _InTripPageState extends State<InTripPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState){return Scaffold(
-        key: _scaffoldKey,
-        extendBodyBehindAppBar: true,
-        appBar: PreferredSize(
-          preferredSize:  Size.fromHeight(MediaQuery.of(context).size.height * 0.13497653),
-          child: AppBar(
-            automaticallyImplyLeading: false,
-            elevation: 0,
-            backgroundColor: Colors.black.withOpacity(0),
-            title: const JbusAppBarTitle(),
-            flexibleSpace: const AppBarStyle(),
-            leading: CustomEndDrawerButton(
-              onTap: () {
-                _scaffoldKey.currentState!.openDrawer();
-              },
-            ),
-            actions: [
-              CustomDrawerButton(onTap: () {
-                Navigator.pop(context);
-              })
-            ],
-          ),
-        ),
-        drawer: const NotificationsDrawer(),
-        endDrawer: const MainDrawer(),
-        body: Stack(children: [
-          GoogleMap(
-            zoomControlsEnabled: false,
-            myLocationButtonEnabled: false,
-            myLocationEnabled: true,
-            initialCameraPosition: CameraPosition(
-              target: LatLng(widget.startingPoint.latitude,
-                  widget.startingPoint.longitude),
-              zoom: 12.0,
-            ),
-            markers: markers,
-            onMapCreated: (controller) {
-              mapController = controller;
-              // ignore: unrelated_type_equality_checks
-              if (themeState.thememode == ThemeMode.dark) {
-                mapController!.setMapStyle(GoogleMapsApi.darkMapString);
-              }}
-          ),
-          Container(
-            height: double.infinity,
-            alignment: Alignment.bottomCenter,
-            padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.01877934, left: MediaQuery.of(context).size.height * 0.01877934, right: MediaQuery.of(context).size.height * 0.01877934),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        FloatingActionButton(
-                          child: const Icon(Icons.directions_bus),
-                          onPressed: () {
-                            googleApi.moveToLocation(
-                                mapController!, busLocation);
-                          },
-                        ),
-                         SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.01760563,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.0176056,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  width: double.infinity,
-                  height: MediaQuery.of(context).size.height * 0.05868545,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end:  Alignment.bottomCenter,
-                    colors: [
-                      ourWhite.withOpacity(0),
-                      themeState.thememode == ThemeMode.light
-                          ? ourWhite
-                          : ourDarkThemeBackgroundNavey,
-                    ]),
-                  ),
-                  child: Text('ETA: $_secondsRemaining',
-                      style:  TextStyle(
-                          fontSize: MediaQuery.of(context).size.height * 0.0293427, fontWeight: FontWeight.w300)),
-                ),
+
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
+      return Scaffold(
+          key: _scaffoldKey,
+          extendBodyBehindAppBar: true,
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(MediaQuery.of(context).size.height * 0.13497653),
+            child: AppBar(
+              automaticallyImplyLeading: false,
+              elevation: 0,
+              backgroundColor: Colors.black.withOpacity(0),
+              title: const JbusAppBarTitle(),
+              flexibleSpace: const AppBarStyle(),
+              // leading: CustomEndDrawerButton(
+              //   onTap: () {
+              //     _scaffoldKey.currentState!.openDrawer();
+              //   },
+              // ),
+              actions: [
+                CustomDrawerButton(onTap: () {
+                  _scaffoldKey.currentState!.openEndDrawer();
+                })
               ],
+
             ),
           ),
-        ]));});
+
+          drawer: const NotificationsDrawer(),
+          endDrawer: const MainDrawer(),
+          body: Stack(children: [
+            GoogleMap(
+                zoomControlsEnabled: false,
+                myLocationButtonEnabled: false,
+                myLocationEnabled: true,
+                initialCameraPosition: CameraPosition(
+                  target: LatLng(widget.startingPoint.latitude,
+                      widget.startingPoint.longitude),
+                  zoom: 12.0,
+                ),
+                markers: markers,
+                onMapCreated: (controller) {
+                  mapController = controller;
+                  // ignore: unrelated_type_equality_checks
+                  if (themeState.thememode == ThemeMode.dark) {
+                    mapController!.setMapStyle(GoogleMapsApi.darkMapString);
+                  }
+                }),
+            Container(
+              height: double.infinity,
+              alignment: Alignment.bottomCenter,
+              padding:
+                  const EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.01877934, left: MediaQuery.of(context).size.height * 0.01877934, right: MediaQuery.of(context).size.height * 0.01877934),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          FloatingActionButton(
+                            child: const Icon(Icons.directions_bus),
+                            onPressed: () {
+                              googleApi.moveToLocation(
+                                  mapController!, busLocation);
+                            },
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    width: double.infinity,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            ourWhite.withOpacity(0),
+                            themeState.thememode == ThemeMode.light
+                                ? ourWhite
+                                : ourDarkThemeBackgroundNavey,
+                          ]),
+                    ),
+                    child: Text('ETA: $_secondsRemaining',
+                        style: const TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.w300)),
+                  ),
+                ],
+              ),
+
+            ),
+          ]));
+    });
   }
 
   void listenToDriverLocation() {
-    Geolocator.getPositionStream(
-      locationSettings: const LocationSettings(
-        accuracy: LocationAccuracy.best,
-      ),
-    ).listen((Position position) {
-      // Handle location updates here
-      double latitude = position.latitude;
-      double longitude = position.longitude;
-      setState(() {
-        busLocation = LatLng(latitude, longitude);
+    final databaseReference = FirebaseDatabase.instance.ref();
+    databaseReference
+        .child(
+            'Route/${widget.route.id}/${widget.isGoing ? 'going' : 'returning'}/Bus/${widget.busId}/currentLocation')
+        .onValue
+        .listen((event) {
+      print('Waiting: ${event.snapshot.value}');
+      if (event.snapshot.value != null) {
+        final Map<Object?, Object?>? driverLocation =
+            event.snapshot.value as Map<Object?, Object?>?;
 
-        markers.clear();
-        markers.add(
-          Marker(
-            markerId: const MarkerId('driverMarker'),
-            position: busLocation,
-            icon: googleApi.customBusIcon!,
-          ),
-        );
-        addEndMarkers();
-      });
-      googleApi.moveToLocation(mapController!, LatLng(latitude, longitude));
+        if (driverLocation != null) {
+          // Access the location data using the Object? keys
+          final double latitude = driverLocation['latitude'] as double;
+          final double longitude = driverLocation['longitude'] as double;
+
+          // Create a LatLng object from the location data
+          final LatLng driverLatLng = LatLng(latitude, longitude);
+          // Update the marker
+          setState(() {
+            busLocation = driverLatLng;
+            markers.clear();
+            markers.add(
+              Marker(
+                markerId: const MarkerId('driverMarker'),
+                position: driverLatLng,
+                icon: googleApi.customBusIcon!,
+              ),
+            );
+            addEndMarkers();
+          });
+
+          googleApi.moveToLocation(mapController!, LatLng(latitude, longitude));
+        }
+      }
     });
   }
 

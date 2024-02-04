@@ -28,15 +28,15 @@ class EditProfileScreen extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.0597,
             ),
-            EditProfileTab(
-              icon: Icons.person_pin_outlined,
+            ListTile(
+              leading: Icon(Icons.person_pin_outlined),
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const SetProfilePhotoScreen()));
               },
-              info: 'Change your personal photo',
+              title: Text('Change your personal photo'),
             ),
             Divider(
               color: ourLightGray,
@@ -44,8 +44,8 @@ class EditProfileScreen extends StatelessWidget {
             ),
             BlocBuilder<NameBloc, NameState>(
               builder: (context, state) {
-                return EditProfileTab(
-                    icon: Icons.person_outline_outlined,
+                return ListTile(
+                    leading: Icon(Icons.person_outline_outlined),
                     onTap: () {
                       Navigator.push(
                         context,
@@ -54,7 +54,7 @@ class EditProfileScreen extends StatelessWidget {
                         ),
                       );
                     },
-                    info: '${state.firstName} ${state.lastName}');
+                    title: Text('${state.firstName} ${state.lastName}'));
               },
             ),
 
@@ -64,8 +64,8 @@ class EditProfileScreen extends StatelessWidget {
             ),
             BlocBuilder<EmailBloc, EmailState>(
               builder: (context, state) {
-                return EditProfileTab(
-                    icon: Icons.email_outlined,
+                return ListTile(
+                    leading: Icon(Icons.email_outlined),
                     onTap: () {
                       Navigator.push(
                         context,
@@ -74,7 +74,7 @@ class EditProfileScreen extends StatelessWidget {
                         ),
                       );
                     },
-                    info: state.email);
+                    title: Text(state.email));
               },
             ),
 
@@ -84,8 +84,8 @@ class EditProfileScreen extends StatelessWidget {
             ),
             BlocBuilder<MobileNumberBloc, MobileNumberState>(
               builder: (context, state) {
-                return EditProfileTab(
-                    icon: Icons.phone_iphone,
+                return ListTile(
+                    leading: Icon(Icons.phone_iphone),
                     onTap: () {
                       Navigator.push(
                         context,
@@ -95,7 +95,7 @@ class EditProfileScreen extends StatelessWidget {
                         ),
                       );
                     },
-                    info: state.mobileNumber);
+                    title: Text(state.mobileNumber));
               },
             ),
 
@@ -103,12 +103,12 @@ class EditProfileScreen extends StatelessWidget {
               color: ourLightGray,
               indent: MediaQuery.of(context).size.height * 0.0470,
             ),
-            EditProfileTab(
-              icon: Icons.lock_outline_rounded,
+            ListTile(
+              leading: Icon(Icons.lock_outline_rounded),
               onTap: () {
                 const UpdatePasswordScreen();
               },
-              info: AppLocalizations.of(context)!.changePassword,
+              title: Text(AppLocalizations.of(context)!.changePassword),
             ),
 
             // icon: Icons.email_outlined,

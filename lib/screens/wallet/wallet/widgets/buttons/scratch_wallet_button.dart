@@ -2,34 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/constants/colors/gradients.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:jbus_app/screens/wallet/send_money/send_money.dart';
+import 'package:jbus_app/screens/wallet/scratch_wallet/charge_wallet.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 
-class SendMonyButton extends StatelessWidget {
-  const SendMonyButton({
+class ScratchWalletButton extends StatelessWidget {
+  const ScratchWalletButton({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.only(
-        left: MediaQuery.of(context).size.height * 0.01877934,
-        right: MediaQuery.of(context).size.height * 0.01877934,
-        bottom: MediaQuery.of(context).size.height * 0.028169,
-        top: 0,
+      padding: const EdgeInsets.only(
+        left: 5,
+        right: 5,
+        bottom: 12,
+        top: 24,
       ),
       child: RectangularElevatedButton(
-        width: 270,
-        icon: Icons.arrow_upward_rounded,
-        text: AppLocalizations.of(context)!.sendMoney,
+        width: double.infinity,
+        text: AppLocalizations.of(context)!.scratchCard,
+        // icon: Icons.attach_money_rounded,
         gradient: grayButtonGradient,
         gradientForDark: grayButtonGradient,
         fontColor: ourNavey,
         darkfontColor: ourNavey,
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const SendMoneyScreen()));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const ScratshCarkWallet()));
         },
       ),
     );

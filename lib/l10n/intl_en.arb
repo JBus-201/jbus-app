@@ -99,7 +99,7 @@
     "jod": "JOD",
     "sendMoney": "Send Money",
     "cardNumber": "Card Number",
-    "cvv": "CVV",
+    "cvv": "CVC",
     "expiryYearYY": "Expiry Year (yy)",
     "expiryMonthMM": "Expiry Month (mm)",
     "cardHolderNameOptional": "Card Holder Name (Optional)",
@@ -113,7 +113,7 @@
     "sorryPleaseEnterACardNumber": "Sorry, Please Enter a Card Number",
     "sorryPleaseEnterAYear": "Sorry, Please Enter a Year",
     "sorryPleaseEnterAMonth": "Sorry, Please Enter a Month",
-    "sorryPleaseEnterACvv": "Sorry, Please Enter a Cvv",
+    "sorryPleaseEnterACvv": "Sorry, Please Enter a CVC",
     "apperance": "Apperance",
     "turnedOn": "Turned On",
     "turnedOff": "Turned Off",
@@ -155,8 +155,8 @@
     "requestSentSuccesfuly": "Request Sent Succesfuly",
     "ops": "Oops!",
     "somthingWrong": "Somthing went wrong",
-    "noFriendsMsg": "No friends,\nSorry, but you are lonely",
-    "noFriendReqMsg": "No friend requests,\nSorry, but no one loves you",
+    "noFriendsMsg": "No friends.",
+    "noFriendReqMsg": "No friend requests.",
     "accept": "Accept",
     "youAreFriendsMsg": "You are friends now",
     "noFaza": "There is no previous faza",
@@ -168,7 +168,7 @@
     "activeBuses": "Active Buses",
     "noFavePointsMsg": "No favorite points available",
     "selectPoints": "Select Points",
-    "noAvailableBuses": "No Available busses",
+    "noAvailableBuses": "No Available buses",
     "selectBus": "Select Bus",
     "exitTripMsg": "Sure to Exit trip?",
     "youArived": "You'r arived",
@@ -196,6 +196,8 @@
     "yourWallet":"Your wallet",
     "walletHasBeenChargedSuccessfully":"Wallet has been charged successfully.",
     "cvvc":"CVV:",
-    "sorryPleaseEnterAValidAccountNumber":"Sorry, Please enter a valid account number."
-
+    "sorryPleaseEnterAValidAccountNumber":"Sorry, Please enter a valid account number.",
+    "scratchCard":"Scratch Card",
+    "fee":"Fee",
+    "points":"Points"
 }

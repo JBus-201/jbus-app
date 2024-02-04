@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -55,12 +54,18 @@ Future main() async {
     // print('Message data: ${json.decode(message.data['value'])['Body']}');
 
     if (message.notification != null) {
-      print(
-          'Message also contained a notification: ${message.notification!.body}');
+      if (message.data['type'] == 'friendRequest') {
+      sl<NavigationService>().navigatorKey.currentState?.push(MaterialPageRoute(
+          builder: (context) => const NotificationFazaFriendRequestsPage()));
+    }
+    else if (message.data['type'] == 'friendConfirmed') {
+      sl<NavigationService>().navigatorKey.currentState?.push(
+          MaterialPageRoute(builder: (context) => const NotificationFazaFriendsPage()));
     }
     else if (message.data['type'] == 'RequestFazaa') {
       sl<NavigationService>().navigatorKey.currentState?.push(
           MaterialPageRoute(builder: (context) => FazaPayersPage(requestorId: int.parse(message.data['value']),)));
+    }
     }
   });
 
@@ -88,12 +93,18 @@ Future main() async {
     // print('Message data: ${json.decode(message.data['value'])['Body']}');
 
     if (message.notification != null) {
-      print(
-          'Message also contained a notification: ${message.notification!.body}');
+      if (message.data['type'] == 'friendRequest') {
+      sl<NavigationService>().navigatorKey.currentState?.push(MaterialPageRoute(
+          builder: (context) => const NotificationFazaFriendRequestsPage()));
+    }
+    else if (message.data['type'] == 'friendConfirmed') {
+      sl<NavigationService>().navigatorKey.currentState?.push(
+          MaterialPageRoute(builder: (context) => const NotificationFazaFriendsPage()));
     }
     else if (message.data['type'] == 'RequestFazaa') {
       sl<NavigationService>().navigatorKey.currentState?.push(
           MaterialPageRoute(builder: (context) => FazaPayersPage(requestorId: int.parse(message.data['value']),)));
+    }
     }
   });
 
@@ -160,6 +171,7 @@ Widget _getHomeScreen(UserStatus status) {
     case UserStatus.loggedIn:
       return const HomeScreen();
     case UserStatus.inTrip:
+      sl<AuthService>().data;
       return const Dashboard();
     default:
       return const SignupScreen();

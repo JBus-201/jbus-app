@@ -36,6 +36,15 @@ class SignupScreen extends StatelessWidget {
             );
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => EmailVerificationScreen(
+
+                    firstName: FirstNameTextField.firstName,
+                    lastName: LastNameTextField.lastName,
+                    email: EmailTextField.email,
+                    phoneNumber: MobileNumberTextField.mobileNumber!.isEmpty
+                        ? '0781782840'
+                        : MobileNumberTextField.mobileNumber,
+                    password:
+                        PasswordTextField.password,
                     )));
           }
         },

@@ -47,6 +47,7 @@ class _TripAvailableBusesState extends State<TripAvailableBuses> {
   LatLng? endLatLng;
   int busesNum = 0;
   int currentIndex = 1;
+  int currentPassNum = 0;
   @override
   void initState() {
     super.initState();
@@ -87,8 +88,8 @@ class _TripAvailableBusesState extends State<TripAvailableBuses> {
               onMapCreated: (controller) {
                 mapController = controller;
                 if (themeState.thememode == ThemeMode.dark) {
-                mapController!.setMapStyle(GoogleMapsApi.darkMapString);
-              }
+                  mapController!.setMapStyle(GoogleMapsApi.darkMapString);
+                }
               },
             ),
             Align(
@@ -206,78 +207,105 @@ class _TripAvailableBusesState extends State<TripAvailableBuses> {
           // Create a LatLng object from the location data
           final LatLng driverLatLng = LatLng(latitude, longitude);
           // Update the marker
-          Marker existingMarker = markers.firstWhere(
-            (marker) => marker.markerId.value == busId.toString(),
-            orElse: () => Marker(
-                markerId: MarkerId(busId.toString()),
-                icon: googleApi.customBusIcon!),
-          );
-          setState(() {
-            markers.remove(existingMarker);
-            markers.add(
-              existingMarker.copyWith(
-                positionParam: driverLatLng,
-                iconParam: googleApi.customBusIcon!,
-                onTapParam: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) => ETAViewDialog(
-                          onPress: () {
-                            // DateTime currentUtcDateTime =
-                            //     DateTime.now().toUtc();
-                            PointCreateRequest pick = PointCreateRequest(
-                                latitude: startLatLng!.latitude,
-                                longitude: startLatLng!.longitude,
-                                name: widget.startingPoint.name!);
-                            PointCreateRequest drop = PointCreateRequest(
-                                latitude: endLatLng!.latitude,
-                                longitude: endLatLng!.longitude,
-                                name: widget.endingPoint.name!);
-                            TripCreateRequest trip = TripCreateRequest(
-                                pickUpPoint: pick,
-                                // startedAt: currentUtcDateTime,
-                                // status: "Pending",
-                                dropOffPoint: drop);
-                            sl<ApiService>()
-                                .createTrip(trip, busId)
-                                .then((value) => {
-                                      if (value.response.statusCode == 201)
-                                        {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    TripBusWaitingPage(
-                                                      route: widget.route,
-                                                      isGoing: widget.isGoing,
-                                                      startingPoint:
-                                                          widget.startingPoint,
-                                                      endingPoint:
-                                                          widget.endingPoint,
-                                                      bus: activeBuses[index],
-                                                    )),
-                                          )
-                                        }
-                                    })
-                                // ignore: body_might_complete_normally_catch_error
-                                .catchError((error, stackTrace) {
-                              print('Error: ${error.toString()}');
-                              showDialog(
-                                  context: context,
-                                  builder: (context) => Warning(
-                                      title: AppLocalizations.of(context)!.ops,
-                                      description: AppLocalizations.of(context)!
-                                          .somthingWrong));
-                            });
-                          },
-                          first: LatLng(latitude, longitude),
-                          second: startLatLng!));
-                },
-              ),
+          getCurrentPassNum(busId);
+          if (currentPassNum < activeBuses.elementAt(index).capacity! || true) {
+            Marker existingMarker = markers.firstWhere(
+              (marker) => marker.markerId.value == busId.toString(),
+              orElse: () => Marker(
+                  markerId: MarkerId(busId.toString()),
+                  icon: googleApi.customBusIcon!),
             );
-          });
+            setState(() {
+              markers.remove(existingMarker);
+              markers.add(
+                existingMarker.copyWith(
+                  positionParam: driverLatLng,
+                  iconParam: googleApi.customBusIcon!,
+                  onTapParam: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => ETAViewDialog(
+                            onPress: () {
+                              // DateTime currentUtcDateTime =
+                              //     DateTime.now().toUtc();
+                              PointCreateRequest pick = PointCreateRequest(
+                                  latitude: startLatLng!.latitude,
+                                  longitude: startLatLng!.longitude,
+                                  name: widget.startingPoint.name!);
+                              PointCreateRequest drop = PointCreateRequest(
+                                  latitude: endLatLng!.latitude,
+                                  longitude: endLatLng!.longitude,
+                                  name: widget.endingPoint.name!);
+                              TripCreateRequest trip = TripCreateRequest(
+                                  pickUpPoint: pick,
+                                  // startedAt: currentUtcDateTime,
+                                  // status: "Pending",
+                                  dropOffPoint: drop);
+                              sl<ApiService>()
+                                  .createTrip(trip, busId)
+                                  .then((value) => {
+                                        if (value.response.statusCode == 201)
+                                          {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      TripBusWaitingPage(
+                                                        route: widget.route,
+                                                        isGoing: widget.isGoing,
+                                                        startingPoint: widget
+                                                            .startingPoint,
+                                                        endingPoint:
+                                                            widget.endingPoint,
+                                                        bus: activeBuses[index],
+                                                      )),
+                                            )
+                                          }
+                                      })
+                                  // ignore: body_might_complete_normally_catch_error
+                                  .catchError((error, stackTrace) {
+                                print('Error: ${error.toString()}');
+                                showDialog(
+                                    context: context,
+                                    builder: (context) => Warning(
+                                        title:
+                                            AppLocalizations.of(context)!.ops,
+                                        description:
+                                            AppLocalizations.of(context)!
+                                                .somthingWrong));
+                              });
+                            },
+                            first: LatLng(latitude, longitude),
+                            second: startLatLng!));
+                  },
+                ),
+              );
+            });
+          }
 
           googleApi.moveToLocation(mapController!, LatLng(latitude, longitude));
+        }
+      }
+    });
+  }
+
+  void getCurrentPassNum(int busId) {
+    databaseReference
+        .child(
+            'Route/${widget.route.id}/${widget.isGoing ? 'going' : 'returning'}/Bus/$busId/currentPassNum')
+        .onValue
+        .listen((event) {
+      print('Capacity: ${event.snapshot.value}');
+      if (event.snapshot.value != null) {
+        final Map<Object?, Object?>? cpassNum=
+            event.snapshot.value as Map<Object?, Object?>?;
+
+        if (cpassNum != null) {
+          // Access the location data using the Object? keys
+          final int passNum = cpassNum as int;
+          setState(() {
+            currentPassNum = passNum;
+          });
         }
       }
     });

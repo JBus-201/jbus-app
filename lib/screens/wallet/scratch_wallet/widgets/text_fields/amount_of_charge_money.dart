@@ -51,3 +51,51 @@ class AmmountOfChargeMoneyTextField extends StatelessWidget {
     );
   }
 }
+
+class ScratchOfChargeMoneyTextField extends StatelessWidget {
+  const ScratchOfChargeMoneyTextField({
+    super.key,
+    
+  });
+
+    static final TextEditingController amountOfChargeMoneyController =
+      TextEditingController();
+  
+
+  @override
+  Widget build(BuildContext context) {
+    return OurTextFormField(
+      counterText: '',
+      textInputAction: TextInputAction.next,
+      label:
+          AppLocalizations.of(context)!.cardNumber,
+      icon: Icons.attach_money_rounded,
+      autocorrect: false,
+      enableSuggestions: false,
+      keyboardType: TextInputType.number,
+      maxLength: 6,
+      controller: amountOfChargeMoneyController,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(
+          RegExp(r'^\d+\.?\d{0,2}'),
+        ),
+      ],
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return AppLocalizations.of(context)!
+              .sorryPleaseEnterTheAmountOfMoneyToBeCharged;
+        }
+        final bool amountOfMoney =
+            RegExp(r'^\d+(\.\d{0,2})?$')
+                .hasMatch(value.trim());
+    
+        if (amountOfMoney) {
+          return null;
+        } else {
+          return AppLocalizations.of(context)!
+              .sorryPleaseEnterAValidAmountOfMoney;
+        }
+      },
+    );
+  }
+}
