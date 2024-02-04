@@ -10,21 +10,32 @@ import 'package:jbus_app/screens/wallet/send_money/widgets/text_fields/amount_of
 class YesButtonForCharging extends StatelessWidget {
   const YesButtonForCharging({
     super.key,
+    required this.onPressed,
   });
+
+  final Function onPressed;
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      onPressed: () {
-        Navigator.of(context).pop();
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const SuccessMoneyChargedScreen(),
-          ),
-        );
+      onPressed: () async {
+        try {
+          await onPressed.call();
 
-        AmmountOfChargeMoneyTextField.amountOfChargeMoneyController.text = '';
+          if (context.mounted) {
+            Navigator.of(context).pop();
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const SuccessMoneyChargedScreen(),
+              ),
+            );
+          }
+
+          AmmountOfChargeMoneyTextField.amountOfChargeMoneyController.text = '';
+        } catch (e) {
+          print("error");
+        }
       },
       style: OutlinedButton.styleFrom(
           fixedSize: const Size(120, 35),

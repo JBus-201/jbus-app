@@ -105,8 +105,7 @@ abstract class ApiService {
   Future<Trip> getTrip(@Path("id") int id);
 
   @PUT("/Trip")
-  Future<HttpResponse> updateTrip(
-      @Body() TripUpdateRequest tripUpdateRequest);
+  Future<HttpResponse> updateTrip(@Body() TripUpdateRequest tripUpdateRequest);
 
   @PUT("/Trip/finishHim")
   Future<HttpResponse> finishTrip();
@@ -123,4 +122,7 @@ abstract class ApiService {
 
   @POST('/PaymentTransaction/scanQrCode')
   Future<HttpResponse> scanQrCode(@Body() Map<String, dynamic> body);
+
+  @POST("/ChargingBalance/ChargeWallett")
+  Future<HttpResponse> chargeWallet(@Body() Map<String, dynamic> paymentInfo);
 }

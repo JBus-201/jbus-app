@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
+import 'package:jbus_app/data/api/api_service.dart';
 import 'package:jbus_app/screens/wallet/charge_wallet/widgets/buttons/no_button_for_charge.dart';
 import 'package:jbus_app/screens/wallet/charge_wallet/widgets/buttons/yes_button_for_charge.dart';
 import 'package:jbus_app/screens/wallet/charge_wallet/widgets/text_fields/amount_of_charge_money.dart';
+import 'package:jbus_app/services/service_locator.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jbus_app/widgets/text/our_text.dart';
@@ -48,13 +50,26 @@ class ChargeButtonWithDialog extends StatelessWidget {
                         ),
                       ),
                     ),
-                    actions: const [
+                    actions: [
                       Center(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            YesButtonForCharging(),
-                            NoButtonForCharging(),
+                            YesButtonForCharging(
+                              onPressed: () async {
+                                sl<ApiService>().chargeWallet({
+                                  "paymentMethod": "VISA",
+                                  "amount": double.parse(
+                                    AmmountOfChargeMoneyTextField
+                                        .amountOfChargeMoneyController.text,
+                                  ),
+                                  "cardNumber": 1234123412341234,
+                                  "cvc": "123",
+                                  "expirationDate": "2025-01-01"
+                                });
+                              },
+                            ),
+                            const NoButtonForCharging(),
                           ],
                         ),
                       )
