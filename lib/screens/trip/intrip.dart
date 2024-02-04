@@ -68,12 +68,13 @@ class _InTripPageState extends State<InTripPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
       return Scaffold(
           key: _scaffoldKey,
           extendBodyBehindAppBar: true,
           appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(115.0),
+            preferredSize:  Size.fromHeight(MediaQuery.of(context).size.height * 0.13497653),
             child: AppBar(
               automaticallyImplyLeading: false,
               elevation: 0,
@@ -90,8 +91,10 @@ class _InTripPageState extends State<InTripPage> {
                   _scaffoldKey.currentState!.openEndDrawer();
                 })
               ],
+
             ),
           ),
+
           drawer: const NotificationsDrawer(),
           endDrawer: const MainDrawer(),
           body: Stack(children: [
@@ -116,7 +119,7 @@ class _InTripPageState extends State<InTripPage> {
               height: double.infinity,
               alignment: Alignment.bottomCenter,
               padding:
-                  const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
+                   EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.01877934, left: MediaQuery.of(context).size.height * 0.01877934, right: MediaQuery.of(context).size.height * 0.01877934),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -165,6 +168,7 @@ class _InTripPageState extends State<InTripPage> {
                   ),
                 ],
               ),
+
             ),
           ]));
     });

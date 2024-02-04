@@ -30,43 +30,38 @@ class NeedFazaDialog extends StatelessWidget {
         backgroundColor:
             themeState.thememode == ThemeMode.light ? ourWhite : ourDarkGray,
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding:  EdgeInsets.all(MediaQuery.of(context).size.height * 0.02347418),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              const Icon(
+               Icon(
                 Icons.question_mark_rounded,
-                size: 48,
+                size: MediaQuery.of(context).size.height * 0.056338,
                 color: ourOrange,
               ),
-              const SizedBox(height: 16),
+               SizedBox(height: MediaQuery.of(context).size.height * 0.018779),
               Text(
                 title,
-                style: const TextStyle(
-                  fontSize: 18,
+                style:  TextStyle(
+                  fontSize: MediaQuery.of(context).size.height * 0.02112676,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 8),
+               SizedBox(height: MediaQuery.of(context).size.height * 0.00938967),
               Text(
                 description,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 16,
+                style:  TextStyle(
+                  fontSize: MediaQuery.of(context).size.height * 0.01877934,
                 ),
               ),
-              const SizedBox(height: 16),
+               SizedBox(height: MediaQuery.of(context).size.height * 0.01877934),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   FazaRequestBT(totalAmountNeeded: amount, route: route),
-                  // TextButton(
-                  //   onPressed: () {
-                  //     Navigator.of(context).pop();
-                  //   },
-                  //   child: const Text("Cancel"),
-                  // ),
+
                 ],
               )
             ],

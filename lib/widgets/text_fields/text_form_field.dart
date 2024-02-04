@@ -170,8 +170,8 @@ class OurTextFormField extends StatelessWidget {
                           ? ourNavey
                           : ourOrange,
                     ),
-                    const SizedBox(
-                      width: 8,
+                     SizedBox(
+                      width: MediaQuery.of(context).size.height * 0.009389,
                     ),
                     Text(
                       label,

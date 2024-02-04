@@ -18,13 +18,15 @@ class EditProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const JbusAppBarTitle(),),
+      appBar: AppBar(
+        title: const JbusAppBarTitle(),
+      ),
       body: SafeArea(
         child: Center(
             child: Column(
           children: [
-            const SizedBox(
-              height: 50,
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.0597,
             ),
             ListTile(
               leading: Icon(Icons.person_pin_outlined),
@@ -36,9 +38,9 @@ class EditProfileScreen extends StatelessWidget {
               },
               title: Text('Change your personal photo'),
             ),
-            const Divider(
+            Divider(
               color: ourLightGray,
-              indent: 40,
+              indent: MediaQuery.of(context).size.height * 0.0470,
             ),
             BlocBuilder<NameBloc, NameState>(
               builder: (context, state) {
@@ -56,9 +58,9 @@ class EditProfileScreen extends StatelessWidget {
               },
             ),
 
-            const Divider(
+            Divider(
               color: ourLightGray,
-              indent: 40,
+              indent: MediaQuery.of(context).size.height * 0.0470,
             ),
             BlocBuilder<EmailBloc, EmailState>(
               builder: (context, state) {
@@ -76,9 +78,9 @@ class EditProfileScreen extends StatelessWidget {
               },
             ),
 
-            const Divider(
+            Divider(
               color: ourLightGray,
-              indent: 40,
+              indent: MediaQuery.of(context).size.height * 0.0470,
             ),
             BlocBuilder<MobileNumberBloc, MobileNumberState>(
               builder: (context, state) {
@@ -97,9 +99,9 @@ class EditProfileScreen extends StatelessWidget {
               },
             ),
 
-            const Divider(
+            Divider(
               color: ourLightGray,
-              indent: 40,
+              indent: MediaQuery.of(context).size.height * 0.0470,
             ),
             ListTile(
               leading: Icon(Icons.lock_outline_rounded),

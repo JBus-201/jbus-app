@@ -37,12 +37,15 @@ class SendButtonWithDialog extends StatelessWidget {
                       child: OurText(
                         AppLocalizations.of(context)!.confirmation,
                         color: ourNavey,
-                        fontSize: 24,
+                        fontSize:
+                            MediaQuery.of(context).size.height * 0.0281690,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     content: Container(
-                      constraints: const BoxConstraints(maxHeight: 80),
+                      constraints: BoxConstraints(
+                          maxHeight:
+                              MediaQuery.of(context).size.height * 0.093896),
                       child: Align(
                         alignment: Alignment.center,
                         child: OurText(

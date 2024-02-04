@@ -13,18 +13,19 @@ class LanguageSettingsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.language),
       ),
-      body: const Center(
+      body: Center(
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding:
+              EdgeInsets.all(MediaQuery.of(context).size.height * 0.01877934),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(
-                height: 46,
+                height: MediaQuery.of(context).size.height * 0.05399061,
               ),
-              ArabicButton(),
-              EnglishButton(),
-              SystemButton(),
+              const ArabicButton(),
+              const EnglishButton(),
+              const SystemButton(),
             ],
           ),
         ),

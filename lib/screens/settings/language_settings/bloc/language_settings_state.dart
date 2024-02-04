@@ -4,10 +4,10 @@ class LanguageSettingsState extends Equatable {
   const LanguageSettingsState({
     this.arabicButtonColorLight = naveyButtonGradient,
     this.englishButtonColorLight = naveyButtonGradient,
-    this.systemButtonColorLight = naveyButtonGradient,
+    this.systemButtonColorLight = blueButtonGradient,
     this.arabicButtonColorDark = darkOrangeButtonGradient,
     this.englishButtonColorDark = darkOrangeButtonGradient,
-    this.systemButtonColorDark = darkOrangeButtonGradient,
+    this.systemButtonColorDark = orangeButtonGradient,
   });
 
   final Gradient arabicButtonColorLight;

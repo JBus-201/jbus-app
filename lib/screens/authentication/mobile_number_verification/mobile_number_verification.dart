@@ -41,7 +41,7 @@ class MobileNumberVerificationScreen extends StatelessWidget {
           title: Text(AppLocalizations.of(context)!.mobileNumber),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(8),
+          padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.00938),
           child: Center(
             child: Column(
               children: [
@@ -54,7 +54,8 @@ class MobileNumberVerificationScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(26.0),
+                        padding: EdgeInsets.all(
+                            MediaQuery.of(context).size.height * 0.030516),
                         child: Directionality(
                           textDirection: TextDirection.ltr,
                           child: Row(

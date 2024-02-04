@@ -24,13 +24,13 @@ class ViewLongPressDialog extends StatelessWidget {
       elevation: 5,
       backgroundColor: ourWhite,
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding:  EdgeInsets.all(MediaQuery.of(context).size.height * 0.02347),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             FavoriteButton(
                 routeId: routeId, location: location, isFavorite: false),
-            const SizedBox(height: 16),
+             SizedBox(height: MediaQuery.of(context).size.height * 0.0187793),
           ],
         ),
       ),

@@ -13,13 +13,16 @@ class MoneyRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-          const EdgeInsets.only(top: 10, bottom: 10, right: 16.0, left: 16.0),
+      padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.0117,
+          bottom: MediaQuery.of(context).size.height * 0.0117,
+          right: MediaQuery.of(context).size.width * 0.0407,
+          left: MediaQuery.of(context).size.width * 0.0407),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.all(4.0),
+            padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.0102),
             child: OurText(
               AppLocalizations.of(context)!.money,
               fontWeight: FontWeight.w700,
@@ -31,8 +34,8 @@ class MoneyRow extends StatelessWidget {
               OurTab(
                 text: AppLocalizations.of(context)!.wallet,
                 image: 'assets/images/wallet.png',
-                scale: 9,
-                topPadding: 10,
+                scale: MediaQuery.of(context).size.height * 0.0106,
+                topPadding: MediaQuery.of(context).size.width * 0.0254,
                 onTap: () {
                   Navigator.push(
                     context,
@@ -45,14 +48,14 @@ class MoneyRow extends StatelessWidget {
               OurTab(
                 text: AppLocalizations.of(context)!.points,
                 image: 'assets/images/coins.png',
-                scale: 20,
-                topPadding: 10,
+                scale: MediaQuery.of(context).size.height * 0.0235,
+                topPadding: MediaQuery.of(context).size.width * 0.0254,
                 onTap: () {},
               ),
               OurTab(
                 text: AppLocalizations.of(context)!.fazaa,
                 image: 'assets/images/hands.png',
-                scale: 22,
+                scale: MediaQuery.of(context).size.height * 0.0258216,
                 topPadding: 0,
                 onTap: () {
                   Navigator.push(

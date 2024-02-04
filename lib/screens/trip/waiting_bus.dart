@@ -110,7 +110,7 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
               height: double.infinity,
               alignment: Alignment.bottomCenter,
               padding:
-                  const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
+                   EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.01877934, left: MediaQuery.of(context).size.height * 0.01877934, right: MediaQuery.of(context).size.height * 0.01877934),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -215,22 +215,22 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 15,
+                   SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.01760563,
                   ),
                   Container(
                     alignment: Alignment.center,
                     width: double.infinity,
-                    height: 50,
+                    height: MediaQuery.of(context).size.height * 0.0586545,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.center,
                           colors: [ourWhite.withOpacity(0), ourWhite]),
                     ),
-                    child: const Text('ETA',
+                    child:  Text('ETA',
                         style: TextStyle(
-                            fontSize: 25, fontWeight: FontWeight.w300)),
+                            fontSize: MediaQuery.of(context).size.height * 0.02934272, fontWeight: FontWeight.w300)),
                   ),
                 ],
               ),

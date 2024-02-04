@@ -86,8 +86,8 @@ class _FazaWaitingPageState extends State<FazaWaitingPage> {
               '${AppLocalizations.of(context)!.totalAmountNeeded}: $amountfaz',
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
-            const SizedBox(
-              height: 20,
+             SizedBox(
+              height: MediaQuery.of(context).size.height * 0.02347418,
             ),
             Text('${AppLocalizations.of(context)!.timeRemaining}: $_secondsRemaining')
           ],

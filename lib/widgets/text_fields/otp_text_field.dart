@@ -19,9 +19,9 @@ class OtpTextField extends StatelessWidget {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
       return Expanded(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding:  EdgeInsets.all(MediaQuery.of(context).size.height * 0.009389),
           child: SizedBox(
-            height: 100,
+            height: MediaQuery.of(context).size.height * 0.11737089,
             child: TextFormField(
               onChanged: (value) {
                 if (value.length == 1) {

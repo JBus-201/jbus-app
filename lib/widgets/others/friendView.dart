@@ -17,41 +17,43 @@ class FriendViewDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
       return Dialog(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
+
         ),
         elevation: 5,
         backgroundColor:
             themeState.thememode == ThemeMode.light ? ourWhite : ourDarkGray,
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding:  EdgeInsets.all(MediaQuery.of(context).size.height * 0.02347418),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Container(
-                height: 100,
-                width: 100,
+                height: MediaQuery.of(context).size.height * 0.11737089,
+              width: MediaQuery.of(context).size.height * 0.11737089,
                 decoration: BoxDecoration(
                     shape: BoxShape.circle, border: Border.all(width: 0.5)),
                 child: profileImage != null
                     ? Image.asset('$profileImage')
                     : const Icon(Icons.person),
               ),
-              const SizedBox(height: 16),
+               SizedBox(height: MediaQuery.of(context).size.height * 0.01877934),
               Text(
                 '${AppLocalizations.of(context)!.userId}: $id',
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 10),
+               SizedBox(height: MediaQuery.of(context).size.height * 0.01173709),
               Text(
                 '$name',
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 16),
+               SizedBox(height:  MediaQuery.of(context).size.height * 0.01877934),
               RectangularElevatedButton(
-                width: 150,
+                width: MediaQuery.of(context).size.height * 0.17605634,
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

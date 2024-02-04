@@ -50,10 +50,10 @@ class _AllFriendsPageState extends State<AllFriendsPage> {
 
                 return ListTile(
                   leading: Container(
-                    height: 50,
-                    width: 50,
+                    height: MediaQuery.of(context).size.height * 0.05868,
+                    width: MediaQuery.of(context).size.height * 0.05868,
                     decoration: BoxDecoration(
-                        shape: BoxShape.circle, border: Border.all(width: 0.5)),
+                        shape: BoxShape.circle, border: Border.all(width: MediaQuery.of(context).size.height * 0.00058685)),
                     child: friend.profileImage != null
                         ? Image.asset('${friend.profileImage}')
                         : const Icon(Icons.person),

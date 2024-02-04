@@ -25,7 +25,7 @@ class FazaRequestBT extends StatelessWidget {
   Widget build(BuildContext context) {
     return RectangularElevatedButton(
         gradient: redButtonGradient,
-        width: 130,
+        width: MediaQuery.of(context).size.height * 0.152582,
         text: AppLocalizations.of(context)!.fazaa,
         onPressed: () {
           sl<ApiService>().isPassengerFazaaAble().then((value) => {

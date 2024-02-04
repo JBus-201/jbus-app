@@ -32,7 +32,6 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
       key: _scaffoldKey,
       extendBodyBehindAppBar: true,
-      // appBar:
       drawerEnableOpenDragGesture: true,
       endDrawerEnableOpenDragGesture: true,
       drawer: const NotificationsDrawer(),
@@ -40,7 +39,6 @@ class _DashboardState extends State<Dashboard> {
       body: Stack(children: [
         BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
           return GoogleMap(
-            // trafficEnabled: true,
             buildingsEnabled: true,
             myLocationEnabled: true,
             rotateGesturesEnabled: true,
@@ -62,7 +60,7 @@ class _DashboardState extends State<Dashboard> {
         }),
         Container(
           alignment: Alignment.topCenter,
-          height: 150,
+          height: MediaQuery.of(context).size.height * 0.176056,
           child: AppBar(
             automaticallyImplyLeading: false,
             // elevation: 0,

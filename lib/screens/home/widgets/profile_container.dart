@@ -15,8 +15,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileContainer extends StatefulWidget {
   const ProfileContainer({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<ProfileContainer> createState() => _ProfileContainerState();
@@ -87,8 +87,10 @@ class _ProfileContainerState extends State<ProfileContainer> {
               ),
               child: Column(
                 children: [
+
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.08,
+
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -98,6 +100,7 @@ class _ProfileContainerState extends State<ProfileContainer> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+
                           BlocBuilder<SetProfilePhotoBloc,
                               SetProfilePhotoState>(
                             builder: (context, state) {
@@ -114,14 +117,17 @@ class _ProfileContainerState extends State<ProfileContainer> {
                                       builder: (context) =>
                                           const EditProfileScreen(),
                                     ),
+
                                   );
                                 },
                               );
                             },
                           ),
                           OurText(
+
                             user.user.name ?? "N/A",
                             fontWeight: FontWeight.w600,
+
                             color: ourWhite,
                           ),
                         ],
@@ -180,17 +186,20 @@ class _ProfileContainerState extends State<ProfileContainer> {
                           ),
                         ],
                       ),
+
                     ],
                   ),
-                  const SizedBox(
-                    height: 30,
+                   SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.0352,
                   ),
                 ],
               ),
+
             );
           }
         },
       );
     });
+
   }
 }

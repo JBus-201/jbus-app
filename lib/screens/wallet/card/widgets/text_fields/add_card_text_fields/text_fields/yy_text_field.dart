@@ -12,7 +12,7 @@ class YYTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return OurTextFormField(
         label: AppLocalizations.of(context)!.expiryYearYY,
-        labelFontSize: 12,
+        labelFontSize: 11,
         hintText: 'yy',
         icon: Icons.date_range_outlined,
         textInputAction: TextInputAction.next,

@@ -137,12 +137,12 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
               ),
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 10,
+                   SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.011737,
                   ),
                   Container(
-                    width: 32,
-                    height: 4,
+                    width: MediaQuery.of(context).size.height * 0.037558,
+                    height: MediaQuery.of(context).size.height * 0.004694,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100),
                       color: themeState.thememode == ThemeMode.light
@@ -150,8 +150,8 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                           : ourWhite,
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
+                   SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.011737,
                   ),
                   InkWell(
                     onTap: expand,
@@ -169,11 +169,12 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                         decoration: InputDecoration(
                           hintText: "search",
                           hintStyle: TextStyle(
-                            color: themeState.thememode == ThemeMode.light
-                                ? ourGray
-                                : ourWhite,
-                          ),
-                          contentPadding: const EdgeInsets.all(12.0),
+
+                              color: themeState.thememode == ThemeMode.light
+                                  ? ourGray
+                                  : ourWhite),
+                          contentPadding:  EdgeInsets.all(MediaQuery.of(context).size.height * 0.014084),
+
                           focusColor: themeState.thememode == ThemeMode.light
                               ? ourWhite
                               : ourGray,
@@ -187,11 +188,11 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                           ),
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: themeState.thememode == ThemeMode.dark
-                                  ? ourWhite
-                                  : ourGray,
-                              width: 0.5,
-                            ),
+                                color: themeState.thememode == ThemeMode.dark
+                                    ? ourWhite
+                                    : ourGray,
+                                width: MediaQuery.of(context).size.height * 0.00058685),
+
                             borderRadius: const BorderRadius.all(
                               Radius.circular(12),
                             ),
@@ -216,8 +217,8 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
+                   SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.011737,
                   ),
                   Expanded(
                     child: sRoutes.isNotEmpty
@@ -233,7 +234,7 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                               String? firstStop = route.startingPoint.name;
                               String? finalStop = route.endingPoint.name;
                               return Padding(
-                                padding: const EdgeInsets.only(bottom: 20),
+                                padding:  EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.023474),
                                 child: GestureDetector(
                                   onTap: () {
                                     if (wallet < route.fee) {
@@ -255,7 +256,7 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                                     }
                                   },
                                   child: Container(
-                                    height: 150,
+                                    height: MediaQuery.of(context).size.height * 0.176056,
                                     width: double.infinity,
                                     decoration: BoxDecoration(
                                         color: themeState.thememode ==
@@ -286,27 +287,27 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                                             Text(
                                               firstStop ?? 'N/A',
                                               style: TextStyle(
-                                                  fontSize: 20,
+                                                  fontSize: MediaQuery.of(context).size.height * 0.023474,
                                                   fontWeight: FontWeight.w400,
                                                   color: themeState.thememode ==
                                                           ThemeMode.light
                                                       ? ourBlue
                                                       : ourWhite),
                                             ),
-                                            const SizedBox(
-                                              width: 15,
+                                             SizedBox(
+                                              width:  MediaQuery.of(context).size.height * 0.017605,
                                             ),
                                             const Icon(
                                               Icons.linear_scale_outlined,
                                               color: ourOrange,
                                             ),
-                                            const SizedBox(
-                                              width: 15,
+                                             SizedBox(
+                                              width: MediaQuery.of(context).size.height * 0.017605,
                                             ),
                                             Text(
                                               finalStop ?? 'N/A',
                                               style: TextStyle(
-                                                  fontSize: 20,
+                                                  fontSize: MediaQuery.of(context).size.height * 0.023474,
                                                   fontWeight: FontWeight.w400,
                                                   color: themeState.thememode ==
                                                           ThemeMode.light
@@ -315,16 +316,17 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                                             ),
                                           ],
                                         ),
-                                        const SizedBox(
-                                          height: 15,
+                                         SizedBox(
+                                          height:  MediaQuery.of(context).size.height * 0.017605,
                                         ),
+
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             Text(
                                               '${AppLocalizations.of(context)!.fee}: ${route.fee / 100}',
                                               style: TextStyle(
-                                                fontSize: 18,
+                                                fontSize: MediaQuery.of(context).size.height * 0.02112676,
                                                 fontWeight: FontWeight.w400,
                                                 color: wallet >= route.fee
                                                     ? themeState.thememode ==
@@ -348,6 +350,7 @@ class _BottomSearchSheetState extends State<BottomSearchSheet>
                                               ),
                                             ),
                                           ],
+
                                         )
                                       ],
                                     ),

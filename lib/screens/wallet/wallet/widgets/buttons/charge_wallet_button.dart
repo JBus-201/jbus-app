@@ -14,11 +14,13 @@ class ChargeWalletButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
+
       padding: const EdgeInsets.only(
         left: 5,
         right: 5,
         bottom: 12,
         top: 24,
+
       ),
       child: RectangularElevatedButton(
         width: double.infinity,

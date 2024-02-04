@@ -26,7 +26,7 @@ class ChargeWalletScreen extends StatelessWidget {
                   delegate: SliverChildBuilderDelegate(
                 childCount: 1,
                 (context, index) => Padding(
-                  padding: const EdgeInsets.all(12),
+                  padding:  EdgeInsets.all(MediaQuery.of(context).size.height * 0.0140845),
                   child: Center(
                       child: Form(
                           key: formKey,
