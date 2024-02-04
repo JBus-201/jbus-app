@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/themes/bloc/theme_bloc.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FriendViewDialog extends StatelessWidget {
   final int id;
@@ -40,7 +41,7 @@ class FriendViewDialog extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Text(
-                'User Id: $id',
+                '${AppLocalizations.of(context)!.userId}: $id',
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 10),
@@ -54,7 +55,7 @@ class FriendViewDialog extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                text: "OK",
+                text: AppLocalizations.of(context)!.ok,
               ),
             ],
           ),
