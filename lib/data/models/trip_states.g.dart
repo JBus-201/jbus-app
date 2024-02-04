@@ -10,7 +10,7 @@ TripStatus _$TripStatusFromJson(Map<String, dynamic> json) => TripStatus(
       status: json['status'] as int,
       trip: Trip.fromJson(json['trip'] as Map<String, dynamic>),
       route: BusRoute.fromJson(json['route'] as Map<String, dynamic>),
-      busId: json['busId'] as int,
+      bus: Bus.fromJson(json['busId'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$TripStatusToJson(TripStatus instance) =>
@@ -18,5 +18,5 @@ Map<String, dynamic> _$TripStatusToJson(TripStatus instance) =>
       'status': instance.status,
       'trip': instance.trip,
       'route': instance.route,
-      'busId': instance.busId,
+      'busId': instance.bus,
     };

@@ -24,7 +24,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InTripPage extends StatefulWidget {
   final BusRoute route;
-  final bool isGoing;
+  final String isGoing;
   final Point startingPoint;
   final Point endingPoint;
   final int busId;
@@ -178,7 +178,7 @@ class _InTripPageState extends State<InTripPage> {
     final databaseReference = FirebaseDatabase.instance.ref();
     databaseReference
         .child(
-            'Route/${widget.route.id}/${widget.isGoing ? 'going' : 'returning'}/Bus/${widget.busId}/currentLocation')
+            'Route/${widget.route.id}/${widget.isGoing}/Bus/${widget.busId}/currentLocation')
         .onValue
         .listen((event) {
       print('Waiting: ${event.snapshot.value}');

@@ -187,7 +187,7 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
                                                         busId: widget.bus.id!,
                                                         endingPoint:
                                                             widget.endingPoint,
-                                                        isGoing: widget.isGoing,
+                                                        isGoing: widget.isGoing?"going":"returning",
                                                         route: widget.route,
                                                         startingPoint: widget
                                                             .startingPoint,

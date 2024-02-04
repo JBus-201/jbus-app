@@ -178,11 +178,11 @@ Widget _getHomeScreen(UserStatus status) {
     case UserStatus.inTrip:
       TripStatus trip = sl<AuthService>().data!;
       return InTripPage(
-        busId: trip.busId,
+        busId: trip.bus.id!,
         endingPoint: trip.trip.dropOffPoint!,
         route: trip.route,
         startingPoint: trip.trip.pickUpPoint,
-        isGoing: true,
+        isGoing: trip.bus.going!,
       );
     default:
       return const SignupScreen();

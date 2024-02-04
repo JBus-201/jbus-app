@@ -1,3 +1,4 @@
+import 'package:jbus_app/data/models/bus.dart';
 import 'package:jbus_app/data/models/bus_route.dart';
 import 'package:jbus_app/data/models/trip.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -13,13 +14,13 @@ class TripStatus {
     @JsonKey(name: "route")
     BusRoute route;
     @JsonKey(name: "busId")
-    int busId;
+    Bus bus;
 
     TripStatus({
         required this.status,
         required this.trip,
         required this.route,
-        required this.busId,
+        required this.bus,
     });
 
     factory TripStatus.fromJson(Map<String, dynamic> json) => _$TripStatusFromJson(json);
