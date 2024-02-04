@@ -6,6 +6,7 @@ import 'package:jbus_app/screens/wallet/send_money/widgets/screens/success_money
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jbus_app/screens/wallet/send_money/widgets/text_fields/account_number.dart';
 import 'package:jbus_app/screens/wallet/send_money/widgets/text_fields/amount_of_money.dart';
+import 'package:jbus_app/widgets/warnings/warning.dart';
 
 class YesButtonForCharging extends StatelessWidget {
   const YesButtonForCharging({
@@ -35,16 +36,22 @@ class YesButtonForCharging extends StatelessWidget {
           AmmountOfChargeMoneyTextField.amountOfChargeMoneyController.text = '';
         } catch (e) {
           print("error");
+          showDialog(
+              context: context,
+              builder: (context) => Warning(
+                  title: AppLocalizations.of(context)!.ops,
+                  description: AppLocalizations.of(context)!.somthingWrong));
         }
       },
       style: OutlinedButton.styleFrom(
-          fixedSize:  Size(MediaQuery.of(context).size.height * 0.0140845, MediaQuery.of(context).size.height * 0.041079),
+          fixedSize: Size(MediaQuery.of(context).size.height * 0.0140845,
+              MediaQuery.of(context).size.height * 0.041079),
           side: const BorderSide(
             color: ourNavey,
           )),
       child: Text(
         AppLocalizations.of(context)!.yes,
-        style:  TextStyle(
+        style: TextStyle(
           fontSize: MediaQuery.of(context).size.height * 0.0211267,
           fontWeight: FontWeight.w500,
           color: ourNavey,
