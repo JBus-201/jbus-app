@@ -13,7 +13,7 @@ class TripStatus {
     Trip trip;
     @JsonKey(name: "route")
     BusRoute route;
-    @JsonKey(name: "busId")
+    @JsonKey(name: "bus")
     Bus bus;
 
     TripStatus({

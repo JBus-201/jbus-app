@@ -184,7 +184,7 @@ class _TripBusWaitingPageState extends State<TripBusWaitingPage> {
                                               MaterialPageRoute(
                                                   builder: (context) =>
                                                       InTripPage(
-                                                        busId: widget.bus.id!,
+                                                        bus: widget.bus,
                                                         endingPoint:
                                                             widget.endingPoint,
                                                         isGoing: widget.isGoing?"going":"returning",

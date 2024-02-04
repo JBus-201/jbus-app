@@ -178,7 +178,7 @@ Widget _getHomeScreen(UserStatus status) {
     case UserStatus.inTrip:
       TripStatus trip = sl<AuthService>().data!;
       return InTripPage(
-        busId: trip.bus.id!,
+        bus: trip.bus,
         endingPoint: trip.trip.dropOffPoint!,
         route: trip.route,
         startingPoint: trip.trip.pickUpPoint,

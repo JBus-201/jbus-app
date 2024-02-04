@@ -8,6 +8,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/data/api/api_service.dart';
 import 'package:jbus_app/data/api/google_service.dart';
+import 'package:jbus_app/data/models/bus.dart';
 import 'package:jbus_app/data/models/bus_route.dart';
 import 'package:jbus_app/data/models/point.dart';
 import 'package:jbus_app/screens/dashbourd/buttons/drawer.dart';
@@ -27,14 +28,14 @@ class InTripPage extends StatefulWidget {
   final String isGoing;
   final Point startingPoint;
   final Point endingPoint;
-  final int busId;
+  final Bus bus;
   const InTripPage({
     super.key,
     required this.route,
     required this.isGoing,
     required this.startingPoint,
     required this.endingPoint,
-    required this.busId,
+    required this.bus,
   });
 
   @override
@@ -178,7 +179,7 @@ class _InTripPageState extends State<InTripPage> {
     final databaseReference = FirebaseDatabase.instance.ref();
     databaseReference
         .child(
-            'Route/${widget.route.id}/${widget.isGoing}/Bus/${widget.busId}/currentLocation')
+            'Route/${widget.route.id}/${widget.isGoing}/Bus/${widget.bus.id}/currentLocation')
         .onValue
         .listen((event) {
       print('Waiting: ${event.snapshot.value}');
