@@ -923,7 +923,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/ChargingBalance/ChargeWallett',
+              '/ChargingBalance/ChargeWallet',
               queryParameters: queryParameters,
               data: _data,
             )
