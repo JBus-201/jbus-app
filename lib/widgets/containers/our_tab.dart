@@ -36,6 +36,7 @@ class OurTab extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(18),
       child: Container(
+
         height: MediaQuery.of(context).size.height * 0.14,
         //116,
         width: MediaQuery.of(context).size.width * 0.29,
@@ -49,12 +50,7 @@ class OurTab extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          // image: DecorationImage(
-          //   image: AssetImage(
-          //     image,
-          //   ),
-          //   fit: BoxFit.fill,
-          // ),
+          
           borderRadius: BorderRadius.circular(18),
         ),
         //child: Image.asset(image),
@@ -69,12 +65,14 @@ class OurTab extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(4),
+                padding:  EdgeInsets.all(MediaQuery.of(context).size.height * 0.00469484),
                 child: OurText(
                   text,
                   fontWeight: FontWeight.w600,
-                  fontSize: 14,
+
+                  fontSize: MediaQuery.of(context).size.height * 0.01643192,
                   darkColor: ourWhite,
+
                 ),
               ),
             ]),

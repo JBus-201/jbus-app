@@ -42,11 +42,12 @@ class _ViewSelectedRoutePageState extends State<ViewSelectedRoutePage> {
 
   @override
   Widget build(BuildContext context) {
+
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
       return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(115.0),
+          preferredSize: const Size.fromHeight(MediaQuery.of(context).size.height * 0.134976),
           child: AppBar(
             automaticallyImplyLeading: true,
             elevation: 0,
@@ -54,6 +55,7 @@ class _ViewSelectedRoutePageState extends State<ViewSelectedRoutePage> {
             title: const JbusAppBarTitle(),
             flexibleSpace: const AppBarStyle(),
           ),
+
         ),
         body: Stack(
           children: [
@@ -135,6 +137,7 @@ class _ViewSelectedRoutePageState extends State<ViewSelectedRoutePage> {
                         snippet: AppLocalizations.of(context)!.predefinedStop,
                       ),
                     ),
+
                   );
                   return GoogleMap(
                     zoomControlsEnabled: false,
@@ -251,6 +254,7 @@ class _ViewSelectedRoutePageState extends State<ViewSelectedRoutePage> {
         ),
       );
     });
+
   }
 
   void handleLongPress(LatLng point) {

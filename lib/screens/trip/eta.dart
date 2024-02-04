@@ -28,16 +28,16 @@ class ETAViewDialog extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.white,
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding:  EdgeInsets.all(MediaQuery.of(context).size.height * 0.02347418),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              const Icon(
+               Icon(
                 Icons.directions_bus_rounded,
-                size: 48,
+                size: MediaQuery.of(context).size.height * 0.05633803,
                 color: ourOrange,
               ),
-              const SizedBox(height: 16),
+               SizedBox(height: MediaQuery.of(context).size.height * 0.018779),
               FutureBuilder<Duration>(
                   future: GoogleMapsApi().calculateDrivingEta(first, second),
                   builder: (context, snapshot) {
@@ -52,28 +52,23 @@ class ETAViewDialog extends StatelessWidget {
                       ));
                     } else {
                       return Text(snapshot.data!.toString(),
-                          style: const TextStyle(
-                            fontSize: 18,
+                          style:  TextStyle(
+                            fontSize: MediaQuery.of(context).size.height * 0.02112676,
                             fontWeight: FontWeight.bold,
                           ));
                     }
                   }),
-              const SizedBox(height: 16),
+               SizedBox(height: MediaQuery.of(context).size.height * 0.01877934),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   RectangularElevatedButton(
-                    width: 150,
+                    width: MediaQuery.of(context).size.height * 0.17605634,
                     onPressed: onPress,
                     text: AppLocalizations.of(context)!.selectBus,
                   ),
-                  // TextButton(
-                  //   onPressed: () {
-                  //     Navigator.of(context).pop();
-                  //   },
-                  //   child: const Text("Cancel"),
-                  // ),
+
                 ],
               )
             ],

@@ -14,13 +14,17 @@ class StartYourTripRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-          const EdgeInsets.only(top: 10, bottom: 10, right: 16.0, left: 16.0),
+      padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.0118,
+          bottom: MediaQuery.of(context).size.height * 0.0118,
+          right: MediaQuery.of(context).size.height * 0.0188,
+          left: MediaQuery.of(context).size.height * 0.0188),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.all(4.0),
+            padding:
+                EdgeInsets.all(MediaQuery.of(context).size.height * 0.0047),
             child: OurText(
               AppLocalizations.of(context)!.startYourTrip,
               fontWeight: FontWeight.w700,
@@ -32,8 +36,8 @@ class StartYourTripRow extends StatelessWidget {
               OurTab(
                 text: AppLocalizations.of(context)!.ride,
                 image: 'assets/images/bus.png',
-                scale: 9.5,
-                topPadding: 12,
+                scale: MediaQuery.of(context).size.height * 0.01115023,
+                topPadding: MediaQuery.of(context).size.height * 0.0141,
                 onTap: () {
                   Navigator.push(
                     context,
@@ -46,8 +50,8 @@ class StartYourTripRow extends StatelessWidget {
               OurTab(
                 text: AppLocalizations.of(context)!.routes,
                 image: 'assets/images/routes.png',
-                scale: 9,
-                topPadding: 15,
+                scale: MediaQuery.of(context).size.height * 0.01056338,
+                topPadding: MediaQuery.of(context).size.height * 0.0176,
                 onTap: () {
                   Navigator.push(
                       context,
@@ -58,8 +62,8 @@ class StartYourTripRow extends StatelessWidget {
               OurTab(
                 text: AppLocalizations.of(context)!.favorites,
                 image: 'assets/images/favorites.png',
-                scale: 16,
-                topPadding: 19,
+                scale: MediaQuery.of(context).size.height * 0.01877934,
+                topPadding: MediaQuery.of(context).size.height * 0.0223,
                 onTap: () {
                   Navigator.push(
                     context,

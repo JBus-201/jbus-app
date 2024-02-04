@@ -3,7 +3,7 @@ import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/widgets/text/our_text.dart';
 
 class EditProfileTab extends StatelessWidget {
-  const EditProfileTab( {
+  const EditProfileTab({
     super.key,
     required this.icon,
     required this.onTap,
@@ -17,7 +17,10 @@ class EditProfileTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 8, right: 16, left: 16),
+      padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.0094,
+          right: MediaQuery.of(context).size.height * 0.0188,
+          left: MediaQuery.of(context).size.height * 0.0188),
       child: InkWell(
         highlightColor: Colors.transparent,
         onTap: onTap,
@@ -30,15 +33,15 @@ class EditProfileTab extends StatelessWidget {
                   children: [
                     Icon(
                       icon,
-                      size: 30,
+                      size: MediaQuery.of(context).size.height * 0.0352,
                       color: ourNavey,
                     ),
-                    const SizedBox(
-                      width: 20,
+                     SizedBox(
+                      width: MediaQuery.of(context).size.height * 0.0235,
                     ),
                     OurText(
                       info,
-                      fontSize: 18,
+                      fontSize: MediaQuery.of(context).size.height * 0.02112676,
                       fontWeight: FontWeight.w500,
                     ),
                   ],
@@ -49,10 +52,9 @@ class EditProfileTab extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 8,
+             SizedBox(
+              height: MediaQuery.of(context).size.height * 0.0094,
             ),
-            
           ],
         ),
       ),

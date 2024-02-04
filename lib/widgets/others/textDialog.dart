@@ -24,6 +24,7 @@ class TextDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
     final TextEditingController favNameController = TextEditingController();
+
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
       return Dialog(
         shape: RoundedRectangleBorder(
@@ -48,16 +49,17 @@ class TextDialog extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
+
                 ),
               ),
               const SizedBox(height: 16),
               Form(
                 key: formKey,
                 child: OurTextFormField(
-                    topPadding: 25,
-                    leftPadding: 5,
-                    rightPadding: 5,
-                    bottomPadding: 25,
+                     topPadding: MediaQuery.of(context).size.height * 0.02934272,
+                  leftPadding: MediaQuery.of(context).size.height * 0.00586854,
+                  rightPadding: MediaQuery.of(context).size.height * 0.00586854,
+                  bottomPadding: MediaQuery.of(context).size.height * 0.02934272,
                     showCursor: true,
                     textAlign: TextAlign.center,
                     icon: Icons.location_on,
@@ -84,8 +86,9 @@ class TextDialog extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   RectangularElevatedButton(
-                    width: 100,
-                    fontSize: 15,
+                    width: MediaQuery.of(context).size.height * 0.11737089,
+                  fontSize: MediaQuery.of(context).size.height * 0.01760563,
+                    
                     fontWeight: FontWeight.w300,
                     onPressed: () {
                       final newFav = FavoritePointCreateRequest(

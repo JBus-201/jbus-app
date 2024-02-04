@@ -8,11 +8,8 @@ class PasswordTextField extends StatelessWidget {
   PasswordTextField({super.key});
 
   final TextEditingController passwordController = TextEditingController();
-  // static final TextEditingController confirmPasswordController =
-  //     TextEditingController();
-  static String? password;
-  
 
+  static String? password;
 
   @override
   Widget build(BuildContext context) {
@@ -30,16 +27,10 @@ class PasswordTextField extends StatelessWidget {
             obscureText: state.obscureText,
             autocorrect: false,
             enableSuggestions: false,
-            bottomPadding: 24,
-            sizedBoxHeight: 65,
+            bottomPadding: MediaQuery.of(context).size.height * 0.028169,
+            sizedBoxHeight: MediaQuery.of(context).size.height * 0.076291,
             maxLength: 40,
-            // onChanged: (value) {
-            //   final emailBloc = BlocProvider.of<PasswordBloc>(context);
-            //   emailBloc.add(UpdatePasswordEvent(value.trim()));
-            //},
             validator: (value) {
-             
-
               final RegExp regex = RegExp(r'.{8,20}');
 
               if (value == null || value.isEmpty) {
@@ -49,42 +40,12 @@ class PasswordTextField extends StatelessWidget {
                     .sorryPleaseEnterAValidPassword;
               }
 
-              
               password = value.trim();
               return null;
-
-              
             },
           );
         },
       ),
-      // BlocBuilder<SignupBloc, SignupState>(
-      //   builder: (context, state) {
-      // return OurTextFormField(
-      //     label: AppLocalizations.of(context)!.confirmPassword,
-      //     icon: Icons.lock_outline_rounded,
-      //     suffixIcon: state.icon,
-      //     textInputAction: TextInputAction.done,
-      //     controller: confirmPasswordController,
-      //     keyboardType: TextInputType.visiblePassword,
-      //     enableSuggestions: false,
-      //     obscureText: state.obscureText,
-      //     autocorrect: false,
-      //     maxLength: 40,
-      //     validator: (value) {
-      //       if (value == null || value.isEmpty) {
-      //         return AppLocalizations.of(context)!.sorryPleaseReEnterYourPassword;
-      //       }
-
-      //       if (password != value.trim()) {
-      //         return AppLocalizations.of(context)!.sorryPasswordDoesNotMatch;
-      //         //'Sorry, Password does not match, please re enter your password correctly.';
-      //       }
-
-      //       return null;
-      //     });
-      //   },
-      // ),
     );
   }
 }

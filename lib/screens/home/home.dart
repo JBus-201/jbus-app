@@ -21,24 +21,24 @@ class HomeScreen extends StatelessWidget {
               colors: [
                 themeState.thememode == ThemeMode.light
                     ? ourWhite
-                    : ourDarkGray,
+                    : ourMainDark,
                 //ourLightGray,
                 themeState.thememode == ThemeMode.light
                     ? ourWhite
-                    : ourDarkGray,
+                    : ourMainDark,
               ], // Adjust the colors as needed
             ),
           ),
-          child: const Center(
+          child: Center(
             child: Column(
               children: [
-                ProfileContainer(),
+                const ProfileContainer(),
                 SizedBox(
-                  height: 20,
+                  height: MediaQuery.of(context).size.height * 0.0235,
                 ),
-                StartYourTripRow(),
-                MoneyRow(),
-                OthersRow(),
+                const StartYourTripRow(),
+                const MoneyRow(),
+                const OthersRow(),
               ],
             ),
           ),

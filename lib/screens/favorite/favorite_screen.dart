@@ -64,7 +64,7 @@ class FavoriteScreen extends StatelessWidget {
 
     if (state is FavoritePointsLoaded) {
       return Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding:  EdgeInsets.all(MediaQuery.of(context).size.height * 0.0093896),
         child: SingleChildScrollView(
           child: Column(
             children: state.points.map((point) {
@@ -82,23 +82,23 @@ class FavoriteScreen extends StatelessWidget {
                     );
                   },
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.0093896),
                     child: Column(
                       children: [
                         ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(16),
-                              topRight: Radius.circular(16),
+                            borderRadius:  BorderRadius.only(
+                              topLeft: Radius.circular(MediaQuery.of(context).size.height * 0.0187793),
+                              topRight: Radius.circular(MediaQuery.of(context).size.height * 0.0187793),
                             ),
                             child: GoogleMapsApi().getPointImage(
                                 point.point.latitude,
                                 point.point.longitude,
                                 ourBlue)),
                         Padding(
-                          padding: const EdgeInsets.only(
-                            left: 8,
-                            right: 8,
-                            top: 8,
+                          padding:  EdgeInsets.only(
+                            left: MediaQuery.of(context).size.height * 0.0093896,
+                            right: MediaQuery.of(context).size.height * 0.0093896,
+                            top: MediaQuery.of(context).size.height * 0.0093896,
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -16,7 +16,8 @@ class QrScreen extends StatelessWidget {
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(115.0),
+          preferredSize:  Size.fromHeight(
+             MediaQuery.of(context).size.height * 0.1349765),
           child: AppBar(
             automaticallyImplyLeading: true,
             elevation: 0,

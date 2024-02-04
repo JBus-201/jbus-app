@@ -19,7 +19,7 @@ class SettingsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding:  EdgeInsets.all(MediaQuery.of(context).size.height * 0.01877934),
       child: InkWell(
         onTap: onTap,
         child: Row(
@@ -29,25 +29,25 @@ class SettingsTab extends StatelessWidget {
               children: [
                 Icon(
                   icon,
-                  size: 30,
+                  size: MediaQuery.of(context).size.height * 0.03521127,
                   color: ourNavey,
                   //weight: 100,
                   //fill: 0.9,
                 ),
-                const SizedBox(
-                  width: 20,
+                 SizedBox(
+                  width: MediaQuery.of(context).size.height * 0.02347418,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     OurText(
                       title,
-                      fontSize: 18,
+                      fontSize: MediaQuery.of(context).size.height * 0.02112676,
                       fontWeight: FontWeight.w500,
                     ),
                     OurText(
                       subTitle,
-                      fontSize: 14,
+                      fontSize: MediaQuery.of(context).size.height * 0.01643192,
                       fontWeight: FontWeight.w300,
                       color: ourDarkBlue,
                     ),

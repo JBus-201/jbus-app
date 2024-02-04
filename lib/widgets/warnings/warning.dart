@@ -26,25 +26,25 @@ class Warning extends StatelessWidget {
         backgroundColor:
             themeState.thememode == ThemeMode.light ? ourWhite : ourDarkGray,
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding:  EdgeInsets.all(MediaQuery.of(context).size.height * 0.02347418),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Icon(
                 isWarning ? Icons.warning : Icons.task_alt_rounded,
-                size: 48,
+                size: MediaQuery.of(context).size.height * 0.05633803,
                 color: isWarning ? ourRed : ourGreen,
               ),
-              const SizedBox(height: 16),
+               SizedBox(height: MediaQuery.of(context).size.height * 0.018779),
               Text(
                 title,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 18,
+                style:  TextStyle(
+                  fontSize: MediaQuery.of(context).size.height * 0.0211267,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 8),
+               SizedBox(height: MediaQuery.of(context).size.height * 0.00938967),
               Text(
                 description,
                 textAlign: TextAlign.center,
@@ -52,9 +52,9 @@ class Warning extends StatelessWidget {
                   fontSize: 16,
                 ),
               ),
-              const SizedBox(height: 16),
+               SizedBox(height: MediaQuery.of(context).size.height * 0.018779),
               RectangularElevatedButton(
-                width: 150,
+                width: MediaQuery.of(context).size.height * 0.17605634,
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

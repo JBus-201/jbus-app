@@ -53,7 +53,7 @@ class PaymentCard extends StatelessWidget implements Equatable {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 24.0, left: 24, right: 24, bottom: 0),
+      padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.028169, left: MediaQuery.of(context).size.height * 0.028169, right: MediaQuery.of(context).size.height * 0.028169, bottom: 0),
       //child: InkWell(
         //onTap: () {},
         child: Column(
@@ -65,10 +65,10 @@ class PaymentCard extends StatelessWidget implements Equatable {
                   children: [
                     Image.asset(
                       'assets/images/visa.png',
-                      scale: 12,
+                      scale: MediaQuery.of(context).size.height * 0.01408451,
                     ),
-                    const SizedBox(
-                      width: 30,
+                     SizedBox(
+                      width: MediaQuery.of(context).size.height * 0.03521127,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,44 +81,23 @@ class PaymentCard extends StatelessWidget implements Equatable {
                         OurText(
                           cardNumber,
                           color: ourGray,
-                          fontSize: 14,
+                          fontSize: MediaQuery.of(context).size.height * 0.01643192,
                         ),
                         OurText(
                           '$mm/$yy    ${AppLocalizations.of(context)!.cvvc} $cvv',
                           color: ourGray,
-                          fontSize: 14,
+                          fontSize: MediaQuery.of(context).size.height * 0.01643192,
                         ),
                         OurText(
                           cardHolderName,
                           color: ourGray,
-                          fontSize: 14,
+                          fontSize: MediaQuery.of(context).size.height * 0.01643192,
                         ),
                       ],
                     ),
                   ],
                 ),
-                // BlocBuilder<WalletBloc, WalletState>(
-                //   builder: (context, state) {
-                //     return IconButton(
-                //       icon: Icon(state.icon),
-                //       color: ourNavey,
-                //       onPressed: () {
-                //         final walletBloc = BlocProvider.of<WalletBloc>(context);
-                //         walletBloc.add(
-                //           SelectCardEvent(
-                //             paymentCard: PaymentCard(
-                //               cardNumber: cardNumber,
-                //               cardHolderName: cardHolderName,
-                //               cvv: cvv,
-                //               mm: mm,
-                //               yy: yy,
-                //             ),
-                //           ),
-                //         );
-                //       },
-                //     );
-                //   },
-                // ),
+             
                 OutlinedButton(
                   onPressed: () {
                     EditCardHolderNameTextField.cardHolderNameContorller.text =
@@ -172,8 +151,8 @@ class PaymentCard extends StatelessWidget implements Equatable {
                       side: const BorderSide(color: ourNavey)),
                   child: Text(
                     AppLocalizations.of(context)!.edit,
-                    style: const TextStyle(
-                      fontSize: 17,
+                    style:  TextStyle(
+                      fontSize: MediaQuery.of(context).size.height * 0.01995305,
                       fontWeight: FontWeight.w500,
                       color: ourNavey,
                     ),
@@ -181,12 +160,12 @@ class PaymentCard extends StatelessWidget implements Equatable {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 24,
+             SizedBox(
+              height: MediaQuery.of(context).size.height * 0.02816901,
             ),
-            const Divider(
-              indent: 16,
-              endIndent: 16,
+             Divider(
+              indent: MediaQuery.of(context).size.height * 0.01877934,
+              endIndent: MediaQuery.of(context).size.height * 0.01877934,
               color: ourLightGray,
             ),
           ],

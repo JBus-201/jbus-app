@@ -37,11 +37,13 @@ class _NaveyWalletContainerState extends State<NaveyWalletContainer> {
   Widget build(BuildContext context) {
     return Container(
       color: ourNavey,
+
       width: double.infinity,
+
       child: Column(
         children: [
-          const SizedBox(
-            height: 100,
+           SizedBox(
+            height: MediaQuery.of(context).size.height * 0.1173089,
           ),
           Text(
             AppLocalizations.of(context)!.walletBalance,
@@ -59,14 +61,15 @@ class _NaveyWalletContainerState extends State<NaveyWalletContainer> {
                       user = snapshot.data!;
                       return Text(
                         '${user.wallet / 100} ',
-                        style: const TextStyle(fontSize: 50, color: ourWhite),
+        style: const TextStyle(fontSize: 50, color: ourWhite),
+
                       );
                     }
                   }),
               Text(
                 AppLocalizations.of(context)!.jod,
-                style: const TextStyle(
-                  fontSize: 36,
+                style:  TextStyle(
+                  fontSize: MediaQuery.of(context).size.height * 0.04225352,
                   color: ourWhite,
                   fontWeight: FontWeight.w400,
                 ),

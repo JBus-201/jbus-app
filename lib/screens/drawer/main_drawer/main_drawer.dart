@@ -42,7 +42,7 @@ class MainDrawer extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: <Widget>[
             SizedBox(
-              height: 250,
+              height: MediaQuery.of(context).size.height * 0.293427,
               child: DrawerHeader(
                 padding: const EdgeInsets.only(bottom: 1),
                 decoration: BoxDecoration(
@@ -64,8 +64,8 @@ class MainDrawer extends StatelessWidget {
                       file: File(''),
                       image:
                           'assets/images/profile_photos/boys_avatars/green_boy_four.png',
-                      borderRadius: 50,
-                      photoRadius: 48,
+                      borderRadius: MediaQuery.of(context).size.height * 0.05868545,
+                      photoRadius: MediaQuery.of(context).size.height * 0.05633803,
                       borderColor: ourWhite,
                     ),
                     Text(

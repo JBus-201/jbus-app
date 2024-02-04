@@ -62,11 +62,11 @@ class _FazaHistoryPageState extends State<FazaHistoryPage> {
 
                       return ListTile(
                         leading: Container(
-                          height: 50,
-                          width: 50,
+                          height: MediaQuery.of(context).size.height * 0.058685,
+                          width: MediaQuery.of(context).size.height * 0.058685,
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              border: Border.all(width: 0.5)),
+                              border: Border.all(width: MediaQuery.of(context).size.height * 0.00058685)),
                           child: fazaa.inDebt.profileImage != null
                               ? Image.asset('${fazaa.inDebt.profileImage}')
                               : const Icon(Icons.person),
@@ -86,7 +86,7 @@ class _FazaHistoryPageState extends State<FazaHistoryPage> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: fazaa.paid ? ourGreen : ourRed,
-                              fontSize: 15,
+                              fontSize:  MediaQuery.of(context).size.height * 0.01760563,
                               fontWeight: FontWeight.bold),
                         ),
                       );

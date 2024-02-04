@@ -29,8 +29,8 @@ class PasswordVerificationTextField extends StatelessWidget {
                 enableSuggestions: false,
                 obscureText: state.obscureText,
                 autocorrect: false,
-                bottomPadding: 24,
-                sizedBoxHeight: 65,
+                bottomPadding: MediaQuery.of(context).size.height * 0.028169,
+            sizedBoxHeight: MediaQuery.of(context).size.height * 0.07629108,
                 maxLength: 40,
                 validator: (value) {
                   if (value == null || value.isEmpty) {

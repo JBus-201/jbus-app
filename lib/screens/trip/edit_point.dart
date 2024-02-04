@@ -194,15 +194,15 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
             Container(
               height: double.infinity,
               alignment: Alignment.bottomCenter,
-              padding: const EdgeInsets.all(16.0),
+              padding:  EdgeInsets.all(MediaQuery.of(context).size.height * 0.01877934),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   RectangularElevatedButton(
                       text: AppLocalizations.of(context)!.selectPick,
-                      fontSize: 16,
+                      fontSize: MediaQuery.of(context).size.height * 0.01877934,
                       fontWeight: FontWeight.w300,
-                      width: 175,
+                      width: MediaQuery.of(context).size.height * 0.20539906,
                       onPressed: () {
                         pickupSelectedPoint = Point(
                             name: markers
@@ -248,7 +248,7 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       CircularElevatedButton(
-                        size: 30,
+                        size: MediaQuery.of(context).size.height * 0.03521127,
                         icon: Icons.arrow_left_rounded,
                         onPressed: () {
                           if (markers.isNotEmpty && currentIndex > 1) {
@@ -263,9 +263,9 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                       ),
                       RectangularElevatedButton(
                           text: AppLocalizations.of(context)!.selectDrop,
-                          fontSize: 16,
+                          fontSize: MediaQuery.of(context).size.height * 0.01877934,
                           fontWeight: FontWeight.w300,
-                          width: 175,
+                          width: MediaQuery.of(context).size.height * 0.205399,
                           onPressed: () {
                             dropoffSelectedPoint = Point(
                                 name: markers
@@ -308,7 +308,7 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                                         endingPoint: dropoffSelectedPoint)));
                           }),
                       CircularElevatedButton(
-                        size: 30,
+                        size: MediaQuery.of(context).size.height * 0.03521127,
                         icon: Icons.arrow_right_rounded,
                         onPressed: () {
                           print(

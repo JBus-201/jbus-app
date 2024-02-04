@@ -18,7 +18,7 @@ class TestScreen extends StatelessWidget {
           ),
           body: Center(
             child: SizedBox(
-              height: 300,
+              height: MediaQuery.of(context).size.height * 0.35211268,
               child: ListView.builder(
                   itemCount:
                       //state.paymentCardsList.length

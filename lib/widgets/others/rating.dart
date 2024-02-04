@@ -37,12 +37,12 @@ class _RatingWidgetState extends State<RatingWidget> {
             });
           },
           child: SizedBox(
-            width: 40,
-            height: 40,
+            width: MediaQuery.of(context).size.height * 0.04694836,
+            height: MediaQuery.of(context).size.height * 0.04694836,
             child: Icon(
               index < _rating ? Icons.star : Icons.star_border,
               color: index < _rating ? ourYellow : ourGray,
-              size: 40,
+              size: MediaQuery.of(context).size.height * 0.04694836,
             ),
           ),
         );

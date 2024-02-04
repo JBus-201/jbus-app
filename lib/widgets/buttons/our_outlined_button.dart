@@ -25,11 +25,11 @@ class OurOutlinedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(4.0),
+      padding:  EdgeInsets.all(MediaQuery.of(context).size.height * 0.00469484),
       child: OutlinedButton(
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
-          side: BorderSide(width: 2.0, color: borderColor),
+          side: BorderSide(width: MediaQuery.of(context).size.height * 0.00234742, color: borderColor),
           fixedSize: Size(width, height),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(22),

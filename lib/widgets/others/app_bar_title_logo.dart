@@ -7,12 +7,12 @@ class JbusAppBarTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(
-          height: 12,
+         SizedBox(
+          height: MediaQuery.of(context).size.height * 0.01408451,
         ),
         Image.asset(
           'assets/logos/jbus-logo.png',
-          scale: 20,
+          scale: MediaQuery.of(context).size.height * 0.02347418,
         ),
       ],
     );

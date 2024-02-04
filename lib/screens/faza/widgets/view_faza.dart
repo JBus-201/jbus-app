@@ -17,6 +17,7 @@ class FazaInfoViewDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
       return Dialog(
         shape: RoundedRectangleBorder(
@@ -26,7 +27,7 @@ class FazaInfoViewDialog extends StatelessWidget {
         backgroundColor:
             themeState.thememode == ThemeMode.light ? ourWhite : ourDarkGray,
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding:  EdgeInsets.all(MediaQuery.of(context).size.height * 0.02347418),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -36,15 +37,15 @@ class FazaInfoViewDialog extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: fazaa.paid ? ourGreen : ourRed,
-                      fontSize: 18,
+                      fontSize: MediaQuery.of(context).size.height * 0.02112676,
                       fontWeight: FontWeight.bold)),
               Text(
                   '${AppLocalizations.of(context)!.date}: ${fazaa.createdAt.toString().substring(0, 11)}',
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                      fontSize: 15, fontWeight: FontWeight.normal)),
+                      fontSize: MediaQuery.of(context).size.height * 0.01760563, fontWeight: FontWeight.normal)),
               const SizedBox(
-                height: 25,
+                height: MediaQuery.of(context).size.height * 0.02934272,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -77,6 +78,7 @@ class FazaInfoViewDialog extends StatelessWidget {
                   ),
                   Column(children: [
                     Text(AppLocalizations.of(context)!.inDebt),
+
                     Container(
                       height: 70,
                       width: 70,

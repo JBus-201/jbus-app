@@ -45,10 +45,10 @@ class _AddFriendForFazaState extends State<AddFriendForFaza> {
           Form(
             key: formKey,
             child: OurTextFormField(
-                topPadding: 50,
-                leftPadding: 70,
-                rightPadding: 70,
-                bottomPadding: 50,
+                topPadding: MediaQuery.of(context).size.height * 0.0586545,
+                leftPadding: MediaQuery.of(context).size.height * 0.08215962,
+                rightPadding: MediaQuery.of(context).size.height * 0.08215962,
+                bottomPadding: MediaQuery.of(context).size.height * 0.0586545,
                 showCursor: true,
                 textAlign: TextAlign.center,
                 icon: Icons.person,
@@ -75,7 +75,7 @@ class _AddFriendForFazaState extends State<AddFriendForFaza> {
           ),
           RectangularElevatedButton(
             text: AppLocalizations.of(context)!.sendRequest,
-            width: 250,
+            width: MediaQuery.of(context).size.height * 0.29342723,
             onPressed: () {
               if (formKey.currentState!.validate()) {
                 int friendId = int.parse(friendIdController.text);

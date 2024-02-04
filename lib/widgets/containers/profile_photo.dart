@@ -28,7 +28,7 @@ class ProfilePhoto extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding:  EdgeInsets.all(MediaQuery.of(context).size.height * 0.00938967),
       child: InkWell(
         customBorder: const CircleBorder(),
         onTap: onTap,
@@ -43,21 +43,10 @@ class ProfilePhoto extends StatelessWidget {
                   Image.asset(image)
               : Image.asset(
                   image,
-                  scale: 2.2,
+                  scale: MediaQuery.of(context).size.height * 0.00258216,
                 ),
         ),
 
-        //  CircleAvatar(
-        //   backgroundColor: ourWhite,
-        //   // backgroundImage: hasBeenChoosenFromGallery == true
-        //   //     ? Image.file(file) as ImageProvider
-        //   //     : (isActualPhoto == true)
-        //   //         ? AssetImage(state.photoUrl)
-        //   //         : AssetImage(image) as ImageProvider,
-        //   radius: photoRadius,
-        // child:
-        //),
-        //),
       ),
     );
   }

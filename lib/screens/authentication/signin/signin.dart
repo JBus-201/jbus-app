@@ -24,11 +24,6 @@ class SignInScreen extends StatelessWidget {
               const SliverAppBar(
                 title: JbusAppBarTitle(),
                 automaticallyImplyLeading: false,
-
-                //const AppBarTitleLogo(),
-                //     Text(
-                //   AppLocalizations.of(context)!.signIn,
-                // ),
                 floating: false,
                 pinned: false,
               ),
@@ -36,7 +31,7 @@ class SignInScreen extends StatelessWidget {
                 delegate: SliverChildBuilderDelegate(
                   childCount: 1,
                   (context, index) => Padding(
-                    padding: const EdgeInsets.all(12),
+                    padding:  EdgeInsets.all(MediaQuery.of(context).size.height * 0.014084),
                     child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -47,15 +42,9 @@ class SignInScreen extends StatelessWidget {
                               children: [
                                 EmailTextFieldSI(),
                                 PasswordTextFieldSI(),
-                                //  EmailTextField(),
-                                //  PasswordTextField(),
                               ],
                             ),
                           ),
-                          // const SizedBox(
-                          //   height: 8,
-                          // ),
-
                           BlocProvider(
                             create: (context) => SigninCubit(
                               apiService: sl(),
@@ -63,15 +52,6 @@ class SignInScreen extends StatelessWidget {
                               prefs: sl(),
                             ),
                             child: SignInButtonSIS(
-                              // if(EmailTextFieldSI.emailController == )
-                              // {
-                              // }
-
-                              // emailController:
-                              //     EmailTextFieldSI.emailController,
-                              // passwordController:
-                              //     PasswordTextFieldSI.passwordController,
-
                               formKey: formKey,
                             ),
                           ),
