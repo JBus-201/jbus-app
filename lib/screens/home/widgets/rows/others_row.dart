@@ -13,13 +13,17 @@ class OthersRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-          const EdgeInsets.only(top: 10, bottom: 10, right: 16.0, left: 16.0),
+      padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.0117,
+          bottom: MediaQuery.of(context).size.height * 0.0117,
+          right: MediaQuery.of(context).size.height * 0.0188,
+          left: MediaQuery.of(context).size.height * 0.0188),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.all(4.0),
+            padding:
+                EdgeInsets.all(MediaQuery.of(context).size.height * 0.0047),
             child: OurText(
               AppLocalizations.of(context)!.others,
               fontWeight: FontWeight.w700,
@@ -31,15 +35,15 @@ class OthersRow extends StatelessWidget {
               OurTab(
                 text: AppLocalizations.of(context)!.history,
                 image: 'assets/images/calendar.png',
-                scale: 8.5,
-                topPadding: 14,
+                scale: MediaQuery.of(context).size.height * 0.00997653,
+                topPadding: MediaQuery.of(context).size.height * 0.0164,
                 onTap: () {},
               ),
               OurTab(
                 text: AppLocalizations.of(context)!.settings,
                 image: 'assets/images/settings.png',
-                scale: 9.2,
-                topPadding: 15,
+                scale: MediaQuery.of(context).size.height * 0.01079812,
+                topPadding: MediaQuery.of(context).size.height * 0.0176,
                 onTap: () {
                   Navigator.push(
                     context,
@@ -52,8 +56,8 @@ class OthersRow extends StatelessWidget {
               OurTab(
                 text: AppLocalizations.of(context)!.account,
                 image: 'assets/images/profile_photos/boy_four.png',
-                scale: 24,
-                topPadding: 12,
+                scale: MediaQuery.of(context).size.height * 0.02816901,
+                topPadding: MediaQuery.of(context).size.height * 0.0141,
                 //leftPadding: 1,
                 onTap: () {
                   Navigator.push(

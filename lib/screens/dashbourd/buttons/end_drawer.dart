@@ -11,26 +11,19 @@ class CustomEndDrawerButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
       return Container(
-        padding: const EdgeInsets.only(left: 15),
+        padding:  EdgeInsets.only(left: MediaQuery.of(context).size.height * 0.017605),
         child: Stack(
           alignment: Alignment.center,
           children: [
             Container(
               
               decoration: const BoxDecoration(
-                  //   boxShadow: [
-                  //   BoxShadow(
-                  //     offset: const Offset(0, 2),
-                  //     color:themeState.thememode == ThemeMode.light ? ourDarkGray50.withOpacity(0.1) : ourWhite.withOpacity(0.1),
-                  //     blurRadius: 2,
-                  //   )
-                  // ],
                   shape: BoxShape.circle),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  shape: const CircleBorder(
+                  shape:  CircleBorder(
                     side: BorderSide(
-                        color: ourNavey, width: 1.7), // Add the border here
+                        color: ourNavey, width: MediaQuery.of(context).size.height * 0.00199), // Add the border here
                   ),
                   foregroundColor: themeState.thememode == ThemeMode.light
                       ? ourBlack

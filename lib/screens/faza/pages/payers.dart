@@ -123,8 +123,8 @@ class _FazaPayersPageState extends State<FazaPayersPage> {
               '${AppLocalizations.of(context)!.totalAmountNeeded}: $amountfaz',
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
-            const SizedBox(
-              height: 20,
+             SizedBox(
+              height: MediaQuery.of(context).size.height * 0.02347418,
             ),
             Text(
                 '${AppLocalizations.of(context)!.timeRemaining}: $_secondsRemaining',
@@ -134,12 +134,12 @@ class _FazaPayersPageState extends State<FazaPayersPage> {
                             ? ourRed
                             : ourOrange
                         : ourGreen)),
-            const SizedBox(
-              height: 50,
+             SizedBox(
+              height: MediaQuery.of(context).size.height * 0.05868545,
             ),
             RectangularElevatedButton(
               text: "${AppLocalizations.of(context)!.pay}: ${0.05}",
-              width: 250,
+              width: MediaQuery.of(context).size.height * 0.29342723,
               onPressed: () {
                 if (wallet > 5) {
                   if (amountfaz > 0) {
@@ -210,7 +210,7 @@ class _FazaPayersPageState extends State<FazaPayersPage> {
             ),
             RectangularElevatedButton(
               text: AppLocalizations.of(context)!.payTwoFive,
-              width: 250,
+              width: MediaQuery.of(context).size.height * 0.29342723,
               onPressed: () {
                 if (amountfaz > 0) {
                   showDialog(
@@ -244,7 +244,7 @@ class _FazaPayersPageState extends State<FazaPayersPage> {
             ),
             RectangularElevatedButton(
               text: "${AppLocalizations.of(context)!.pay}: $amountfaz",
-              width: 250,
+              width: MediaQuery.of(context).size.height * 0.29342723,
               onPressed: () {
                 if (amountfaz > 0) {
                   showDialog(
@@ -267,7 +267,7 @@ class _FazaPayersPageState extends State<FazaPayersPage> {
               },
               gradient: goldButtonGradient,
               gradientForDark: goldButtonGradient,
-              padding: 50,
+              padding: MediaQuery.of(context).size.height * 0.058685,
             )
           ],
         ),

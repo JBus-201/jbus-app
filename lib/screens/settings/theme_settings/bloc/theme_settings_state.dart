@@ -4,10 +4,10 @@ class ThemeSettingsState extends Equatable {
   const ThemeSettingsState({
     this.lightButtonColorLight = naveyButtonGradient,
     this.darkButtonColorLight = naveyButtonGradient,
-    this.systemButtonColorLight = naveyButtonGradient,
+    this.systemButtonColorLight = blueButtonGradient,
     this.lightButtonColorDark = darkOrangeButtonGradient,
     this.darkButtonColorDark = darkOrangeButtonGradient,
-    this.systemButtonColorDark = darkOrangeButtonGradient,
+    this.systemButtonColorDark = orangeButtonGradient,
   });
 
   final Gradient lightButtonColorLight;

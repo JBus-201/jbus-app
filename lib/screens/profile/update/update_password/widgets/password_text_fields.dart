@@ -30,8 +30,8 @@ class PasswordTextField extends StatelessWidget {
             obscureText: state.obscureText,
             autocorrect: false,
             enableSuggestions: false,
-            bottomPadding: 24,
-            sizedBoxHeight: 65,
+            bottomPadding: MediaQuery.of(context).size.height * 0.028169,
+            sizedBoxHeight: MediaQuery.of(context).size.height * 0.07629108,
             maxLength: 40,
             // onChanged: (value) {
             //   final emailBloc = BlocProvider.of<PasswordBloc>(context);

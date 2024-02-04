@@ -15,30 +15,30 @@ class FriendViewDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height * 0.01173709),
       ),
       elevation: 5,
       backgroundColor: Colors.white,
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding:  EdgeInsets.all(MediaQuery.of(context).size.height * 0.02347418),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Container(
-              height: 100,
-              width: 100,
+              height: MediaQuery.of(context).size.height * 0.11737089,
+              width: MediaQuery.of(context).size.height * 0.11737089,
               decoration: BoxDecoration(
-                  shape: BoxShape.circle, border: Border.all(width: 0.5)),
+                  shape: BoxShape.circle, border: Border.all(width: 0.00058685)),
               child: profileImage != null
                   ? Image.asset('$profileImage')
                   : const Icon(Icons.person),
-            ),const SizedBox(height: 16),
+            ), SizedBox(height: MediaQuery.of(context).size.height * 0.01877934),
             Text('User Id: $id',textAlign: TextAlign.center,),
-            const SizedBox(height: 10),
+             SizedBox(height: MediaQuery.of(context).size.height * 0.01173709),
             Text('$name',textAlign: TextAlign.center,),
-            const SizedBox(height: 16),
+             SizedBox(height: MediaQuery.of(context).size.height * 0.01877934),
             RectangularElevatedButton(
-              width: 150,
+              width: MediaQuery.of(context).size.height * 0.17605634,
               onPressed: () {
                 Navigator.of(context).pop();
               },

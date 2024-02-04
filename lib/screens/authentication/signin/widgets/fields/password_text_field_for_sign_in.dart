@@ -9,10 +9,6 @@ class PasswordTextFieldSI extends StatelessWidget {
 
   static final TextEditingController passwordController =
       TextEditingController();
-  // static final TextEditingController confirmPasswordController =
-  //     TextEditingController();
-  //static String? password;
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -29,12 +25,10 @@ class PasswordTextFieldSI extends StatelessWidget {
             obscureText: state.obscureText,
             autocorrect: false,
             enableSuggestions: false,
-            bottomPadding: 24,
-            sizedBoxHeight: 65,
+            bottomPadding: MediaQuery.of(context).size.height * 0.02816,
+            sizedBoxHeight: MediaQuery.of(context).size.height * 0.07629,
             maxLength: 40,
             validator: (value) {
-              //password = value;
-
               final RegExp regex = RegExp(r'.{8,20}');
 
               if (value == null || value.isEmpty) {
@@ -43,39 +37,11 @@ class PasswordTextFieldSI extends StatelessWidget {
                 return AppLocalizations.of(context)!
                     .sorryPleaseEnterAValidPassword;
               }
-
               return null;
             },
           );
         },
       ),
-      // BlocBuilder<SignupBloc, SignupState>(
-      //   builder: (context, state) {
-      // return OurTextFormField(
-      //     label: AppLocalizations.of(context)!.confirmPassword,
-      //     icon: Icons.lock_outline_rounded,
-      //     suffixIcon: state.icon,
-      //     textInputAction: TextInputAction.done,
-      //     controller: confirmPasswordController,
-      //     keyboardType: TextInputType.visiblePassword,
-      //     enableSuggestions: false,
-      //     obscureText: state.obscureText,
-      //     autocorrect: false,
-      //     maxLength: 40,
-      //     validator: (value) {
-      //       if (value == null || value.isEmpty) {
-      //         return AppLocalizations.of(context)!.sorryPleaseReEnterYourPassword;
-      //       }
-
-      //       if (password != value.trim()) {
-      //         return AppLocalizations.of(context)!.sorryPasswordDoesNotMatch;
-      //         //'Sorry, Password does not match, please re enter your password correctly.';
-      //       }
-
-      //       return null;
-      //     });
-      //   },
-      // ),
     );
   }
 }

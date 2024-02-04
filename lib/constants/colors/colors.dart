@@ -46,3 +46,4 @@ const Color ourLightGold = Color.fromARGB(255, 211, 191, 131);
 const Color ourGold = Color.fromARGB(255, 176, 155, 57);
 //const Color ourVeryLightGray = Color.fromARGB(255, 246, 246, 246);
 const Color ourVeryLightGray = Color.fromARGB(255, 247, 249, 251);
+const Color ourMainDark =  Color.fromARGB(255, 36, 51, 67);

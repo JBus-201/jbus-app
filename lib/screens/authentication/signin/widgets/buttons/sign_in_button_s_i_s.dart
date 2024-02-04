@@ -54,25 +54,17 @@ class SignInButtonSIS extends StatelessWidget {
                   text: AppLocalizations.of(context)!.signIn,
                   onPressed: () async {
                     if (formKey.currentState!.validate() || true) {
-                      //print('HIIIIIIIIIIIIIIIIIIIII');
-                      // final emailBloc = BlocProvider.of<EmailBloc>(context);
-                      // emailBloc.add(UpdateEmailEvent(EmailTextField.email!));
-
-                      // final passwordBloc =
-                      //     BlocProvider.of<PasswordBloc>(context);
-                      // passwordBloc.add(
-                      //     UpdatePasswordEvent(PasswordTextField.password!));
-
+                     
                       final fcmToken =
                           await FirebaseMessaging.instance.getToken();
                       final credential = LoginRequest(
                         email: EmailTextFieldSI.emailController.text,
-                        //emailState.email,
+               
                         password: PasswordTextFieldSI.passwordController.text,
-                        //passwordState.password,
+                      
                         fcmToken: fcmToken,
-                        // email: emailController.text,
-                        // password: passwordController.text,
+                     
+                     
                       );
 
                       if (context.mounted) {

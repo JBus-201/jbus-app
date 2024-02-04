@@ -49,10 +49,10 @@ class _FazaFriendRequestsPageState extends State<FazaFriendRequestsPage> {
 
                 return ListTile(
                   leading: Container(
-                    height: 50,
-                    width: 50,
+                    height: MediaQuery.of(context).size.height * 0.05868,
+                    width: MediaQuery.of(context).size.height * 0.05868,
                     decoration: BoxDecoration(
-                        shape: BoxShape.circle, border: Border.all(width: 0.5)),
+                        shape: BoxShape.circle, border: Border.all(width: MediaQuery.of(context).size.height * 0.00058685)),
                     child: friend.passenger.profileImage != null
                         ? Image.asset('${friend.passenger.profileImage}')
                         : const Icon(Icons.person),
@@ -61,10 +61,10 @@ class _FazaFriendRequestsPageState extends State<FazaFriendRequestsPage> {
                   subtitle: Text(friend.passenger.user.name ?? 'N/A'),
                   trailing: RectangularElevatedButton(
                     text: AppLocalizations.of(context)!.accept,
-                    fontSize: 15,
-                    padding: 1,
-                    height: 15,
-                    width: 100,
+                    fontSize: MediaQuery.of(context).size.height * 0.0176563,
+                    padding: MediaQuery.of(context).size.height * 0.00117371,
+                    height: MediaQuery.of(context).size.height * 0.01760563,
+                    width: MediaQuery.of(context).size.height * 0.11737089,
                     onPressed: () {
                       print('Request Id: ${friend.id}');
                       sl<ApiService>()

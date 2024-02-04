@@ -95,7 +95,7 @@ class _TripAvailableBusesState extends State<TripAvailableBuses> {
               alignment: Alignment.bottomCenter,
               child: Container(
                   alignment: Alignment.center,
-                  height: 100,
+                  height: MediaQuery.of(context).size.height * 0.11737089,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     // color: Colors.white,
@@ -117,7 +117,7 @@ class _TripAvailableBusesState extends State<TripAvailableBuses> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CircularElevatedButton(
-                        size: 30,
+                        size: MediaQuery.of(context).size.height * 0.03521127,
                         icon: Icons.arrow_left_rounded,
                         onPressed: () {
                           if (markers.isNotEmpty && currentIndex > 1) {
@@ -132,19 +132,19 @@ class _TripAvailableBusesState extends State<TripAvailableBuses> {
                       ),
                       Container(
                           alignment: Alignment.center,
-                          width: 70,
-                          height: 70,
+                          width: MediaQuery.of(context).size.height * 0.0821596,
+                          height: MediaQuery.of(context).size.height * 0.0821596,
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              border: Border.all(width: 0.5, color: ourGray)),
+                              border: Border.all(width: MediaQuery.of(context).size.height * 0.00058685, color: ourGray)),
                           child: Text(
                             '$busesNum',
                             textAlign: TextAlign.start,
-                            style: const TextStyle(
-                                fontSize: 30, fontWeight: FontWeight.w300),
+                            style:  TextStyle(
+                                fontSize: MediaQuery.of(context).size.height * 0.03521127, fontWeight: FontWeight.w300),
                           )),
                       CircularElevatedButton(
-                        size: 30,
+                        size: MediaQuery.of(context).size.height * 0.03521127,
                         icon: Icons.arrow_right_rounded,
                         onPressed: () {
                           if (markers.isNotEmpty &&

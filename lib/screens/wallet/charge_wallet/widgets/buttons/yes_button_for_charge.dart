@@ -27,14 +27,14 @@ class YesButtonForCharging extends StatelessWidget {
         AmmountOfChargeMoneyTextField.amountOfChargeMoneyController.text = '';
       },
       style: OutlinedButton.styleFrom(
-          fixedSize: const Size(120, 35),
+          fixedSize:  Size(MediaQuery.of(context).size.height * 0.0140845, MediaQuery.of(context).size.height * 0.041079),
           side: const BorderSide(
             color: ourNavey,
           )),
       child: Text(
         AppLocalizations.of(context)!.yes,
-        style: const TextStyle(
-          fontSize: 18,
+        style:  TextStyle(
+          fontSize: MediaQuery.of(context).size.height * 0.0211267,
           fontWeight: FontWeight.w500,
           color: ourNavey,
         ),

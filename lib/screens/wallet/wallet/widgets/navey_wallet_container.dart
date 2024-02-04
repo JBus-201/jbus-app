@@ -37,11 +37,11 @@ class _NaveyWalletContainerState extends State<NaveyWalletContainer> {
     double walletBalance = 24.6;
     return Container(
       color: ourNavey,
-      width: 500,
+      width: MediaQuery.of(context).size.height * 0.58685446,
       child: Column(
         children: [
-          const SizedBox(
-            height: 100,
+           SizedBox(
+            height: MediaQuery.of(context).size.height * 0.1173089,
           ),
           Text(
             AppLocalizations.of(context)!.walletBalance,
@@ -60,15 +60,15 @@ class _NaveyWalletContainerState extends State<NaveyWalletContainer> {
                       return Text(
                         '${user.wallet / 100} ',
                         style:
-                            const TextStyle(fontSize: 50, color: Colors.white),
+                             TextStyle(fontSize: MediaQuery.of(context).size.height * 0.05868545, color: Colors.white),
                       );
                     }
                   }),
               
               Text(
                 AppLocalizations.of(context)!.jod,
-                style: const TextStyle(
-                  fontSize: 36,
+                style:  TextStyle(
+                  fontSize: MediaQuery.of(context).size.height * 0.04225352,
                   color: ourWhite,
                   fontWeight: FontWeight.w400,
                 ),

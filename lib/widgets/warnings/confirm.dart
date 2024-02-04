@@ -28,37 +28,37 @@ class ConfirmationDialog extends StatelessWidget {
         backgroundColor:
             themeState.thememode == ThemeMode.light ? ourWhite : ourDarkGray,
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding:  EdgeInsets.all(MediaQuery.of(context).size.height * 0.023474),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              const Icon(
+               Icon(
                 Icons.question_mark_rounded,
-                size: 48,
+                size: MediaQuery.of(context).size.height * 0.056338,
                 color: ourOrange,
               ),
-              const SizedBox(height: 16),
+               SizedBox(height: MediaQuery.of(context).size.height * 0.0187793),
               Text(
                 title,
-                style: const TextStyle(
-                  fontSize: 18,
+                style:  TextStyle(
+                  fontSize: MediaQuery.of(context).size.height * 0.02112676,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 8),
+               SizedBox(height: MediaQuery.of(context).size.height * 0.009389),
               Text(
                 description,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 16,
+                style:  TextStyle(
+                  fontSize: MediaQuery.of(context).size.height * 0.018779,
                 ),
               ),
-              const SizedBox(height: 16),
+               SizedBox(height: MediaQuery.of(context).size.height * 0.018779),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   RectangularElevatedButton(
-                    width: 110,
+                    width: MediaQuery.of(context).size.height * 0.12910798,
                     onPressed: onConfirm,
                     text: AppLocalizations.of(context)!.yes,
                   ),

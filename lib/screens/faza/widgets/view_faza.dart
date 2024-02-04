@@ -3,6 +3,7 @@ import 'package:jbus_app/constants/colors/colors.dart';
 import 'package:jbus_app/data/models/fazaa.dart';
 import 'package:jbus_app/widgets/buttons/rectangular_elevated_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class FazaInfoViewDialog extends StatelessWidget {
   final Fazaa fazaa;
   final int myId;
@@ -21,7 +22,8 @@ class FazaInfoViewDialog extends StatelessWidget {
       elevation: 5,
       backgroundColor: Colors.white,
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding:
+            EdgeInsets.all(MediaQuery.of(context).size.height * 0.02347418),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -31,14 +33,16 @@ class FazaInfoViewDialog extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     color: fazaa.paid ? ourGreen : ourRed,
-                    fontSize: 18,
+                    fontSize: MediaQuery.of(context).size.height * 0.02112676,
                     fontWeight: FontWeight.bold)),
-            Text('${AppLocalizations.of(context)!.date}: ${fazaa.createdAt.toString().substring(0, 11)}',
+            Text(
+                '${AppLocalizations.of(context)!.date}: ${fazaa.createdAt.toString().substring(0, 11)}',
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                    fontSize: 15, fontWeight: FontWeight.normal)),
-            const SizedBox(
-              height: 25,
+                style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.height * 0.01760563,
+                    fontWeight: FontWeight.normal)),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.02934272,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

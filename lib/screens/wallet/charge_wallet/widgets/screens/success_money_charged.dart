@@ -16,28 +16,28 @@ class SuccessMoneyChargedScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(
+             Icon(
               Icons.done,
               color: ourNavey,
-              size: 124,
+              size: MediaQuery.of(context).size.height * 0.145539,
             ),
-            const SizedBox(
-              height: 60,
+             SizedBox(
+              height: MediaQuery.of(context).size.height * 0.0704225,
             ),
             Text(
               AppLocalizations.of(context)!.walletHasBeenChargedSuccessfully,
               textAlign: TextAlign.center,
               style: const TextStyle(color: ourNavey),
             ),
-            const SizedBox(
-              height: 16,
+             SizedBox(
+              height: MediaQuery.of(context).size.height * 0.018779,
             ),
             RectangularElevatedButton(
               text: AppLocalizations.of(context)!.goBack,
-              height: 4,
-              fontSize: 16,
+              height: MediaQuery.of(context).size.height * 0.004694,
+              fontSize: MediaQuery.of(context).size.height * 0.0187793,
               fontWeight: FontWeight.w600,
-              width: 120,
+              width: MediaQuery.of(context).size.height * 0.140845,
               onPressed: () {
                 Navigator.pop(
                   context,

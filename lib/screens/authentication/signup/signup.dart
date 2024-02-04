@@ -36,15 +36,6 @@ class SignupScreen extends StatelessWidget {
             );
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => EmailVerificationScreen(
-                    // firstName: FirstNameTextField.firstNameController.text,
-                    // lastName: LastNameTextField.lastNameController.text,
-                    //email: EmailTextFieldForSignUp.emailController.text,
-                    // phoneNumber: MobileNumberTextField
-                    //         .phoneNumberController.text.isEmpty
-                    //     ? null
-                    //     : MobileNumberTextField.phoneNumberController.text,
-                    // password:
-                    //     PasswordTextFieldForSignUp.passwordController.text,
                     )));
           }
         },
@@ -68,7 +59,7 @@ class SignupScreen extends StatelessWidget {
                       delegate: SliverChildBuilderDelegate(
                         childCount: 1,
                         (context, index) => Padding(
-                          padding: const EdgeInsets.all(12),
+                          padding:  EdgeInsets.all(MediaQuery.of(context).size.height * 0.014084),
                           child: Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -98,20 +89,6 @@ class SignupScreen extends StatelessWidget {
                                 BlocBuilder<EmailBloc, EmailState>(
                                   builder: (context, state) {
                                     return SignUpButtonSUS(
-                                      // firstNameControllerText:
-                                      //     FirstNameTextField
-                                      //         .firstNameController.text,
-                                      // lastNameControllerText: LastNameTextField
-                                      //     .lastNameController.text,
-                                      // // emailControllerText:
-                                      // // EmailTextFieldForSignUp
-                                      // //     .emailController.text,
-                                      // phoneNumberControllerText:
-                                      //     MobileNumberTextField
-                                      //         .phoneNumberController.text,
-                                      // passwordControllerText:
-                                      //     PasswordTextFieldForSignUp
-                                      //         .passwordController.text,
                                       formKey: formKey,
                                       onPressed: () {
                                         final emailBloc =
@@ -155,8 +132,6 @@ class SignupScreen extends StatelessWidget {
 
                                         context.read<SignupCubit>().sendOTP(
                                               EmailTextField.email!,
-
-                                              //state.email,
                                             );
                                       },
                                       isLoading: state is SignupLoading,

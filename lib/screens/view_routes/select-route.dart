@@ -59,6 +59,7 @@ class _SelectRoutePageState extends State<SelectRoutePage> {
     });
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -84,8 +85,8 @@ class _SelectRoutePageState extends State<SelectRoutePage> {
               ),
             ),
           ),
-          const SizedBox(
-            height: 10,
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.01173709,
           ),
           Expanded(
             child: sRoutes.isNotEmpty
@@ -98,7 +99,9 @@ class _SelectRoutePageState extends State<SelectRoutePage> {
                       String? firstStop = route.startingPoint.name;
                       String? finalStop = route.endingPoint.name;
                       return Padding(
-                        padding: const EdgeInsets.only(bottom: 20),
+                        padding: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).size.height *
+                                0.02347418),
                         child: GestureDetector(
                           onTap: () {
                             Navigator.push(
@@ -108,7 +111,8 @@ class _SelectRoutePageState extends State<SelectRoutePage> {
                                         ViewSelectedRoutePage(route: route)));
                           },
                           child: Container(
-                            height: 150,
+                            height:
+                                MediaQuery.of(context).size.height * 0.17605634,
                             width: double.infinity,
                             decoration: const BoxDecoration(
                                 color: Color.fromARGB(255, 236, 236, 236),
@@ -131,38 +135,38 @@ class _SelectRoutePageState extends State<SelectRoutePage> {
                                   children: [
                                     Text(
                                       firstStop ?? 'N/A',
-                                      style: const TextStyle(
+                                      style:  TextStyle(
                                           color: ourBlue,
                                           fontWeight: FontWeight.w400,
-                                          fontSize: 20),
+                                          fontSize: MediaQuery.of(context).size.height * 0.02347418),
                                     ),
-                                    const SizedBox(
-                                      width: 15,
+                                     SizedBox(
+                                      width: MediaQuery.of(context).size.height * 0.01760563,
                                     ),
                                     const Icon(
                                       Icons.linear_scale_outlined,
                                       color: ourOrange,
                                     ),
-                                    const SizedBox(
-                                      width: 15,
+                                     SizedBox(
+                                      width: MediaQuery.of(context).size.height * 0.01760563,
                                     ),
                                     Text(
                                       finalStop ?? 'N/A',
-                                      style: const TextStyle(
+                                      style:  TextStyle(
                                           color: ourBlue,
                                           fontWeight: FontWeight.w400,
-                                          fontSize: 20),
+                                          fontSize: MediaQuery.of(context).size.height * 0.02347418),
                                     ),
                                   ],
                                 ),
-                                const SizedBox(
-                                  height: 15,
+                                 SizedBox(
+                                  height: MediaQuery.of(context).size.height * 0.01760563,
                                 ),
                                 Text(
                                   'Fee: ${route.fee}',
-                                  style: const TextStyle(
+                                  style:  TextStyle(
                                       fontWeight: FontWeight.w300,
-                                      fontSize: 16),
+                                      fontSize: MediaQuery.of(context).size.height * 0.01877934),
                                 )
                               ],
                             ),

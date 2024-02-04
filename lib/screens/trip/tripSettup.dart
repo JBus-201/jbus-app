@@ -163,16 +163,16 @@ class _TripSettupState extends State<TripSettup> {
                         ),
                         child: SingleChildScrollView(
                           child: Padding(
-                            padding: const EdgeInsets.all(10.0),
+                            padding:  EdgeInsets.all(MediaQuery.of(context).size.height * 0.011737),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 RectangularElevatedButton(
                                   text:
                                       AppLocalizations.of(context)!.activeBuses,
-                                  padding: 15,
-                                  width: 200,
-                                  fontSize: 17,
+                                  padding: MediaQuery.of(context).size.height * 0.01760563,
+                                  width: MediaQuery.of(context).size.height * 0.2347417,
+                                  fontSize: MediaQuery.of(context).size.height * 0.0199530,
                                   fontWeight: FontWeight.w400,
                                   onPressed: () {
                                     Navigator.push(
@@ -187,7 +187,7 @@ class _TripSettupState extends State<TripSettup> {
                                                 )));
                                   },
                                 ),
-                                const SizedBox(height: 15),
+                                 SizedBox(height: MediaQuery.of(context).size.height * 0.01760563),
                                 SingleChildScrollView(
                                   child: Row(
                                     mainAxisAlignment:
@@ -200,12 +200,12 @@ class _TripSettupState extends State<TripSettup> {
                                             CrossAxisAlignment.center,
                                         children: [
                                           Container(
-                                            width: 50,
-                                            height: 50,
+                                            width: MediaQuery.of(context).size.height * 0.05868545,
+                                            height: MediaQuery.of(context).size.height * 0.05868545,
                                             decoration: BoxDecoration(
                                                 shape: BoxShape.circle,
                                                 border: Border.all(
-                                                    width: 0.5,
+                                                    width: MediaQuery.of(context).size.height * 0.00058685,
                                                     color: themeState
                                                           .thememode ==
                                                       ThemeMode.light?ourGray:ourWhite)),
@@ -216,8 +216,8 @@ class _TripSettupState extends State<TripSettup> {
                                                       ThemeMode.light?ourGray:ourWhite,
                                             ),
                                           ),
-                                          const SizedBox(
-                                            height: 20,
+                                           SizedBox(
+                                            height: MediaQuery.of(context).size.height * 0.023474,
                                           ),
                                           Text(
                                               isGoing
@@ -230,11 +230,11 @@ class _TripSettupState extends State<TripSettup> {
                                                           endingPoint.name!
                                                                   .length >
                                                               19
-                                                      ? 18
-                                                      : 15,
+                                                      ? MediaQuery.of(context).size.height * 0.02112676
+                                                      : MediaQuery.of(context).size.height * 0.01760563,
                                                   fontWeight: FontWeight.w300)),
-                                          const SizedBox(
-                                            height: 20,
+                                           SizedBox(
+                                            height: MediaQuery.of(context).size.height * 0.02347418,
                                           ),
                                           FloatingActionButton(
                                               shape: const CircleBorder(),
@@ -311,12 +311,12 @@ class _TripSettupState extends State<TripSettup> {
                                             CrossAxisAlignment.center,
                                         children: [
                                           Container(
-                                            width: 50,
-                                            height: 50,
+                                            width: MediaQuery.of(context).size.height * 0.05868545,
+                                            height: MediaQuery.of(context).size.height * 0.05868545,
                                             decoration: BoxDecoration(
                                                 shape: BoxShape.circle,
                                                 border: Border.all(
-                                                    width: 0.5,
+                                                    width: MediaQuery.of(context).size.height * 0.0005868545,
                                                     color: themeState
                                                           .thememode ==
                                                       ThemeMode.light?ourGray:ourWhite)),
@@ -327,8 +327,8 @@ class _TripSettupState extends State<TripSettup> {
                                                       ThemeMode.light?ourGray:ourWhite,
                                             ),
                                           ),
-                                          const SizedBox(
-                                            height: 20,
+                                           SizedBox(
+                                            height: MediaQuery.of(context).size.height * 0.02347418,
                                           ),
                                           Text(
                                             isGoing
@@ -341,12 +341,12 @@ class _TripSettupState extends State<TripSettup> {
                                                             endingPoint.name!
                                                                     .length >
                                                                 19
-                                                        ? 18
-                                                        : 15,
+                                                        ? MediaQuery.of(context).size.height * 0.02112676
+                                                        : MediaQuery.of(context).size.height * 0.01760563,
                                                 fontWeight: FontWeight.w300),
                                           ),
-                                          const SizedBox(
-                                            height: 20,
+                                           SizedBox(
+                                            height: MediaQuery.of(context).size.height * 0.02347418,
                                           ),
                                           FloatingActionButton(
                                               shape: const CircleBorder(),

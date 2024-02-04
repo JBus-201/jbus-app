@@ -17,8 +17,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileContainer extends StatefulWidget {
   const ProfileContainer({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<ProfileContainer> createState() => _ProfileContainerState();
@@ -96,10 +96,11 @@ class _ProfileContainerState extends State<ProfileContainer> {
                           return ProfilePhoto(
                             file: File(''),
                             image: state.photoUrl,
-                            borderRadius: 60,
-                            photoRadius: 100,
+                            borderRadius: MediaQuery.of(context).size.height * 0.070422535211268,
+                            photoRadius: MediaQuery.of(context).size.height * 0.117370892018779,
                             borderColor: ourWhite,
                             onTap: () {
+                              
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -130,13 +131,17 @@ class _ProfileContainerState extends State<ProfileContainer> {
                                 if (snapshot.connectionState ==
                                     ConnectionState.waiting) {
                                   return const Center(
-                                      child: CircularProgressIndicator());
+                                      child: CircularProgressIndicator(
+                                    color: ourWhite,
+                                  ));
                                 } else {
                                   Passenger user = snapshot.data!;
                                   return OurText(
                                     '${user.wallet / 100} ',
                                     fontWeight: FontWeight.w800,
-                                    fontSize: 60,
+                                    fontSize:
+                                        MediaQuery.of(context).size.height *
+                                            0.07042254,
                                     color: ourWhite,
                                     fontFamily: 'PTSerif',
                                   );
@@ -145,24 +150,23 @@ class _ProfileContainerState extends State<ProfileContainer> {
                           OurText(
                             AppLocalizations.of(context)!.jod,
                             fontWeight: FontWeight.w500,
-                            fontSize: 20,
+                            fontSize: MediaQuery.of(context).size.height * 0.023474178403756,
                             color: ourWhite,
                             fontFamily: 'PTSerif',
                           )
                         ],
                       ),
                       ElevatedButton(
-                onPressed: () => refreshData(),
-                child: const Icon(Icons.refresh),
-              ),
+                        onPressed: () => refreshData(),
+                        child: const Icon(Icons.refresh),
+                      ),
                     ],
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 30,
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.0352,
               ),
-              
             ],
           ),
         );

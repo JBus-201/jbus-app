@@ -55,7 +55,7 @@ class _FavoriteButtonState extends State<FavoriteButton> {
       child: Icon(
         isFavorite ? Icons.favorite_rounded : Icons.favorite_border_rounded,
         color: isFavorite ? ourRed : ourGray,
-        size: 35,
+        size: MediaQuery.of(context).size.height * 0.04107981,
       ),
     );
   }

@@ -43,7 +43,7 @@ class _ViewSelectedRoutePageState extends State<ViewSelectedRoutePage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(115.0),
+        preferredSize:  Size.fromHeight(MediaQuery.of(context).size.height * 0.134976),
         child: AppBar(
           automaticallyImplyLeading: true,
           elevation: 0,
@@ -181,7 +181,7 @@ class _ViewSelectedRoutePageState extends State<ViewSelectedRoutePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           CircularElevatedButton(
-                            size: 30,
+                            size: MediaQuery.of(context).size.height * 0.0352112,
                             icon: Icons.arrow_left_rounded,
                             onPressed: () {
                               if (markers.isNotEmpty && currentIndex > 0) {
@@ -195,7 +195,7 @@ class _ViewSelectedRoutePageState extends State<ViewSelectedRoutePage> {
                             },
                           ),
                           CircularElevatedButton(
-                            size: 30,
+                            size: MediaQuery.of(context).size.height * 0.0352112,
                             icon: Icons.swap_horiz_rounded,
                             onPressed: () {
                               setState(() {
@@ -216,7 +216,7 @@ class _ViewSelectedRoutePageState extends State<ViewSelectedRoutePage> {
                             },
                           ),
                           CircularElevatedButton(
-                            size: 30,
+                            size: MediaQuery.of(context).size.height * 0.0352112,
                             icon: Icons.arrow_right_rounded,
                             onPressed: () {
                               print(

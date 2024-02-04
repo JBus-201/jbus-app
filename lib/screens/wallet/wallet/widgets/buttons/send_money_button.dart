@@ -13,10 +13,10 @@ class SendMonyButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
-        left: 16,
-        right: 16,
-        bottom: 24,
+      padding:  EdgeInsets.only(
+        left: MediaQuery.of(context).size.height * 0.01877934,
+        right: MediaQuery.of(context).size.height * 0.01877934,
+        bottom: MediaQuery.of(context).size.height * 0.028169,
         top: 0,
       ),
       child: RectangularElevatedButton(

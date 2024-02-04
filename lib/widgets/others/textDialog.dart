@@ -29,31 +29,31 @@ class TextDialog extends StatelessWidget {
       elevation: 5,
       backgroundColor: Colors.white,
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding:  EdgeInsets.all(MediaQuery.of(context).size.height * 0.02347418),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            const Icon(
+             Icon(
               Icons.location_on,
-              size: 48,
+              size: MediaQuery.of(context).size.height * 0.05633803,
               color: ourOrange,
             ),
-            const SizedBox(height: 16),
+             SizedBox(height: MediaQuery.of(context).size.height * 0.01877934),
             Text(
               AppLocalizations.of(context)!.favoriteStops,
-              style: const TextStyle(
-                fontSize: 18,
+              style:  TextStyle(
+                fontSize: MediaQuery.of(context).size.height * 0.02112676,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 16),
+             SizedBox(height: MediaQuery.of(context).size.height * 0.01877934),
             Form(
               key: formKey,
               child: OurTextFormField(
-                  topPadding: 25,
-                  leftPadding: 5,
-                  rightPadding: 5,
-                  bottomPadding: 25,
+                  topPadding: MediaQuery.of(context).size.height * 0.02934272,
+                  leftPadding: MediaQuery.of(context).size.height * 0.00586854,
+                  rightPadding: MediaQuery.of(context).size.height * 0.00586854,
+                  bottomPadding: MediaQuery.of(context).size.height * 0.02934272,
                   showCursor: true,
                   textAlign: TextAlign.center,
                   icon: Icons.location_on,
@@ -80,8 +80,8 @@ class TextDialog extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 RectangularElevatedButton(
-                  width: 100,
-                  fontSize: 15,
+                  width: MediaQuery.of(context).size.height * 0.11737089,
+                  fontSize: MediaQuery.of(context).size.height * 0.01760563,
                   fontWeight: FontWeight.w300,
                   onPressed: () {
                     final newFav = FavoritePointCreateRequest(

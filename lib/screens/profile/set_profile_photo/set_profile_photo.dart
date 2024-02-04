@@ -62,31 +62,31 @@ class _SetProfilePhotoScreenState extends State<SetProfilePhotoScreen> {
               children: [
                 // Main photo
                 ProfilePhoto(
-                  borderRadius: 100,
-                  photoRadius: 96,
+                  borderRadius: MediaQuery.of(context).size.height * 0.1174,
+                  photoRadius: MediaQuery.of(context).size.height * 0.1127,
                   image: state.photoUrl,
                   hasBeenChoosenFromGallery: hasBeenChoosenFromGallery,
                   //file: state.file,
                   file: file,
                 ),
-                const SizedBox(
-                  height: 18,
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.0211,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ProfilePhoto(
                       hasBeenChoosenFromGallery: hasBeenChoosenFromGallery,
-                      borderRadius: 50,
-                      photoRadius: 48,
+                      borderRadius: MediaQuery.of(context).size.height * 0.0597,
+                      photoRadius: MediaQuery.of(context).size.height * 0.0563,
                       image: 'assets/images/galery.png',
                       onTap: () => chooseImageFromGallary(),
                       file: File('assets/images/galery.png'),
                     ),
                     ProfilePhoto(
                       file: File(''),
-                      borderRadius: 50,
-                      photoRadius: 48,
+                      borderRadius: MediaQuery.of(context).size.height * 0.0597,
+                      photoRadius: MediaQuery.of(context).size.height * 0.0563,
                       image: 'assets/images/profile_photos/boy_one.png',
                       onTap: () {
                         final setProfilePhotoBloc =
@@ -101,17 +101,17 @@ class _SetProfilePhotoScreenState extends State<SetProfilePhotoScreen> {
                     ),
                     ProfilePhoto(
                       file: File(''),
-                      borderRadius: 50,
-                      photoRadius: 48,
-                      image: 'assets/images/profile_photos/boy_tow.png',
+                      borderRadius: MediaQuery.of(context).size.height * 0.0597,
+                      photoRadius: MediaQuery.of(context).size.height * 0.0563,
+                      image: 'assets/images/profile_photos/boy_two.png',
                       onTap: () {
                         final setProfilePhotoBloc =
                             context.read<SetProfilePhotoBloc>();
-    
+
                         setProfilePhotoBloc.add(
                           ChangeProfilePhotoEvent(
                             profilePhotoUrl:
-                                'assets/images/profile_photos/boy_tow.png',
+                                'assets/images/profile_photos/boy_two.png',
                           ),
                         );
                       },
@@ -123,13 +123,13 @@ class _SetProfilePhotoScreenState extends State<SetProfilePhotoScreen> {
                   children: [
                     ProfilePhoto(
                       file: File(''),
-                      borderRadius: 50,
-                      photoRadius: 48,
+                      borderRadius: MediaQuery.of(context).size.height * 0.0597,
+                      photoRadius: MediaQuery.of(context).size.height * 0.0563,
                       image: 'assets/images/profile_photos/boy_three.png',
                       onTap: () {
                         final setProfilePhotoBloc =
                             context.read<SetProfilePhotoBloc>();
-    
+
                         setProfilePhotoBloc.add(
                           ChangeProfilePhotoEvent(
                             profilePhotoUrl:
@@ -140,13 +140,13 @@ class _SetProfilePhotoScreenState extends State<SetProfilePhotoScreen> {
                     ),
                     ProfilePhoto(
                       file: File(''),
-                      borderRadius: 50,
-                      photoRadius: 48,
+                      borderRadius: MediaQuery.of(context).size.height * 0.0597,
+                      photoRadius: MediaQuery.of(context).size.height * 0.0563,
                       image: 'assets/images/profile_photos/boy_four.png',
                       onTap: () {
                         final setProfilePhotoBloc =
                             context.read<SetProfilePhotoBloc>();
-    
+
                         setProfilePhotoBloc.add(
                           ChangeProfilePhotoEvent(
                             profilePhotoUrl:
@@ -157,13 +157,13 @@ class _SetProfilePhotoScreenState extends State<SetProfilePhotoScreen> {
                     ),
                     ProfilePhoto(
                       file: File(''),
-                      borderRadius: 50,
-                      photoRadius: 48,
+                      borderRadius: MediaQuery.of(context).size.height * 0.0597,
+                      photoRadius: MediaQuery.of(context).size.height * 0.0563,
                       image: 'assets/images/profile_photos/girl_one.png',
                       onTap: () {
                         final setProfilePhotoBloc =
                             context.read<SetProfilePhotoBloc>();
-    
+
                         setProfilePhotoBloc.add(
                           ChangeProfilePhotoEvent(
                             profilePhotoUrl:
@@ -179,13 +179,13 @@ class _SetProfilePhotoScreenState extends State<SetProfilePhotoScreen> {
                   children: [
                     ProfilePhoto(
                       file: File(''),
-                      borderRadius: 50,
-                      photoRadius: 48,
+                      borderRadius: MediaQuery.of(context).size.height * 0.0597,
+                      photoRadius: MediaQuery.of(context).size.height * 0.0563,
                       image: 'assets/images/profile_photos/girl_two.png',
                       onTap: () {
                         final setProfilePhotoBloc =
                             context.read<SetProfilePhotoBloc>();
-    
+
                         setProfilePhotoBloc.add(
                           ChangeProfilePhotoEvent(
                             profilePhotoUrl:
@@ -196,13 +196,13 @@ class _SetProfilePhotoScreenState extends State<SetProfilePhotoScreen> {
                     ),
                     ProfilePhoto(
                       file: File(''),
-                      borderRadius: 50,
-                      photoRadius: 48,
+                      borderRadius: MediaQuery.of(context).size.height * 0.0597,
+                      photoRadius: MediaQuery.of(context).size.height * 0.0563,
                       image: 'assets/images/profile_photos/girl_three.png',
                       onTap: () {
                         final setProfilePhotoBloc =
                             context.read<SetProfilePhotoBloc>();
-    
+
                         setProfilePhotoBloc.add(
                           ChangeProfilePhotoEvent(
                             profilePhotoUrl:
@@ -213,18 +213,18 @@ class _SetProfilePhotoScreenState extends State<SetProfilePhotoScreen> {
                     ),
                     ProfilePhoto(
                       file: File(''),
-                      borderRadius: 50,
-                      photoRadius: 48,
+                      borderRadius: MediaQuery.of(context).size.height * 0.0597,
+                      photoRadius: MediaQuery.of(context).size.height * 0.0563,
                       image: 'assets/images/camera.png',
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 18,
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.02113,
                 ),
                 RectangularElevatedButton(
                   text: AppLocalizations.of(context)!.save,
-                  width: 336,
+                  width: MediaQuery.of(context).size.height * 0.3943,
                   onPressed: () {
                     Navigator.push(
                       context,

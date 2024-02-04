@@ -83,7 +83,7 @@ class _AddFavoriteScreenState extends State<AddFavoriteScreen> {
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(115.0),
+          preferredSize:  Size.fromHeight(MediaQuery.of(context).size.height * 0.1349765),
           child: AppBar(
             automaticallyImplyLeading: true,
             elevation: 0,
@@ -120,7 +120,7 @@ class _AddFavoriteScreenState extends State<AddFavoriteScreen> {
                     right: 0,
                     child: Container(
                       color: Colors.white,
-                      padding: const EdgeInsets.all(16),
+                      padding:  EdgeInsets.all(MediaQuery.of(context).size.height * 0.01877934),
                       child: Column(
                         children: [
                           Form(
@@ -139,8 +139,8 @@ class _AddFavoriteScreenState extends State<AddFavoriteScreen> {
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 16,
+                           SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.01877934,
                           ),
                           ElevatedButton(
                             onPressed: point == null

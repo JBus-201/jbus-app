@@ -12,18 +12,19 @@ class ThemeSettingsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.theme),
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(16.0),
+      body: Padding(
+        padding:
+            EdgeInsets.all(MediaQuery.of(context).size.height * 0.01877934),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(
-                height: 46,
+                height: MediaQuery.of(context).size.height * 0.05399061,
               ),
-              LightThemeButton(),
-              DarkThemeButton(),
-              SystemThemeButton(),
+              const LightThemeButton(),
+              const DarkThemeButton(),
+              const SystemThemeButton(),
             ],
           ),
         ),

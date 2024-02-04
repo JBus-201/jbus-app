@@ -5,22 +5,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class SignUpButtonSUS extends StatelessWidget {
   const SignUpButtonSUS({
     super.key,
-    // required this.firstNameControllerText,
-    // required this.lastNameControllerText,
-    // //required this.emailControllerText,
-    // this.phoneNumberControllerText,
-    // required this.passwordControllerText,
+
     this.validator,
     required this.formKey,
     required this.onPressed,
     required this.isLoading,
   });
-
-  // final String firstNameControllerText;
-  // final String lastNameControllerText;
-  //final String emailControllerText;
-  // final String? phoneNumberControllerText;
-  // final String passwordControllerText;
   final String? Function(String?)? validator;
   final GlobalKey<FormState> formKey;
   final Function() onPressed;
