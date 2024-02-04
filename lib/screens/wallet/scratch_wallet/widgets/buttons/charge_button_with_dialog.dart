@@ -23,7 +23,7 @@ class ChargeButtonWithDialog extends StatelessWidget {
           print(
               'Code:::${AmmountOfChargeMoneyTextField.amountOfChargeMoneyController.text}');
           sl<ApiService>()
-              .chargeUsingSC(int.parse(AmmountOfChargeMoneyTextField
+              .chargeUsingSC(int.parse(ScratchOfChargeMoneyTextField
                   .amountOfChargeMoneyController.text))
               .then((value) => {
                     if (value.response.statusCode == 200)
