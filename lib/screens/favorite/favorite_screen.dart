@@ -103,9 +103,21 @@ class FavoriteScreen extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(point.point.name ?? '',style: const TextStyle(fontWeight: FontWeight.w400),),
-                              Text(point.route.name ??
-                                  '${point.route.startingPoint.name} - ${point.route.endingPoint.name}',style: const TextStyle(fontWeight: FontWeight.w300),),
+                              Column(
+                                //TODO
+                                children: [
+                                  Text(
+                                    point.point.name ?? '',
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  Text(
+                                    point.route.name ?? '${point.route.name}',
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w300),
+                                  ),
+                                ],
+                              ),
                               IconButton(
                                 icon: const Icon(Icons.delete),
                                 onPressed: () {
