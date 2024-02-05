@@ -85,7 +85,7 @@ class FazaRequestBT extends StatelessWidget {
                               title: AppLocalizations.of(context)!.ops,
                               description: AppLocalizations.of(context)!
                                   .fazaNoFriendMsg),
-                        ).then((value) => Navigator.pop(context));
+                        );
                       }
                     })
                   }

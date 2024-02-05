@@ -10,17 +10,17 @@ class TripStatus {
     @JsonKey(name: "status")
     int status;
     @JsonKey(name: "trip")
-    Trip trip;
+    Trip? trip;
     @JsonKey(name: "route")
-    BusRoute route;
+    BusRoute? route;
     @JsonKey(name: "bus")
-    Bus bus;
+    Bus? bus;
 
     TripStatus({
         required this.status,
-        required this.trip,
-        required this.route,
-        required this.bus,
+        this.trip,
+        this.route,
+        this.bus,
     });
 
     factory TripStatus.fromJson(Map<String, dynamic> json) => _$TripStatusFromJson(json);
