@@ -160,8 +160,7 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                       _mapController = controller;
                       // ignore: unrelated_type_equality_checks
                       if (themeState.thememode == ThemeMode.dark) {
-                        _mapController
-                            .setMapStyle(GoogleMapsApi.darkMapString);
+                        _mapController.setMapStyle(GoogleMapsApi.darkMapString);
                       }
                     },
                     initialCameraPosition: CameraPosition(
@@ -194,7 +193,8 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
             Container(
               height: double.infinity,
               alignment: Alignment.bottomCenter,
-              padding:  EdgeInsets.all(MediaQuery.of(context).size.height * 0.01877934),
+              padding: EdgeInsets.all(
+                  2),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -251,9 +251,12 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                         size: MediaQuery.of(context).size.height * 0.03521127,
                         icon: Icons.arrow_left_rounded,
                         onPressed: () {
-                          if (markers.isNotEmpty && currentIndex > 1) {
-                            print('Currrent index: $currentIndex');
-                            currentIndex--;
+                          if (markers.isNotEmpty) {
+                            if (currentIndex > 0) {
+                              currentIndex--;
+                            } else {
+                              currentIndex = markers.length - 1;
+                            }
                             googleApi.moveToLocation(
                               _mapController,
                               markers.elementAt(currentIndex).position,
@@ -263,7 +266,8 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                       ),
                       RectangularElevatedButton(
                           text: AppLocalizations.of(context)!.selectDrop,
-                          fontSize: MediaQuery.of(context).size.height * 0.01877934,
+                          fontSize:
+                              MediaQuery.of(context).size.height * 0.01877934,
                           fontWeight: FontWeight.w300,
                           width: MediaQuery.of(context).size.height * 0.205399,
                           onPressed: () {
@@ -313,9 +317,12 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
                         onPressed: () {
                           print(
                               'Currrent index: ${favoritePointsList!.length}');
-                          if (markers.isNotEmpty &&
-                              currentIndex < markers.length - 2) {
-                            currentIndex++;
+                          if (markers.isNotEmpty) {
+                            if (currentIndex < markers.length - 1) {
+                              currentIndex++;
+                            } else {
+                              currentIndex = 0;
+                            }
                             googleApi.moveToLocation(_mapController,
                                 markers.elementAt(currentIndex).position);
                           }

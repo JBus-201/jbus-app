@@ -42,12 +42,12 @@ class _ViewSelectedRoutePageState extends State<ViewSelectedRoutePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
       return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: PreferredSize(
-          preferredSize:  Size.fromHeight(MediaQuery.of(context).size.height * 0.134976),
+          preferredSize:
+              Size.fromHeight(MediaQuery.of(context).size.height * 0.134976),
           child: AppBar(
             automaticallyImplyLeading: true,
             elevation: 0,
@@ -55,7 +55,6 @@ class _ViewSelectedRoutePageState extends State<ViewSelectedRoutePage> {
             title: const JbusAppBarTitle(),
             flexibleSpace: const AppBarStyle(),
           ),
-
         ),
         body: Stack(
           children: [
@@ -137,7 +136,6 @@ class _ViewSelectedRoutePageState extends State<ViewSelectedRoutePage> {
                         snippet: AppLocalizations.of(context)!.predefinedStop,
                       ),
                     ),
-
                   );
                   return GoogleMap(
                     zoomControlsEnabled: false,
@@ -199,9 +197,13 @@ class _ViewSelectedRoutePageState extends State<ViewSelectedRoutePage> {
                               size: 30,
                               icon: Icons.arrow_left_rounded,
                               onPressed: () {
-                                if (markers.isNotEmpty && currentIndex > 1) {
+                                if (markers.isNotEmpty) {
+                                  if (currentIndex > 0) {
+                                    currentIndex--;
+                                  } else {
+                                    currentIndex = markers.length - 1;
+                                  }
                                   print('Currrent index: $currentIndex');
-                                  currentIndex--;
                                   googleApi.moveToLocation(
                                     _mapController,
                                     markers.elementAt(currentIndex).position,
@@ -234,11 +236,13 @@ class _ViewSelectedRoutePageState extends State<ViewSelectedRoutePage> {
                               size: 30,
                               icon: Icons.arrow_right_rounded,
                               onPressed: () {
-                                print(
-                                    'Currrent index: ${favoritePointsList!.length}');
-                                if (markers.isNotEmpty &&
-                                    currentIndex < markers.length - 2) {
-                                  currentIndex++;
+                                if (markers.isNotEmpty) {
+                                  if (currentIndex < markers.length - 1) {
+                                    currentIndex++;
+                                  } else {
+                                    currentIndex = 0;
+                                  }
+                                  print('Currrent index: ${currentIndex}');
                                   googleApi.moveToLocation(_mapController,
                                       markers.elementAt(currentIndex).position);
                                 }
@@ -254,7 +258,6 @@ class _ViewSelectedRoutePageState extends State<ViewSelectedRoutePage> {
         ),
       );
     });
-
   }
 
   void handleLongPress(LatLng point) {
