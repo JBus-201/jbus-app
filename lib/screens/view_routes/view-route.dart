@@ -32,7 +32,7 @@ class _ViewSelectedRoutePageState extends State<ViewSelectedRoutePage> {
   GoogleMapsApi googleApi = GoogleMapsApi();
   late GoogleMapController _mapController;
   dynamic route;
-  int currentIndex = 1;
+  int currentIndex = 0;
   List<FavoritePoint>? favoritePointsList;
 
   void initState() {
