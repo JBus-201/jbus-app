@@ -130,6 +130,13 @@ class _ProfileContainerState extends State<ProfileContainer> {
 
                             color: ourWhite,
                           ),
+                          OurText(
+
+                            'ID: ${user.id}' ?? "N/A",
+                            fontWeight: FontWeight.w600,
+
+                            color: ourWhite,
+                          ),
                         ],
                       ),
                       Column(

@@ -11,7 +11,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image/image.dart' as img;
 
 class GoogleMapsApi {
-  final String apiKey = "AIzaSyBGSGYjRajQX1-0LksuNshClN1l8ORObJA";
+  final String apiKey = "AIzaSyDJcIH5ybe8Cv8isRQPYQGmWEEgZWobSRs";
   static LatLng curentLocation = const LatLng(0, 0);
   static bool permission = false;
   BitmapDescriptor? customBusIcon;
