@@ -193,8 +193,7 @@ class _EditPickupPointPageState extends State<EditPickupPointPage> {
             Container(
               height: double.infinity,
               alignment: Alignment.bottomCenter,
-              padding: EdgeInsets.all(
-                  2),
+              padding: const EdgeInsets.all(2),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
