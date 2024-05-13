@@ -4,6 +4,7 @@ import 'package:jbus_app/screens/settings/settings/settings.dart';
 import 'package:jbus_app/widgets/containers/our_tab.dart';
 import 'package:jbus_app/widgets/text/our_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:jbus_app/widgets/warnings/warning.dart';
 
 class OthersRow extends StatelessWidget {
   const OthersRow({
@@ -37,7 +38,15 @@ class OthersRow extends StatelessWidget {
                 image: 'assets/images/calendar.png',
                 scale: MediaQuery.of(context).size.height * 0.00997653,
                 topPadding: MediaQuery.of(context).size.height * 0.0164,
-                onTap: () {},
+                onTap: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) => const Warning(
+                            title: 'Sorry!',
+                            description: 'Comming soon',
+                            isWarning: true,
+                          ));
+                },
               ),
               OurTab(
                 text: AppLocalizations.of(context)!.settings,

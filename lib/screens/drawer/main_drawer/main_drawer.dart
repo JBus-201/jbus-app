@@ -64,13 +64,11 @@ class MainDrawer extends StatelessWidget {
                       file: File(''),
                       image:
                           'assets/images/profile_photos/boys_avatars/green_boy_four.png',
-                      borderRadius: MediaQuery.of(context).size.height * 0.05868545,
-                      photoRadius: MediaQuery.of(context).size.height * 0.05633803,
+                      borderRadius:
+                          MediaQuery.of(context).size.height * 0.05868545,
+                      photoRadius:
+                          MediaQuery.of(context).size.height * 0.05633803,
                       borderColor: ourWhite,
-                    ),
-                    Text(
-                      '${AppLocalizations.of(context)!.firstName} ${AppLocalizations.of(context)!.lastName}',
-                      style: const TextStyle(color: ourWhite),
                     ),
                     FutureBuilder<Passenger>(
                         future: sl<ApiService>().getPasssenger(),
@@ -83,21 +81,22 @@ class MainDrawer extends StatelessWidget {
                             ));
                           } else {
                             Passenger user = snapshot.data!;
-                            return Row(
+                            return Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  '${user.wallet / 100} ',
+                                  '${user.user.name}',
+                                  style: const TextStyle(color: ourWhite),
+                                ),
+                                Text(
+                                  'ID: ${user.id}',
+                                  style: const TextStyle(color: ourWhite),
+                                ),
+                                Text(
+                                  '${user.wallet / 100} ${AppLocalizations.of(context)!.jod}',
                                   style: const TextStyle(
                                     color: ourWhite,
                                     fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                Text(
-                                  AppLocalizations.of(context)!.jod,
-                                  style: const TextStyle(
-                                    color: ourWhite,
-                                    fontWeight: FontWeight.w300,
                                   ),
                                 ),
                               ],
